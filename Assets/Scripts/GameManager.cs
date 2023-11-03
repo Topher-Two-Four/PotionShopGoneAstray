@@ -4,7 +4,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public float timeRemaining = 9; // Time remaining in day
+    public float timeRemaining = 90; // Time remaining in day
     public bool isTimerRunning; // Variable to keep track of if timer is still running
     public bool isMorning; // Variable to keep track of whether it's morning
     public bool isAfternoon; // Variable to keep track of whether it's afternoon

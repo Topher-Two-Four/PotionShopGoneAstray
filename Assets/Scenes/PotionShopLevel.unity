@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 967f871289ba10b4d9b0e9dbd6ef434d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeRemaining: 10
+  timeRemaining: 90
   isTimerRunning: 0
   isMorning: 0
   isAfternoon: 0

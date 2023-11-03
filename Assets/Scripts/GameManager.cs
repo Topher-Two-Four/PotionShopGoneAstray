@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     private void TimerUpdate() // Update timer and keep track of what time of day it is
     {
-        if (timeRemaining > 6)
+        if (timeRemaining > 60)
         {
             isMorning = true;
             isAfternoon = false;
@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
                 //Debug.Log("It's now morning."); // Print morning notification
             }
         }
-        else if (timeRemaining <= 6 && timeRemaining > 3)
+        else if (timeRemaining <= 60 && timeRemaining > 30)
         {
             isMorning = false;
             isAfternoon = true;
@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
                 //Debug.Log("It's now afternoon."); // Print afternoon notification
             }
         }
-        else if (timeRemaining <= 3 && timeRemaining > 0)
+        else if (timeRemaining <= 30 && timeRemaining > 0)
         {
             isMorning = false;
             isAfternoon = false;

@@ -1,39 +1,122 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public float timeRemaining = 9; // Time remaining in day
+    public bool isTimerRunning; // Variable to keep track of if timer is still running
+    public bool isMorning; // Variable to keep track of whether it's morning
+    public bool isAfternoon; // Variable to keep track of whether it's afternoon
+    public bool isEvening; // Variable to keep track of whether it's evening
+    public bool isEndOfDay; // Variable to keep track of whether the day is over
+    public TMP_Text timeRemainingText; // Time remaining to display as text
+    public TMP_Text timeOfDayText; // Time of day to display as text
 
-    // Use scene manager to switch to Potion Level
-    public void SwitchSceneToPotionLevel()
+    private bool morningTransitionComplete = false; // Keep track of transition from beginning of new day to morning
+    private bool afternoonTransitionComplete = false; // Keep track of transition from morning to afternoon
+    private bool eveningTransitionComplete = false; // Keep track of transition from afternoon to evening
+    private bool endOfDayTransitionComplete = false; // Keep track of transition from evening to end of day
+
+    private void Start()
+    {
+        isTimerRunning = true; // Set timer running to true when starting game/day
+    }
+
+    private void Update()
+    {
+        if (isTimerRunning == true) // Calculate time if timer is still running
+        {
+            timeRemaining -= Time.deltaTime; // Decrement time using deltaTime
+            //Debug.Log(timeRemaining); // Print remaining time
+            TimerUpdate(); // Update timer every frame
+        }
+    }
+
+
+    public void SwitchSceneToPotionLevel() // Use scene manager to switch to Potion Level
     {
         SceneManager.LoadScene(0);
-
-        // Unlock cursor, confine to game screen
-        Cursor.lockState = CursorLockMode.Confined;
-
-        // Hide cursor
-        Cursor.visible = false;
-
+        Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
+        Cursor.visible = false; // Hide cursor
     }
 
     // Use scene manager to switch to Maze Level
     public void SwitchSceneToMazeLevel()
     {
-
         // Ranomize which maze scene is loaded
+        SceneManager.LoadScene(1); // Use scene manager to load first scene out of list, which is the potion shop
+        Cursor.lockState = CursorLockMode.Locked; // Lock cursor in one place
+        Cursor.visible = true; // Hide cursor
+    }
 
-        // Use scene manager to load first scene out of list, which is the potion shop
-        SceneManager.LoadScene(1);
+    private void TimerUpdate() // Update timer and keep track of what time of day it is
+    {
+        if (timeRemaining > 6)
+        {
+            isMorning = true;
+            isAfternoon = false;
+            isEvening = false;
+            isEndOfDay = false;
+            if (morningTransitionComplete == false) // Morning transition block, which will run once at the beginning of the morning
+            {
+                // Add additional new day to morning transition logic here as needed
+                morningTransitionComplete = true; // Set transition status to complete
+                timeOfDayText.text = ("Morning"); // Display time of day text on screen
+                timeOfDayText.color = Color.white; // Set color of text to white
+                //Debug.Log("It's now morning."); // Print morning notification
+            }
+        }
+        else if (timeRemaining <= 6 && timeRemaining > 3)
+        {
+            isMorning = false;
+            isAfternoon = true;
+            isEvening = false;
+            isEndOfDay = false;
+            if (afternoonTransitionComplete == false) // Afternoon transition block, which will run once at the beginning of the afternoon
+            {
+                // Add additional morning to afternoon transition logic here as needed
+                afternoonTransitionComplete = true; // Set transition status to complete
+                timeOfDayText.text = ("Afternoon"); // Display time of day text on screen
+                //Debug.Log("It's now afternoon."); // Print afternoon notification
+            }
+        }
+        else if (timeRemaining <= 3 && timeRemaining > 0)
+        {
+            isMorning = false;
+            isAfternoon = false;
+            isEvening = true;
+            isEndOfDay = false;
+            if (eveningTransitionComplete == false) // Evening transition block, which will run once at the beginning of the evening
+            {
+                // Add additional afternoon to evening transition logic here as needed
+                eveningTransitionComplete = true; // Set transition status to complete
+                timeOfDayText.text = ("Evening"); // Display time of day text on screen
+                //Debug.Log("It's now evening."); // Print evening notification
+            }
+        }
+        else
+        {
+            timeRemaining = 0; // Stop timer at 0, instead of becoming negative value
+            isTimerRunning = false; // Turn off timer
+            if (endOfDayTransitionComplete == false) // End of day transition block, which will run once at the end of the day
+            {
+                // Add additional evening to end of day transition logic here as needed
+                endOfDayTransitionComplete = true; // Set transition status to complete
+                timeOfDayText.text = ("End of Day"); // Display time of day text on screen
+                timeOfDayText.color = Color.red; // Set color of text to red
+                //Debug.Log("The day is now over."); // Print end of day notification
+            }
+        }
+        DisplayTime(timeRemaining); // Display time remaining
+    }
 
-        // Lock cursor in one place
-        Cursor.lockState = CursorLockMode.Locked;
-
-        // Hide cursor
-        Cursor.visible = true;
-
+    private void DisplayTime(float timeToDisplay)
+    {
+        timeToDisplay += 1; // Add a second to the time value vefore calculations of minutes and seconds, to account for final second of countdown
+        float minutes = Mathf.FloorToInt(timeRemaining / 60); // Calculate remaining minutes
+        float seconds = Mathf.FloorToInt(timeRemaining % 60); // Calculate remaining seconds
+        timeRemainingText.text = string.Format("{0:00}:{1:00}", minutes, seconds); // The value on the left determines which values to use (minutes, seconds) and the right is how it's formatted
     }
 
 }

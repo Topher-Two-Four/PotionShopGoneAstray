@@ -59,7 +59,7 @@ public class MazeAIController : MonoBehaviour
 
     public void SwitchNextPoint()
     {
-        _currentPatrolPointIndex = (_currentPatrolPointIndex + 1) % patrolPoints.Length; // Increment patrol point index
+        _currentPatrolPointIndex = Random.Range(0, patrolPoints.Length); // Set new random patrol point
         navMeshAgent.SetDestination(patrolPoints[_currentPatrolPointIndex].position); // Set new patrol point as destination
     }
 

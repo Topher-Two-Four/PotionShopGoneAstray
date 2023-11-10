@@ -18,6 +18,19 @@ public class GameManager : MonoBehaviour
     private bool eveningTransitionComplete = false; // Keep track of transition from afternoon to evening
     private bool endOfDayTransitionComplete = false; // Keep track of transition from evening to end of day
 
+    public static GameManager Instance { get; private set; } // Singleton logic
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     private void Start()
     {
         isTimerRunning = true; // Set timer running to true when starting game/day

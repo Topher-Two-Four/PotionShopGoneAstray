@@ -47,7 +47,7 @@ public class MazeAIController : MonoBehaviour
     {
         ScanEnvironment(); // Scan environment for player
 
-        if (!_isPatrolling) // If player is not patrolling then chase player
+        if (_isChasing) // If AI set to chase then chase player, else patrol
         {
             Chase(); // Chase player
         }
@@ -183,6 +183,7 @@ public class MazeAIController : MonoBehaviour
                 {
                     _isChasing = true; // Set AI to chase player
                     _isPatrolling = false; // Set AI to no longer patrol
+                    break;
                 }
                 else
                 {

@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
         Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
-        Cursor.visible = false; // Hide cursor
+        Cursor.visible = true; // Display cursor
     }
 
     // Use scene manager to switch to Maze Level
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
         // Ranomize which maze scene is loaded
         SceneManager.LoadScene(1); // Use scene manager to load first scene out of list, which is the potion shop
         Cursor.lockState = CursorLockMode.Locked; // Lock cursor in one place
-        Cursor.visible = true; // Hide cursor
+        Cursor.visible = false; // Hide cursor
     }
 
     private void TimerUpdate() // Update timer and keep track of what time of day it is

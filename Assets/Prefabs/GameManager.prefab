@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5663296710758069016}
   - component: {fileID: 7191769637739229790}
-  - component: {fileID: 5613212169576665005}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -26,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6047709958944849528}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -163.80835, y: -910.8775, z: 9796.225}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -53,15 +52,3 @@ MonoBehaviour:
   isEndOfDay: 0
   timeRemainingText: {fileID: 0}
   timeOfDayText: {fileID: 0}
---- !u!114 &5613212169576665005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6047709958944849528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cc32c3447e22104e93b05e9d2e12b4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

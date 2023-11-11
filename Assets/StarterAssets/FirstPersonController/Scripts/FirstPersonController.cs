@@ -51,6 +51,12 @@ namespace StarterAssets
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -90.0f;
 
+		public float maxStamina = 100f;
+		public float currentStamina = 100f;
+		public float staminaDrainAmount = 0.5f;
+		public float staminaRegenAmount = 0.2f;
+
+
 		// cinemachine
 		private float _cinemachineTargetPitch;
 
@@ -115,6 +121,12 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+
+			if (_input.sprint)
+            {
+
+            }
+
 		}
 
 		private void LateUpdate()

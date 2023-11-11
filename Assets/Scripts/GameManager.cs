@@ -46,9 +46,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SwitchSceneToMainMenu() // Use scene manager to switch to main menu
+    public void SwitchSceneToMainMenu() // Use scene manager to switch to Main Menu
     {
         SceneManager.LoadScene(0); // Use scene manager to load first scene from scene list (main menu)
+        Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
+        Cursor.visible = true; // Display cursor
+    }
+
+    public void SwitchSceneToSettingsMenu() // Use scene manager to switch to Settings Menu
+    {
+        SceneManager.LoadScene(1); // Use scene manager to load second scene from scene list (settings menu)
         Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
         Cursor.visible = true; // Display cursor
     }
@@ -66,7 +73,7 @@ public class GameManager : MonoBehaviour
         }
       */
 
-        SceneManager.LoadScene(1); // Use scene manager to load second scene from scene list (potion shop level)
+        SceneManager.LoadScene(2); // Use scene manager to load third scene from scene list (potion shop level)
         Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
         Cursor.visible = true; // Display cursor
     }
@@ -74,9 +81,14 @@ public class GameManager : MonoBehaviour
     public void SwitchSceneToMazeLevel() // Use scene manager to switch to Maze Level
     {
         // Ranomize which maze scene is loaded
-        SceneManager.LoadScene(2); // Use scene manager to load third scene from scene list (maze level)
+        SceneManager.LoadScene(3); // Use scene manager to load fourth scene from scene list (maze level)
         Cursor.lockState = CursorLockMode.Locked; // Lock cursor in one place
         Cursor.visible = false; // Hide cursor
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
     private void StartTimer()

@@ -46,21 +46,47 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-    public void SwitchSceneToPotionLevel() // Use scene manager to switch to Potion Level
+    public void SwitchSceneToMainMenu() // Use scene manager to switch to main menu
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(0); // Use scene manager to load first scene from scene list (main menu)
         Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
         Cursor.visible = true; // Display cursor
     }
 
-    // Use scene manager to switch to Maze Level
-    public void SwitchSceneToMazeLevel()
+    public void SwitchSceneToPotionLevel() // Use scene manager to switch to Potion Level
+    {
+
+        // Need to make the timer start after leaving the main menu
+        /*
+        if (isTimerRunning == false) // Calculate time if timer is still running
+        {
+            timeRemaining = 90;
+            StartTimer();
+            Debug.Log("Timer started.");
+        }
+      */
+
+        SceneManager.LoadScene(1); // Use scene manager to load second scene from scene list (potion shop level)
+        Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
+        Cursor.visible = true; // Display cursor
+    }
+
+    public void SwitchSceneToMazeLevel() // Use scene manager to switch to Maze Level
     {
         // Ranomize which maze scene is loaded
-        SceneManager.LoadScene(1); // Use scene manager to load first scene out of list, which is the potion shop
+        SceneManager.LoadScene(2); // Use scene manager to load third scene from scene list (maze level)
         Cursor.lockState = CursorLockMode.Locked; // Lock cursor in one place
         Cursor.visible = false; // Hide cursor
+    }
+
+    private void StartTimer()
+    {
+        isTimerRunning = true;
+    }
+
+    private void StopTimer()
+    {
+        isTimerRunning = false;
     }
 
     private void TimerUpdate() // Update timer and keep track of what time of day it is

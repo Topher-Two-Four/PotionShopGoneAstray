@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 450b34c3a313783408d00fcf7810bcb8
+  - enabled: 1
     path: Assets/Scenes/PotionShopLevel.unity
     guid: 23f3668c341a78843a3a8021b6994a0d
   - enabled: 1

@@ -6,7 +6,16 @@ using UnityEngine;
 public class InventoryController : MonoBehaviour
 {
     [HideInInspector]
-    public ItemGrid selectedItemGrid;
+    private ItemGrid selectedItemGrid;
+
+    public ItemGrid SelectedItemGrid { 
+        get => selectedItemGrid;
+        set
+        {
+            selectedItemGrid = value;
+            inventoryHighlight.SetParent(value);
+        }
+    }
 
     InventoryItem selectedItem;
     InventoryItem overlapItem;
@@ -15,6 +24,13 @@ public class InventoryController : MonoBehaviour
     [SerializeField] List<ItemData> items;
     [SerializeField] GameObject itemPrefab;
     [SerializeField] Transform canvasTransform;
+
+    InventoryHighlight inventoryHighlight;
+
+    private void Awake()
+    {
+        inventoryHighlight = GetComponent<InventoryHighlight>();
+    }
 
     private void Update()
     {
@@ -25,12 +41,53 @@ public class InventoryController : MonoBehaviour
             CreateRandomItem();
         }
 
-        if (selectedItemGrid == null) { return; }
+        if (selectedItemGrid == null) 
+        {
+            inventoryHighlight.Show(false);
+            return; 
+        }
+
+        HandleHighlight();
 
         if (Input.GetMouseButtonDown(0))
         {
             LeftMouseButtonPress();
 
+        }
+    }
+
+    Vector2Int oldPosition;
+    InventoryItem itemToHighlight;
+    private void HandleHighlight()
+    {
+        Vector2Int positionOnGrid = GetTileGridPosition();
+        if (oldPosition == positionOnGrid) { return; }
+        oldPosition = positionOnGrid;
+        if (selectedItem == null)
+        {
+            itemToHighlight = selectedItemGrid.GetItem(positionOnGrid.x, positionOnGrid.y);
+
+            if (itemToHighlight != null)
+            {
+                inventoryHighlight.Show(true);
+                inventoryHighlight.SetSize(itemToHighlight);
+                inventoryHighlight.SetPosition(selectedItemGrid, itemToHighlight);
+            }
+            else
+            {
+                inventoryHighlight.Show(false);
+            }
+        }
+        else
+        {
+            inventoryHighlight.Show(selectedItemGrid.BoundaryCheck(
+                positionOnGrid.x,
+                positionOnGrid.y,
+                selectedItem.itemData.width,
+                selectedItem.itemData.height)
+                );
+            inventoryHighlight.SetSize(selectedItem);
+            inventoryHighlight.SetPosition(selectedItemGrid, selectedItem, positionOnGrid.x, positionOnGrid.y);
         }
     }
 
@@ -48,7 +105,7 @@ public class InventoryController : MonoBehaviour
 
     private void LeftMouseButtonPress()
     {
-        Vector2Int tileGridPosition = selectedItemGrid.GetTileGridPosition(Input.mousePosition);
+        Vector2Int tileGridPosition = GetTileGridPosition();
 
         if (selectedItem == null)
         {
@@ -59,6 +116,19 @@ public class InventoryController : MonoBehaviour
         {
             PlaceItem(tileGridPosition);
         }
+    }
+
+    private Vector2Int GetTileGridPosition()
+    {
+        Vector2 position = Input.mousePosition;
+
+        if (selectedItem != null)
+        {
+            position.x -= (selectedItem.itemData.width - 1) * ItemGrid.tileSizeWidth / 2;
+            position.y += (selectedItem.itemData.height - 1) * ItemGrid.tileSizeHeight / 2;
+        }
+
+        return selectedItemGrid.GetTileGridPosition(position);
     }
 
     private void PlaceItem(Vector2Int tileGridPosition)

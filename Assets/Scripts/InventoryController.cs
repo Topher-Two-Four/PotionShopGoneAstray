@@ -62,8 +62,11 @@ public class InventoryController : MonoBehaviour
 
     private void PlaceItem(Vector2Int tileGridPosition)
     {
-        selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y);
-        selectedItem = null;
+        bool complete = selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y);
+        if (complete)
+        {
+            selectedItem = null;
+        }
     }
 
     private void PickUpItem(Vector2Int tileGridPosition)

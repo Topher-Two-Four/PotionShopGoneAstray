@@ -38,12 +38,20 @@ public class InventoryController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            CreateRandomItem();
+            if (selectedItem == null)
+            {
+                CreateRandomItem();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
             InsertRandomItem();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RotateItem();
         }
 
         if (selectedItemGrid == null) 
@@ -59,6 +67,13 @@ public class InventoryController : MonoBehaviour
             LeftMouseButtonPress();
 
         }
+    }
+
+    private void RotateItem()
+    {
+        if (selectedItem == null) { return; }
+
+        selectedItem.Rotate();
     }
 
     private void InsertRandomItem()
@@ -107,8 +122,8 @@ public class InventoryController : MonoBehaviour
             inventoryHighlight.Show(selectedItemGrid.BoundaryCheck(
                 positionOnGrid.x,
                 positionOnGrid.y,
-                selectedItem.itemData.width,
-                selectedItem.itemData.height)
+                selectedItem.WIDTH,
+                selectedItem.HEIGHT)
                 );
             inventoryHighlight.SetSize(selectedItem);
             inventoryHighlight.SetPosition(selectedItemGrid, selectedItem, positionOnGrid.x, positionOnGrid.y);
@@ -122,6 +137,7 @@ public class InventoryController : MonoBehaviour
         
         rectTransform = inventoryItem.GetComponent<RectTransform>();
         rectTransform.SetParent(canvasTransform);
+        rectTransform.SetAsLastSibling();
 
         int selectedItemID = UnityEngine.Random.Range(0, items.Count);
         inventoryItem.Set(items[selectedItemID]);
@@ -148,8 +164,8 @@ public class InventoryController : MonoBehaviour
 
         if (selectedItem != null)
         {
-            position.x -= (selectedItem.itemData.width - 1) * ItemGrid.tileSizeWidth / 2;
-            position.y += (selectedItem.itemData.height - 1) * ItemGrid.tileSizeHeight / 2;
+            position.x -= (selectedItem.WIDTH - 1) * ItemGrid.tileSizeWidth / 2;
+            position.y += (selectedItem.HEIGHT - 1) * ItemGrid.tileSizeHeight / 2;
         }
 
         return selectedItemGrid.GetTileGridPosition(position);
@@ -166,6 +182,7 @@ public class InventoryController : MonoBehaviour
                 selectedItem = overlapItem;
                 overlapItem = null;
                 rectTransform = selectedItem.GetComponent<RectTransform>();
+                rectTransform.SetAsLastSibling();
             }
         }
     }

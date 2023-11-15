@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PotionCraftingSystem : MonoBehaviour
 {
@@ -22,12 +23,18 @@ public class PotionCraftingSystem : MonoBehaviour
     public float mediumQualityTimeLimit = 50f;
     public float lowQualityTimeLimit = 30f;
 
-    private void Start()
+    public Button brewButton;
+
+
+    private void Awake()
     {
-        Po
+            brewButton.onClick.AddListener(() => BrewPotion(ingredient1, ingredient2, ingredient3));
     }
 
-
+    private void Update()
+    {
+        SetBrewButtonStatus();
+    }
 
     public int CheckPotionQuality(int cookTime, float timeAtDesiredTemp)
     {
@@ -61,19 +68,25 @@ public class PotionCraftingSystem : MonoBehaviour
 
     public void BrewPotion(ItemData ingredient1, ItemData ingredient2, ItemData ingredient3)
     {
+
+
+    }
+
+    public void SetBrewButtonStatus()
+    {
         Recipe potionRecipe = RecipeList.Instance.FindRecipe(ingredient1, ingredient2, ingredient3);
         if (potionRecipe != null)
         {
-            // Make potion and highlight button is colored
-            // If button pressed:
-            ItemData potionBrewed = new ItemData();
-            //potionBrewed = RecipeList.Instance.AddPotionToInventory(potionRecipe);
-            
+            brewButton.interactable = true;
+            //ItemData potionBrewed = new ItemData();
+            RecipeList.Instance.AddPotionToInventory(potionRecipe);
+
         }
         else
         {
             // Do not allow making of potion and keep brew button grayed out
+            brewButton.interactable = false;
         }
-
     }
+
 }

@@ -53,14 +53,16 @@ public class RecipeList : MonoBehaviour
             return null;
     }
 
-    internal void AddPotionToInventory(Recipe potionRecipe)
+    internal Recipe AddPotionToInventory(Recipe potionRecipe)
     {
         foreach (Recipe recipe in recipeList)
         {
             if (recipe == potionRecipe && potionRecipe.potionName != null)
             {
                 Debug.Log("Created 1x " + (potionRecipe.potionName));
+                return recipe;
             }
         }
+        return null;
     }
 }

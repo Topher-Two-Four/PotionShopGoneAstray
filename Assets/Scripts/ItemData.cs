@@ -9,6 +9,8 @@ public class ItemData : ScriptableObject
     public int width = 1;
     public int height = 1;
 
+    public bool isIngredient;
+
     public Sprite itemIcon;
 
     // INSERT REMAINDER OF ITEM OBJECT DATA HERE

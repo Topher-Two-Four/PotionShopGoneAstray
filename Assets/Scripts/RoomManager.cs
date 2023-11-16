@@ -10,7 +10,7 @@ public class RoomManager : MonoBehaviour
     public List<Button> buttonList = new List<Button>(); // List for holding buttons, index corresponding to each room
     public GameObject currentRoom; // The current room that is active/open
 
-    private bool isAnyRoomOpen; // Keep track of whether a room canvas is open or not
+    //private bool isAnyRoomOpen; // Keep track of whether a room canvas is open or not
 
     private void Awake()
     {
@@ -37,7 +37,7 @@ public class RoomManager : MonoBehaviour
             // Set new current room game object to active
             currentRoom.SetActive(true);
             // Keep track that a room game object is open and being displayed
-            isAnyRoomOpen = true;
+            //isAnyRoomOpen = true;
         }
 
     }

@@ -244,28 +244,29 @@ public class PotionCraftingSystem : MonoBehaviour
         Recipe potionRecipe = RecipeList.Instance.FindRecipe(ingredient1, ingredient2, ingredient3); // Get potion recipe from instance of the recipe list
         if (potionRecipe != null) // Check whether a potion recipe exists with the combination of these three ingredients
         {
-            if (!isBrewing)
+            if (isBrewing) // If recipe is not currently brewing
             {
-                brewButton.interactable = true; // If a recipe with this ingredient combination does exist then make the brew button interactable
-                potionImage.sprite = potionRecipe.potionIcon;
-                timeRemainingText.text = cookTime.ToString();
-                if (isRetrievable)
+                brewButton.interactable = false; // If a recipe with this ingredient combination does not exist then make the brew button uninteractable (and grayed out)
+            } 
+            else
+            {
+                if (!isRetrievable) // If recipe is not retrievable
                 {
-                    brewButton.interactable = false; // If a recipe with this ingredient combination does exist then make the brew button interactable
+                    brewButton.interactable = false;
                     potionImage.sprite = potionRecipe.potionIcon;
                     timeRemainingText.text = ("Done!");
                 }
                 else
                 {
-                    brewButton.interactable = true; // If a recipe with this ingredient combination does exist then make the brew button interactable
+                    brewButton.interactable = true;
                     potionImage.sprite = potionRecipe.potionIcon;
                     timeRemainingText.text = cookTime.ToString();
                 }
+                brewButton.interactable = true; // If a recipe with this ingredient combination does exist then make the brew button interactable
+                potionImage.sprite = potionRecipe.potionIcon;
+                timeRemainingText.text = cookTime.ToString();
             }
-        }
-        else
-        {
-            brewButton.interactable = false; // If a recipe with this ingredient combination does not exist then make the brew button uninteractable (and grayed out)
+           
         }
     }
 

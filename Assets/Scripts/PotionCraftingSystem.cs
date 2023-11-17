@@ -33,6 +33,13 @@ public class PotionCraftingSystem : MonoBehaviour
     public Button decreaseTempButton; // Button to increase cooking temperature
     public Button brewButton; // Button to begin brewing
 
+    public Color freezingTempDisplayColor = new Color(0, 117, 191);
+    public Color lowTempDisplayColor = new Color(0, 0, 255);
+    public Color mediumTempDisplayColor = new Color(0, 255, 0);
+    public Color hotTempDisplayColor = new Color(108, 255, 0);
+    public Color boilingTempDisplayColor = new Color(255, 0, 0);
+
+    public Image temperatureDisplayImage; // Background image for the temperature display
     public Image ingredient1Image; // Image for the first ingredient
     public Image ingredient2Image; // Image for the second ingredient
     public Image ingredient3Image; // Image for the third ingredient
@@ -55,12 +62,13 @@ public class PotionCraftingSystem : MonoBehaviour
             Instance = this;
         }
 
-        ingredient1Button.onClick.AddListener(() => AddIngredientToInventory()); // Add button listener for first ingredient space
-        ingredient2Button.onClick.AddListener(() => AddIngredientToInventory()); // Add button listener for second ingredient space
-        ingredient3Button.onClick.AddListener(() => AddIngredientToInventory()); // Add button listener for third ingredient space
-        //increaseTempButton.onClick.AddListener(() => AddIngredientToInventory()); // Add button listener for increase temperature button
-        //decreaseTempButton.onClick.AddListener(() => AddIngredientToInventory());// Add button listener for decrease temperature button
+        ingredient1Button.onClick.AddListener(() => AddIngredientToInventory(ingredient1)); // Add button listener for first ingredient space
+        ingredient2Button.onClick.AddListener(() => AddIngredientToInventory(ingredient2)); // Add button listener for second ingredient space
+        ingredient3Button.onClick.AddListener(() => AddIngredientToInventory(ingredient3)); // Add button listener for third ingredient space
+        increaseTempButton.onClick.AddListener(() => IncreaseTemperature()); // Add button listener for increase temperature button
+        decreaseTempButton.onClick.AddListener(() => DecreaseTemperature());// Add button listener for decrease temperature button
         brewButton.onClick.AddListener(() => BrewPotion(ingredient1, ingredient2, ingredient3)); // Add button listener to brew potion when pressed
+        UpdateTemperatureDisplay();
     }
 
     private void Update()
@@ -193,7 +201,7 @@ public class PotionCraftingSystem : MonoBehaviour
         }
     }
 
-    public void AddIngredientToInventory()
+    public void AddIngredientToInventory(ItemData ingredient)
     {
         // If button clicked has an ingredient then add it to inventory
         // Reset button image
@@ -280,4 +288,65 @@ public class PotionCraftingSystem : MonoBehaviour
             potionImage = null; // Set potion image to null to remove potion image from screen display
         }
     }
+
+    private void IncreaseTemperature()
+    {
+        if (currentTemp < 5) 
+        {
+            currentTemp++;
+            UpdateTemperatureDisplay();
+        } else
+        {
+            currentTemp = 5;
+            UpdateTemperatureDisplay();
+        }
+    }
+
+    private void DecreaseTemperature()
+    {
+        if (currentTemp > 1)
+        {
+            currentTemp--;
+            UpdateTemperatureDisplay();
+        }
+        else
+        {
+            currentTemp = 1;
+            UpdateTemperatureDisplay();
+        }
+    }
+
+    private void UpdateTemperatureDisplay()
+    {
+        switch (currentTemp)
+        {
+            case 5:
+                temperatureDisplayText.text = ("Boiling");
+                temperatureDisplayImage.color = boilingTempDisplayColor;
+                break;
+            case 4:
+                temperatureDisplayText.text = ("Hot");
+                temperatureDisplayImage.color = hotTempDisplayColor;
+                break;
+            case 3:
+                temperatureDisplayText.text = ("Medium");
+                temperatureDisplayImage.color = mediumTempDisplayColor;
+                break;
+            case 2:
+                temperatureDisplayText.text = ("Low");
+                temperatureDisplayImage.color = lowTempDisplayColor;
+                break;
+            case 1:
+                temperatureDisplayText.text = ("Freezing");
+                temperatureDisplayImage.color = freezingTempDisplayColor;
+                break;
+            default:
+                temperatureDisplayText.text = ("Off");
+                temperatureDisplayImage.color = new Color(255, 255, 255);
+                break;
+        }
+
+                
+    }
+
 }

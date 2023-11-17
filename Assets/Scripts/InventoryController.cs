@@ -67,6 +67,27 @@ public class InventoryController : MonoBehaviour
             LeftMouseButtonPress();
 
         }
+
+        if (Input.GetMouseButton(1))
+        {
+            RightMouseButtonPress();
+        }
+
+    }
+
+    private void RightMouseButtonPress()
+    {
+        Vector2Int tileGridPosition = GetTileGridPosition();
+
+        if (selectedItem == null)
+        {
+            PickUpItem(tileGridPosition);
+        }
+        else
+        {
+            PlaceItem(tileGridPosition);
+        }
+         
     }
 
     private void RotateItem()
@@ -203,4 +224,19 @@ public class InventoryController : MonoBehaviour
             rectTransform.position = Input.mousePosition;
         }
     }
+
+    private void AddIngredientToInventory()
+    {
+        if (selectedItem == null)
+        {
+            return;
+        }
+
+        if (selectedItem.itemData.isIngredient)
+        {
+            PotionCraftingSystem.Instance.AddIngredientToSlot(selectedItem.itemData);
+        }
+
+    }
+
 }

@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 2
   height: 1
+  isIngredient: 1
   itemIcon: {fileID: 21300000, guid: f245bbad47aff8547a33dd1c30149c69, type: 3}

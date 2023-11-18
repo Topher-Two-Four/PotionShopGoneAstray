@@ -16,7 +16,6 @@ public class InventoryController : MonoBehaviour
             inventoryHighlight.SetParent(value);
         }
     }
-    public static InventoryController Instance { get; private set; } // Singleton logic
 
     InventoryItem selectedItem;
     InventoryItem overlapItem;
@@ -28,34 +27,8 @@ public class InventoryController : MonoBehaviour
 
     InventoryHighlight inventoryHighlight;
 
-    public void PickUpItemObject(ItemData itemData)
-    {
-        InventoryItem inventoryItem = Instantiate(itemPrefab).GetComponent<InventoryItem>();
-        selectedItem = inventoryItem;
-
-        InventoryItem itemToInsert = itemData.itemToInsertToInventory; //Link to ItemData 
-        Debug.Log(itemToInsert);
-        selectedItem = null;
-        InsertItem(itemToInsert);
-
-        rectTransform = inventoryItem.GetComponent<RectTransform>();
-        rectTransform.SetParent(canvasTransform);
-        rectTransform.SetAsLastSibling();
-
-        inventoryItem.Set(itemData);
-    }
-
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            Instance = this;
-        }
-
         inventoryHighlight = GetComponent<InventoryHighlight>();
     }
 

@@ -361,7 +361,7 @@ MonoBehaviour:
   potionQuality: 4
   ingredient1: {fileID: 11400000, guid: 21941877933038a448e70debb18e8d65, type: 2}
   ingredient2: {fileID: 11400000, guid: 7802850d100d4934b8e443b37b387c54, type: 2}
-  ingredient3: {fileID: 11400000, guid: f016e24a37bad8449b0dba750ca2322e, type: 2}
+  ingredient3: {fileID: 0}
   ultraQualityTimeLimit: 90
   highQualityTimeLimit: 70
   mediumQualityTimeLimit: 50
@@ -2837,7 +2837,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 11400000, guid: ab4e900680b33094bb79d0e08454f8fc, type: 2}
+  - {fileID: 11400000, guid: 21941877933038a448e70debb18e8d65, type: 2}
+  - {fileID: 11400000, guid: f016e24a37bad8449b0dba750ca2322e, type: 2}
+  - {fileID: 11400000, guid: 7802850d100d4934b8e443b37b387c54, type: 2}
   - {fileID: 11400000, guid: 70974091588d09b44bc875d4bdbee113, type: 2}
   - {fileID: 11400000, guid: 6fbda981b9d84a6428774b461a5beb87, type: 2}
   itemPrefab: {fileID: 3761654210620089128, guid: 6c69ccac8bd83f94eb1782d99ff66571, type: 3}

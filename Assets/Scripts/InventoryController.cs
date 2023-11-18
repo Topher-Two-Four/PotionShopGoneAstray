@@ -8,7 +8,7 @@ public class InventoryController : MonoBehaviour
     [HideInInspector]
     private ItemGrid selectedItemGrid;
 
-    public ItemGrid SelectedItemGrid { 
+    public ItemGrid SelectedItemGrid {  
         get => selectedItemGrid;
         set
         {
@@ -73,21 +73,6 @@ public class InventoryController : MonoBehaviour
             RightMouseButtonPress();
         }
 
-    }
-
-    private void RightMouseButtonPress()
-    {
-        Vector2Int tileGridPosition = GetTileGridPosition();
-
-        if (selectedItem == null)
-        {
-            PickUpItem(tileGridPosition);
-        }
-        else
-        {
-            PlaceItem(tileGridPosition);
-        }
-         
     }
 
     private void RotateItem()
@@ -178,6 +163,26 @@ public class InventoryController : MonoBehaviour
             PlaceItem(tileGridPosition);
         }
     }
+    private void RightMouseButtonPress()
+    {
+        Vector2Int tileGridPosition = GetTileGridPosition();
+
+        if (selectedItem != null)
+        {
+            InventoryItem itemToRemove = selectedItemGrid.RemoveItem(tileGridPosition.x, tileGridPosition.y);
+        
+            if (itemToRemove != null)
+            {
+                Destroy(itemToRemove.gameObject);
+            }
+        } 
+        else
+        {
+            AddIngredientToPotionCraftingSpace(tileGridPosition);
+            Debug.Log("Call to add ingredient to inventory space");
+        }
+    }
+
 
     private Vector2Int GetTileGridPosition()
     {
@@ -227,16 +232,26 @@ public class InventoryController : MonoBehaviour
 
     private void AddIngredientToInventory()
     {
-        if (selectedItem == null)
-        {
-            return;
-        }
-
         if (selectedItem.itemData.isIngredient)
         {
             PotionCraftingSystem.Instance.AddIngredientToSlot(selectedItem.itemData);
         }
+    }
+    private void AddIngredientToPotionCraftingSpace(Vector2Int tileGridPosition)
+    {
+        InventoryItem selectedItem = selectedItemGrid.GetItem(tileGridPosition.x, tileGridPosition.y);
+        Debug.Log(selectedItem);
+        if (selectedItem != null && selectedItem.itemData.isIngredient)
+        {
+            selectedItemGrid.RemoveItem(tileGridPosition.x, tileGridPosition.y);
 
+            PotionCraftingSystem.Instance.AddIngredientToSlot(selectedItem.itemData);
+            Destroy(selectedItem.gameObject);
+        }
+        else
+        {
+            return;
+        }
     }
 
 }

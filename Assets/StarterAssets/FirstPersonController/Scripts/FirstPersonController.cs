@@ -55,8 +55,7 @@ namespace StarterAssets
 		public float currentStamina = 100f;
 		public float staminaDrainAmount = 0.5f;
 		public float staminaRegenAmount = 0.2f;
-
-
+		
 		// cinemachine
 		private float _cinemachineTargetPitch;
 
@@ -133,6 +132,12 @@ namespace StarterAssets
 		{
 			CameraRotation();
 		}
+
+		public void MoveToPosition(Vector3 position)
+        {
+			gameObject.transform.position = position;
+			Debug.Log(position);
+        }
 
 		private void GroundedCheck()
 		{

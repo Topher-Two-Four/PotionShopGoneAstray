@@ -13,8 +13,8 @@ EditorBuildSettings:
     guid: d10449e4d97ff7a41a695dd0c593494d
   - enabled: 1
     path: Assets/Scenes/PotionShopLevel.unity
-    guid: 23f3668c341a78843a3a8021b6994a0d
+    guid: dc7fb4771bf4b034a9894fc35f9331f5
   - enabled: 1
-    path: Assets/Scenes/MazeLevel.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/MazeTestBuild.unity
+    guid: a7277d6fbcc6d5f4dba9db35380b624e
   m_configObjects: {}

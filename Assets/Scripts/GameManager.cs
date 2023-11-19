@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using StarterAssets;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class GameManager : MonoBehaviour
     public bool isEndOfDay; // Variable to keep track of whether the day is over
     public TMP_Text timeRemainingText; // Time remaining to display as text
     public TMP_Text timeOfDayText; // Time of day to display as text
+
+    public FirstPersonController controller;
+    public GameObject playerCapsule;
+    
 
     private bool morningTransitionComplete = false; // Keep track of transition from beginning of new day to morning
     private bool afternoonTransitionComplete = false; // Keep track of transition from morning to afternoon
@@ -34,6 +39,10 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         isTimerRunning = true; // Set timer running to true when starting game/day
+        Cursor.lockState = CursorLockMode.Confined; // Lock cursor in one place
+        Cursor.visible = true; // Hide cursor
+        Debug.Log(playerCapsule);
+        playerCapsule.SetActive(false);
     }
 
     private void Update()
@@ -44,13 +53,25 @@ public class GameManager : MonoBehaviour
             //Debug.Log(timeRemaining); // Print remaining time
             TimerUpdate(); // Update timer every frame
         }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            SetPlayerCapsuleActive();
+            Invoke("LoadMazeLevel", 1f);
+        }
+    }
+
+    private void SetPlayerCapsuleActive()
+    {
+        Debug.Log(playerCapsule);
+        playerCapsule.SetActive(true);
     }
 
     public void SwitchSceneToMainMenu() // Use scene manager to switch to Main Menu
     {
-        SceneManager.LoadScene(0); // Use scene manager to load first scene from scene list (main menu)
+
         Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
         Cursor.visible = true; // Display cursor
+        SceneManager.LoadScene(0); // Use scene manager to load first scene from scene list (main menu)
     }
 
     public void SwitchSceneToSettingsMenu() // Use scene manager to switch to Settings Menu
@@ -58,10 +79,16 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(1); // Use scene manager to load second scene from scene list (settings menu)
         Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
         Cursor.visible = true; // Display cursor
+
     }
 
     public void SwitchSceneToPotionLevel() // Use scene manager to switch to Potion Level
     {
+        SceneManager.LoadScene(2);
+        Cursor.lockState = CursorLockMode.Confined; // Lock cursor in one place
+        Cursor.visible = true; // Hide cursor
+        playerCapsule.SetActive(false);
+
 
         // Need to make the timer start after leaving the main menu
         /*
@@ -73,18 +100,39 @@ public class GameManager : MonoBehaviour
         }
       */
 
-        SceneManager.LoadScene(2); // Use scene manager to load third scene from scene list (potion shop level)
-        Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
-        Cursor.visible = true; // Display cursor
+
     }
 
     public void SwitchSceneToMazeLevel() // Use scene manager to switch to Maze Level
     {
-        // Ranomize which maze scene is loaded
-        SceneManager.LoadScene(3); // Use scene manager to load fourth scene from scene list (maze level)
-        Cursor.lockState = CursorLockMode.Locked; // Lock cursor in one place
-        Cursor.visible = false; // Hide cursor
+        Debug.Log(playerCapsule);
+        SceneManager.LoadScene(3); // Use scene manager to load second scene from scene list (settings menu)
+        Invoke("SetPlayerCapsuleActive", 3f);
+        Debug.Log(playerCapsule);
+        Invoke("LoadMazeLevel", 5f);
     }
+
+    private void LoadMazeLevel()
+    {
+        Debug.Log(playerCapsule);
+
+        Cursor.lockState = CursorLockMode.Locked; // Unlock cursor, confine to game screen
+        Cursor.visible = false; // Display cursor
+
+
+        controller.GetComponent<CharacterController>().enabled = false; // Disable character controller to allow immediate position change
+
+        SetPlayerCapsuleActive(); // Ensure the player capsule is active
+
+        GameObject spawnPoint = GameObject.FindGameObjectWithTag("PlayerSpawnPoint");
+
+
+        controller.MoveToPosition(spawnPoint.transform.position); 
+
+
+        controller.GetComponent<CharacterController>().enabled = true; // Enable character controller once position is changed
+    }
+
 
     public void ExitGame()
     {

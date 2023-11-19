@@ -362,6 +362,7 @@ MonoBehaviour:
   ingredient1: {fileID: 11400000, guid: 21941877933038a448e70debb18e8d65, type: 2}
   ingredient2: {fileID: 11400000, guid: 7802850d100d4934b8e443b37b387c54, type: 2}
   ingredient3: {fileID: 0}
+  potionBeingBrewed: {fileID: 0}
   ultraQualityTimeLimit: 90
   highQualityTimeLimit: 70
   mediumQualityTimeLimit: 50
@@ -388,6 +389,7 @@ MonoBehaviour:
   emptySlotImage: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   temperatureDisplayText: {fileID: 625185103}
   timeRemainingText: {fileID: 1933629295}
+  potionRecipe: {fileID: 0}
 --- !u!4 &258361605
 Transform:
   m_ObjectHideFlags: 0
@@ -2267,7 +2269,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!1 &1120529366
 GameObject:
@@ -2301,6 +2303,17 @@ Transform:
   - {fileID: 845946659}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1216859933 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5555001892586057329, guid: 2363c673e5c152642ab9de3e3f454fc7, type: 3}
+  m_PrefabInstance: {fileID: 1452992798}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26e83be86f5671a48ba21e5d32365c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1218162996
 GameObject:
   m_ObjectHideFlags: 0
@@ -2836,6 +2849,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a84c835212d49cf46941e31e97c7081c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryGrid: {fileID: 1216859933}
   items:
   - {fileID: 11400000, guid: 21941877933038a448e70debb18e8d65, type: 2}
   - {fileID: 11400000, guid: f016e24a37bad8449b0dba750ca2322e, type: 2}

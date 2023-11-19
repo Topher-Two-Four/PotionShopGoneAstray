@@ -7,9 +7,9 @@ public class ItemObject : MonoBehaviour
 {
     public Rigidbody rigidBody;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             Debug.Log("Player collided with item object.");
         }

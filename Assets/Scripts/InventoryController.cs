@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class InventoryController : MonoBehaviour
 {
+
+    public ItemGrid inventoryGrid;
+
     [HideInInspector]
     private ItemGrid selectedItemGrid;
 
@@ -27,8 +30,20 @@ public class InventoryController : MonoBehaviour
 
     InventoryHighlight inventoryHighlight;
 
+
+
+    public static InventoryController Instance { get; private set; } // Singleton logic
+
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
         inventoryHighlight = GetComponent<InventoryHighlight>();
     }
 
@@ -82,23 +97,35 @@ public class InventoryController : MonoBehaviour
         selectedItem.Rotate();
     }
 
+    public void InsertItem(ItemData itemData)
+    {
+        if (inventoryGrid == null) { return; }
+
+            CreateInventoryItem(itemData);
+            Debug.Log(itemData);
+            InventoryItem itemToInsert = selectedItem;
+            InsertItem(itemToInsert);
+            selectedItem = null;
+
+    }
     private void InsertRandomItem()
     {
         if (selectedItemGrid == null) { return; }
 
-        CreateRandomItem();
+
+        CreateRandomItem(); // Creates a selected item and holds it
         InventoryItem itemToInsert = selectedItem;
         selectedItem = null;
         InsertItem(itemToInsert);
     }
 
-    private void InsertItem(InventoryItem itemToInsert)
+    public void InsertItem(InventoryItem itemToInsert)
     {
-        Vector2Int? posOnGrid = selectedItemGrid.FindSpaceForObject(itemToInsert);
+        Vector2Int? posOnGrid = inventoryGrid.FindSpaceForObject(itemToInsert);
 
         if (posOnGrid == null) { return; }
 
-        selectedItemGrid.PlaceItem(itemToInsert, posOnGrid.Value.x, posOnGrid.Value.y);
+        inventoryGrid.PlaceItem(itemToInsert, posOnGrid.Value.x, posOnGrid.Value.y);
     }
 
     Vector2Int oldPosition;
@@ -134,6 +161,18 @@ public class InventoryController : MonoBehaviour
             inventoryHighlight.SetSize(selectedItem);
             inventoryHighlight.SetPosition(selectedItemGrid, selectedItem, positionOnGrid.x, positionOnGrid.y);
         }
+    }
+
+    public void CreateInventoryItem(ItemData itemData)
+    {
+        InventoryItem inventoryItem = Instantiate(itemPrefab).GetComponent<InventoryItem>();
+        selectedItem = inventoryItem;
+
+        rectTransform = inventoryItem.GetComponent<RectTransform>();
+        rectTransform.SetParent(canvasTransform);
+        rectTransform.SetAsLastSibling();
+
+        inventoryItem.Set(itemData);
     }
 
     private void CreateRandomItem()
@@ -230,13 +269,6 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    private void AddIngredientToInventory()
-    {
-        if (selectedItem.itemData.isIngredient)
-        {
-            PotionCraftingSystem.Instance.AddIngredientToSlot(selectedItem.itemData);
-        }
-    }
     private void AddIngredientToPotionCraftingSpace(Vector2Int tileGridPosition)
     {
         InventoryItem selectedItem = selectedItemGrid.GetItem(tileGridPosition.x, tileGridPosition.y);

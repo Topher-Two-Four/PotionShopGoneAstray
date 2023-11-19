@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class PotionCraftingSystem : MonoBehaviour
     public ItemData ingredient1; // First ingredient ItemData scriptable object
     public ItemData ingredient2; // Second ingredient ItemData scriptable object
     public ItemData ingredient3; // Third ingredient ItemData scriptable object
+    public ItemData potionBeingBrewed; // Third ingredient ItemData scriptable object
 
     public float ultraQualityTimeLimit = 90f; // Time in desired temperature range required to make an ultra quality potion
     public float highQualityTimeLimit = 70f;// Time in desired temperature range required to make a high quality potion
@@ -49,6 +51,8 @@ public class PotionCraftingSystem : MonoBehaviour
     public TMP_Text temperatureDisplayText; // TMP text game object for displaying the current temperature
     public TMP_Text timeRemainingText; // TMP text game object for displaying amount of cook time remaining
 
+    public Recipe potionRecipe;
+
     public static PotionCraftingSystem Instance { get; private set; } // Singleton logic
 
     private void Awake()
@@ -62,18 +66,48 @@ public class PotionCraftingSystem : MonoBehaviour
             Instance = this;
         }
 
-        ingredient1Button.onClick.AddListener(() => AddIngredientToInventory(ingredient1)); // Add button listener for first ingredient space
-        ingredient2Button.onClick.AddListener(() => AddIngredientToInventory(ingredient2)); // Add button listener for second ingredient space
-        ingredient3Button.onClick.AddListener(() => AddIngredientToInventory(ingredient3)); // Add button listener for third ingredient space
+        ingredient1Button.onClick.AddListener(() => AddItemToInventory(ingredient1)); // Add button listener for first ingredient space
+        ingredient2Button.onClick.AddListener(() => AddItemToInventory(ingredient2)); // Add button listener for second ingredient space
+        ingredient3Button.onClick.AddListener(() => AddItemToInventory(ingredient3)); // Add button listener for third ingredient space
         increaseTempButton.onClick.AddListener(() => IncreaseTemperature()); // Add button listener for increase temperature button
         decreaseTempButton.onClick.AddListener(() => DecreaseTemperature());// Add button listener for decrease temperature button
         brewButton.onClick.AddListener(() => BrewPotion(ingredient1, ingredient2, ingredient3)); // Add button listener to brew potion when pressed
+        potionRetrievalButton.onClick.AddListener(() => RetrievePotion());// Add button listener for potion retrieval area
         UpdateTemperatureDisplay();
+    }
+
+    private void RetrievePotion()
+    {
+        Debug.Log(potionBeingBrewed);
+        Debug.Log("Trying to retrieve potion");
+        if (!isBrewing)
+        {
+            if (isRetrievable)
+            {
+                Debug.Log("Retrieving potion");
+                AddItemToInventory(potionBeingBrewed);
+                potionBeingBrewed = null;
+            }
+            else
+            {
+                Debug.Log("Potion not retrievable");
+            }
+        } 
+        else
+        {
+            Debug.Log("Brewing not complete");
+        }
+
+        // If brewing is complete
+        // and if potion is retrievable
+        // add potion to inventory
+        // remove potion from retrieval area
     }
 
     private void Update()
     {
         UpdateIngredientIcons();
+        UpdatePotionIcon();
         UpdateBrewButtonStatus(); // NEED TO MAKE DO THIS ONLY WHEN CHANGE OCCURS
     }
 
@@ -101,6 +135,7 @@ public class PotionCraftingSystem : MonoBehaviour
     {
         timeCooked = 0f;
         timeAtDesiredTemp = 0f;
+        potionBeingBrewed = potionRecipe.potion;
         Debug.Log("Brewing process started");
         while (timeCooked < potionRecipe.cookTime)
         {
@@ -163,6 +198,18 @@ public class PotionCraftingSystem : MonoBehaviour
         }
     }
 
+    private void UpdatePotionIcon()
+    {
+        if (potionBeingBrewed != null)
+        {
+            potionImage.sprite = potionBeingBrewed.itemIcon;
+        }
+        else
+        {
+            potionImage.sprite = emptySlotImage;
+        }
+    }
+
     private void DisplayBrewingComplete()
     {
         Debug.Log("Brewing complete.");
@@ -201,11 +248,18 @@ public class PotionCraftingSystem : MonoBehaviour
         }
     }
 
-    public void AddIngredientToInventory(ItemData ingredient)
+    public void AddItemToInventory(ItemData itemData)
     {
-        // If button clicked has an ingredient then add it to inventory
-        // Reset button image
-        // Else return
+        if (itemData != null)
+        {
+            InventoryController.Instance.InsertItem(itemData);
+            itemData = null;
+            if (itemData == potionBeingBrewed)
+            {
+                potionBeingBrewed = null;
+            }
+        } 
+
     }
 
     public int CheckPotionQuality(int cookTime, float timeAtDesiredTemp) // Check what quality of potion has been made, based on time in desired temperature range

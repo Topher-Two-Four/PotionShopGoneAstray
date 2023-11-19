@@ -16941,6 +16941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 394110253}
+  itemData: {fileID: 11400000, guid: 21941877933038a448e70debb18e8d65, type: 2}
 --- !u!54 &394110253
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -65261,6 +65262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a84c835212d49cf46941e31e97c7081c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryGrid: {fileID: 1913225570}
   items:
   - {fileID: 11400000, guid: 21941877933038a448e70debb18e8d65, type: 2}
   - {fileID: 11400000, guid: f016e24a37bad8449b0dba750ca2322e, type: 2}
@@ -88386,6 +88388,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4133279865073494329, guid: 2363c673e5c152642ab9de3e3f454fc7, type: 3}
   m_PrefabInstance: {fileID: 302345688}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1913225570 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5555001892586057329, guid: 2363c673e5c152642ab9de3e3f454fc7, type: 3}
+  m_PrefabInstance: {fileID: 302345688}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26e83be86f5671a48ba21e5d32365c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1914692932
 Mesh:
   m_ObjectHideFlags: 0

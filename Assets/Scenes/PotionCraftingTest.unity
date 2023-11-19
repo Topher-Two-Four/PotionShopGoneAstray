@@ -359,8 +359,8 @@ MonoBehaviour:
   desiredTemp: 3
   timeAtDesiredTemp: 0
   potionQuality: 4
-  ingredient1: {fileID: 11400000, guid: 21941877933038a448e70debb18e8d65, type: 2}
-  ingredient2: {fileID: 11400000, guid: 7802850d100d4934b8e443b37b387c54, type: 2}
+  ingredient1: {fileID: 0}
+  ingredient2: {fileID: 0}
   ingredient3: {fileID: 0}
   potionBeingBrewed: {fileID: 0}
   ultraQualityTimeLimit: 90

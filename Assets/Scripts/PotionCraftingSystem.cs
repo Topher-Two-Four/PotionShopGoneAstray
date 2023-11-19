@@ -263,6 +263,7 @@ public class PotionCraftingSystem : MonoBehaviour
 
     public void AddItemToInventory(ItemData itemData)
     {
+        Debug.Log(itemData);
         if (itemData != null)
         {
             InventoryController.Instance.InsertItem(itemData);

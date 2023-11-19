@@ -6,12 +6,15 @@ using UnityEngine.EventSystems;
 public class ItemObject : MonoBehaviour
 {
     public Rigidbody rigidBody;
+    public ItemData itemData;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Player collided with item object.");
+            Debug.Log(itemData);
+            InventoryController.Instance.AddItemObjectToInventory(itemData);
+            Destroy(gameObject);
         }
     }
 

@@ -286,4 +286,15 @@ public class InventoryController : MonoBehaviour
         }
     }
 
+    public void AddItemObjectToInventory(ItemData itemData)
+    {
+        Debug.Log(itemData);
+        if (itemData != null)
+        {
+            InsertItem(itemData);
+            itemData = null;
+        }
+
+    }
+
 }

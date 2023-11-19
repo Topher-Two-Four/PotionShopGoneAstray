@@ -66,9 +66,9 @@ public class PotionCraftingSystem : MonoBehaviour
             Instance = this;
         }
 
-        ingredient1Button.onClick.AddListener(() => AddItemToInventory(ingredient1)); // Add button listener for first ingredient space
-        ingredient2Button.onClick.AddListener(() => AddItemToInventory(ingredient2)); // Add button listener for second ingredient space
-        ingredient3Button.onClick.AddListener(() => AddItemToInventory(ingredient3)); // Add button listener for third ingredient space
+        ingredient1Button.onClick.AddListener(() => RetrieveItem(ingredient1, 1)); // Add button listener for first ingredient space
+        ingredient2Button.onClick.AddListener(() => RetrieveItem(ingredient2, 2)); // Add button listener for second ingredient space
+        ingredient3Button.onClick.AddListener(() => RetrieveItem(ingredient3, 3)); // Add button listener for third ingredient space
         increaseTempButton.onClick.AddListener(() => IncreaseTemperature()); // Add button listener for increase temperature button
         decreaseTempButton.onClick.AddListener(() => DecreaseTemperature());// Add button listener for decrease temperature button
         brewButton.onClick.AddListener(() => BrewPotion(ingredient1, ingredient2, ingredient3)); // Add button listener to brew potion when pressed
@@ -97,11 +97,24 @@ public class PotionCraftingSystem : MonoBehaviour
         {
             Debug.Log("Brewing not complete");
         }
+    }
 
-        // If brewing is complete
-        // and if potion is retrievable
-        // add potion to inventory
-        // remove potion from retrieval area
+    private void RetrieveItem(ItemData ingredient, int ingredientSlot)
+    {
+        AddItemToInventory(ingredient);
+        if (ingredientSlot == 1) 
+        {
+            ingredient1 = null;
+        } 
+        else if (ingredientSlot == 2)
+        {
+            ingredient2 = null;
+        } 
+        else
+        {
+            ingredient3 = null;
+        }
+
     }
 
     private void Update()
@@ -136,6 +149,9 @@ public class PotionCraftingSystem : MonoBehaviour
         timeCooked = 0f;
         timeAtDesiredTemp = 0f;
         potionBeingBrewed = potionRecipe.potion;
+        ingredient1 = null;
+        ingredient2 = null;
+        ingredient3 = null;
         Debug.Log("Brewing process started");
         while (timeCooked < potionRecipe.cookTime)
         {
@@ -157,9 +173,6 @@ public class PotionCraftingSystem : MonoBehaviour
             }
             yield return null;
         }
-        ingredient1 = null;
-        ingredient2 = null;
-        ingredient3 = null;
         DisplayBrewingComplete();
     }
 
@@ -257,6 +270,22 @@ public class PotionCraftingSystem : MonoBehaviour
             if (itemData == potionBeingBrewed)
             {
                 potionBeingBrewed = null;
+            }
+            if (itemData == ingredient1)
+            {
+                itemData = null;
+            }
+            else if (itemData == ingredient2)
+            {
+                itemData = null;
+            }
+            else if (itemData == ingredient3)
+            {
+                itemData = null;
+            }
+            else
+            {
+                return;
             }
         } 
 

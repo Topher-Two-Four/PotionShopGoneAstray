@@ -5,7 +5,7 @@ using StarterAssets;
 
 public class GameManager : MonoBehaviour
 {
-    public float timeRemaining = 90; // Time remaining in day
+    public float timeRemaining = 900; // Time remaining in day
     public bool isTimerRunning; // Variable to keep track of if timer is still running
     public bool isMorning; // Variable to keep track of whether it's morning
     public bool isAfternoon; // Variable to keep track of whether it's afternoon
@@ -14,9 +14,12 @@ public class GameManager : MonoBehaviour
     public TMP_Text timeRemainingText; // Time remaining to display as text
     public TMP_Text timeOfDayText; // Time of day to display as text
 
-    public FirstPersonController controller;
-    public GameObject playerCapsule;
-    
+    public int playerCurrency = 0;
+    public int landlordPayment = 200;
+    public int potionValue;
+
+    public FirstPersonController controller; // First person controller game object
+    public GameObject playerCapsule; // Player capsule collider
 
     private bool morningTransitionComplete = false; // Keep track of transition from beginning of new day to morning
     private bool afternoonTransitionComplete = false; // Keep track of transition from morning to afternoon
@@ -41,8 +44,8 @@ public class GameManager : MonoBehaviour
         isTimerRunning = true; // Set timer running to true when starting game/day
         Cursor.lockState = CursorLockMode.Confined; // Lock cursor in one place
         Cursor.visible = true; // Hide cursor
-        Debug.Log(playerCapsule);
-        playerCapsule.SetActive(false);
+        Debug.Log(playerCapsule); 
+        playerCapsule.SetActive(false); // Deactivate player capsule
     }
 
     private void Update()
@@ -56,27 +59,27 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X))
         {
             SetPlayerCapsuleActive();
-            Invoke("LoadMazeLevel", 1f);
+            Invoke("LoadMazeLevel", .1f);
         }
     }
 
-    private void SetPlayerCapsuleActive()
+
+    public void ExitGame()
     {
-        Debug.Log(playerCapsule);
-        playerCapsule.SetActive(true);
+        Application.Quit(); // Exit game to desktop
     }
 
     public void SwitchSceneToMainMenu() // Use scene manager to switch to Main Menu
     {
-
+        SceneManager.LoadScene(0); // Load scene through scene manager
         Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
         Cursor.visible = true; // Display cursor
-        SceneManager.LoadScene(0); // Use scene manager to load first scene from scene list (main menu)
+
     }
 
     public void SwitchSceneToSettingsMenu() // Use scene manager to switch to Settings Menu
     {
-        SceneManager.LoadScene(1); // Use scene manager to load second scene from scene list (settings menu)
+        SceneManager.LoadScene(1); // Load scene through scene manager
         Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
         Cursor.visible = true; // Display cursor
 
@@ -84,38 +87,19 @@ public class GameManager : MonoBehaviour
 
     public void SwitchSceneToPotionLevel() // Use scene manager to switch to Potion Level
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(2); // Load scene through scene manager
         Cursor.lockState = CursorLockMode.Confined; // Lock cursor in one place
         Cursor.visible = true; // Hide cursor
-        playerCapsule.SetActive(false);
-
-
-        // Need to make the timer start after leaving the main menu
-        /*
-        if (isTimerRunning == false) // Calculate time if timer is still running
-        {
-            timeRemaining = 90;
-            StartTimer();
-            Debug.Log("Timer started.");
-        }
-      */
-
-
+        playerCapsule.SetActive(false); // Deactivate player capsule
     }
 
     public void SwitchSceneToMazeLevel() // Use scene manager to switch to Maze Level
     {
-        Debug.Log(playerCapsule);
         SceneManager.LoadScene(3); // Use scene manager to load second scene from scene list (settings menu)
-        Invoke("SetPlayerCapsuleActive", 3f);
-        Debug.Log(playerCapsule);
-        Invoke("LoadMazeLevel", 5f);
     }
 
-    private void LoadMazeLevel()
+    private void LoadMazeLevel() // Place player in correct spot when maze is loaded
     {
-        Debug.Log(playerCapsule);
-
         Cursor.lockState = CursorLockMode.Locked; // Unlock cursor, confine to game screen
         Cursor.visible = false; // Display cursor
 
@@ -124,39 +108,27 @@ public class GameManager : MonoBehaviour
 
         SetPlayerCapsuleActive(); // Ensure the player capsule is active
 
-        GameObject spawnPoint = GameObject.FindGameObjectWithTag("PlayerSpawnPoint");
+        GameObject spawnPoint = GameObject.FindGameObjectWithTag("PlayerSpawnPoint"); // Find player spawn point
 
 
-        controller.MoveToPosition(spawnPoint.transform.position); 
+        controller.MoveToPosition(spawnPoint.transform.position); // Move player controller to player spawn point
 
 
         controller.GetComponent<CharacterController>().enabled = true; // Enable character controller once position is changed
     }
 
-
-    public void ExitGame()
+    private void SetPlayerCapsuleActive()
     {
-        Application.Quit();
-    }
-
-    private void StartTimer()
-    {
-        isTimerRunning = true;
-    }
-
-    private void StopTimer()
-    {
-        isTimerRunning = false;
+        Debug.Log(playerCapsule);
+        playerCapsule.SetActive(true); // Set player capsule active
     }
 
     private void TimerUpdate() // Update timer and keep track of what time of day it is
     {
-        if (timeRemaining > 60)
+        if (timeRemaining > 600)
         {
-            isMorning = true;
-            isAfternoon = false;
-            isEvening = false;
-            isEndOfDay = false;
+            isMorning = true; isAfternoon = false; isEvening = false; isEndOfDay = false; // Set time of day to morning
+
             if (morningTransitionComplete == false) // Morning transition block, which will run once at the beginning of the morning
             {
                 // Add additional new day to morning transition logic here as needed
@@ -166,12 +138,9 @@ public class GameManager : MonoBehaviour
                 //Debug.Log("It's now morning."); // Print morning notification
             }
         }
-        else if (timeRemaining <= 60 && timeRemaining > 30)
+        else if (timeRemaining <= 600 && timeRemaining > 300)
         {
-            isMorning = false;
-            isAfternoon = true;
-            isEvening = false;
-            isEndOfDay = false;
+            isMorning = false; isAfternoon = true; isEvening = false; isEndOfDay = false; // Set time of day to afternoon
             if (afternoonTransitionComplete == false) // Afternoon transition block, which will run once at the beginning of the afternoon
             {
                 // Add additional morning to afternoon transition logic here as needed
@@ -180,12 +149,9 @@ public class GameManager : MonoBehaviour
                 //Debug.Log("It's now afternoon."); // Print afternoon notification
             }
         }
-        else if (timeRemaining <= 30 && timeRemaining > 0)
+        else if (timeRemaining <= 300 && timeRemaining > 0)
         {
-            isMorning = false;
-            isAfternoon = false;
-            isEvening = true;
-            isEndOfDay = false;
+            isMorning = false; isAfternoon = false; isEvening = true; isEndOfDay = false; // Set time of day to evening
             if (eveningTransitionComplete == false) // Evening transition block, which will run once at the beginning of the evening
             {
                 // Add additional afternoon to evening transition logic here as needed
@@ -196,6 +162,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            isMorning = false; isAfternoon = false; isEvening = false; isEndOfDay = true; // Set time of day to end of day
             timeRemaining = 0; // Stop timer at 0, instead of becoming negative value
             isTimerRunning = false; // Turn off timer
             if (endOfDayTransitionComplete == false) // End of day transition block, which will run once at the end of the day
@@ -204,7 +171,8 @@ public class GameManager : MonoBehaviour
                 endOfDayTransitionComplete = true; // Set transition status to complete
                 timeOfDayText.text = ("End of Day"); // Display time of day text on screen
                 timeOfDayText.color = Color.red; // Set color of text to red
-                //Debug.Log("The day is now over."); // Print end of day notification
+                Debug.Log("The day is now over."); // Print end of day notification
+                EndDay();
             }
         }
         DisplayTime(timeRemaining); // Display time remaining
@@ -216,6 +184,13 @@ public class GameManager : MonoBehaviour
         float minutes = Mathf.FloorToInt(timeRemaining / 60); // Calculate remaining minutes
         float seconds = Mathf.FloorToInt(timeRemaining % 60); // Calculate remaining seconds
         timeRemainingText.text = string.Format("{0:00}:{1:00}", minutes, seconds); // The value on the left determines which values to use (minutes, seconds) and the right is how it's formatted
+    }
+
+    private void EndDay()
+    {
+        // Check whether player made enough money to pay landlord
+        // Display whether or not they won
+        // Button for return to main menu or quit
     }
 
 }

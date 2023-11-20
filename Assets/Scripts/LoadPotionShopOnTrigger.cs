@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoadPotionShopOnTrigger : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class LoadPotionShopOnTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            SceneManager.LoadScene(2);
             GameManager.Instance.SwitchSceneToPotionLevel(); // Switch scene to potion shop
         }
     }

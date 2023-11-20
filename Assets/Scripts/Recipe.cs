@@ -14,6 +14,7 @@ public class Recipe : ScriptableObject
 
     public float cookTime = 120f; // How long the recipe takes to cook
     public int desiredTemp = 3; // The desired temperature for this potion between 1 and 5
+    public int quality = 5; // The desired temperature for this potion between 1 and 5
 
     public float ultraQualityTimeLimit; // Time in desired temperature range required to make an ultra quality potion
     public float highQualityTimeLimit;// Time in desired temperature range required to make a high quality potion

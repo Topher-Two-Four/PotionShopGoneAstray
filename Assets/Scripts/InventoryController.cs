@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InventoryController : MonoBehaviour
 {
-
+    public GameObject inventoryCanvas;
     public ItemGrid inventoryGrid; // Inventory grid used by the player
 
     [HideInInspector]
@@ -30,6 +30,7 @@ public class InventoryController : MonoBehaviour
 
     InventoryHighlight inventoryHighlight; // Inventory item highlighter
 
+
     public static InventoryController Instance { get; private set; } // Singleton logic
 
     private void Awake()
@@ -49,9 +50,12 @@ public class InventoryController : MonoBehaviour
 
         HandleHighlight(); // Use script to handle highlight of inventory item
 
+        if (Input.GetKeyDown(KeyCode.Tab)) { ToggleInventoryCanvas(); } // When left mouse button is pressed run method
+
         if (Input.GetMouseButtonDown(0)) { LeftMouseButtonPress(); } // When left mouse button is pressed run method
 
         if (Input.GetMouseButton(1)) { RightMouseButtonPress(); } // When right mouse button is pressed run method
+
     }
 
     public void CreateInventoryItem(ItemData itemData)
@@ -96,6 +100,18 @@ public class InventoryController : MonoBehaviour
         {
             InsertItem(itemData);
             itemData = null;
+        }
+    }
+
+    public void ToggleInventoryCanvas()
+    {
+        if (inventoryCanvas.gameObject.activeSelf)
+        {
+            inventoryCanvas.gameObject.SetActive(false);
+        } 
+        else
+        {
+            inventoryCanvas.gameObject.SetActive(true);
         }
     }
 

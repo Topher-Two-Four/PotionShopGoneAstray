@@ -16,8 +16,9 @@ MonoBehaviour:
   ingredient1: {fileID: 11400000, guid: 21941877933038a448e70debb18e8d65, type: 2}
   ingredient2: {fileID: 11400000, guid: 7802850d100d4934b8e443b37b387c54, type: 2}
   ingredient3: {fileID: 11400000, guid: f016e24a37bad8449b0dba750ca2322e, type: 2}
-  cookTime: 120
+  cookTime: 60
   desiredTemp: 3
+  quality: 5
   ultraQualityTimeLimit: 90
   highQualityTimeLimit: 70
   mediumQualityTimeLimit: 50

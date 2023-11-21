@@ -6,14 +6,17 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
-    public float timeRemaining = 900; // Time remaining in day
-    public bool isTimerRunning; // Variable to keep track of if timer is still running
+    public float timeRemaining = 0; // Time remaining in day
+    public float timeInDay = 900; // Time remaining in day
     public bool isMorning; // Variable to keep track of whether it's morning
     public bool isAfternoon; // Variable to keep track of whether it's afternoon
     public bool isEvening; // Variable to keep track of whether it's evening
     public bool isEndOfDay; // Variable to keep track of whether the day is over
     public TMP_Text timeRemainingText; // Time remaining to display as text
     public TMP_Text timeOfDayText; // Time of day to display as text
+    public TMP_Text playerCurrencyText;
+    public TMP_Text landlordPaymentText;
+    public TMP_Text winOrLossText; 
 
     public int playerCurrency = 0;
     public int landlordPayment = 200;
@@ -25,6 +28,7 @@ public class GameManager : MonoBehaviour
     public GameObject potionCraftingCanvas;
     public GameObject doorToMaze;
 
+    private bool isTimerRunning = false;
     private bool morningTransitionComplete = false; // Keep track of transition from beginning of new day to morning
     private bool afternoonTransitionComplete = false; // Keep track of transition from morning to afternoon
     private bool eveningTransitionComplete = false; // Keep track of transition from afternoon to evening
@@ -45,11 +49,14 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        isTimerRunning = true; // Set timer running to true when starting game/day
+        isTimerRunning = true;
+        Debug.Log(isTimerRunning);
         Cursor.lockState = CursorLockMode.Confined; // Lock cursor in one place
         Cursor.visible = true; // Hide cursor
         Debug.Log(playerCapsule); 
         playerCapsule.SetActive(false); // Deactivate player capsule
+        playerCurrencyText.text = ("Player Currency: $" + playerCurrency);
+        landlordPaymentText.text = ("Landlord Payment: $" + landlordPayment);
     }
 
     private void Update()
@@ -59,21 +66,30 @@ public class GameManager : MonoBehaviour
             timeRemaining -= Time.deltaTime; // Decrement time using deltaTime
             //Debug.Log(timeRemaining); // Print remaining time
             TimerUpdate(); // Update timer every frame
-        }
-
-        if (Input.GetKeyDown(KeyCode.X))
+        } 
+        else
         {
-            SetPlayerCapsuleActive();
-            Invoke("LoadMazeLevel", .1f);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            TogglePotionCraftingCanvas();
+            TimerUpdate();
         }
 
     }
 
+    public void StartGameTimer()
+    {
+        Debug.Log(isTimerRunning);
+        isTimerRunning = true; // Set the timer to run
+        Debug.Log(isTimerRunning);
+    }
+
+    public void PauseGameTimer()
+    {
+        isTimerRunning = false; // Set the timer to pause
+    }
+
+    public void ResetGameTimer()
+    {
+        timeRemaining = timeInDay;
+    }
 
     public void ExitGame()
     {
@@ -108,20 +124,24 @@ public class GameManager : MonoBehaviour
         doorToMaze.SetActive(false);
     }
 
+    public void AddCurrency(int currencyToAdd)
+    {
+        playerCurrency += currencyToAdd;
+        playerCurrencyText.text = ("Player Currency: $" + playerCurrency);
+    }
+
     public void SwitchSceneToMainMenu() // Use scene manager to switch to Main Menu
     {
         SceneManager.LoadScene(0); // Load scene through scene manager
         Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
         Cursor.visible = true; // Display cursor
-
     }
 
-    public void SwitchSceneToSettingsMenu() // Use scene manager to switch to Settings Menu
+    public void SwitchSceneToBootstrapLevel() // Use scene manager to switch to Main Menu
     {
         SceneManager.LoadScene(1); // Load scene through scene manager
         Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
         Cursor.visible = true; // Display cursor
-
     }
 
     public void SwitchSceneToPotionLevel() // Use scene manager to switch to Potion Level
@@ -131,16 +151,29 @@ public class GameManager : MonoBehaviour
             LoadMazeLevel();
         }
 
+        Debug.Log(isTimerRunning);
+
         SceneManager.LoadScene(2); // Load scene through scene manager
         Cursor.lockState = CursorLockMode.Confined; // Lock cursor in one place
         Cursor.visible = true; // Hide cursor
-        playerCapsule.SetActive(false); // Deactivate player capsule
+        if (playerCapsule != null)
+        {
+            playerCapsule.SetActive(false); // Deactivate player capsule
+        }
     }
 
     public void SwitchSceneToMazeLevel() // Use scene manager to switch to Maze Level
     {
         SceneManager.LoadScene(3); // Use scene manager to load second scene from scene list (settings menu)
         LoadMazeLevel();
+    }
+
+    public void SwitchSceneToSettingsMenu() // Use scene manager to switch to Settings Menu
+    {
+        SceneManager.LoadScene(4); // Load scene through scene manager
+        Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
+        Cursor.visible = true; // Display cursor
+
     }
 
     private void LoadMazeLevel() // Place player in correct spot when maze is loaded
@@ -230,8 +263,16 @@ public class GameManager : MonoBehaviour
 
     private void EndDay()
     {
-        // Check whether player made enough money to pay landlord
-        // Display whether or not they won
+        winOrLossText.gameObject.SetActive(true);
+
+        if (playerCurrency >= landlordPayment)
+        {
+            winOrLossText.text = ("You've won!");
+        } else
+        {
+            winOrLossText.text = ("You've lost!");
+        }
+
         // Button for return to main menu or quit
     }
 

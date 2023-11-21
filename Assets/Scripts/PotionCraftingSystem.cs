@@ -414,6 +414,7 @@ public class PotionCraftingSystem : MonoBehaviour
             {
                 Debug.Log("Retrieving potion");
                 AddItemToInventory(potionBeingBrewed);
+                GameManager.Instance.AddCurrency(potionBeingBrewed.baseValue);
                 potionBeingBrewed = null;
             }
             else

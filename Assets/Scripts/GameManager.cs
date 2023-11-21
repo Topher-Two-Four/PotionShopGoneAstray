@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public GameObject playerCapsule; // Player capsule collider
 
     public GameObject potionCraftingCanvas;
+    public GameObject doorToMaze;
 
     private bool morningTransitionComplete = false; // Keep track of transition from beginning of new day to morning
     private bool afternoonTransitionComplete = false; // Keep track of transition from morning to afternoon
@@ -98,6 +99,14 @@ public class GameManager : MonoBehaviour
     {
             potionCraftingCanvas.SetActive(false);
     }
+    public void ToggleOnDoorToMaze()
+    {
+        doorToMaze.SetActive(true);
+    }
+    public void ToggleOffDoorToMaze()
+    {
+        doorToMaze.SetActive(false);
+    }
 
     public void SwitchSceneToMainMenu() // Use scene manager to switch to Main Menu
     {
@@ -117,6 +126,11 @@ public class GameManager : MonoBehaviour
 
     public void SwitchSceneToPotionLevel() // Use scene manager to switch to Potion Level
     {
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3))
+        {
+            LoadMazeLevel();
+        }
+
         SceneManager.LoadScene(2); // Load scene through scene manager
         Cursor.lockState = CursorLockMode.Confined; // Lock cursor in one place
         Cursor.visible = true; // Hide cursor
@@ -126,18 +140,7 @@ public class GameManager : MonoBehaviour
     public void SwitchSceneToMazeLevel() // Use scene manager to switch to Maze Level
     {
         SceneManager.LoadScene(3); // Use scene manager to load second scene from scene list (settings menu)
-        float loadMazeTime = 5f;
-        float currentLoadTime = 0f;
-        while (currentLoadTime < loadMazeTime)
-        {
-            Debug.Log(currentLoadTime);
-            currentLoadTime += Time.deltaTime;
-            if (currentLoadTime >= loadMazeTime)
-            {
-                SetPlayerCapsuleActive();
-                Invoke("LoadMazeLevel", .1f);
-            }
-        }
+        LoadMazeLevel();
     }
 
     private void LoadMazeLevel() // Place player in correct spot when maze is loaded
@@ -145,18 +148,15 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked; // Unlock cursor, confine to game screen
         Cursor.visible = false; // Display cursor
 
-
-        controller.GetComponent<CharacterController>().enabled = false; // Disable character controller to allow immediate position change
-
         SetPlayerCapsuleActive(); // Ensure the player capsule is active
 
-        GameObject spawnPoint = GameObject.FindGameObjectWithTag("PlayerSpawnPoint"); // Find player spawn point
+        Vector3 spawnPoint = new Vector3(-25, -55, 25);
 
+        Debug.Log(spawnPoint);
 
-        controller.MoveToPosition(spawnPoint.transform.position); // Move player controller to player spawn point
+        controller.MoveToPosition(spawnPoint); // Move player controller to player spawn point
 
-
-        controller.GetComponent<CharacterController>().enabled = true; // Enable character controller once position is changed
+        Debug.Log("Maze level loaded");
     }
 
     private void SetPlayerCapsuleActive()

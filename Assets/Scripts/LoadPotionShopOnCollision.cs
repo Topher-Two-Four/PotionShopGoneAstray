@@ -11,8 +11,6 @@ public class LoadPotionShopOnCollision : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-
-            SceneManager.LoadScene(2);
             GameManager.Instance.SwitchSceneToPotionLevel(); // Switch scene to potion shop
         }
     }

@@ -20,6 +20,14 @@ public class RoomManager : MonoBehaviour
         {
             button.onClick.AddListener(() => ToggleRoom(button));
         }
+
+        GameManager.Instance.ToggleOnDoorToMaze();
+
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.ToggleOffDoorToMaze();
     }
 
     // Toggles on and off room game objects for navigation of 2D scene
@@ -42,10 +50,20 @@ public class RoomManager : MonoBehaviour
 
             if (currentRoom == roomList[1] || currentRoom == roomList[4])
             {
+                Debug.Log(currentRoom);
+                GameManager.Instance.ToggleOffDoorToMaze();
                 GameManager.Instance.ToggleOnPotionCraftingCanvas();
             } 
+            else if (currentRoom == roomList[3] || currentRoom == roomList[6])
+            {
+                Debug.Log(currentRoom);
+                GameManager.Instance.ToggleOffPotionCraftingCanvas(); // Later on will have toggle batch of game objects and logic based on potion shop room
+                GameManager.Instance.ToggleOnDoorToMaze();
+            }
             else
             {
+                Debug.Log(currentRoom);
+                GameManager.Instance.ToggleOffDoorToMaze();
                 GameManager.Instance.ToggleOffPotionCraftingCanvas();
             }
         }

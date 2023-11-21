@@ -11,6 +11,7 @@ public class ItemData : ScriptableObject
 
     public bool isIngredient; // Whether this item is an ingredient
     public bool isPotion; // Whether this item is a potion
+    public bool isSellable; // Whether this item can be sold
     public int quality; // The quality of the item from 1-5
     public int baseValue; // The base currency value of this item
 

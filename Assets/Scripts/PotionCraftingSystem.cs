@@ -55,6 +55,8 @@ public class PotionCraftingSystem : MonoBehaviour
 
     public static PotionCraftingSystem Instance { get; private set; } // Singleton logic
 
+    // *** MONOBEHAVIOR ***
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -69,60 +71,26 @@ public class PotionCraftingSystem : MonoBehaviour
         ingredient1Button.onClick.AddListener(() => RetrieveItem(ingredient1, 1)); // Add button listener for first ingredient space
         ingredient2Button.onClick.AddListener(() => RetrieveItem(ingredient2, 2)); // Add button listener for second ingredient space
         ingredient3Button.onClick.AddListener(() => RetrieveItem(ingredient3, 3)); // Add button listener for third ingredient space
+        
         increaseTempButton.onClick.AddListener(() => IncreaseTemperature()); // Add button listener for increase temperature button
         decreaseTempButton.onClick.AddListener(() => DecreaseTemperature());// Add button listener for decrease temperature button
+        
         brewButton.onClick.AddListener(() => BrewPotion(ingredient1, ingredient2, ingredient3)); // Add button listener to brew potion when pressed
+        
         potionRetrievalButton.onClick.AddListener(() => RetrievePotion());// Add button listener for potion retrieval area
+        
         UpdateTemperatureDisplay();
-    }
-
-    private void RetrievePotion()
-    {
-        Debug.Log(potionBeingBrewed);
-        Debug.Log("Trying to retrieve potion");
-        if (!isBrewing)
-        {
-            if (isRetrievable)
-            {
-                Debug.Log("Retrieving potion");
-                AddItemToInventory(potionBeingBrewed);
-                potionBeingBrewed = null;
-            }
-            else
-            {
-                Debug.Log("Potion not retrievable");
-            }
-        } 
-        else
-        {
-            Debug.Log("Brewing not complete");
-        }
-    }
-
-    private void RetrieveItem(ItemData ingredient, int ingredientSlot)
-    {
-        AddItemToInventory(ingredient);
-        if (ingredientSlot == 1) 
-        {
-            ingredient1 = null;
-        } 
-        else if (ingredientSlot == 2)
-        {
-            ingredient2 = null;
-        } 
-        else
-        {
-            ingredient3 = null;
-        }
-
     }
 
     private void Update()
     {
         UpdateIngredientIcons();
         UpdatePotionIcon();
-        UpdateBrewButtonStatus(); // NEED TO MAKE DO THIS ONLY WHEN CHANGE OCCURS
+        UpdateBrewButtonStatus();
     }
+
+
+    // *** POTION BREWING ***
 
     public void BrewPotion(ItemData ingredient1, ItemData ingredient2, ItemData ingredient3) // Brew potion using three ingredients
     {
@@ -142,7 +110,6 @@ public class PotionCraftingSystem : MonoBehaviour
     {
         StartCoroutine(BrewingProcess(potionRecipe));
     }
-
 
     private IEnumerator BrewingProcess(Recipe potionRecipe)
     {
@@ -176,9 +143,49 @@ public class PotionCraftingSystem : MonoBehaviour
         DisplayBrewingComplete();
     }
 
+    public void UpdateBrewButtonStatus()
+    {
+        Recipe potionRecipe = RecipeList.Instance.FindRecipe(ingredient1, ingredient2, ingredient3); // Get potion recipe from instance of the recipe list
+        if (potionRecipe != null) // Check whether a potion recipe exists with the combination of these three ingredients
+        {
+            if (isBrewing) // If recipe is not currently brewing
+            {
+                brewButton.interactable = false; // If a recipe with this ingredient combination does not exist then make the brew button uninteractable (and grayed out)
+            }
+            else
+            {
+                if (!isRetrievable) // If recipe is not retrievable
+                {
+                    brewButton.interactable = false;
+                    potionImage.sprite = potionRecipe.potionIcon;
+                    timeRemainingText.text = ("Done!");
+                }
+                else
+                {
+                    brewButton.interactable = true;
+                    potionImage.sprite = potionRecipe.potionIcon;
+                    timeRemainingText.text = cookTime.ToString();
+                }
+                brewButton.interactable = true; // If a recipe with this ingredient combination does exist then make the brew button interactable
+                potionImage.sprite = potionRecipe.potionIcon;
+                timeRemainingText.text = cookTime.ToString();
+            }
+
+        }
+    }
+
     private void UpdateBrewingTimerDisplay(float timeRemaining)
     {
         timeRemainingText.text = (((int)timeRemaining).ToString());
+    }
+
+    private void DisplayBrewingComplete()
+    {
+        Debug.Log("Brewing complete.");
+        timeRemainingText.text = ("Done!");
+        isBrewing = false;
+        isRetrievable = true;
+        potionRetrievalButton.interactable = true;
     }
 
     private void UpdateIngredientIcons()
@@ -223,14 +230,6 @@ public class PotionCraftingSystem : MonoBehaviour
         }
     }
 
-    private void DisplayBrewingComplete()
-    {
-        Debug.Log("Brewing complete.");
-        timeRemainingText.text = ("Done!");
-        isBrewing = false;
-        isRetrievable = true;
-        potionRetrievalButton.interactable = true;
-    }
 
     public void AddIngredientToSlot(ItemData ingredient) // Add an ingredient from the inventory into the crafting slot
     {
@@ -323,37 +322,6 @@ public class PotionCraftingSystem : MonoBehaviour
         }
     }
 
-    public void UpdateBrewButtonStatus()
-    {
-        Recipe potionRecipe = RecipeList.Instance.FindRecipe(ingredient1, ingredient2, ingredient3); // Get potion recipe from instance of the recipe list
-        if (potionRecipe != null) // Check whether a potion recipe exists with the combination of these three ingredients
-        {
-            if (isBrewing) // If recipe is not currently brewing
-            {
-                brewButton.interactable = false; // If a recipe with this ingredient combination does not exist then make the brew button uninteractable (and grayed out)
-            } 
-            else
-            {
-                if (!isRetrievable) // If recipe is not retrievable
-                {
-                    brewButton.interactable = false;
-                    potionImage.sprite = potionRecipe.potionIcon;
-                    timeRemainingText.text = ("Done!");
-                }
-                else
-                {
-                    brewButton.interactable = true;
-                    potionImage.sprite = potionRecipe.potionIcon;
-                    timeRemainingText.text = cookTime.ToString();
-                }
-                brewButton.interactable = true; // If a recipe with this ingredient combination does exist then make the brew button interactable
-                potionImage.sprite = potionRecipe.potionIcon;
-                timeRemainingText.text = cookTime.ToString();
-            }
-           
-        }
-    }
-
     public void SetPotionRetrievalArea() // Set the image for the potion retrieval area
     {
         Recipe potionRecipe = RecipeList.Instance.FindRecipe(ingredient1, ingredient2, ingredient3); // Get potio
@@ -373,6 +341,8 @@ public class PotionCraftingSystem : MonoBehaviour
             potionImage = null; // Set potion image to null to remove potion image from screen display
         }
     }
+
+    // *** CAULDRON CONTROLS ***
 
     private void IncreaseTemperature()
     {
@@ -429,9 +399,50 @@ public class PotionCraftingSystem : MonoBehaviour
                 temperatureDisplayText.text = ("Off");
                 temperatureDisplayImage.color = new Color(255, 255, 255);
                 break;
+        }           
+    }
+
+    // *** ITEM RETRIEVAL ***
+
+    private void RetrievePotion()
+    {
+        Debug.Log(potionBeingBrewed);
+        Debug.Log("Trying to retrieve potion");
+        if (!isBrewing)
+        {
+            if (isRetrievable)
+            {
+                Debug.Log("Retrieving potion");
+                AddItemToInventory(potionBeingBrewed);
+                potionBeingBrewed = null;
+            }
+            else
+            {
+                Debug.Log("Potion not retrievable");
+            }
+        }
+        else
+        {
+            Debug.Log("Brewing not complete");
+        }
+    }
+
+    private void RetrieveItem(ItemData ingredient, int ingredientSlot)
+    {
+        AddItemToInventory(ingredient);
+        if (ingredientSlot == 1)
+        {
+            ingredient1 = null;
+        }
+        else if (ingredientSlot == 2)
+        {
+            ingredient2 = null;
+        }
+        else
+        {
+            ingredient3 = null;
         }
 
-                
     }
 
 }

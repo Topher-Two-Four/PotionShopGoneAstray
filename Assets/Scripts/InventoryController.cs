@@ -30,8 +30,6 @@ public class InventoryController : MonoBehaviour
 
     InventoryHighlight inventoryHighlight; // Inventory item highlighter
 
-
-
     public static InventoryController Instance { get; private set; } // Singleton logic
 
     private void Awake()
@@ -45,56 +43,27 @@ public class InventoryController : MonoBehaviour
     {
         ItemIconDrag(); // Drag item icon using script
 
-        if (Input.GetKeyDown(KeyCode.Tab)) { if (selectedItem == null) { CreateRandomItem(); } } // Create random item and have it selected
-       
-        if (Input.GetKeyDown(KeyCode.Q)) { InsertRandomItem(); } // Create random item and add it to the inventory grid in next available space
-
         if (Input.GetKeyDown(KeyCode.R)) { RotateItem(); } // Rotate selected inventory item
 
-        if (selectedItemGrid == null)
-        {
-            inventoryHighlight.Show(false); // Don't show highlight if selected item grid doesn't exist in current context
-            return; // Return from method
-        }
+        if (selectedItemGrid == null) { inventoryHighlight.Show(false); return; } // Don't show highlight if selected item grid doesn't exist and return from method
 
         HandleHighlight(); // Use script to handle highlight of inventory item
 
-        if (Input.GetMouseButtonDown(0)) // When left mouse button is pressed
-        {
-            LeftMouseButtonPress(); // Run script for left mouse button press logic
+        if (Input.GetMouseButtonDown(0)) { LeftMouseButtonPress(); } // When left mouse button is pressed run method
 
-        }
-
-        if (Input.GetMouseButton(1)) // When right mouse button is pressed
-        {
-            RightMouseButtonPress(); // Run script for right mouse button press logic
-        }
+        if (Input.GetMouseButton(1)) { RightMouseButtonPress(); } // When right mouse button is pressed run method
     }
 
-    private void RotateItem()
+    public void CreateInventoryItem(ItemData itemData)
     {
-        if (selectedItem == null) { return; } selectedItem.Rotate(); // Rotate selected item
-    }
+        InventoryItem inventoryItem = Instantiate(itemPrefab).GetComponent<InventoryItem>();
+        selectedItem = inventoryItem;
 
-    public void InsertItem(ItemData itemData)
-    {
-        if (inventoryGrid == null) { return; } // Return if inventory grid doesn't exist
+        rectTransform = inventoryItem.GetComponent<RectTransform>();
+        rectTransform.SetParent(canvasTransform);
+        rectTransform.SetAsLastSibling();
 
-            CreateInventoryItem(itemData); // Create new inventory item from ItemData object
-            InventoryItem itemToInsert = selectedItem; // Declare inventory item to insert to be currently selected item
-            InsertItem(itemToInsert); // Insert inventory item into next open spot in inventory
-            selectedItem = null; // Reset selected item to null to clear selection
-
-    }
-    private void InsertRandomItem()
-    {
-        if (selectedItemGrid == null) { return; }
-
-
-        CreateRandomItem(); // Creates a selected item and holds it
-        InventoryItem itemToInsert = selectedItem;
-        selectedItem = null;
-        InsertItem(itemToInsert);
+        inventoryItem.Set(itemData);
     }
 
     public void InsertItem(InventoryItem itemToInsert)
@@ -106,8 +75,63 @@ public class InventoryController : MonoBehaviour
         inventoryGrid.PlaceItem(itemToInsert, posOnGrid.Value.x, posOnGrid.Value.y);
     }
 
+    public void InsertItem(ItemData itemData)
+    {
+        if (inventoryGrid == null) { return; } // Return if inventory grid doesn't exist
+
+            CreateInventoryItem(itemData); // Create new inventory item from ItemData object
+            
+            InventoryItem itemToInsert = selectedItem; // Declare inventory item to insert to be currently selected item
+            
+            InsertItem(itemToInsert); // Insert inventory item into next open spot in inventory
+            
+            selectedItem = null; // Reset selected item to null to clear selection
+
+    }
+
+    public void AddItemObjectToInventory(ItemData itemData)
+    {
+        Debug.Log(itemData);
+        if (itemData != null)
+        {
+            InsertItem(itemData);
+            itemData = null;
+        }
+    }
+
+    public void SellPotion(ItemData itemData)
+    {
+        int potionValue = (itemData.quality * itemData.baseValue);
+        GameManager.Instance.playerCurrency += potionValue;
+    }
+
+    public void AddIngredientToPotionCraftingSpace(Vector2Int tileGridPosition)
+    {
+        InventoryItem selectedItem = selectedItemGrid.GetItem(tileGridPosition.x, tileGridPosition.y);
+        Debug.Log(selectedItem);
+        if (selectedItem != null && selectedItem.itemData.isIngredient)
+        {
+            selectedItemGrid.RemoveItem(tileGridPosition.x, tileGridPosition.y);
+
+            PotionCraftingSystem.Instance.AddIngredientToSlot(selectedItem.itemData);
+            Destroy(selectedItem.gameObject);
+        }
+        else if (selectedItem != null && selectedItem.itemData.isPotion)
+        {
+            selectedItemGrid.RemoveItem(tileGridPosition.x, tileGridPosition.y);
+
+            SellPotion(selectedItem.itemData);
+            Destroy(selectedItem.gameObject);
+        }
+        else
+        {
+            return;
+        }
+    }
+
     Vector2Int oldPosition;
     InventoryItem itemToHighlight;
+
     private void HandleHighlight()
     {
         Vector2Int positionOnGrid = GetTileGridPosition();
@@ -140,30 +164,11 @@ public class InventoryController : MonoBehaviour
             inventoryHighlight.SetPosition(selectedItemGrid, selectedItem, positionOnGrid.x, positionOnGrid.y);
         }
     }
-
-    public void CreateInventoryItem(ItemData itemData)
+    private void RotateItem()
     {
-        InventoryItem inventoryItem = Instantiate(itemPrefab).GetComponent<InventoryItem>();
-        selectedItem = inventoryItem;
+        if (selectedItem == null) { return; }
 
-        rectTransform = inventoryItem.GetComponent<RectTransform>();
-        rectTransform.SetParent(canvasTransform);
-        rectTransform.SetAsLastSibling();
-
-        inventoryItem.Set(itemData);
-    }
-
-    private void CreateRandomItem()
-    {
-        InventoryItem inventoryItem = Instantiate(itemPrefab).GetComponent<InventoryItem>();
-        selectedItem = inventoryItem;
-        
-        rectTransform = inventoryItem.GetComponent<RectTransform>();
-        rectTransform.SetParent(canvasTransform);
-        rectTransform.SetAsLastSibling();
-
-        int selectedItemID = UnityEngine.Random.Range(0, items.Count);
-        inventoryItem.Set(items[selectedItemID]);
+        selectedItem.Rotate(); // Rotate selected item
     }
 
     private void LeftMouseButtonPress()
@@ -187,19 +192,18 @@ public class InventoryController : MonoBehaviour
         if (selectedItem != null)
         {
             InventoryItem itemToRemove = selectedItemGrid.RemoveItem(tileGridPosition.x, tileGridPosition.y);
-        
+
             if (itemToRemove != null)
             {
                 Destroy(itemToRemove.gameObject);
             }
-        } 
+        }
         else
         {
             AddIngredientToPotionCraftingSpace(tileGridPosition);
             Debug.Log("Call to add ingredient to inventory space");
         }
     }
-
 
     private Vector2Int GetTileGridPosition()
     {
@@ -245,47 +249,6 @@ public class InventoryController : MonoBehaviour
         {
             rectTransform.position = Input.mousePosition;
         }
-    }
-
-    private void AddIngredientToPotionCraftingSpace(Vector2Int tileGridPosition)
-    {
-        InventoryItem selectedItem = selectedItemGrid.GetItem(tileGridPosition.x, tileGridPosition.y);
-        Debug.Log(selectedItem);
-        if (selectedItem != null && selectedItem.itemData.isIngredient)
-        {
-            selectedItemGrid.RemoveItem(tileGridPosition.x, tileGridPosition.y);
-
-            PotionCraftingSystem.Instance.AddIngredientToSlot(selectedItem.itemData);
-            Destroy(selectedItem.gameObject);
-        }
-        else if (selectedItem!= null && selectedItem.itemData.isPotion)
-        {
-            selectedItemGrid.RemoveItem(tileGridPosition.x, tileGridPosition.y);
-
-            SellPotion(selectedItem.itemData);
-            Destroy(selectedItem.gameObject);
-        } 
-        else
-        {
-            return;
-        }
-    }
-
-    public void AddItemObjectToInventory(ItemData itemData)
-    {
-        Debug.Log(itemData);
-        if (itemData != null)
-        {
-            InsertItem(itemData);
-            itemData = null;
-        }
-
-    }
-
-    public void SellPotion(ItemData itemData)
-    {
-        int potionValue = (itemData.quality * itemData.baseValue);
-        GameManager.Instance.playerCurrency += potionValue;
     }
 
 }

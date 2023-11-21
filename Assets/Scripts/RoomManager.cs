@@ -9,6 +9,7 @@ public class RoomManager : MonoBehaviour
     public List<GameObject> roomList = new List<GameObject>(); // List for holding room game objects
     public List<Button> buttonList = new List<Button>(); // List for holding buttons, index corresponding to each room
     public GameObject currentRoom; // The current room that is active/open
+    public bool isCauldronRoom; 
 
     //private bool isAnyRoomOpen; // Keep track of whether a room canvas is open or not
 
@@ -38,6 +39,15 @@ public class RoomManager : MonoBehaviour
             currentRoom.SetActive(true);
             // Keep track that a room game object is open and being displayed
             //isAnyRoomOpen = true;
+
+            if (currentRoom == roomList[1] || currentRoom == roomList[4])
+            {
+                GameManager.Instance.ToggleOnPotionCraftingCanvas();
+            } 
+            else
+            {
+                GameManager.Instance.ToggleOffPotionCraftingCanvas();
+            }
         }
 
     }

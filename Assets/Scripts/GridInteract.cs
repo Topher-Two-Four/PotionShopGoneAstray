@@ -8,23 +8,23 @@ using UnityEngine.EventSystems;
 public class GridInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 
-    InventoryController inventoryController;
-    ItemGrid itemGrid;
+    InventoryController inventoryController; // Inventory controller being interacted with
+    ItemGrid itemGrid; // Item grid of the current inventory item
 
     private void Awake()
     {
-        inventoryController = FindObjectOfType(typeof(InventoryController)) as InventoryController;
-        itemGrid = GetComponent<ItemGrid>();
+        inventoryController = FindObjectOfType(typeof(InventoryController)) as InventoryController; // Get inventory controller
+        itemGrid = GetComponent<ItemGrid>(); // Get item grid object
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnPointerEnter(PointerEventData eventData) // Run when pointer enters grid space
     {
-        inventoryController.SelectedItemGrid = itemGrid;
+        inventoryController.SelectedItemGrid = itemGrid; // Set selected item grid to the current one
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void OnPointerExit(PointerEventData eventData) // Run when pointer exits grid space
     {
-        inventoryController.SelectedItemGrid = null;
+        inventoryController.SelectedItemGrid = null; // Set selected item grid to null
     }
 
 

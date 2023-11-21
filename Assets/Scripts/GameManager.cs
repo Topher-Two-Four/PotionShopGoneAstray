@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using StarterAssets;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour
 
     public FirstPersonController controller; // First person controller game object
     public GameObject playerCapsule; // Player capsule collider
+
+    public GameObject potionCraftingCanvas;
 
     private bool morningTransitionComplete = false; // Keep track of transition from beginning of new day to morning
     private bool afternoonTransitionComplete = false; // Keep track of transition from morning to afternoon
@@ -56,17 +59,44 @@ public class GameManager : MonoBehaviour
             //Debug.Log(timeRemaining); // Print remaining time
             TimerUpdate(); // Update timer every frame
         }
+
         if (Input.GetKeyDown(KeyCode.X))
         {
             SetPlayerCapsuleActive();
             Invoke("LoadMazeLevel", .1f);
         }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            TogglePotionCraftingCanvas();
+        }
+
     }
 
 
     public void ExitGame()
     {
         Application.Quit(); // Exit game to desktop
+    }
+
+    public void TogglePotionCraftingCanvas()
+    {
+        if (potionCraftingCanvas.gameObject.activeSelf)
+        {
+            potionCraftingCanvas.SetActive(false);
+        }
+        else
+        {
+            potionCraftingCanvas.SetActive(true);
+        }
+    }
+    public void ToggleOnPotionCraftingCanvas()
+    {
+            potionCraftingCanvas.SetActive(true);
+    }
+    public void ToggleOffPotionCraftingCanvas()
+    {
+            potionCraftingCanvas.SetActive(false);
     }
 
     public void SwitchSceneToMainMenu() // Use scene manager to switch to Main Menu
@@ -96,6 +126,18 @@ public class GameManager : MonoBehaviour
     public void SwitchSceneToMazeLevel() // Use scene manager to switch to Maze Level
     {
         SceneManager.LoadScene(3); // Use scene manager to load second scene from scene list (settings menu)
+        float loadMazeTime = 5f;
+        float currentLoadTime = 0f;
+        while (currentLoadTime < loadMazeTime)
+        {
+            Debug.Log(currentLoadTime);
+            currentLoadTime += Time.deltaTime;
+            if (currentLoadTime >= loadMazeTime)
+            {
+                SetPlayerCapsuleActive();
+                Invoke("LoadMazeLevel", .1f);
+            }
+        }
     }
 
     private void LoadMazeLevel() // Place player in correct spot when maze is loaded
@@ -192,5 +234,6 @@ public class GameManager : MonoBehaviour
         // Display whether or not they won
         // Button for return to main menu or quit
     }
+
 
 }

@@ -9,8 +9,9 @@ public class RoomManager : MonoBehaviour
     public List<GameObject> roomList = new List<GameObject>(); // List for holding room game objects
     public List<Button> buttonList = new List<Button>(); // List for holding buttons, index corresponding to each room
     public GameObject currentRoom; // The current room that is active/open
+    public bool isCauldronRoom; 
 
-    private bool isAnyRoomOpen; // Keep track of whether a room canvas is open or not
+    //private bool isAnyRoomOpen; // Keep track of whether a room canvas is open or not
 
     private void Awake()
     {
@@ -19,6 +20,14 @@ public class RoomManager : MonoBehaviour
         {
             button.onClick.AddListener(() => ToggleRoom(button));
         }
+
+        GameManager.Instance.ToggleOnDoorToMaze();
+
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.ToggleOffDoorToMaze();
     }
 
     // Toggles on and off room game objects for navigation of 2D scene
@@ -37,7 +46,26 @@ public class RoomManager : MonoBehaviour
             // Set new current room game object to active
             currentRoom.SetActive(true);
             // Keep track that a room game object is open and being displayed
-            isAnyRoomOpen = true;
+            //isAnyRoomOpen = true;
+
+            if (currentRoom == roomList[1] || currentRoom == roomList[4])
+            {
+                Debug.Log(currentRoom);
+                GameManager.Instance.ToggleOffDoorToMaze();
+                GameManager.Instance.ToggleOnPotionCraftingCanvas();
+            } 
+            else if (currentRoom == roomList[3] || currentRoom == roomList[6])
+            {
+                Debug.Log(currentRoom);
+                GameManager.Instance.ToggleOffPotionCraftingCanvas(); // Later on will have toggle batch of game objects and logic based on potion shop room
+                GameManager.Instance.ToggleOnDoorToMaze();
+            }
+            else
+            {
+                Debug.Log(currentRoom);
+                GameManager.Instance.ToggleOffDoorToMaze();
+                GameManager.Instance.ToggleOffPotionCraftingCanvas();
+            }
         }
 
     }

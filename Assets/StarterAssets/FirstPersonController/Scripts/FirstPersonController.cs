@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -55,8 +56,7 @@ namespace StarterAssets
 		public float currentStamina = 100f;
 		public float staminaDrainAmount = 0.5f;
 		public float staminaRegenAmount = 0.2f;
-
-
+		
 		// cinemachine
 		private float _cinemachineTargetPitch;
 
@@ -134,6 +134,12 @@ namespace StarterAssets
 			CameraRotation();
 		}
 
+		public void MoveToPosition(Vector3 position)
+        {
+			gameObject.transform.position = position;
+			Debug.Log(position);
+        }
+
 		private void GroundedCheck()
 		{
 			// set sphere position, with offset
@@ -205,56 +211,51 @@ namespace StarterAssets
 				// move
 				inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
 			}
+			if(SceneManager.GetActiveScene().Equals(SceneManager.GetSceneByBuildIndex(3)))
+            {
+				// move the player
+				_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+			}
 
-			// move the player
-			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 		}
 
 		private void JumpAndGravity()
 		{
 			if (Grounded)
 			{
-				// reset the fall timeout timer
-				_fallTimeoutDelta = FallTimeout;
+				_fallTimeoutDelta = FallTimeout; // Reset the fall timeout timer
 
-				// stop our velocity dropping infinitely when grounded
-				if (_verticalVelocity < 0.0f)
+				
+				if (_verticalVelocity < 0.0f) // Stop our velocity dropping infinitely when grounded
 				{
-					_verticalVelocity = -2f;
+					_verticalVelocity = -2f; // Set max falling velocity
 				}
 
-				// Jump
-				if (_input.jump && _jumpTimeoutDelta <= 0.0f)
-				{
-					// the square root of H * -2 * G = how much velocity needed to reach desired height
-					_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+		
+				if (_input.jump && _jumpTimeoutDelta <= 0.0f) // Jump
+				{					
+					_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity); // The square root of H * -2 * G = how much velocity needed to reach desired height
 				}
 
-				// jump timeout
-				if (_jumpTimeoutDelta >= 0.0f)
-				{
-					_jumpTimeoutDelta -= Time.deltaTime;
-				}
+				if (_jumpTimeoutDelta >= 0.0f) { _jumpTimeoutDelta -= Time.deltaTime; } // Jump timeout
 			}
 			else
 			{
-				// reset the jump timeout timer
-				_jumpTimeoutDelta = JumpTimeout;
+				_jumpTimeoutDelta = JumpTimeout; // Reset the jump timeout timer
 
-				// fall timeout
-				if (_fallTimeoutDelta >= 0.0f)
+				if (_fallTimeoutDelta >= 0.0f) // Fall timeout
 				{
-					_fallTimeoutDelta -= Time.deltaTime;
+					_fallTimeoutDelta -= Time.deltaTime; // Increment fall timeout timer
 				}
 
-				// if we are not grounded, do not jump
-				_input.jump = false;
+				
+				_input.jump = false; // If we are not grounded, do not jump
 			}
 
-			// apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
-			if (_verticalVelocity < _terminalVelocity)
+			
+			if (_verticalVelocity < _terminalVelocity) // Apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
 			{
-				_verticalVelocity += Gravity * Time.deltaTime;
+				_verticalVelocity += Gravity * Time.deltaTime; // Apply gravity over time using algorithmD
 			}
 		}
 

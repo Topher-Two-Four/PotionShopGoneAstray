@@ -35,6 +35,19 @@ public class ItemGrid : MonoBehaviour
 
         return toReturn;
     }
+    public InventoryItem RemoveItem(int x, int y)
+    {
+
+        InventoryItem itemToRemove = inventoryItemSlot[x, y];
+
+        if (itemToRemove == null) { return null; }
+
+        Destroy(itemToRemove.gameObject);
+
+        inventoryItemSlot[x, y] = null;
+
+        return itemToRemove;
+    }
 
     private void CleanGridReference(InventoryItem item)
     {

@@ -6,11 +6,16 @@ using UnityEngine;
 [CreateAssetMenu]
 public class ItemData : ScriptableObject
 {
-    public int width = 1;
-    public int height = 1;
+    public int width = 1; // Width of inventory item
+    public int height = 1; // Height of inventory item
 
-    public Sprite itemIcon;
+    public bool isIngredient; // Whether this item is an ingredient
+    public bool isPotion; // Whether this item is a potion
+    public bool isSellable; // Whether this item can be sold
+    public int quality; // The quality of the item from 1-5
+    public int baseValue; // The base currency value of this item
 
-    // INSERT REMAINDER OF ITEM OBJECT DATA HERE
+    public Sprite itemIcon; // The UI display icon for this item
+
 
 }

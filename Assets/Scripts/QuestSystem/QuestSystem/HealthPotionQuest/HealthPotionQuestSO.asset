@@ -9,6 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 294185b0eafd7954bb208b6f004d2616, type: 3}
-  m_Name: CollectCoinsQuest
+  m_Script: {fileID: 11500000, guid: 8f117a5726eaa7b4da26f665fb2e54e2, type: 3}
+  m_Name: HealthPotionQuestSO
   m_EditorClassIdentifier: 
+  <id>k__BackingField: HealthPotionQuestSO
+  displayName: HealthPotionQuest
+  levelRequirement: 0
+  questPrerequisites: []
+  questStepPrefabs: []
+  goldReward: 0
+  experienceReward: 0

@@ -386,6 +386,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6047709958944849528, guid: 91d3cb84ad82a74468a13781462d10ca, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7191769637739229790, guid: 91d3cb84ad82a74468a13781462d10ca, type: 3}
       propertyPath: controller
       value: 
@@ -5278,7 +5282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFailed: 0
   currentTemp: 3
-  cookTime: 120
+  cookTime: 60
   timeCooked: 0
   desiredTemp: 3
   timeAtDesiredTemp: 0

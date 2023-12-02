@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [CreateAssetMenu]
 public class Recipe : ScriptableObject
 {
-    public ItemData potion; // Potion that will be made from this recipe
+    public PotionData potion; // Potion that will be made from this recipe
 
     public ItemData ingredient1; // First ingredient in this recipe
     public ItemData ingredient2; // Second ingredient in this recipe

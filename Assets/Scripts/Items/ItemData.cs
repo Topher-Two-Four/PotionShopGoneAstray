@@ -10,10 +10,7 @@ public class ItemData : ScriptableObject
     public int height = 1; // Height of inventory item
 
     public bool isIngredient; // Whether this item is an ingredient
-    public bool isPotion; // Whether this item is a potion
-    public bool isSellable; // Whether this item can be sold
-    public int quality; // The quality of the item from 1-5
-    public int baseValue; // The base currency value of this item
+    public bool isSellable;
 
     public Sprite itemIcon; // The UI display icon for this item
 

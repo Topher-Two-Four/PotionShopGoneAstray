@@ -115,16 +115,18 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    public void SellPotion(ItemData itemData)
+    public void SellPotion(PotionData potionData)
     {
-        int potionValue = (itemData.quality * itemData.baseValue);
-        GameManager.Instance.playerCurrency += potionValue;
+        potionData.sellPrice = (potionData.quality * potionData.baseValue);
+        GameManager.Instance.playerCurrency += potionData.sellPrice;
     }
 
     public void AddIngredientToPotionCraftingSpace(Vector2Int tileGridPosition)
     {
         InventoryItem selectedItem = selectedItemGrid.GetItem(tileGridPosition.x, tileGridPosition.y);
-        Debug.Log(selectedItem);
+
+        if  (PotionCraftingSystem.Instance.isBrewing) { return; }
+
         if (selectedItem != null && selectedItem.itemData.isIngredient)
         {
             selectedItemGrid.RemoveItem(tileGridPosition.x, tileGridPosition.y);
@@ -132,13 +134,14 @@ public class InventoryController : MonoBehaviour
             PotionCraftingSystem.Instance.AddIngredientToSlot(selectedItem.itemData);
             Destroy(selectedItem.gameObject);
         }
-        else if (selectedItem != null && selectedItem.itemData.isPotion)
+        else if (selectedItem != null && selectedItem.GetType() == typeof(PotionData))
         {
             selectedItemGrid.RemoveItem(tileGridPosition.x, tileGridPosition.y);
 
-            SellPotion(selectedItem.itemData);
+            //SellPotion(selectedItem.potionData);
             Destroy(selectedItem.gameObject);
         }
+        
         else
         {
             return;
@@ -217,7 +220,6 @@ public class InventoryController : MonoBehaviour
         else
         {
             AddIngredientToPotionCraftingSpace(tileGridPosition);
-            Debug.Log("Call to add ingredient to inventory space");
         }
     }
 

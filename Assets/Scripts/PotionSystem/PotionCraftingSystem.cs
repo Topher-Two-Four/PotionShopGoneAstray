@@ -8,7 +8,7 @@ public class PotionCraftingSystem : MonoBehaviour
 {
     public bool isFailed = false; // Variable to track whether potion crafting process has failed
     public int currentTemp = 3; // Current temperature of the cauldron
-    public float cookTime = 120f; // Total cook time of the potion
+    public float cookTime = 60f; // Total cook time of the potion
     public float timeCooked = 0f; // Time that the potion has been cooking
     public int desiredTemp = 3; // Desired temperature for the potion being made
     public float timeAtDesiredTemp = 0f; // Time that potion has been cooking at the desired temperature
@@ -108,6 +108,8 @@ public class PotionCraftingSystem : MonoBehaviour
 
     private void BrewPotionWIthRecipe(Recipe potionRecipe)
     {
+        if (potionRecipe == null) { return; }
+
         StartCoroutine(BrewingProcess(potionRecipe));
     }
 
@@ -129,14 +131,14 @@ public class PotionCraftingSystem : MonoBehaviour
                 UpdateBrewingTimerDisplay(timeRemaining);
                 timeCooked += Time.deltaTime;
                 timeAtDesiredTemp += Time.deltaTime;
-                Debug.Log("At desired temp");
+                //Debug.Log("At desired temp");
             } 
             else
             {
                 float timeRemaining = Mathf.Max(0, cookTime - timeCooked);
                 UpdateBrewingTimerDisplay(timeRemaining);
                 timeCooked += Time.deltaTime;
-                Debug.Log("Not at desired temp");
+                //Debug.Log("Not at desired temp");
             }
             yield return null;
         }
@@ -146,34 +148,17 @@ public class PotionCraftingSystem : MonoBehaviour
     public void UpdateBrewButtonStatus()
     {
         Recipe potionRecipe = RecipeList.Instance.FindRecipe(ingredient1, ingredient2, ingredient3); // Get potion recipe from instance of the recipe list
-        if (potionRecipe != null) // Check whether a potion recipe exists with the combination of these three ingredients
+
+        if (potionRecipe == null)
         {
-            if (isBrewing) // If recipe is not currently brewing
-            {
-                brewButton.interactable = false; // If a recipe with this ingredient combination does not exist then make the brew button uninteractable (and grayed out)
-            }
-            else
-            {
-                if (!isRetrievable) // If recipe is not retrievable
-                {
-                    brewButton.interactable = false;
-                    potionImage.sprite = potionRecipe.potionIcon;
-                    timeRemainingText.text = ("Done!");
-                }
-                else
-                {
-                    brewButton.interactable = true;
-                    potionImage.sprite = potionRecipe.potionIcon;
-                    timeRemainingText.text = cookTime.ToString();
-                }
-                brewButton.interactable = true; // If a recipe with this ingredient combination does exist then make the brew button interactable
-                potionImage.sprite = potionRecipe.potionIcon;
-                timeRemainingText.text = cookTime.ToString();
-            }
-
+            brewButton.interactable = false;
+            return;
         }
-    }
 
+        potionImage.sprite = potionRecipe.potionIcon;
+        timeRemainingText.text = isRetrievable || isBrewing ? "Done!" : cookTime.ToString();
+        brewButton.interactable = !isBrewing && (isRetrievable || potionRecipe != null);
+    }
     private void UpdateBrewingTimerDisplay(float timeRemaining)
     {
         timeRemainingText.text = (((int)timeRemaining).ToString());
@@ -234,7 +219,7 @@ public class PotionCraftingSystem : MonoBehaviour
     public void AddIngredientToSlot(ItemData ingredient) // Add an ingredient from the inventory into the crafting slot
     {
         Debug.Log("Adding " + ingredient);
-        if (ingredient.isIngredient == true) // Check whether the item is an ingredient
+        if (ingredient.isIngredient) // Check whether the item is an ingredient
         {
             if (ingredient1 == null)
             {
@@ -414,7 +399,7 @@ public class PotionCraftingSystem : MonoBehaviour
             {
                 Debug.Log("Retrieving potion");
                 AddItemToInventory(potionBeingBrewed);
-                GameManager.Instance.AddCurrency(potionBeingBrewed.baseValue);
+                //GameManager.Instance.AddCurrency(potionBeingBrewed.baseValue);
                 potionBeingBrewed = null;
             }
             else

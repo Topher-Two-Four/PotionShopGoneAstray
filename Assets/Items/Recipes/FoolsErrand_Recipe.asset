@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208b1537c6b018c438507b1122182a38, type: 3}
+  m_Name: FoolsErrand_Recipe
+  m_EditorClassIdentifier: 
+  potion: {fileID: 11400000, guid: 190d16ec3d596744d9f276ec4c34db3c, type: 2}
+  ingredient1: {fileID: 11400000, guid: 57b141b33fde4ce48845950dc08834b7, type: 2}
+  ingredient2: {fileID: 11400000, guid: b041e646501ec1345bb0c5ae3b910e27, type: 2}
+  ingredient3: {fileID: 0}
+  ingredient4: {fileID: 0}
+  cookTime: 60
+  desiredTemp: 3
+  quality: 5
+  ultraQualityTimeLimit: 0
+  highQualityTimeLimit: 0
+  mediumQualityTimeLimit: 0
+  lowQualityTimeLimit: 0
+  potionIcon: {fileID: 21300000, guid: 64a3f0d6b45076d4b8e8580d094ee266, type: 3}

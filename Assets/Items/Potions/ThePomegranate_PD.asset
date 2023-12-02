@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c2163ed23c45274abea9e832adece52, type: 3}
-  m_Name: HealthPotion_PD
+  m_Name: ThePomegranate_PD
   m_EditorClassIdentifier: 
   width: 2
   height: 2
   isIngredient: 0
   isSellable: 1
-  itemIcon: {fileID: 21300000, guid: 9b664b2cc5947874e98a401477767f20, type: 3}
-  isHealth: 1
+  itemIcon: {fileID: 21300000, guid: 64a3f0d6b45076d4b8e8580d094ee266, type: 3}
+  isHealth: 0
   isLove: 0
   isHatred: 0
   isAntidote: 0
@@ -25,7 +25,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isCrippling: 1
   quality: 0
   baseValue: 0
   sellPrice: 0

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c2163ed23c45274abea9e832adece52, type: 3}
-  m_Name: HealthPotion_PD
+  m_Name: NaturesBlessing_PD
   m_EditorClassIdentifier: 
   width: 2
   height: 2

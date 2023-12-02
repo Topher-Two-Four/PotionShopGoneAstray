@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208b1537c6b018c438507b1122182a38, type: 3}
   m_Name: HealthBoost_Recipe
   m_EditorClassIdentifier: 
-  potion: {fileID: 0}
+  potion: {fileID: 11400000, guid: ca15a0f9cde6b1845905563e31809941, type: 2}
   ingredient1: {fileID: 11400000, guid: dcceffc03aaaf634cb3bb435242c39dc, type: 2}
   ingredient2: {fileID: 0}
   ingredient3: {fileID: 0}
+  ingredient4: {fileID: 0}
   cookTime: 60
   desiredTemp: 3
   quality: 5

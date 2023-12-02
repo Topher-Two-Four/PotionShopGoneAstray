@@ -91,7 +91,7 @@ public class ItemGrid : MonoBehaviour
                 }
             }
         }
-
+        Debug.Log("No space left for item.");
         return null;
     }
 

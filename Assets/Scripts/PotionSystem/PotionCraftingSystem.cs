@@ -17,6 +17,7 @@ public class PotionCraftingSystem : MonoBehaviour
     public ItemData ingredient1; // First ingredient ItemData scriptable object
     public ItemData ingredient2; // Second ingredient ItemData scriptable object
     public ItemData ingredient3; // Third ingredient ItemData scriptable object
+    public ItemData ingredient4; // Third ingredient ItemData scriptable object
     public ItemData potionBeingBrewed; // Third ingredient ItemData scriptable object
 
     public float ultraQualityTimeLimit = 90f; // Time in desired temperature range required to make an ultra quality potion
@@ -30,6 +31,7 @@ public class PotionCraftingSystem : MonoBehaviour
     public Button ingredient1Button; // Button for the first ingredient
     public Button ingredient2Button; // Button for the second ingredient
     public Button ingredient3Button; // Button for the third ingredient
+    public Button ingredient4Button; // Button for the fourth ingredient
     public Button potionRetrievalButton; // Button for potion retrieval
     public Button increaseTempButton; // Button to increase cooking temperature
     public Button decreaseTempButton; // Button to increase cooking temperature
@@ -45,6 +47,7 @@ public class PotionCraftingSystem : MonoBehaviour
     public Image ingredient1Image; // Image for the first ingredient
     public Image ingredient2Image; // Image for the second ingredient
     public Image ingredient3Image; // Image for the third ingredient
+    public Image ingredient4Image; // Image for the third ingredient
     public Image potionImage; // Image for the potion created or being created
     public Sprite emptySlotImage; // Image for an empty slot
 
@@ -71,7 +74,8 @@ public class PotionCraftingSystem : MonoBehaviour
         ingredient1Button.onClick.AddListener(() => RetrieveItem(ingredient1, 1)); // Add button listener for first ingredient space
         ingredient2Button.onClick.AddListener(() => RetrieveItem(ingredient2, 2)); // Add button listener for second ingredient space
         ingredient3Button.onClick.AddListener(() => RetrieveItem(ingredient3, 3)); // Add button listener for third ingredient space
-        
+        ingredient4Button.onClick.AddListener(() => RetrieveItem(ingredient4, 4)); // Add button listener for third ingredient space
+
         increaseTempButton.onClick.AddListener(() => IncreaseTemperature()); // Add button listener for increase temperature button
         decreaseTempButton.onClick.AddListener(() => DecreaseTemperature());// Add button listener for decrease temperature button
         
@@ -94,7 +98,7 @@ public class PotionCraftingSystem : MonoBehaviour
 
     public void BrewPotion(ItemData ingredient1, ItemData ingredient2, ItemData ingredient3) // Brew potion using three ingredients
     {
-        Recipe potionRecipe = RecipeList.Instance.FindRecipe(ingredient1, ingredient2, ingredient3);
+        Recipe potionRecipe = RecipeList.Instance.FindRecipe(ingredient1, ingredient2, ingredient3, ingredient4);
 
         if (potionRecipe != null)
         {
@@ -103,6 +107,9 @@ public class PotionCraftingSystem : MonoBehaviour
             potionImage.sprite = potionRecipe.potionIcon;
             UpdateBrewingTimerDisplay(potionRecipe.cookTime);
             Debug.Log(potionRecipe);
+        } else
+        {
+            potionImage.sprite = null;
         }
     }
 
@@ -121,6 +128,7 @@ public class PotionCraftingSystem : MonoBehaviour
         ingredient1 = null;
         ingredient2 = null;
         ingredient3 = null;
+        ingredient4 = null;
         Debug.Log("Brewing process started");
         while (timeCooked < potionRecipe.cookTime)
         {
@@ -147,7 +155,7 @@ public class PotionCraftingSystem : MonoBehaviour
 
     public void UpdateBrewButtonStatus()
     {
-        Recipe potionRecipe = RecipeList.Instance.FindRecipe(ingredient1, ingredient2, ingredient3); // Get potion recipe from instance of the recipe list
+        Recipe potionRecipe = RecipeList.Instance.FindRecipe(ingredient1, ingredient2, ingredient3, ingredient4); // Get potion recipe from instance of the recipe list
 
         if (potionRecipe == null)
         {
@@ -201,6 +209,15 @@ public class PotionCraftingSystem : MonoBehaviour
         {
             ingredient3Image.sprite = emptySlotImage;
         }
+
+        if (ingredient4 != null)
+        {
+            ingredient4Image.sprite = ingredient4.itemIcon;
+        }
+        else
+        {
+            ingredient4Image.sprite = emptySlotImage;
+        }
     }
 
     private void UpdatePotionIcon()
@@ -232,6 +249,10 @@ public class PotionCraftingSystem : MonoBehaviour
             else if (ingredient3 == null)
             {
                 ingredient3 = ingredient;
+            }
+            else if (ingredient4 == null)
+            {
+                ingredient4 = ingredient;
             }
             else
             {
@@ -265,6 +286,10 @@ public class PotionCraftingSystem : MonoBehaviour
                 itemData = null;
             }
             else if (itemData == ingredient3)
+            {
+                itemData = null;
+            }
+            else if (itemData == ingredient4)
             {
                 itemData = null;
             }
@@ -309,7 +334,7 @@ public class PotionCraftingSystem : MonoBehaviour
 
     public void SetPotionRetrievalArea() // Set the image for the potion retrieval area
     {
-        Recipe potionRecipe = RecipeList.Instance.FindRecipe(ingredient1, ingredient2, ingredient3); // Get potio
+        Recipe potionRecipe = RecipeList.Instance.FindRecipe(ingredient1, ingredient2, ingredient3, ingredient4); // Get potion recipe from recipe list
         Debug.Log("Setting retrieval area.");
 
         if (isBrewing) // Check whether brewing is occurring
@@ -425,9 +450,13 @@ public class PotionCraftingSystem : MonoBehaviour
         {
             ingredient2 = null;
         }
-        else
+        else if (ingredientSlot == 3)
         {
             ingredient3 = null;
+        } 
+        else
+        {
+            ingredient4 = null;
         }
 
     }

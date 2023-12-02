@@ -8,6 +8,8 @@ public class InventoryController : MonoBehaviour
     public GameObject inventoryCanvas;
     public ItemGrid inventoryGrid; // Inventory grid used by the player
 
+    private bool isSpaceForItem;
+
     [HideInInspector]
     private ItemGrid selectedItemGrid; // Item grid that is currently selected
 
@@ -32,6 +34,11 @@ public class InventoryController : MonoBehaviour
 
 
     public static InventoryController Instance { get; private set; } // Singleton logic
+
+    private void Start()
+    {
+        isSpaceForItem = true; // Set initially true when beginning the game
+    }
 
     private void Awake()
     {
@@ -74,15 +81,26 @@ public class InventoryController : MonoBehaviour
     {
         Vector2Int? posOnGrid = inventoryGrid.FindSpaceForObject(itemToInsert);
 
-        if (posOnGrid == null) { return; }
+        if (posOnGrid == null)
+        {
+            Debug.Log("Space for object is null.");
+            isSpaceForItem = false;
+            return;
+        }
 
         inventoryGrid.PlaceItem(itemToInsert, posOnGrid.Value.x, posOnGrid.Value.y);
     }
 
     public void InsertItem(ItemData itemData)
     {
-        if (inventoryGrid == null) { return; } // Return if inventory grid doesn't exist
+        if (inventoryGrid == null || !isSpaceForItem)
+            {
+            Debug.Log(isSpaceForItem);
+            return;
+            } // Return if inventory grid doesn't exist or if there is no space for item in inventory
 
+            // Need to return if FindSpaceForObject(itemToInsert) is false
+            
             CreateInventoryItem(itemData); // Create new inventory item from ItemData object
             
             InventoryItem itemToInsert = selectedItem; // Declare inventory item to insert to be currently selected item
@@ -90,14 +108,14 @@ public class InventoryController : MonoBehaviour
             InsertItem(itemToInsert); // Insert inventory item into next open spot in inventory
             
             selectedItem = null; // Reset selected item to null to clear selection
-
     }
 
     public void AddItemObjectToInventory(ItemData itemData)
     {
         Debug.Log(itemData);
-        if (itemData != null)
+        if (itemData != null && isSpaceForItem)
         {
+            //if (inventoryCanvas.)
             InsertItem(itemData);
             itemData = null;
         }

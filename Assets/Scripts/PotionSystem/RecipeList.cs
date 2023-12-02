@@ -10,6 +10,7 @@ public class RecipeList : MonoBehaviour
     private ItemData ingredient1; // First ingredient ItemData object
     private ItemData ingredient2; // Second ingredient ItemData object
     private ItemData ingredient3; // Third ingredient ItemData object
+    private ItemData ingredient4; // Fourth ingredient ItemData object
 
     public static RecipeList Instance { get; private set; } // Make recipe list into a singleton
     private void Awake()
@@ -24,33 +25,58 @@ public class RecipeList : MonoBehaviour
         }
     }
 
-    public Recipe FindRecipe(ItemData item1, ItemData item2, ItemData item3) // Search if a recipe exists containing a combination of three ingredients
+    public Recipe FindRecipe(ItemData item1, ItemData item2, ItemData item3, ItemData item4) // Search if a recipe exists containing a combination of three ingredients
     {
         foreach (Recipe recipe in recipeList) // Iterate through recipes in the list of recipes
         {
-            if (recipe.ingredient1 == item1 || recipe.ingredient2 == item1 || recipe.ingredient3 == item1) // Check whether the first ItemData object is in any recipes
+
+
+            if (item1 == null && item2 == null && item3 == null && item4 == null) { return null; }
+
+
+
+            if (recipe.ingredient1 == item1 || recipe.ingredient2 == item1 || recipe.ingredient3 == item1 || recipe.ingredient4 == item1) // Check whether the first ItemData object is in any recipes
             {
                 ingredient1 = item1; // If the first ItemData object is in a recipe then set it as the first ingredient
-                if (recipe.ingredient1 == item2 || recipe.ingredient2 == item2 || recipe.ingredient3 == item2) // Check whether the second ItemData object is in any recipes
+                
+                if (recipe.ingredient2 == null && recipe.ingredient3 == null && recipe.ingredient4 == null)
+                {
+                    Debug.Log(recipe);
+                    return recipe;
+                }
+
+                if (recipe.ingredient1 == item2 || recipe.ingredient2 == item2 || recipe.ingredient3 == item2 || recipe.ingredient4 == item2) // Check whether the second ItemData object is in any recipes
                 {
                     ingredient2 = item2; // If the second ItemData object is in a recipe then set it as the second ingredient
-                    if (recipe.ingredient3 == null) // Check whether a third ingredient exists
+                    
+                    if (recipe.ingredient3 == null && recipe.ingredient4 == null) // Check whether a third ingredient exists
                     {
-                        return recipe; // Return two-ingredient recipe if there is not a third ingredient
+                        Debug.Log(recipe);
+                        return recipe; // Return two-ingredient recipe if there is not a third our fourth ingredient
                     }
-                    if (recipe.ingredient3 == item3 || recipe.ingredient2 == item3 || recipe.ingredient3 == item3 && item3 != null)
+
+                    if (recipe.ingredient3 == item3 || recipe.ingredient2 == item3 || recipe.ingredient3 == item3 || recipe.ingredient4 == item3 && item3 != null && item4 != null)
                     {
                         ingredient3 = item3; // If the third ItemData object is in a recipe then set it as the third ingredient
-                        return recipe; // Return three-ingredient recipe
+
+                        if (recipe.ingredient4 == null)
+                        {
+                            Debug.Log(recipe);
+                            return recipe; // Return three-ingredient recipe if there is not a fourth ingredient
+                        }
+
+                        if (recipe.ingredient1 == item4 || recipe.ingredient2 == item4 || recipe.ingredient3 == item4 || recipe.ingredient4 == item4 && item4 != null)
+                        {
+                            ingredient4 = item4;
+                            Debug.Log(recipe);
+                            return recipe; // Return four-ingredient recipe
+                        }
                     }
                 }
-                else // Recipe has not been found in recipe list
-                {
-                    return null; // Return null if recipe not found
-                }
-            } 
+            }
         }
-            return null; // Return null if recipe not found
+
+        return null;
     }
 
     internal Recipe AddPotionToInventory(Recipe potionRecipe) // Add crafted potion to player inventory

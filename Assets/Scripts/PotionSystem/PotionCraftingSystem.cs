@@ -401,6 +401,7 @@ public class PotionCraftingSystem : MonoBehaviour
                 AddItemToInventory(potionBeingBrewed);
                 //GameManager.Instance.AddCurrency(potionBeingBrewed.baseValue);
                 potionBeingBrewed = null;
+                isRetrievable = false; // Reset is retrievable variable
             }
             else
             {

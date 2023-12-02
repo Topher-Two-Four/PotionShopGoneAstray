@@ -125,7 +125,7 @@ public class InventoryController : MonoBehaviour
     {
         InventoryItem selectedItem = selectedItemGrid.GetItem(tileGridPosition.x, tileGridPosition.y);
 
-        if  (PotionCraftingSystem.Instance.isBrewing) { return; }
+        if  (PotionCraftingSystem.Instance.isBrewing || PotionCraftingSystem.Instance.isRetrievable) { return; }
 
         if (selectedItem != null && selectedItem.itemData.isIngredient)
         {

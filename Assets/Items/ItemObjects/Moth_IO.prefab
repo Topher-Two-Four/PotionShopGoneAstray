@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1694961899202827394}
   - component: {fileID: 3728056772645781790}
   m_Layer: 0
-  m_Name: CarrotItemObject
+  m_Name: Moth_IO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2dd9a65b81478c641b1454708291f7f4, type: 2}
+  - {fileID: 2100000, guid: 0e944aa0a5d99a441b9a2cba61e542ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -147,4 +147,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 1694961899202827394}
-  itemData: {fileID: 11400000, guid: 21941877933038a448e70debb18e8d65, type: 2}
+  itemData: {fileID: 11400000, guid: 204ac5b1d0d21714fa1c9d8390eda909, type: 2}

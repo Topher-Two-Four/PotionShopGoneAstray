@@ -265,7 +265,7 @@ public class PotionCraftingSystem : MonoBehaviour
             }
         }
         else
-        // ********************************** STOPPING POINT ********************************
+        // ********************************** STOPPING POINT FOR TROUBLESHOOTING INVENTORY ADDITION TO SLOT********************************
         {
             Debug.Log("No available space.");
             return; // Return if no space available amongst the three ingredient spaces

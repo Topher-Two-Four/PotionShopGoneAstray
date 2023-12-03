@@ -78,11 +78,11 @@ public class InventoryController : MonoBehaviour
         inventoryItem.Set(itemData);
     }
 
-    public void CreateInventoryItem(PotionData potionData, int qualityLevel)
+    public void CreateInventoryItem(PotionData potionData, int qualityLevel, Color qualityColor)
     {
         InventoryItem inventoryItem = Instantiate(potionPrefab).GetComponent<InventoryItem>();
         selectedItem = inventoryItem;
-        inventoryItem.SetQuality(qualityLevel);
+        inventoryItem.SetQuality(qualityLevel, qualityColor);
 
         rectTransform = inventoryItem.GetComponent<RectTransform>();
         rectTransform.SetParent(canvasTransform);
@@ -124,7 +124,7 @@ public class InventoryController : MonoBehaviour
             selectedItem = null; // Reset selected item to null to clear selection
     }
 
-    public void InsertPotion(PotionData potionData, int qualityLevel)
+    public void InsertPotion(PotionData potionData, int qualityLevel, Color qualityColor)
     {
         if (inventoryGrid == null || !isSpaceForItem)
         {
@@ -136,7 +136,7 @@ public class InventoryController : MonoBehaviour
 
         potionData.quality = qualityLevel;
 
-        CreateInventoryItem(potionData, qualityLevel); // Create new inventory item from ItemData object
+        CreateInventoryItem(potionData, qualityLevel, qualityColor); // Create new inventory item from ItemData object
 
         InventoryItem itemToInsert = selectedItem; // Declare inventory item to insert to be currently selected item
 

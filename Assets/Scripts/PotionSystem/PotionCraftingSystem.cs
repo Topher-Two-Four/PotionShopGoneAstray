@@ -44,11 +44,12 @@ public class PotionCraftingSystem : MonoBehaviour
     public Color hotTempDisplayColor = new Color(108, 255, 0);
     public Color boilingTempDisplayColor = new Color(255, 0, 0);
 
-    public Color ultraQualityColor = new Color(25, 25, 99); // Purple
-    public Color highQualityColor = new Color(0, 1, 255); // Blue
-    public Color mediumQualityColor = new Color(255, 0, 0); // Red
-    public Color lowQualityColor = new Color(255, 103, 0); // Orange
-    public Color failedColor = new Color(109, 109, 109); // Gray
+    public Color ultraQualityColor = new Color(25, 25, 99, 120); // Purple
+    public Color highQualityColor = new Color(0, 1, 255, 120); // Blue
+    public Color mediumQualityColor = new Color(255, 0, 0, 120); // Red
+    public Color lowQualityColor = new Color(255, 103, 0, 120); // Orange
+    public Color failedColor = new Color(109, 109, 109, 120); // Gray
+    public Color currentQualityColor = new Color(255, 255, 255, 1);
 
     public Image temperatureDisplayImage; // Background image for the temperature display
     public Image ingredient1Image; // Image for the first ingredient
@@ -113,9 +114,11 @@ public class PotionCraftingSystem : MonoBehaviour
             isBrewing = true;
             BrewPotionWIthRecipe(potionRecipe);
             potionImage.sprite = potionRecipe.potionIcon;
+            potionBackgroundImage.color = currentQualityColor;
             UpdateBrewingTimerDisplay(potionRecipe.cookTime);
             Debug.Log(potionRecipe);
-        } else
+        }
+        else
         {
             potionImage.sprite = null;
         }
@@ -156,11 +159,12 @@ public class PotionCraftingSystem : MonoBehaviour
                 timeCooked += Time.deltaTime;
                 //Debug.Log("Not at desired temp");
             }
-
+            CheckPotionQuality(potionRecipe.cookTime, timeAtDesiredTemp);
             UpdatePotionQualityIndicator();
 
             yield return null;
         }
+        CheckPotionQuality(potionRecipe.cookTime, timeAtDesiredTemp);
         DisplayBrewingComplete();
     }
 
@@ -183,10 +187,15 @@ public class PotionCraftingSystem : MonoBehaviour
         timeRemainingText.text = (((int)timeRemaining).ToString());
     }
 
+    private void ResetBrewingTimer()
+    {
+        timeRemainingText.text = ("000");
+    }
+
     private void UpdatePotionQualityIndicator()
     {
         int currentQuality = GetPotionQuality();
-        Debug.Log(currentQuality);
+        //Debug.Log(currentQuality);
 
         switch (currentQuality)
         {
@@ -216,12 +225,59 @@ public class PotionCraftingSystem : MonoBehaviour
     {
         // Need to make this deductive
         float qualityPercentage = (timeAtDesiredTemp / cookTime);
-        Debug.Log(qualityPercentage);
-        if (qualityPercentage >= ultraQualityTimePercentage) { return 4; }
-        if (qualityPercentage >= highQualityTimePercentage) { return 3; }
-        if (qualityPercentage >= mediumQualityTimePercentage) { return 2; }
-        if (qualityPercentage >= lowQualityTimePercentage) { return 1; }
+        if (qualityPercentage >= ultraQualityTimePercentage) 
+        {
+            potionQuality = 4;
+            return 4; 
+        }
+        if (qualityPercentage >= highQualityTimePercentage) 
+        {
+            potionQuality = 3;
+            return 3; 
+        }
+        if (qualityPercentage >= mediumQualityTimePercentage) 
+        {
+            potionQuality = 2;
+            return 2; 
+        }
+        if (qualityPercentage >= lowQualityTimePercentage) 
+        {
+            potionQuality = 1;
+            return 1; 
+        }
+        potionQuality = 0;
         return 0;
+    }
+
+    private Color GetPotionQualityImageColor(int qualityLevel)
+    {
+        switch (qualityLevel)
+        {
+            case 4:
+                currentQualityColor = ultraQualityColor;
+                break;
+
+            case 3:
+                currentQualityColor = highQualityColor;
+                break;
+
+            case 2:
+                currentQualityColor = mediumQualityColor;
+                break;
+
+            case 1:
+                currentQualityColor = lowQualityColor;
+                break;
+
+            case 0:
+                currentQualityColor = failedColor;
+                break;
+            default:
+                currentQualityColor = Color.clear;
+                break;
+        }
+
+        return currentQualityColor;
     }
 
     private void DisplayBrewingComplete()
@@ -275,13 +331,15 @@ public class PotionCraftingSystem : MonoBehaviour
 
     private void UpdatePotionIcon()
     {
-        if (potionBeingBrewed != null)
+        if (potionBeingBrewed != null || isRetrievable)
         {
             potionImage.sprite = potionBeingBrewed.itemIcon;
+            potionBackgroundImage.gameObject.SetActive(true);
         }
         else
         {
             potionImage.sprite = emptySlotImage;
+            potionBackgroundImage.gameObject.SetActive(false);
         }
     }
 
@@ -326,7 +384,6 @@ public class PotionCraftingSystem : MonoBehaviour
 
     public void AddItemToInventory(ItemData itemData)
     {
-        Debug.Log(itemData);
         if (itemData != null)
         {
             InventoryController.Instance.InsertItem(itemData);
@@ -365,61 +422,83 @@ public class PotionCraftingSystem : MonoBehaviour
         Debug.Log(qualityLevel);
         if (potionData != null)
         {
-            InventoryController.Instance.InsertPotion(potionData, qualityLevel);
+            currentQualityColor = GetPotionQualityImageColor(qualityLevel);
+            Debug.Log(currentQualityColor);
+            InventoryController.Instance.InsertPotion(potionData, qualityLevel, currentQualityColor);
             potionBeingBrewed = null;
+            potionBackgroundImage.color = Color.clear;
         }
     }
 
-    public int CheckPotionQuality(int cookTime, float timeAtDesiredTemp) // Check what quality of potion has been made, based on time in desired temperature range
+    public int CheckPotionQuality(float cookTime, float timeAtDesiredTemp) // Check what quality of potion has been made, based on time in desired temperature range
     {
         float qualityPercentage = (timeAtDesiredTemp / cookTime); // Calculate variable to represent the quality of potion made, based on time in desired temperature range
 
         if (qualityPercentage >= ultraQualityTimePercentage) // Check whether quality percentage is within ultra quality time range
         {
-            isFailed = false; // Declare that the potion crafting process has succeeded
+            currentQualityColor = ultraQualityColor;
+            //isFailed = false; // Declare that the potion crafting process has succeeded
             return 4; // Return variable to represent an ultra quality potion (4)
         }
         else if (qualityPercentage >= highQualityTimePercentage) // Check whether quality percentage is within high quality time range
         {
-            isFailed = false; // Declare that the potion crafting process has succeeded
+            //isFailed = false; // Declare that the potion crafting process has succeeded
+            currentQualityColor = highQualityColor;
             return 3; // Return variable to represent an ultra quality potion (3)
         }
         else if (qualityPercentage >= mediumQualityTimePercentage) // Check whether quality percentage is within medium quality time range
         {
-            isFailed = false; // Declare that the potion crafting process has succeeded
+            //isFailed = false; // Declare that the potion crafting process has succeeded
+            currentQualityColor = mediumQualityColor;
             return 2; // Return variable to represent an ultra quality potion (2)
         }
         else if (qualityPercentage >= lowQualityTimePercentage) // Check whether quality percentage is within low quality time range
         {
-            isFailed = false; // Declare that the potion crafting process has succeeded
+            //isFailed = false; // Declare that the potion crafting process has succeeded
+            currentQualityColor = lowQualityColor;
             return 1; // Return variable to represent an ultra quality potion (1)
         }
         else // Potion making has failed if lower that the low quality time limit
         {
-            isFailed = true; // Declare that the potion crafting process has failed
+            //isFailed = true; // Declare that the potion crafting process has failed
+            currentQualityColor = failedColor;
             return 0; // // Return variable to represent that a potion was not crafted, or if it was it is inert (0)
         }
     }
 
+    /*
     public void SetPotionRetrievalArea() // Set the image for the potion retrieval area
     {
         Recipe potionRecipe = RecipeList.Instance.FindRecipe(ingredient1, ingredient2, ingredient3, ingredient4); // Get potion recipe from recipe list
         Debug.Log("Setting retrieval area.");
+        if (potionRecipe != null)
+        {
+            if (isBrewing) // Check whether brewing is occurring
+            {
+                potionImage.sprite = potionRecipe.potionIcon; // Display potion image if it's being brewed
+                potionBackgroundImage.color = currentQualityColor;
+                // Add grayish tranpsparency over top of image while unable to be retrieved
+            }
+            else if (isRetrievable) // Check whether the potion is retrievable
+            {
+                potionImage.sprite = potionRecipe.potionIcon; // Display potion image if it's ready to be retrieved
+                potionBackgroundImage.color = currentQualityColor;
+            }
+            else // If brewing isn't occurring and a potion isn't ready to be retrieved then assume potion image doesn't need to be there
+            {
+                potionImage = null; // Set potion image to null to remove potion image from screen display
+                potionBackgroundImage.color = Color.clear;
+            }
+        }
+        else
+        {
+            potionImage.sprite = emptySlotImage; // Set potion image to null to remove potion image from screen display
+            potionBackgroundImage.color = Color.clear;
+        }
 
-        if (isBrewing) // Check whether brewing is occurring
-        {
-            potionImage.sprite = potionRecipe.potionIcon; // Display potion image if it's being brewed
-            // Add grayish tranpsparency over top of image while unable to be retrieved
-        }
-        else if (isRetrievable) // Check whether the potion is retrievable
-        {
-            potionImage.sprite = potionRecipe.potionIcon; // Display potion image if it's ready to be retrieved
-        }
-        else // If brewing isn't occurring and a potion isn't ready to be retrieved then assume potion image doesn't need to be there
-        {
-            potionImage = null; // Set potion image to null to remove potion image from screen display
-        }
     }
+
+    */
 
     // *** CAULDRON CONTROLS ***
 
@@ -496,6 +575,9 @@ public class PotionCraftingSystem : MonoBehaviour
                 //GameManager.Instance.AddCurrency(potionBeingBrewed.baseValue);
                 potionBeingBrewed = null;
                 isRetrievable = false; // Reset is retrievable variable
+                potionQuality = -1;
+                UpdatePotionQualityIndicator();
+                ResetBrewingTimer();
             }
             else
             {

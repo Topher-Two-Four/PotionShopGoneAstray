@@ -8,6 +8,7 @@ public class InventoryItem : MonoBehaviour
 {
     public ItemData itemData;
     public int quality;
+    public Image potionBackground;
 
     public int HEIGHT
     {
@@ -38,9 +39,14 @@ public class InventoryItem : MonoBehaviour
 
     public bool rotated = false;
 
-    public void SetQuality(int qualityLevel)
+    public void SetQuality(int qualityLevel, Color qualityColor)
     {
         quality = qualityLevel;
+        potionBackground = this.gameObject.transform.GetChild(0).GetComponent<Image>();
+        Debug.Log(qualityColor);
+        potionBackground.color = qualityColor;
+
+        // Assign image to potion inventory item
     }
 
     internal void Set(ItemData itemData)

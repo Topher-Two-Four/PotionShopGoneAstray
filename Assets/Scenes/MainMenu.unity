@@ -5614,11 +5614,12 @@ MonoBehaviour:
   mediumTempDisplayColor: {r: 0, g: 1, b: 0, a: 1}
   hotTempDisplayColor: {r: 1, g: 0.42267352, b: 0, a: 1}
   boilingTempDisplayColor: {r: 255, g: 0, b: 0, a: 1}
-  ultraQualityColor: {r: 0, g: 117, b: 191, a: 1}
-  highQualityColor: {r: 0, g: 0, b: 255, a: 1}
-  mediumQualityColor: {r: 0, g: 255, b: 0, a: 1}
-  lowQualityColor: {r: 108, g: 255, b: 0, a: 1}
-  failedColor: {r: 255, g: 0, b: 0, a: 1}
+  ultraQualityColor: {r: 0.9339623, g: 0, b: 0.5869062, a: 0.47058824}
+  highQualityColor: {r: 0, g: 0, b: 0.74901974, a: 0.47058824}
+  mediumQualityColor: {r: 0, g: 0.74901974, b: 0, a: 0.47058824}
+  lowQualityColor: {r: 1, g: 1, b: 0, a: 0.47058824}
+  failedColor: {r: 0.74901974, g: 0, b: 0, a: 0.47058824}
+  currentQualityColor: {r: 0, g: 0, b: 0, a: 0}
   temperatureDisplayImage: {fileID: 773830184}
   ingredient1Image: {fileID: 183108071}
   ingredient2Image: {fileID: 816354662}

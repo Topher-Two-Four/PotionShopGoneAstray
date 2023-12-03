@@ -27,6 +27,7 @@ public class PotionCraftingSystem : MonoBehaviour
 
     public bool isBrewing = false; // Variable to track whether a potion is currently being brewed
     public bool isRetrievable = false; // Variable to track whether a potion is ready to be retrieved
+    public bool ingredientSpaceLeft = true;
 
     public Button ingredient1Button; // Button for the first ingredient
     public Button ingredient2Button; // Button for the second ingredient
@@ -253,13 +254,18 @@ public class PotionCraftingSystem : MonoBehaviour
             else if (ingredient4 == null)
             {
                 ingredient4 = ingredient;
+                ingredientSpaceLeft = false;
+                return;
             }
             else
             {
+                ingredientSpaceLeft = false;
+                Debug.Log("No available space.");
                 return;
             }
         }
         else
+        // ********************************** STOPPING POINT ********************************
         {
             Debug.Log("No available space.");
             return; // Return if no space available amongst the three ingredient spaces

@@ -145,7 +145,7 @@ public class InventoryController : MonoBehaviour
 
         if  (PotionCraftingSystem.Instance.isBrewing || PotionCraftingSystem.Instance.isRetrievable) { return; }
 
-        if (selectedItem != null && selectedItem.itemData.isIngredient)
+        if (selectedItem != null && selectedItem.itemData.isIngredient && isSpaceForItem)
         {
             selectedItemGrid.RemoveItem(tileGridPosition.x, tileGridPosition.y);
 

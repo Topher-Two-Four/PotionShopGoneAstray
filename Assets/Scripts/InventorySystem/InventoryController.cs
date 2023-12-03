@@ -28,6 +28,7 @@ public class InventoryController : MonoBehaviour
 
     [SerializeField] List<ItemData> items; // List of ItemData scriptable objects
     [SerializeField] GameObject itemPrefab; // Prefab for the item object
+    [SerializeField] GameObject potionPrefab; // Prefab for the potion object
     [SerializeField] Transform canvasTransform; // Transform of the inventory canvas
 
     InventoryHighlight inventoryHighlight; // Inventory item highlighter
@@ -77,6 +78,19 @@ public class InventoryController : MonoBehaviour
         inventoryItem.Set(itemData);
     }
 
+    public void CreateInventoryItem(PotionData potionData, int qualityLevel)
+    {
+        InventoryItem inventoryItem = Instantiate(potionPrefab).GetComponent<InventoryItem>();
+        selectedItem = inventoryItem;
+        inventoryItem.SetQuality(qualityLevel);
+
+        rectTransform = inventoryItem.GetComponent<RectTransform>();
+        rectTransform.SetParent(canvasTransform);
+        rectTransform.SetAsLastSibling();
+
+        inventoryItem.Set(potionData);
+    }
+
     public void InsertItem(InventoryItem itemToInsert)
     {
         Vector2Int? posOnGrid = inventoryGrid.FindSpaceForObject(itemToInsert);
@@ -109,6 +123,28 @@ public class InventoryController : MonoBehaviour
             
             selectedItem = null; // Reset selected item to null to clear selection
     }
+
+    public void InsertPotion(PotionData potionData, int qualityLevel)
+    {
+        if (inventoryGrid == null || !isSpaceForItem)
+        {
+            Debug.Log(isSpaceForItem);
+            return;
+        } // Return if inventory grid doesn't exist or if there is no space for item in inventory
+
+        // Need to return if FindSpaceForObject(itemToInsert) is false
+
+        potionData.quality = qualityLevel;
+
+        CreateInventoryItem(potionData, qualityLevel); // Create new inventory item from ItemData object
+
+        InventoryItem itemToInsert = selectedItem; // Declare inventory item to insert to be currently selected item
+
+        InsertItem(itemToInsert); // Insert inventory item into next open spot in inventory
+
+        selectedItem = null; // Reset selected item to null to clear selection
+    }
+
 
     public void AddItemObjectToInventory(ItemData itemData)
     {

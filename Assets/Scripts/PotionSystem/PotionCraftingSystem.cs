@@ -18,12 +18,12 @@ public class PotionCraftingSystem : MonoBehaviour
     public ItemData ingredient2; // Second ingredient ItemData scriptable object
     public ItemData ingredient3; // Third ingredient ItemData scriptable object
     public ItemData ingredient4; // Third ingredient ItemData scriptable object
-    public ItemData potionBeingBrewed; // Third ingredient ItemData scriptable object
+    public PotionData potionBeingBrewed; // Third ingredient ItemData scriptable object
 
-    public float ultraQualityTimeLimit = 90f; // Time in desired temperature range required to make an ultra quality potion
-    public float highQualityTimeLimit = 70f;// Time in desired temperature range required to make a high quality potion
-    public float mediumQualityTimeLimit = 50f; // Time in desired temperature range required to make a medium quality potion
-    public float lowQualityTimeLimit = 30f; // Time in desired temperature range required to make a low quality potion
+    public float ultraQualityTimePercentage = .9f; // Time in desired temperature range required to make an ultra quality potion
+    public float highQualityTimePercentage = .7f;// Time in desired temperature range required to make a high quality potion
+    public float mediumQualityTimePercentage = .5f; // Time in desired temperature range required to make a medium quality potion
+    public float lowQualityTimePercentage = .3f; // Time in desired temperature range required to make a low quality potion
 
     public bool isBrewing = false; // Variable to track whether a potion is currently being brewed
     public bool isRetrievable = false; // Variable to track whether a potion is ready to be retrieved
@@ -186,6 +186,7 @@ public class PotionCraftingSystem : MonoBehaviour
     private void UpdatePotionQualityIndicator()
     {
         int currentQuality = GetPotionQuality();
+        Debug.Log(currentQuality);
 
         switch (currentQuality)
         {
@@ -213,11 +214,13 @@ public class PotionCraftingSystem : MonoBehaviour
 
     private int GetPotionQuality()
     {
+        // Need to make this deductive
         float qualityPercentage = (timeAtDesiredTemp / cookTime);
-        if (qualityPercentage >= ultraQualityTimeLimit) { return 4; }
-        if (qualityPercentage >= highQualityTimeLimit) { return 3; }
-        if (qualityPercentage >= mediumQualityTimeLimit) { return 2; }
-        if (qualityPercentage >= lowQualityTimeLimit) { return 1; }
+        Debug.Log(qualityPercentage);
+        if (qualityPercentage >= ultraQualityTimePercentage) { return 4; }
+        if (qualityPercentage >= highQualityTimePercentage) { return 3; }
+        if (qualityPercentage >= mediumQualityTimePercentage) { return 2; }
+        if (qualityPercentage >= lowQualityTimePercentage) { return 1; }
         return 0;
     }
 
@@ -356,26 +359,37 @@ public class PotionCraftingSystem : MonoBehaviour
 
     }
 
+    public void AddPotionToInventory(PotionData potionData, int qualityLevel)
+    {
+        Debug.Log(potionData);
+        Debug.Log(qualityLevel);
+        if (potionData != null)
+        {
+            InventoryController.Instance.InsertPotion(potionData, qualityLevel);
+            potionBeingBrewed = null;
+        }
+    }
+
     public int CheckPotionQuality(int cookTime, float timeAtDesiredTemp) // Check what quality of potion has been made, based on time in desired temperature range
     {
         float qualityPercentage = (timeAtDesiredTemp / cookTime); // Calculate variable to represent the quality of potion made, based on time in desired temperature range
 
-        if (qualityPercentage >= ultraQualityTimeLimit) // Check whether quality percentage is within ultra quality time range
+        if (qualityPercentage >= ultraQualityTimePercentage) // Check whether quality percentage is within ultra quality time range
         {
             isFailed = false; // Declare that the potion crafting process has succeeded
             return 4; // Return variable to represent an ultra quality potion (4)
         }
-        else if (qualityPercentage >= highQualityTimeLimit) // Check whether quality percentage is within high quality time range
+        else if (qualityPercentage >= highQualityTimePercentage) // Check whether quality percentage is within high quality time range
         {
             isFailed = false; // Declare that the potion crafting process has succeeded
             return 3; // Return variable to represent an ultra quality potion (3)
         }
-        else if (qualityPercentage >= mediumQualityTimeLimit) // Check whether quality percentage is within medium quality time range
+        else if (qualityPercentage >= mediumQualityTimePercentage) // Check whether quality percentage is within medium quality time range
         {
             isFailed = false; // Declare that the potion crafting process has succeeded
             return 2; // Return variable to represent an ultra quality potion (2)
         }
-        else if (qualityPercentage >= lowQualityTimeLimit) // Check whether quality percentage is within low quality time range
+        else if (qualityPercentage >= lowQualityTimePercentage) // Check whether quality percentage is within low quality time range
         {
             isFailed = false; // Declare that the potion crafting process has succeeded
             return 1; // Return variable to represent an ultra quality potion (1)
@@ -478,7 +492,7 @@ public class PotionCraftingSystem : MonoBehaviour
             if (isRetrievable)
             {
                 Debug.Log("Retrieving potion");
-                AddItemToInventory(potionBeingBrewed);
+                AddPotionToInventory(potionBeingBrewed, GetPotionQuality());
                 //GameManager.Instance.AddCurrency(potionBeingBrewed.baseValue);
                 potionBeingBrewed = null;
                 isRetrievable = false; // Reset is retrievable variable

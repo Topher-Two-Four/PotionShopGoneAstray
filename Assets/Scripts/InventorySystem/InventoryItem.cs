@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class InventoryItem : MonoBehaviour
 {
     public ItemData itemData;
+    public int quality;
 
     public int HEIGHT
     {
@@ -37,6 +38,11 @@ public class InventoryItem : MonoBehaviour
 
     public bool rotated = false;
 
+    public void SetQuality(int qualityLevel)
+    {
+        quality = qualityLevel;
+    }
+
     internal void Set(ItemData itemData)
     {
         this.itemData = itemData;
@@ -57,4 +63,5 @@ public class InventoryItem : MonoBehaviour
         rectTransform.rotation = Quaternion.Euler(0, 0, rotated == true ? 90f : 0f);
 
     }
+
 }

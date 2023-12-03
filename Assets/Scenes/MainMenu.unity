@@ -2088,6 +2088,10 @@ PrefabInstance:
       value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 7899478307544988770, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+      propertyPath: potionPrefab
+      value: 
+      objectReference: {fileID: 3761654210620089128, guid: 18758571485f014479423ac07bc72006, type: 3}
+    - target: {fileID: 7899478307544988770, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
       propertyPath: inventoryGrid
       value: 
       objectReference: {fileID: 832016047}
@@ -5590,10 +5594,10 @@ MonoBehaviour:
   ingredient3: {fileID: 0}
   ingredient4: {fileID: 0}
   potionBeingBrewed: {fileID: 0}
-  ultraQualityTimeLimit: 90
-  highQualityTimeLimit: 70
-  mediumQualityTimeLimit: 50
-  lowQualityTimeLimit: 30
+  ultraQualityTimePercentage: 0.9
+  highQualityTimePercentage: 0.7
+  mediumQualityTimePercentage: 0.5
+  lowQualityTimePercentage: 0.3
   isBrewing: 0
   isRetrievable: 0
   ingredientSpaceLeft: 1

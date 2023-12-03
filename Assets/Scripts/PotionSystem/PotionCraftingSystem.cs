@@ -113,7 +113,7 @@ public class PotionCraftingSystem : MonoBehaviour
         {
             isBrewing = true;
             BrewPotionWIthRecipe(potionRecipe);
-            potionImage.sprite = potionRecipe.potionIcon;
+            potionImage.sprite = potionRecipe.potion.itemIcon;
             potionBackgroundImage.color = currentQualityColor;
             UpdateBrewingTimerDisplay(potionRecipe.cookTime);
             Debug.Log(potionRecipe);
@@ -178,7 +178,7 @@ public class PotionCraftingSystem : MonoBehaviour
             return;
         }
 
-        potionImage.sprite = potionRecipe.potionIcon;
+        potionImage.sprite = potionRecipe.potion.itemIcon;
         timeRemainingText.text = isRetrievable || isBrewing ? "Done!" : cookTime.ToString();
         brewButton.interactable = !isBrewing && (isRetrievable || potionRecipe != null);
     }
@@ -333,7 +333,6 @@ public class PotionCraftingSystem : MonoBehaviour
     {
         if (potionBeingBrewed != null || isRetrievable)
         {
-            potionImage.sprite = potionBeingBrewed.itemIcon;
             potionBackgroundImage.gameObject.SetActive(true);
         }
         else

@@ -152,20 +152,22 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log(isTimerRunning);
-
-        SceneManager.LoadScene(2); // Load scene through scene manager
         Cursor.lockState = CursorLockMode.Confined; // Lock cursor in one place
         Cursor.visible = true; // Hide cursor
         if (playerCapsule != null)
         {
             playerCapsule.SetActive(false); // Deactivate player capsule
         }
+        SceneManager.LoadScene(2); // Load scene through scene manager
+
     }
 
     public void SwitchSceneToMazeLevel() // Use scene manager to switch to Maze Level
     {
         SceneManager.LoadScene(3); // Use scene manager to load second scene from scene list (settings menu)
         LoadMazeLevel();
+        controller._speed = 0; // Make it so player doesn't jut forward when entering maze
+        controller._rotationVelocity = 0; // Make it so player doesn't rotate uncontrollably when entering maze
     }
 
     public void SwitchSceneToSettingsMenu() // Use scene manager to switch to Settings Menu
@@ -183,7 +185,7 @@ public class GameManager : MonoBehaviour
 
         SetPlayerCapsuleActive(); // Ensure the player capsule is active
 
-        Vector3 spawnPoint = new Vector3(-25, -55, 25);
+        Vector3 spawnPoint = new Vector3(-27f, -58f, 25f); // ************** EVENTUALLY NEED TO MAKE THIS INTO A SPAWN POINT AND USE MAZE SPAWN MANAGER *************************
 
         Debug.Log(spawnPoint);
 

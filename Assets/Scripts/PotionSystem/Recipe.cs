@@ -21,9 +21,5 @@ public class Recipe : ScriptableObject
     public float highQualityTimeLimit = 70f;// Time in desired temperature range required to make a high quality potion
     public float mediumQualityTimeLimit = 50f; // Time in desired temperature range required to make a medium quality potion
     public float lowQualityTimeLimit = 30f; // Time in desired temperature range required to make a low quality potion
-
-    public Sprite potionIcon; // Image for the potion icon
-
-
 }
 

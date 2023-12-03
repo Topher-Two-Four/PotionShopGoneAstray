@@ -274,6 +274,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 303446425}
   - {fileID: 2120093471}
   m_Father: {fileID: 1453070999}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1619,6 +1620,81 @@ Transform:
   - {fileID: 234730168}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &303446424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 303446425}
+  - component: {fileID: 303446427}
+  - component: {fileID: 303446426}
+  m_Layer: 5
+  m_Name: PotionRetrievaBackgroundImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &303446425
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303446424}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9196756}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &303446426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303446424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.3584906, g: 0.33988965, b: 0.33988965, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &303446427
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303446424}
+  m_CullTransparentMesh: 1
 --- !u!1 &333563698
 GameObject:
   m_ObjectHideFlags: 0
@@ -5534,12 +5610,18 @@ MonoBehaviour:
   mediumTempDisplayColor: {r: 0, g: 1, b: 0, a: 1}
   hotTempDisplayColor: {r: 1, g: 0.42267352, b: 0, a: 1}
   boilingTempDisplayColor: {r: 255, g: 0, b: 0, a: 1}
+  ultraQualityColor: {r: 0, g: 117, b: 191, a: 1}
+  highQualityColor: {r: 0, g: 0, b: 255, a: 1}
+  mediumQualityColor: {r: 0, g: 255, b: 0, a: 1}
+  lowQualityColor: {r: 108, g: 255, b: 0, a: 1}
+  failedColor: {r: 255, g: 0, b: 0, a: 1}
   temperatureDisplayImage: {fileID: 773830184}
   ingredient1Image: {fileID: 183108071}
   ingredient2Image: {fileID: 816354662}
   ingredient3Image: {fileID: 1399944314}
   ingredient4Image: {fileID: 789180104}
   potionImage: {fileID: 2120093469}
+  potionBackgroundImage: {fileID: 303446426}
   emptySlotImage: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   temperatureDisplayText: {fileID: 49256573}
   timeRemainingText: {fileID: 1271069269}

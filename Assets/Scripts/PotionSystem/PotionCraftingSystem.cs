@@ -44,12 +44,19 @@ public class PotionCraftingSystem : MonoBehaviour
     public Color hotTempDisplayColor = new Color(108, 255, 0);
     public Color boilingTempDisplayColor = new Color(255, 0, 0);
 
+    public Color ultraQualityColor = new Color(25, 25, 99); // Purple
+    public Color highQualityColor = new Color(0, 1, 255); // Blue
+    public Color mediumQualityColor = new Color(255, 0, 0); // Red
+    public Color lowQualityColor = new Color(255, 103, 0); // Orange
+    public Color failedColor = new Color(109, 109, 109); // Gray
+
     public Image temperatureDisplayImage; // Background image for the temperature display
     public Image ingredient1Image; // Image for the first ingredient
     public Image ingredient2Image; // Image for the second ingredient
     public Image ingredient3Image; // Image for the third ingredient
     public Image ingredient4Image; // Image for the third ingredient
     public Image potionImage; // Image for the potion created or being created
+    public Image potionBackgroundImage; // Image for the background of the potion, which represents its quality
     public Sprite emptySlotImage; // Image for an empty slot
 
     public TMP_Text temperatureDisplayText; // TMP text game object for displaying the current temperature
@@ -149,6 +156,9 @@ public class PotionCraftingSystem : MonoBehaviour
                 timeCooked += Time.deltaTime;
                 //Debug.Log("Not at desired temp");
             }
+
+            UpdatePotionQualityIndicator();
+
             yield return null;
         }
         DisplayBrewingComplete();
@@ -173,6 +183,44 @@ public class PotionCraftingSystem : MonoBehaviour
         timeRemainingText.text = (((int)timeRemaining).ToString());
     }
 
+    private void UpdatePotionQualityIndicator()
+    {
+        int currentQuality = GetPotionQuality();
+
+        switch (currentQuality)
+        {
+            case 4:
+                potionBackgroundImage.color = ultraQualityColor;
+                break;
+
+            case 3:
+                potionBackgroundImage.color = highQualityColor;
+                break;
+
+            case 2:
+                potionBackgroundImage.color = mediumQualityColor;
+                break;
+
+            case 1:
+                potionBackgroundImage.color = lowQualityColor;
+                break;
+
+            default:
+                potionBackgroundImage.color = failedColor;
+                break;
+        }
+    }
+
+    private int GetPotionQuality()
+    {
+        float qualityPercentage = (timeAtDesiredTemp / cookTime);
+        if (qualityPercentage >= ultraQualityTimeLimit) { return 4; }
+        if (qualityPercentage >= highQualityTimeLimit) { return 3; }
+        if (qualityPercentage >= mediumQualityTimeLimit) { return 2; }
+        if (qualityPercentage >= lowQualityTimeLimit) { return 1; }
+        return 0;
+    }
+
     private void DisplayBrewingComplete()
     {
         Debug.Log("Brewing complete.");
@@ -180,6 +228,7 @@ public class PotionCraftingSystem : MonoBehaviour
         isBrewing = false;
         isRetrievable = true;
         potionRetrievalButton.interactable = true;
+        UpdatePotionQualityIndicator();
     }
 
     private void UpdateIngredientIcons()

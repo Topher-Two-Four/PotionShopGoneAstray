@@ -1,18 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Order : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Customer customer;
+    public PotionData potionRequested;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

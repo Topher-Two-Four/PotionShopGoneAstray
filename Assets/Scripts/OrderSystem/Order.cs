@@ -7,6 +7,8 @@ using TMPro;
 public class Order : MonoBehaviour
 {
     public Customer customer;
+    public string customerName;
+    public Sprite customerPortrait;
     public PotionData potionRequested;
 
 }

@@ -278,5 +278,10 @@ public class GameManager : MonoBehaviour
         // Button for return to main menu or quit
     }
 
+    public void AddCurrencyToPlayer(int amountToAdd)
+    {
+        playerCurrency += amountToAdd;
+        playerCurrencyText.text = ("Player Currency: $" + playerCurrency);
+    }
 
 }

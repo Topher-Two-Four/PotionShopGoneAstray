@@ -247,4 +247,21 @@ public class ItemGrid : MonoBehaviour
 
             return true;
         }
+
+    public void RemovePotionFromInventory(PotionData potionData)
+    {
+        for (int x = 0; x < gridSizeWidth; x++)
+        {
+            for (int y = 0; y < gridSizeHeight; y++)
+            {
+                InventoryItem item = inventoryItemSlot[x, y];
+                if (item != null && item.itemData == potionData)
+                {
+                    RemoveItem(x, y);
+                    return;
+                }
+            }
+        }
+    }
+
 }

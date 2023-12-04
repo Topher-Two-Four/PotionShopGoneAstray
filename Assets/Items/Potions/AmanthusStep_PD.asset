@@ -26,6 +26,6 @@ MonoBehaviour:
   isPoison: 0
   isBenefit: 0
   isCrippling: 1
-  quality: 0
-  baseValue: 0
+  quality: 4
+  baseValue: 10
   sellPrice: 0

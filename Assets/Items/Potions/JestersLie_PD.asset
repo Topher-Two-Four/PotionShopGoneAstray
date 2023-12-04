@@ -27,5 +27,5 @@ MonoBehaviour:
   isBenefit: 0
   isCrippling: 1
   quality: 0
-  baseValue: 0
+  baseValue: 10
   sellPrice: 0

@@ -193,11 +193,16 @@ public class InventoryController : MonoBehaviour
         return null;
         }
 
-    public void SellPotion(PotionData potionData)
+    public void SellPotion(Order order)
     {
         // IF IT's IN THE INVENTORY THEN SELL IT, OTHERWISE DO NOT SELL - COULD ALSO JUST DISABLE BUTTON UNTIL THEN AND FIND POTION OF MATCHING TYPE IN INVENTORY BEFORE ENABLING IT
+        PotionData potionData = FindPotionOfType(order);
+
         potionData.sellPrice = (potionData.quality * potionData.baseValue);
-        GameManager.Instance.playerCurrency += potionData.sellPrice;
+        Debug.Log(potionData.sellPrice);
+        GameManager.Instance.AddCurrencyToPlayer(potionData.sellPrice);
+
+        inventoryGrid.RemovePotionFromInventory(potionData);
     }
 
     public void AddIngredientToPotionCraftingSpace(Vector2Int tileGridPosition)

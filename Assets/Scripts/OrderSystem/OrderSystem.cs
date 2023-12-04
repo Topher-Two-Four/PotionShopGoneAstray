@@ -35,9 +35,7 @@ public class OrderSystem : MonoBehaviour
 
             int randomPotionTypeIndex = Random.Range(0, 8);
 
-            // ********************************* NEED TO MAKE IT SO THAT BUTTON POPULATES WITH TYPE OF POTION REQUESTED AND ABILITY TO TURN IN FOR MONEY AND COMPLETION ***************************
-
-            currentOrder.turnInPotionButton.onClick.AddListener(() => InventoryController.Instance.SellPotion(currentOrder.potionRequested));
+            currentOrder.turnInPotionButton.onClick.AddListener(() => InventoryController.Instance.SellPotion(currentOrder));
             currentOrder.turnInPotionButton.interactable = false;
 
             switch (randomPotionTypeIndex) // Assign random potion type for request

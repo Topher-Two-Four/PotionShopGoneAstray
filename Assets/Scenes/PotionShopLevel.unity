@@ -458,7 +458,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &113991849
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1187,7 +1187,18 @@ MonoBehaviour:
   - {fileID: 661440278}
   - {fileID: 2043424064}
   - {fileID: 1367406640}
-  customerList: []
+  customerList:
+  - {fileID: 11400000, guid: 2cbcbd7be3452e3429a4be3d31bad0cd, type: 2}
+  - {fileID: 11400000, guid: de265f6e22e3a6d48b5fcdda029ceda6, type: 2}
+  - {fileID: 11400000, guid: 15a8c4eab48ded24db0066bdc2b7d275, type: 2}
+  - {fileID: 11400000, guid: 786a91bd1edfa2d4695ff677603e2a9a, type: 2}
+  - {fileID: 11400000, guid: d960aac32a1d17945bdf0a1ee555809d, type: 2}
+  - {fileID: 11400000, guid: ab324fc7fd3473f48b19ac7c641058a7, type: 2}
+  - {fileID: 11400000, guid: 153c49157ae87e14383be803555769cb, type: 2}
+  - {fileID: 11400000, guid: 89ab489e864d17a4590cf9906c2ce040, type: 2}
+  - {fileID: 11400000, guid: 51d2c4a966fdf884f9db3f5a4e93a58c, type: 2}
+  - {fileID: 11400000, guid: e8da664de47c73444a87b29922b29ebb, type: 2}
+  - {fileID: 11400000, guid: 2bedb578c965013418728e3ad64a6585, type: 2}
 --- !u!4 &299548554
 Transform:
   m_ObjectHideFlags: 0
@@ -1918,6 +1929,9 @@ MonoBehaviour:
   customerName: 
   customerPortrait: {fileID: 0}
   potionRequested: {fileID: 0}
+  customerPortraitDisplay: {fileID: 1332807803}
+  orderText: {fileID: 1062316063}
+  turnInPotionButton: {fileID: 1610573332}
 --- !u!114 &661440279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2253,6 +2267,9 @@ MonoBehaviour:
   customerName: 
   customerPortrait: {fileID: 0}
   potionRequested: {fileID: 0}
+  customerPortraitDisplay: {fileID: 586801521}
+  orderText: {fileID: 1617733007}
+  turnInPotionButton: {fileID: 1812076725}
 --- !u!114 &805553285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2534,7 +2551,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &903934940
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2714,6 +2731,9 @@ MonoBehaviour:
   customerName: 
   customerPortrait: {fileID: 0}
   potionRequested: {fileID: 0}
+  customerPortraitDisplay: {fileID: 1148328134}
+  orderText: {fileID: 1985040665}
+  turnInPotionButton: {fileID: 50854431}
 --- !u!114 &927235249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2809,6 +2829,9 @@ MonoBehaviour:
   customerName: 
   customerPortrait: {fileID: 0}
   potionRequested: {fileID: 0}
+  customerPortraitDisplay: {fileID: 1607410386}
+  orderText: {fileID: 594155993}
+  turnInPotionButton: {fileID: 187674443}
 --- !u!114 &929017883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3490,6 +3513,9 @@ MonoBehaviour:
   customerName: 
   customerPortrait: {fileID: 0}
   potionRequested: {fileID: 0}
+  customerPortraitDisplay: {fileID: 996917916}
+  orderText: {fileID: 2139688066}
+  turnInPotionButton: {fileID: 177525872}
 --- !u!114 &1367406641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4088,6 +4114,9 @@ MonoBehaviour:
   customerName: 
   customerPortrait: {fileID: 0}
   potionRequested: {fileID: 0}
+  customerPortraitDisplay: {fileID: 1736668930}
+  orderText: {fileID: 341077640}
+  turnInPotionButton: {fileID: 1098650719}
 --- !u!114 &1589760871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4606,6 +4635,9 @@ MonoBehaviour:
   customerName: 
   customerPortrait: {fileID: 0}
   potionRequested: {fileID: 0}
+  customerPortraitDisplay: {fileID: 66697615}
+  orderText: {fileID: 888063788}
+  turnInPotionButton: {fileID: 2134829599}
 --- !u!114 &1684301859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5183,6 +5215,9 @@ MonoBehaviour:
   customerName: 
   customerPortrait: {fileID: 0}
   potionRequested: {fileID: 0}
+  customerPortraitDisplay: {fileID: 402719729}
+  orderText: {fileID: 802943333}
+  turnInPotionButton: {fileID: 2107335126}
 --- !u!114 &2043424065
 MonoBehaviour:
   m_ObjectHideFlags: 0

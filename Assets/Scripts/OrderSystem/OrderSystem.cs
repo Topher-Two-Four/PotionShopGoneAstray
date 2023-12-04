@@ -9,7 +9,6 @@ public class OrderSystem : MonoBehaviour
     public Order[] orderList;
     public Customer[] customerList;
 
-    // Start is called before the first frame update
     void Start()
     {
         for (int x = 0; x < orderList.Length; x++)
@@ -22,8 +21,13 @@ public class OrderSystem : MonoBehaviour
             currentOrder.customerName = customerList[randomCustomerIndex].customerName;
             currentOrder.customerPortrait = customerList[randomCustomerIndex].customerPortrait;
 
+            currentOrder.customerPortraitDisplay.sprite = currentOrder.customerPortrait;
+            currentOrder.orderText.SetText(currentOrder.customerName + " would like to buy a " + "_______ potion.");
+            //currentOrder.turnInPotionButton.image = currentOrder.potionRequested.
+
             int randomPotionTypeIndex = Random.Range(0, 8);
             Debug.Log(randomPotionTypeIndex);
+            /*
             switch (randomPotionTypeIndex) // Assign random potion type for request
             {
                 case 8:
@@ -56,6 +60,8 @@ public class OrderSystem : MonoBehaviour
                 default:
                     break;
             }
+            */
         }
     }
+
 }

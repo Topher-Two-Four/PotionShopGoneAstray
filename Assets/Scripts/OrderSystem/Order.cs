@@ -10,5 +10,8 @@ public class Order : MonoBehaviour
     public string customerName;
     public Sprite customerPortrait;
     public PotionData potionRequested;
+    public Image customerPortraitDisplay;
+    public TMP_Text orderText;
+    public Button turnInPotionButton;
 
 }

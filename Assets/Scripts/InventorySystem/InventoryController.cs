@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StarterAssets;
+using UnityEngine.SceneManagement;
 
 public class InventoryController : MonoBehaviour
 {
@@ -50,19 +52,22 @@ public class InventoryController : MonoBehaviour
 
     private void Update()
     {
-        ItemIconDrag(); // Drag item icon using script
-
-        if (Input.GetKeyDown(KeyCode.R)) { RotateItem(); } // Rotate selected inventory item
-
-        if (selectedItemGrid == null) { inventoryHighlight.Show(false); return; } // Don't show highlight if selected item grid doesn't exist and return from method
-
-        HandleHighlight(); // Use script to handle highlight of inventory item
-
         if (Input.GetKeyDown(KeyCode.Tab)) { ToggleInventoryCanvas(); } // When left mouse button is pressed run method
 
-        if (Input.GetMouseButtonDown(0)) { LeftMouseButtonPress(); } // When left mouse button is pressed run method
+        if (inventoryCanvas.activeSelf) // Only do the following code if the inventory canvas is open
+        {
+            ItemIconDrag(); // Drag item icon using script
 
-        if (Input.GetMouseButton(1)) { RightMouseButtonPress(); } // When right mouse button is pressed run method
+            if (Input.GetKeyDown(KeyCode.R)) { RotateItem(); } // Rotate selected inventory item
+
+            if (selectedItemGrid == null) { inventoryHighlight.Show(false); return; } // Don't show highlight if selected item grid doesn't exist and return from method
+
+            HandleHighlight(); // Use script to handle highlight of inventory item
+
+            if (Input.GetMouseButtonDown(0)) { LeftMouseButtonPress(); } // When left mouse button is pressed run method
+
+            if (Input.GetMouseButton(1)) { RightMouseButtonPress(); } // When right mouse button is pressed run method
+        }
 
     }
 
@@ -151,7 +156,6 @@ public class InventoryController : MonoBehaviour
         Debug.Log(itemData);
         if (itemData != null && isSpaceForItem)
         {
-            //if (inventoryCanvas.)
             InsertItem(itemData);
             itemData = null;
         }
@@ -159,13 +163,30 @@ public class InventoryController : MonoBehaviour
 
     public void ToggleInventoryCanvas()
     {
-        if (inventoryCanvas.gameObject.activeSelf)
+        GameManager.Instance.controller.RotationSpeed = 1;
+
+        if (inventoryCanvas.gameObject.activeSelf) // If inventory canvas is active then deactivate it
         {
-            inventoryCanvas.gameObject.SetActive(false);
+            Cursor.visible = false; // Hide cursor
+            Cursor.lockState = CursorLockMode.Locked; // Unlock and confine cursor to game screen
+
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(2))
+            {
+                Cursor.lockState = CursorLockMode.Confined; // Unlock cursor and confine to game screen
+                Cursor.visible = true; // Show cursor
+            }
+
+
+            inventoryCanvas.gameObject.SetActive(false); // Deactivate canvas object
         } 
-        else
+        else // If inventory canvas is inactive then activate it
         {
-            inventoryCanvas.gameObject.SetActive(true);
+            GameManager.Instance.controller.RotationSpeed = 0;
+
+            Cursor.lockState = CursorLockMode.Confined; // Lock cursor in one place
+            Cursor.visible = true; // Hide cursor
+
+            inventoryCanvas.gameObject.SetActive(true); // Activate canvas object
         }
     }
 
@@ -195,7 +216,6 @@ public class InventoryController : MonoBehaviour
 
     public void SellPotion(Order order)
     {
-        // IF IT's IN THE INVENTORY THEN SELL IT, OTHERWISE DO NOT SELL - COULD ALSO JUST DISABLE BUTTON UNTIL THEN AND FIND POTION OF MATCHING TYPE IN INVENTORY BEFORE ENABLING IT
         PotionData potionData = FindPotionOfType(order);
 
         potionData.sellPrice = (potionData.quality * potionData.baseValue);

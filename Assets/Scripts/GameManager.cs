@@ -151,7 +151,6 @@ public class GameManager : MonoBehaviour
             LoadMazeLevel();
         }
 
-        Debug.Log(isTimerRunning);
         Cursor.lockState = CursorLockMode.Confined; // Lock cursor in one place
         Cursor.visible = true; // Hide cursor
         if (playerCapsule != null)

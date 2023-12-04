@@ -13,5 +13,8 @@ public class Order : MonoBehaviour
     public Image customerPortraitDisplay;
     public TMP_Text orderText;
     public Button turnInPotionButton;
+    public Image turnInPotionButtonImage;
+
+
 
 }

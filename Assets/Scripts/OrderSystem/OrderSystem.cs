@@ -108,6 +108,10 @@ public class OrderSystem : MonoBehaviour
             {
                 order.turnInPotionButton.interactable = true;
                 Debug.Log(potion);
+            } 
+            else
+            {
+                order.turnInPotionButton.interactable = false;
             }
         }
     }

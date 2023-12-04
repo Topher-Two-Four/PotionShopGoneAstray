@@ -203,6 +203,9 @@ public class InventoryController : MonoBehaviour
         GameManager.Instance.AddCurrencyToPlayer(potionData.sellPrice);
 
         inventoryGrid.RemovePotionFromInventory(potionData);
+        order.orderCompletedMask.gameObject.SetActive(true);
+        order.turnInPotionButton.gameObject.SetActive(false);
+        OrderSystem.Instance.CheckForCompleteOrders();
     }
 
     public void AddIngredientToPotionCraftingSpace(Vector2Int tileGridPosition)

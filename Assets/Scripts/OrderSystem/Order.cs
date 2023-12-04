@@ -14,6 +14,7 @@ public class Order : MonoBehaviour
     public TMP_Text orderText;
     public Button turnInPotionButton;
     public Image turnInPotionButtonImage;
+    public Image orderCompletedMask;
 
     public bool isHealth;
     public bool isLove;

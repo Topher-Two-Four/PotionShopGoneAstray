@@ -13,7 +13,7 @@ public class InventoryController : MonoBehaviour
     [HideInInspector]
     private ItemGrid selectedItemGrid; // Item grid that is currently selected
 
-    public ItemGrid SelectedItemGrid {  
+    public ItemGrid SelectedItemGrid {
         get => selectedItemGrid; // Get currently selected item grid
         set // Set as currently selected item grid
         {
@@ -169,8 +169,33 @@ public class InventoryController : MonoBehaviour
         }
     }
 
+    public PotionData FindPotionOfType(Order potionOrdered)
+    {
+        List<PotionData> potionsInInvetory = inventoryGrid.FindPotionsInInventory();
+
+        foreach (PotionData potion in potionsInInvetory)
+        {
+            if ((potion.isAntidote && potionOrdered.isAntidote) ||
+                (potion.isBenefit && potionOrdered.isBenefit) ||
+                (potion.isCrippling && potionOrdered.isCrippling) ||
+                (potion.isDeath && potionOrdered.isDeath) ||
+                (potion.isHatred && potionOrdered.isHatred ||
+                (potion.isHealth && potionOrdered.isHealth) ||
+                (potion.isLove && potionOrdered.isLove) ||
+                (potion.isLucky && potionOrdered.isLucky) ||
+                (potion.isPoison && potionOrdered.isPoison)))
+                {
+                Debug.Log(potion);
+                return potion;
+                }
+            }
+
+        return null;
+        }
+
     public void SellPotion(PotionData potionData)
     {
+        // IF IT's IN THE INVENTORY THEN SELL IT, OTHERWISE DO NOT SELL - COULD ALSO JUST DISABLE BUTTON UNTIL THEN AND FIND POTION OF MATCHING TYPE IN INVENTORY BEFORE ENABLING IT
         potionData.sellPrice = (potionData.quality * potionData.baseValue);
         GameManager.Instance.playerCurrency += potionData.sellPrice;
     }

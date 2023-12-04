@@ -15,6 +15,14 @@ public class Order : MonoBehaviour
     public Button turnInPotionButton;
     public Image turnInPotionButtonImage;
 
-
+    public bool isHealth;
+    public bool isLove;
+    public bool isHatred;
+    public bool isAntidote;
+    public bool isDeath;
+    public bool isLucky;
+    public bool isPoison;
+    public bool isBenefit;
+    public bool isCrippling;
 
 }

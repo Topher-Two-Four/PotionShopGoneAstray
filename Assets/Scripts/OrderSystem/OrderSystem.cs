@@ -20,12 +20,13 @@ public class OrderSystem : MonoBehaviour
 
     public string potionTypeText;
 
+    public static OrderSystem Instance { get; private set; } // Singleton logic
+
     void Start()
     {
         for (int x = 0; x < orderList.Length; x++)
         {
             Order currentOrder = orderList[x];
-            Debug.Log(currentOrder);
 
             int randomCustomerIndex = Random.Range(0, customerList.Length);
             currentOrder.customer = customerList[randomCustomerIndex];
@@ -33,54 +34,56 @@ public class OrderSystem : MonoBehaviour
             currentOrder.customerPortrait = customerList[randomCustomerIndex].customerPortrait;
 
             int randomPotionTypeIndex = Random.Range(0, 8);
-            Debug.Log(randomPotionTypeIndex);
 
             // ********************************* NEED TO MAKE IT SO THAT BUTTON POPULATES WITH TYPE OF POTION REQUESTED AND ABILITY TO TURN IN FOR MONEY AND COMPLETION ***************************
+
+            currentOrder.turnInPotionButton.onClick.AddListener(() => InventoryController.Instance.SellPotion(currentOrder.potionRequested));
+            currentOrder.turnInPotionButton.interactable = false;
 
             switch (randomPotionTypeIndex) // Assign random potion type for request
             {
                 case 8:
-                    //currentOrder.potionRequested.isAntidote = true;
+                    currentOrder.isAntidote = true;
                     potionTypeText = "Antidote";
                     currentOrder.turnInPotionButtonImage.sprite = antidoteIcon;
                     break;
                 case 7:
-                    //currentOrder.potionRequested.isBenefit = true;
+                    currentOrder.isBenefit = true;
                     potionTypeText = "Benefit";
                     currentOrder.turnInPotionButtonImage.sprite = benefitIcon;
                     break;
                 case 6:
-                    //currentOrder.potionRequested.isCrippling = true;
+                    currentOrder.isCrippling = true;
                     potionTypeText = "Crippling";
                     currentOrder.turnInPotionButtonImage.sprite = cripplingIcon;
                     break;
                 case 5:
-                    //currentOrder.potionRequested.isDeath = true;
+                    currentOrder.isDeath = true;
                     potionTypeText = "Death";
                     currentOrder.turnInPotionButtonImage.sprite = deathIcon;
                     break;
                 case 4:
-                    //currentOrder.potionRequested.isHatred = true;
+                    currentOrder.isHatred = true;
                     potionTypeText = "Hatred";
                     currentOrder.turnInPotionButtonImage.sprite = hatredIcon;
                     break;
                 case 3:
-                    //currentOrder.potionRequested.isHealth = true;
+                    currentOrder.isHealth = true;
                     potionTypeText = "Health";
                     currentOrder.turnInPotionButtonImage.sprite = healthIcon;
                     break;
                 case 2:
-                    //currentOrder.potionRequested.isLove = true;
+                    currentOrder.isLove = true;
                     potionTypeText = "Love";
                     currentOrder.turnInPotionButtonImage.sprite = loveIcon;
                     break;
                 case 1:
-                    //currentOrder.potionRequested.isLucky = true;
+                    currentOrder.isLucky = true;
                     potionTypeText = "Luck";
                     currentOrder.turnInPotionButtonImage.sprite = luckyIcon;
                     break;
                 case 0:
-                    //currentOrder.potionRequested.isPoison = true;
+                    currentOrder.isPoison = true;
                     potionTypeText = "Poison";
                     currentOrder.turnInPotionButtonImage.sprite = poisonIcon;
                     break;
@@ -90,6 +93,24 @@ public class OrderSystem : MonoBehaviour
 
             currentOrder.customerPortraitDisplay.sprite = currentOrder.customerPortrait;
             currentOrder.orderText.SetText(currentOrder.customerName + " would like to buy a " + potionTypeText + " potion.");
+        }
+    }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this) { Destroy(this); } else { Instance = this; } // Singleton logic
+    }
+
+    public void CheckForCompleteOrders()
+    {
+        foreach (Order order in orderList)
+        {
+            PotionData potion = InventoryController.Instance.FindPotionOfType(order);
+            if (potion != null)
+            {
+                order.turnInPotionButton.interactable = true;
+                Debug.Log(potion);
+            }
         }
     }
 

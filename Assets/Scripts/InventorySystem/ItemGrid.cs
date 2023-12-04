@@ -172,6 +172,30 @@ public class ItemGrid : MonoBehaviour
         return true;
     }
 
+    public List<PotionData> FindPotionsInInventory()
+    {
+        List<PotionData> potionsInInventory = new List<PotionData>();
+    
+        for (int x = 0; x < gridSizeWidth; x++)
+        {
+            for (int y = 0; y < gridSizeHeight; y++)
+            {
+                InventoryItem inventoryItem = inventoryItemSlot[x, y];
+                if (inventoryItem != null && inventoryItem.itemData is PotionData potionData)
+                {
+                    if (!potionsInInventory.Contains(potionData))
+                    {
+                        potionsInInventory.Add(potionData);
+                    }
+                }
+            }
+        }
+        Debug.Log(potionsInInventory);
+
+        return potionsInInventory;
+    
+    }
+
     private bool CheckAvailableSpace(int posX, int posY, int width, int height)
     {
         for (int x = 0; x < width; x++)

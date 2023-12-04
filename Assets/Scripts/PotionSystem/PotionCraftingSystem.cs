@@ -572,6 +572,7 @@ public class PotionCraftingSystem : MonoBehaviour
                 Debug.Log("Retrieving potion");
                 AddPotionToInventory(potionBeingBrewed, GetPotionQuality());
                 //GameManager.Instance.AddCurrency(potionBeingBrewed.baseValue);
+                OrderSystem.Instance.CheckForCompleteOrders();
                 potionBeingBrewed = null;
                 isRetrievable = false; // Reset is retrievable variable
                 potionQuality = -1;

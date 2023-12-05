@@ -65,12 +65,12 @@ public class RecipeBookManager : MonoBehaviour
 
     private void UpdatePageTurnButtonVisibility()
     {
-        if (bookPageIndex <= 0) // First page condition
+        if (bookPageIndex == 0) // First page condition
         {
             pageBackButton.gameObject.SetActive(false);
             pageForwardButton.gameObject.SetActive(true);
         }
-        else if (bookPageIndex > 0 && bookPageIndex < bookPages.Length) // Middle pages condition
+        else if (bookPageIndex > 0 && bookPageIndex < bookPages.Length - 1) // Middle pages condition
         {
             pageBackButton.gameObject.SetActive(true);
             pageForwardButton.gameObject.SetActive(true);

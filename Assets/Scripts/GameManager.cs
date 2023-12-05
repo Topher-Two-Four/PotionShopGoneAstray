@@ -137,6 +137,14 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true; // Display cursor
     }
 
+    public void SwitchSceneToPotionShopWithNewGame() // Use scene manager to switch to Main Menu
+    {
+        SceneManager.LoadScene(2); // Load scene through scene manager
+        Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
+        Cursor.visible = true; // Display cursor
+        GameManager.Instance.timeRemaining = timeInDay;
+    }
+
     public void SwitchSceneToBootstrapLevel() // Use scene manager to switch to Main Menu
     {
         SceneManager.LoadScene(1); // Load scene through scene manager

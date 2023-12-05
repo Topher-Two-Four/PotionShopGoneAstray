@@ -968,7 +968,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &137058749
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1372,16 +1372,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 180152579}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.376388, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1353563308}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -215}
+  m_AnchoredPosition: {x: 0, y: -181.77502}
   m_SizeDelta: {x: -1670, y: -746}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &180152581
@@ -2111,7 +2111,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &256145996
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4787,6 +4787,7 @@ MonoBehaviour:
   pageForwardButton: {fileID: 448462924}
   pageBackButton: {fileID: 298660801}
   toggleBookCanvasButton: {fileID: 1302267596}
+  inventoryGrid: {fileID: 0}
 --- !u!1 &713665282
 GameObject:
   m_ObjectHideFlags: 0
@@ -7019,7 +7020,7 @@ GameObject:
   - component: {fileID: 1340424063}
   - component: {fileID: 1340424062}
   m_Layer: 5
-  m_Name: Image
+  m_Name: MainMenuBackgroundImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7199,7 +7200,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!224 &1353563308
 RectTransform:
@@ -7215,8 +7216,8 @@ RectTransform:
   m_Children:
   - {fileID: 1340424061}
   - {fileID: 1932186193}
-  - {fileID: 256145996}
   - {fileID: 180152580}
+  - {fileID: 256145996}
   - {fileID: 137058749}
   - {fileID: 1693266210}
   m_Father: {fileID: 0}
@@ -9394,14 +9395,14 @@ RectTransform:
   m_GameObject: {fileID: 1932186192}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.39312503, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1353563308}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 91}
+  m_AnchoredPosition: {x: 0, y: -2}
   m_SizeDelta: {x: -1670, y: -746}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1932186194
@@ -9450,7 +9451,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7191769637739229790, guid: 91d3cb84ad82a74468a13781462d10ca, type: 3}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: SwitchSceneToPotionLevel
+        m_MethodName: SwitchSceneToPotionShopWithNewGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

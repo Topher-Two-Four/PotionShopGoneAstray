@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject potionCraftingCanvas;
     public GameObject doorToMaze;
+    public GameObject winLossCanvas;
 
     private bool isTimerRunning = false;
     private bool morningTransitionComplete = false; // Keep track of transition from beginning of new day to morning
@@ -49,7 +50,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        isTimerRunning = true;
+        isTimerRunning = false;
         Debug.Log(isTimerRunning);
         Cursor.lockState = CursorLockMode.Confined; // Lock cursor in one place
         Cursor.visible = true; // Hide cursor
@@ -139,9 +140,11 @@ public class GameManager : MonoBehaviour
 
     public void SwitchSceneToPotionShopWithNewGame() // Use scene manager to switch to Main Menu
     {
+        GameManager.Instance.winLossCanvas.SetActive(false);
         SceneManager.LoadScene(2); // Load scene through scene manager
         Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
         Cursor.visible = true; // Display cursor
+        GameManager.Instance.isTimerRunning = true;
         GameManager.Instance.timeRemaining = timeInDay;
     }
 
@@ -273,6 +276,8 @@ public class GameManager : MonoBehaviour
     private void EndDay()
     {
         winOrLossText.gameObject.SetActive(true);
+
+        winLossCanvas.SetActive(true);
 
         if (playerCurrency >= landlordPayment)
         {

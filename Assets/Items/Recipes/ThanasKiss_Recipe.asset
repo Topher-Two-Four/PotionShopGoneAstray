@@ -18,10 +18,9 @@ MonoBehaviour:
   ingredient3: {fileID: 0}
   ingredient4: {fileID: 0}
   cookTime: 60
-  desiredTemp: 3
+  desiredTemp: 2
   quality: 5
   ultraQualityTimeLimit: 0
   highQualityTimeLimit: 0
   mediumQualityTimeLimit: 0
   lowQualityTimeLimit: 0
-  potionIcon: {fileID: 21300000, guid: a33c7bdafc7224e4194a23686a0274fc, type: 3}

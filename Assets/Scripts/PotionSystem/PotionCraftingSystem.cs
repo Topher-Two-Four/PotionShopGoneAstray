@@ -31,6 +31,7 @@ public class PotionCraftingSystem : MonoBehaviour
     public bool isBrewing = false; // Variable to track whether a potion is currently being brewed
     public bool isRetrievable = false; // Variable to track whether a potion is ready to be retrieved
     public bool ingredientSpaceLeft = true;
+    public bool shouldBeStirred = false;
 
     public Button ingredient1Button; // Button for the first ingredient
     public Button ingredient2Button; // Button for the second ingredient
@@ -121,7 +122,6 @@ public class PotionCraftingSystem : MonoBehaviour
         if (potionRecipe != null)
         {
             isBrewing = true;
-            isStirred = false;
             BrewPotionWIthRecipe(potionRecipe);
             potionImage.sprite = potionRecipe.potion.itemIcon;
             potionBackgroundImage.color = currentQualityColor;
@@ -145,7 +145,11 @@ public class PotionCraftingSystem : MonoBehaviour
     {
         timeCooked = 0f;
         timeAtDesiredTemp = 0f;
+        timeWithLidInDesiredState = 0f;
+        isStirred = false;
         potionBeingBrewed = potionRecipe.potion;
+        shouldBeStirred = potionRecipe.needStirring;
+        Debug.Log("Needs stirring:" + shouldBeStirred);
         ingredient1 = null;
         ingredient2 = null;
         ingredient3 = null;
@@ -252,15 +256,25 @@ public class PotionCraftingSystem : MonoBehaviour
     private int GetPotionQuality()
     {
         float _qualityPointsFromStirring = 0;
-        //if ((potionRecipe.needStirring && isStirred))
-        //{
+        if (shouldBeStirred && isStirred)
+        {
             _qualityPointsFromStirring = .1f;
-       // }
+        } else if (!shouldBeStirred && !isStirred)
+        {
+            _qualityPointsFromStirring = .1f;
+        } 
+        else
+        {
+            _qualityPointsFromStirring = 0f;
+        }
 
         float _qualityPointsFromTemperature = (timeAtDesiredTemp / cookTime) * .7f;
 
         float _qualityPointsFromLid = (timeWithLidInDesiredState / cookTime) * .2f;
 
+        //Debug.Log("Lid points " + _qualityPointsFromLid);
+        //Debug.Log("Stir points " + _qualityPointsFromStirring);
+        //Debug.Log("Temperature points " + _qualityPointsFromTemperature);
         float qualityPercentage = (_qualityPointsFromStirring + _qualityPointsFromTemperature + _qualityPointsFromLid);
 
 

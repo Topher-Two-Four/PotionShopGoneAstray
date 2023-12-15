@@ -13,6 +13,7 @@ public class PotionCraftingSystem : MonoBehaviour
     public int desiredTemp = 3; // Desired temperature for the potion being made
     public float timeAtDesiredTemp = 0f; // Time that potion has been cooking at the desired temperature
     public int potionQuality = 4; // Quality of the potion crafted
+    public float timeWithLidOn = 0f;
 
     public ItemData ingredient1; // First ingredient ItemData scriptable object
     public ItemData ingredient2; // Second ingredient ItemData scriptable object
@@ -25,6 +26,8 @@ public class PotionCraftingSystem : MonoBehaviour
     public float mediumQualityTimePercentage = .5f; // Time in desired temperature range required to make a medium quality potion
     public float lowQualityTimePercentage = .3f; // Time in desired temperature range required to make a low quality potion
 
+    public bool isStirred = false;
+    public bool isLidOn = false;
     public bool isBrewing = false; // Variable to track whether a potion is currently being brewed
     public bool isRetrievable = false; // Variable to track whether a potion is ready to be retrieved
     public bool ingredientSpaceLeft = true;
@@ -36,6 +39,9 @@ public class PotionCraftingSystem : MonoBehaviour
     public Button potionRetrievalButton; // Button for potion retrieval
     public Button increaseTempButton; // Button to increase cooking temperature
     public Button decreaseTempButton; // Button to increase cooking temperature
+    public Button putOnLidButton;
+    public Button removeLidButton;
+    public Button stirButton; // Button to stir the caudron
     public Button brewButton; // Button to begin brewing
 
     public Color freezingTempDisplayColor = new Color(0, 117, 191);
@@ -87,7 +93,10 @@ public class PotionCraftingSystem : MonoBehaviour
 
         increaseTempButton.onClick.AddListener(() => IncreaseTemperature()); // Add button listener for increase temperature button
         decreaseTempButton.onClick.AddListener(() => DecreaseTemperature());// Add button listener for decrease temperature button
-        
+        putOnLidButton.onClick.AddListener(() => ToggleLid());
+        removeLidButton.onClick.AddListener(() => ToggleLid());
+        stirButton.onClick.AddListener(() => StirCauldron());
+
         brewButton.onClick.AddListener(() => BrewPotion(ingredient1, ingredient2, ingredient3)); // Add button listener to brew potion when pressed
         
         potionRetrievalButton.onClick.AddListener(() => RetrievePotion());// Add button listener for potion retrieval area
@@ -112,11 +121,12 @@ public class PotionCraftingSystem : MonoBehaviour
         if (potionRecipe != null)
         {
             isBrewing = true;
+            isStirred = false;
             BrewPotionWIthRecipe(potionRecipe);
             potionImage.sprite = potionRecipe.potion.itemIcon;
             potionBackgroundImage.color = currentQualityColor;
             UpdateBrewingTimerDisplay(potionRecipe.cookTime);
-            Debug.Log(potionRecipe);
+            Debug.Log(potionRecipe); //MAKE INTO QUICK DISPLAY TEXT AFTER BEGINNING BREW
         }
         else
         {
@@ -557,6 +567,27 @@ public class PotionCraftingSystem : MonoBehaviour
                 temperatureDisplayImage.color = new Color(255, 255, 255);
                 break;
         }           
+    }
+
+    public void ToggleLid()
+    {
+        if (!isLidOn)
+        {
+            putOnLidButton.gameObject.SetActive(false);
+            removeLidButton.gameObject.SetActive(true);
+            isLidOn = true;
+        }
+        else
+        {
+            removeLidButton.gameObject.SetActive(false);
+            putOnLidButton.gameObject.SetActive(true);
+            isLidOn = false;
+        }
+    }
+
+    public void StirCauldron()
+    {
+        isStirred = true;
     }
 
     // *** ITEM RETRIEVAL ***

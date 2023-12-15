@@ -613,7 +613,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &92036767
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5333,7 +5333,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!223 &713665283
 Canvas:
   m_ObjectHideFlags: 0
@@ -6716,7 +6716,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &977770115
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9032,7 +9032,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1537235619
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10151,6 +10151,7 @@ MonoBehaviour:
   isBrewing: 0
   isRetrievable: 0
   ingredientSpaceLeft: 1
+  shouldBeStirred: 0
   ingredient1Button: {fileID: 906768649}
   ingredient2Button: {fileID: 1382049138}
   ingredient3Button: {fileID: 1040210777}
@@ -10634,7 +10635,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1988705291
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10671,7 +10672,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2023953302
 RectTransform:
   m_ObjectHideFlags: 0

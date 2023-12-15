@@ -19,6 +19,8 @@ MonoBehaviour:
   ingredient4: {fileID: 11400000, guid: 2eea3438c414e014fb9e61b0dfaacf2f, type: 2}
   cookTime: 60
   desiredTemp: 2
+  needStirring: 1
+  needsLidOn: 0
   quality: 5
   ultraQualityTimeLimit: 0
   highQualityTimeLimit: 0

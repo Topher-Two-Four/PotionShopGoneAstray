@@ -13,7 +13,7 @@ public class PotionCraftingSystem : MonoBehaviour
     public int desiredTemp = 3; // Desired temperature for the potion being made
     public float timeAtDesiredTemp = 0f; // Time that potion has been cooking at the desired temperature
     public int potionQuality = 4; // Quality of the potion crafted
-    public float timeWithLidOn = 0f;
+    public float timeWithLidInDesiredState = 0f;
 
     public ItemData ingredient1; // First ingredient ItemData scriptable object
     public ItemData ingredient2; // Second ingredient ItemData scriptable object
@@ -154,21 +154,39 @@ public class PotionCraftingSystem : MonoBehaviour
         while (timeCooked < potionRecipe.cookTime)
         {
 
-            if (currentTemp == desiredTemp)
+            if (currentTemp == desiredTemp && potionRecipe.needsLidOn == isLidOn)
             {
                 float timeRemaining = Mathf.Max(0, cookTime - timeCooked);
                 UpdateBrewingTimerDisplay(timeRemaining);
                 timeCooked += Time.deltaTime;
                 timeAtDesiredTemp += Time.deltaTime;
-                //Debug.Log("At desired temp");
-            } 
+                timeWithLidInDesiredState += Time.deltaTime;
+                Debug.Log("At desired temp, lid in correct state.");
+            }
+            else if (currentTemp == desiredTemp && potionRecipe.needsLidOn != isLidOn)
+            {
+                float timeRemaining = Mathf.Max(0, cookTime - timeCooked);
+                UpdateBrewingTimerDisplay(timeRemaining);
+                timeCooked += Time.deltaTime;
+                timeAtDesiredTemp += Time.deltaTime;
+                Debug.Log("At desired temp, but needs lid corrected.");
+            }
+            else if (currentTemp != desiredTemp && potionRecipe.needsLidOn == isLidOn)
+            {
+                float timeRemaining = Mathf.Max(0, cookTime - timeCooked);
+                UpdateBrewingTimerDisplay(timeRemaining);
+                timeCooked += Time.deltaTime;
+                timeWithLidInDesiredState += Time.deltaTime;
+                Debug.Log("Not at desired temp, but lid correct.");
+            }
             else
             {
                 float timeRemaining = Mathf.Max(0, cookTime - timeCooked);
                 UpdateBrewingTimerDisplay(timeRemaining);
                 timeCooked += Time.deltaTime;
-                //Debug.Log("Not at desired temp");
+                Debug.Log("Not at desired temp and needs lid corrected.");
             }
+            
             CheckPotionQuality(potionRecipe.cookTime, timeAtDesiredTemp);
             UpdatePotionQualityIndicator();
 
@@ -233,12 +251,25 @@ public class PotionCraftingSystem : MonoBehaviour
 
     private int GetPotionQuality()
     {
+        float _qualityPointsFromStirring = 0;
+        //if ((potionRecipe.needStirring && isStirred))
+        //{
+            _qualityPointsFromStirring = .1f;
+       // }
+
+        float _qualityPointsFromTemperature = (timeAtDesiredTemp / cookTime) * .7f;
+
+        float _qualityPointsFromLid = (timeWithLidInDesiredState / cookTime) * .2f;
+
+        float qualityPercentage = (_qualityPointsFromStirring + _qualityPointsFromTemperature + _qualityPointsFromLid);
+
+
+
         // Need to make this deductive
-        float qualityPercentage = (timeAtDesiredTemp / cookTime);
         if (qualityPercentage >= ultraQualityTimePercentage) 
         {
             potionQuality = 4;
-            return 4; 
+            return 4;
         }
         if (qualityPercentage >= highQualityTimePercentage) 
         {
@@ -441,7 +472,7 @@ public class PotionCraftingSystem : MonoBehaviour
 
     public int CheckPotionQuality(float cookTime, float timeAtDesiredTemp) // Check what quality of potion has been made, based on time in desired temperature range
     {
-        float qualityPercentage = (timeAtDesiredTemp / cookTime); // Calculate variable to represent the quality of potion made, based on time in desired temperature range
+       float qualityPercentage = GetPotionQuality(); // Calculate variable to represent the quality of potion made, based on time in desired temperature range
 
         if (qualityPercentage >= ultraQualityTimePercentage) // Check whether quality percentage is within ultra quality time range
         {
@@ -474,40 +505,6 @@ public class PotionCraftingSystem : MonoBehaviour
             return 0; // // Return variable to represent that a potion was not crafted, or if it was it is inert (0)
         }
     }
-
-    /*
-    public void SetPotionRetrievalArea() // Set the image for the potion retrieval area
-    {
-        Recipe potionRecipe = RecipeList.Instance.FindRecipe(ingredient1, ingredient2, ingredient3, ingredient4); // Get potion recipe from recipe list
-        Debug.Log("Setting retrieval area.");
-        if (potionRecipe != null)
-        {
-            if (isBrewing) // Check whether brewing is occurring
-            {
-                potionImage.sprite = potionRecipe.potionIcon; // Display potion image if it's being brewed
-                potionBackgroundImage.color = currentQualityColor;
-                // Add grayish tranpsparency over top of image while unable to be retrieved
-            }
-            else if (isRetrievable) // Check whether the potion is retrievable
-            {
-                potionImage.sprite = potionRecipe.potionIcon; // Display potion image if it's ready to be retrieved
-                potionBackgroundImage.color = currentQualityColor;
-            }
-            else // If brewing isn't occurring and a potion isn't ready to be retrieved then assume potion image doesn't need to be there
-            {
-                potionImage = null; // Set potion image to null to remove potion image from screen display
-                potionBackgroundImage.color = Color.clear;
-            }
-        }
-        else
-        {
-            potionImage.sprite = emptySlotImage; // Set potion image to null to remove potion image from screen display
-            potionBackgroundImage.color = Color.clear;
-        }
-
-    }
-
-    */
 
     // *** CAULDRON CONTROLS ***
 

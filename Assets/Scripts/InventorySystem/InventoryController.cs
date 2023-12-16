@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using StarterAssets;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour
 {
@@ -35,6 +36,8 @@ public class InventoryController : MonoBehaviour
 
     InventoryHighlight inventoryHighlight; // Inventory item highlighter
 
+    public Button trashButton;
+
 
     public static InventoryController Instance { get; private set; } // Singleton logic
 
@@ -47,7 +50,9 @@ public class InventoryController : MonoBehaviour
     {
         if (Instance != null && Instance != this) { Destroy(this);} else { Instance = this;} // Singleton logic
 
-        inventoryHighlight = GetComponent<InventoryHighlight>(); // Get highlight componenet
+        inventoryHighlight = GetComponent<InventoryHighlight>(); // Get highlight component
+
+        trashButton.onClick.AddListener(() => DeleteItem());
     }
 
     private void Update()

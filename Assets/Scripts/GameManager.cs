@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     public FirstPersonController controller; // First person controller game object
     public GameObject playerCapsule; // Player capsule collider
+    public GameObject dropSpawnLocation;
 
     public GameObject potionCraftingCanvas;
     public GameObject doorToMaze;

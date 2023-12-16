@@ -13,4 +13,6 @@ public class ItemData : ScriptableObject
     public bool isSellable;
 
     public Sprite itemIcon; // The UI display icon for this item
+    public ItemObject itemObject;
+
 }

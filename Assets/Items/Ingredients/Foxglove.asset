@@ -17,3 +17,4 @@ MonoBehaviour:
   isIngredient: 1
   isSellable: 0
   itemIcon: {fileID: 21300000, guid: 11b2a56c9484afd4eb9faff1389678f6, type: 3}
+  itemObject: {fileID: 3728056772645781790, guid: f32f4a2bed4d990438cb5cdefe6f31f7, type: 3}

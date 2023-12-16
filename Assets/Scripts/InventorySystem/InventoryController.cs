@@ -41,7 +41,6 @@ public class InventoryController : MonoBehaviour
     private void Start()
     {
         isSpaceForItem = true; // Set initially true when beginning the game
-        ToggleInventoryCanvas();
     }
 
     private void Awake()
@@ -62,6 +61,8 @@ public class InventoryController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.R)) { RotateItem(); } // Rotate selected inventory item
 
             if (Input.GetKeyDown(KeyCode.Delete)) { DeleteItem(); } // Rotate selected inventory item
+
+            if (Input.GetKeyDown(KeyCode.G)) { DropItem(); } // Rotate selected inventory item
 
             if (selectedItemGrid == null) { inventoryHighlight.Show(false); return; } // Don't show highlight if selected item grid doesn't exist and return from method
 
@@ -264,6 +265,19 @@ public class InventoryController : MonoBehaviour
         }
         else
         {
+            return;
+        }
+    }
+
+    public void DropItem()
+    {
+        if (selectedItem != null && selectedItem.GetType() != typeof(PotionData))
+        {
+            selectedItem.Drop();
+        }
+        else
+        {
+            Debug.Log("No way you're wasting a potion!");
             return;
         }
     }

@@ -216,16 +216,16 @@ public class InventoryController : MonoBehaviour
 
     public void SellPotion(Order order)
     {
+        Debug.Log(order);
         PotionData potionData = FindPotionOfType(order);
-
         potionData.sellPrice = (potionData.quality * potionData.baseValue);
-        Debug.Log(potionData.sellPrice);
         GameManager.Instance.AddCurrencyToPlayer(potionData.sellPrice);
-
+        MoralitySystem.Instance.AdjustMoralityCounter(potionData);
         inventoryGrid.RemovePotionFromInventory(potionData);
         order.orderCompletedMask.gameObject.SetActive(true);
         order.turnInPotionButton.gameObject.SetActive(false);
         OrderSystem.Instance.CheckForCompleteOrders();
+        Debug.Log(order);
     }
 
     public void AddIngredientToPotionCraftingSpace(Vector2Int tileGridPosition)

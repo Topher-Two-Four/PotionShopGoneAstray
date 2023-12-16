@@ -77,11 +77,12 @@ public class InventoryItem : MonoBehaviour
 
     public void Drop()
     {
-        Vector3 spawnLocation = GameManager.Instance.dropSpawnLocation.transform.position;
-        Debug.Log(spawnLocation);
-        Debug.Log(itemData.itemObject);
-        Instantiate(itemData.itemObject, spawnLocation, Quaternion.identity);
-        Destroy(gameObject);
+        if (GameManager.Instance.playerCapsule.activeSelf)
+        {
+            Vector3 spawnLocation = GameManager.Instance.dropSpawnLocation.transform.position;
+            Instantiate(itemData.itemObject, spawnLocation, Quaternion.identity);
+            Destroy(gameObject);
+        }
     }
 
 }

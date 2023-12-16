@@ -32,6 +32,7 @@ public class PotionCraftingSystem : MonoBehaviour
     public bool isRetrievable = false; // Variable to track whether a potion is ready to be retrieved
     public bool ingredientSpaceLeft = true;
     public bool shouldBeStirred = false;
+    public bool lidDesired = false;
 
     public Button ingredient1Button; // Button for the first ingredient
     public Button ingredient2Button; // Button for the second ingredient
@@ -149,6 +150,8 @@ public class PotionCraftingSystem : MonoBehaviour
         isStirred = false;
         potionBeingBrewed = potionRecipe.potion;
         shouldBeStirred = potionRecipe.needStirring;
+        desiredTemp = potionRecipe.desiredTemp;
+        lidDesired = potionRecipe.needsLidOn;
         Debug.Log("Needs stirring:" + shouldBeStirred);
         ingredient1 = null;
         ingredient2 = null;

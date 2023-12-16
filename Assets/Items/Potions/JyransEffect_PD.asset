@@ -16,15 +16,15 @@ MonoBehaviour:
   height: 2
   isIngredient: 0
   isSellable: 1
-  itemIcon: {fileID: 21300000, guid: 20a9f598cee410e4a8bd2ef9d2f10c0c, type: 3}
+  itemIcon: {fileID: 21300000, guid: 632a9156505a90d49bb59fa3364a5bff, type: 3}
   isHealth: 0
-  isLove: 0
+  isLove: 1
   isHatred: 0
   isAntidote: 0
   isDeath: 0
   isLucky: 0
   isPoison: 0
-  isBenefit: 1
+  isBenefit: 0
   isCrippling: 0
   quality: 0
   baseValue: 10

@@ -70,4 +70,9 @@ public class InventoryItem : MonoBehaviour
 
     }
 
+    public void Delete()
+    {
+        Destroy(gameObject);
+    }
+
 }

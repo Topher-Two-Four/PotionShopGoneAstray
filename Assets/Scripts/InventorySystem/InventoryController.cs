@@ -41,6 +41,7 @@ public class InventoryController : MonoBehaviour
     private void Start()
     {
         isSpaceForItem = true; // Set initially true when beginning the game
+        ToggleInventoryCanvas();
     }
 
     private void Awake()
@@ -59,6 +60,8 @@ public class InventoryController : MonoBehaviour
             ItemIconDrag(); // Drag item icon using script
 
             if (Input.GetKeyDown(KeyCode.R)) { RotateItem(); } // Rotate selected inventory item
+
+            if (Input.GetKeyDown(KeyCode.Delete)) { DeleteItem(); } // Rotate selected inventory item
 
             if (selectedItemGrid == null) { inventoryHighlight.Show(false); return; } // Don't show highlight if selected item grid doesn't exist and return from method
 
@@ -216,7 +219,6 @@ public class InventoryController : MonoBehaviour
 
     public void SellPotion(Order order)
     {
-        Debug.Log(order);
         PotionData potionData = FindPotionOfType(order);
         potionData.sellPrice = (potionData.quality * potionData.baseValue);
         GameManager.Instance.AddCurrencyToPlayer(potionData.sellPrice);
@@ -225,7 +227,6 @@ public class InventoryController : MonoBehaviour
         order.orderCompletedMask.gameObject.SetActive(true);
         order.turnInPotionButton.gameObject.SetActive(false);
         OrderSystem.Instance.CheckForCompleteOrders();
-        Debug.Log(order);
     }
 
     public void AddIngredientToPotionCraftingSpace(Vector2Int tileGridPosition)
@@ -249,6 +250,18 @@ public class InventoryController : MonoBehaviour
             Destroy(selectedItem.gameObject);
         }
         
+        else
+        {
+            return;
+        }
+    }
+
+    public void DeleteItem()
+    {
+        if (selectedItem != null)
+        {
+            selectedItem.Delete();
+        }
         else
         {
             return;

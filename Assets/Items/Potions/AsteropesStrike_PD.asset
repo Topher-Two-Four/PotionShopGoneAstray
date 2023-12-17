@@ -28,6 +28,6 @@ MonoBehaviour:
   isBenefit: 0
   isCrippling: 1
   quality: 0
-  baseValue: 10
+  baseValue: 14
   sellPrice: 0
   numberOfIngredients: 2

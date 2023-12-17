@@ -119,6 +119,30 @@ public class InventoryController : MonoBehaviour
         inventoryGrid.PlaceItem(itemToInsert, posOnGrid.Value.x, posOnGrid.Value.y);
     }
 
+    // Figure out how InventoryItem relates to ItemData
+
+    public bool CheckForItemSpace(ItemData itemData)
+    {
+        InventoryItem inventoryItem = Instantiate(potionPrefab).GetComponent<InventoryItem>();
+        selectedItem = inventoryItem;
+
+        inventoryItem.Set(itemData);
+
+        Vector2Int? posOnGrid = inventoryGrid.FindSpaceForObject(inventoryItem);
+
+        if (posOnGrid == null)
+        {
+            Debug.Log("Space for object is null.");
+            isSpaceForItem = false;
+            selectedItem = null;
+            return false;
+        }
+        Debug.Log("Room for object exists.");
+        isSpaceForItem = true;
+        selectedItem = null;
+        return true;
+    }
+
     public void InsertItem(ItemData itemData)
     {
         if (inventoryGrid == null || !isSpaceForItem)
@@ -132,6 +156,8 @@ public class InventoryController : MonoBehaviour
             CreateInventoryItem(itemData); // Create new inventory item from ItemData object
             
             InventoryItem itemToInsert = selectedItem; // Declare inventory item to insert to be currently selected item
+
+            Vector2Int? posOnGrid = inventoryGrid.FindSpaceForObject(itemToInsert);
             
             InsertItem(itemToInsert); // Insert inventory item into next open spot in inventory
             

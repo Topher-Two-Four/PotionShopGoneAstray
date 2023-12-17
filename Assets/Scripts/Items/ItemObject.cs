@@ -10,7 +10,7 @@ public class ItemObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && InventoryController.Instance.CheckForItemSpace(itemData))
         {
             InventoryController.Instance.AddItemObjectToInventory(itemData);
             Destroy(gameObject);

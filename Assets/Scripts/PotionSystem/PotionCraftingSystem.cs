@@ -127,7 +127,7 @@ public class PotionCraftingSystem : MonoBehaviour
             potionImage.sprite = potionRecipe.potion.itemIcon;
             potionBackgroundImage.color = currentQualityColor;
             UpdateBrewingTimerDisplay(potionRecipe.cookTime);
-            Debug.Log(potionRecipe); //MAKE INTO QUICK DISPLAY TEXT AFTER BEGINNING BREW
+            //Debug.Log(potionRecipe); //MAKE INTO QUICK DISPLAY TEXT AFTER BEGINNING BREW
         }
         else
         {
@@ -476,7 +476,6 @@ public class PotionCraftingSystem : MonoBehaviour
     public void AddPotionToInventory(PotionData potionData, int qualityLevel)
     {
         Debug.Log(potionData);
-        Debug.Log(qualityLevel);
         if (potionData != null)
         {
             currentQualityColor = GetPotionQualityImageColor(qualityLevel);

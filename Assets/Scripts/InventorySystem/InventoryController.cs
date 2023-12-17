@@ -162,7 +162,7 @@ public class InventoryController : MonoBehaviour
 
     public void AddItemObjectToInventory(ItemData itemData)
     {
-        Debug.Log(itemData);
+        //Debug.Log(itemData);
         if (itemData != null && isSpaceForItem)
         {
             InsertItem(itemData);
@@ -226,7 +226,7 @@ public class InventoryController : MonoBehaviour
     public void SellPotion(Order order)
     {
         PotionData potionData = FindPotionOfType(order);
-        potionData.sellPrice = (potionData.quality * potionData.baseValue);
+        potionData.sellPrice = (potionData.quality * potionData.baseValue) * potionData.numberOfIngredients;
         GameManager.Instance.AddCurrencyToPlayer(potionData.sellPrice);
         MoralitySystem.Instance.AdjustMoralityCounter(potionData);
         inventoryGrid.RemovePotionFromInventory(potionData);

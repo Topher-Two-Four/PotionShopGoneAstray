@@ -19,5 +19,5 @@ public class PotionData : ItemData
     public int quality; // The quality of the item from 1-5
     public int baseValue; // The base currency value of this item
     public int sellPrice;
-
+    public int numberOfIngredients;
 }

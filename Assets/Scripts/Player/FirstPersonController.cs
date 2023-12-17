@@ -70,6 +70,8 @@ namespace StarterAssets
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
 
+		[HideInInspector] public StaminaSystem _staminaSystem; // Create reference to stamina system
+
 	
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 		private PlayerInput _playerInput;
@@ -103,6 +105,7 @@ namespace StarterAssets
 
 		private void Start()
 		{
+			_staminaSystem = GetComponent<StaminaSystem>(); // Get stamina system
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
@@ -115,6 +118,13 @@ namespace StarterAssets
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
 		}
+
+		public void SetSprintSpeed(float newSprintSpeed)
+        {
+			SprintSpeed = newSprintSpeed; // Change sprint speed
+        }
+
+
 
 		private void Update()
 		{
@@ -174,6 +184,24 @@ namespace StarterAssets
 			// set target speed based on move speed, sprint speed and if sprint is pressed
 			float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
+			if(!_input.sprint)
+            {
+				_staminaSystem.isCurrentlySprinting = false;
+            }
+
+			if (_input.sprint && _controller.velocity.sqrMagnitude > 0)
+			{
+				if (_staminaSystem.currentStamina > 0)
+                {
+					_staminaSystem.isCurrentlySprinting = true;
+					_staminaSystem.Sprinting();
+                }
+				else
+                {
+					_input.sprint = false;
+                }
+			}
+
 			// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
 			// note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
@@ -211,11 +239,17 @@ namespace StarterAssets
 				// move
 				inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
 			}
-			if(SceneManager.GetActiveScene().Equals(SceneManager.GetSceneByBuildIndex(3)))
+			if(SceneManager.GetActiveScene().Equals(SceneManager.GetSceneByBuildIndex(3))) // Check for maze scene
             {
 				// move the player
 				_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 			}
+
+		}
+
+		public void PlayerJump()
+        {
+			_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity); // The square root of H * -2 * G = how much velocity needed to reach desired height
 
 		}
 
@@ -232,9 +266,10 @@ namespace StarterAssets
 				}
 
 		
-				if (_input.jump && _jumpTimeoutDelta <= 0.0f) // Jump
-				{					
-					_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity); // The square root of H * -2 * G = how much velocity needed to reach desired height
+				if (_input.jump && _jumpTimeoutDelta <= 0.0f) // Check if jump input is pressed and if jump timeout timer has elapsed
+				{
+					_staminaSystem.StaminaJump(); // Use stamina jump method to check if player has enough stamina to do so
+					_jumpTimeoutDelta = JumpTimeout;
 				}
 
 				if (_jumpTimeoutDelta >= 0.0f) { _jumpTimeoutDelta -= Time.deltaTime; } // Jump timeout

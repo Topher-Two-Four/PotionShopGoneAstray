@@ -267,7 +267,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 762813964091195079}
-  - component: {fileID: 762813964074756711}
   m_Layer: 0
   m_Name: Oleander
   m_TagString: Untagged
@@ -293,30 +292,3 @@ Transform:
   - {fileID: 762813964091195073}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!205 &762813964074756711
-LODGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 762813964091089639}
-  serializedVersion: 2
-  m_LocalReferencePoint: {x: -0.019999951, y: 0.25751442, z: -0.028736904}
-  m_Size: 0.5846869
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
-  m_LastLODIsBillboard: 0
-  m_LODs:
-  - screenRelativeHeight: 0.25
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 762813964093094951}
-  - screenRelativeHeight: 0.125
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 762813964093094949}
-  - screenRelativeHeight: 0.01
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 762813964093094947}
-  m_Enabled: 1

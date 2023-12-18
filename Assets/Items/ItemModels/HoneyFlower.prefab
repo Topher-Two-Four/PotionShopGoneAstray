@@ -267,7 +267,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 156116586614735783}
-  - component: {fileID: 156116586628454151}
   m_Layer: 0
   m_Name: HoneyFlower
   m_TagString: Untagged
@@ -293,30 +292,3 @@ Transform:
   - {fileID: 156116586614735777}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!205 &156116586628454151
-LODGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 156116586614251399}
-  serializedVersion: 2
-  m_LocalReferencePoint: {x: 0.006902486, y: 0.14593062, z: -0.033441126}
-  m_Size: 0.42334378
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
-  m_LastLODIsBillboard: 0
-  m_LODs:
-  - screenRelativeHeight: 0.25
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 156116586612310343}
-  - screenRelativeHeight: 0.125
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 156116586612310341}
-  - screenRelativeHeight: 0.01
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 156116586612310339}
-  m_Enabled: 1

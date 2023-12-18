@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5676680326028246865}
-  - component: {fileID: 5676680326045395953}
   m_Layer: 0
   m_Name: Nightshade
   m_TagString: Untagged
@@ -35,33 +34,6 @@ Transform:
   - {fileID: 5676680326028246871}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!205 &5676680326045395953
-LODGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5676680326028141425}
-  serializedVersion: 2
-  m_LocalReferencePoint: {x: -0.015936524, y: 0.15393865, z: 0.04009807}
-  m_Size: 0.9773996
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
-  m_LastLODIsBillboard: 0
-  m_LODs:
-  - screenRelativeHeight: 0.25
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 5676680326030146993}
-  - screenRelativeHeight: 0.125
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 5676680326030146995}
-  - screenRelativeHeight: 0.01
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 5676680326030146997}
-  m_Enabled: 1
 --- !u!1 &5676680326028141427
 GameObject:
   m_ObjectHideFlags: 0

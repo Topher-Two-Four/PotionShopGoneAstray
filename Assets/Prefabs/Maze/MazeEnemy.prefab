@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8987167489596827051}
   - component: {fileID: 5098395933033271272}
   - component: {fileID: 762768210570543009}
+  - component: {fileID: 4286974276812925492}
   m_Layer: 0
   m_Name: MazeEnemy
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1314685676686306198}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.81382, y: -64.07425, z: -71.37415}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
@@ -119,7 +120,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1314685676686306198}
   serializedVersion: 4
-  m_Mass: 80
+  m_Mass: 35
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -173,8 +174,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 0}
-  walkSpeed: 2
-  sprintSpeed: 4
+  walkSpeed: 8
+  sprintSpeed: 12
   waitTime: 3
   detectionTime: 6
   viewRadius: 20
@@ -214,6 +215,28 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  waitTimeout: 5
   _waitTime: 0
   _detectionTime: 0
   _isPatrolling: 0
@@ -223,6 +246,18 @@ MonoBehaviour:
   _currentPatrolPointIndex: 0
   _lastSeenLocation: {x: 0, y: 0, z: 0}
   _lastDetectedLocation: {x: 0, y: 0, z: 0}
+--- !u!114 &4286974276812925492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314685676686306198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0babd36c7ebf7f1489dd94dde4fad222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2204905745922153758
 GameObject:
   m_ObjectHideFlags: 0

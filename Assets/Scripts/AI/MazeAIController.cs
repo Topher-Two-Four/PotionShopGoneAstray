@@ -58,19 +58,19 @@ public class MazeAIController : MonoBehaviour
             Patrol(); // Patrol maze
         }
 
-        if (navMeshAgent.velocity.magnitude <= navMeshAgent.stoppingDistance &&
-            navMeshAgent.velocity.magnitude < 0.1f)
+        if (navMeshAgent.velocity.magnitude <= navMeshAgent.stoppingDistance && // Check if AI is within stopping distance
+            navMeshAgent.velocity.magnitude < 0.1f) // Check if AI is stopped
         {
-            _lastMoveTime += Time.deltaTime;          
+            _lastMoveTime += Time.deltaTime; // Increment last moved timer
         }
-        else
+        else // If not within stopping distance or moving
         {
-            _lastMoveTime = 0;
+            _lastMoveTime = 0; // Reset last moved timer
         }
 
-        if (_lastMoveTime > waitTimeout && !_isChasing)
+        if (_lastMoveTime > waitTimeout && !_isChasing) // If last moved timer has reached timeout limit and AI is not chasing player, then switch to next patrol point
         {
-            SwitchNextPoint();
+            SwitchNextPoint(); // Switch to next patrol point
         }
 
     }
@@ -79,9 +79,9 @@ public class MazeAIController : MonoBehaviour
     {
         _currentPatrolPointIndex = Random.Range(0, patrolPoints.Length); // Set new random patrol point
         navMeshAgent.SetDestination(patrolPoints[_currentPatrolPointIndex].position); // Set new patrol point as destination
-        Move(walkSpeed);
+        Move(walkSpeed); // Move to next patrol point (with walking feet)
 
-        _lastMoveTime = 0;
+        _lastMoveTime = 0; // Reset last moved timer
     }
 
     private void Move(float moveSpeed)
@@ -191,6 +191,8 @@ public class MazeAIController : MonoBehaviour
 
     private void ScanEnvironment() 
     {
+        DrawDebugVisionArc(); // Use to show arc of AI vision
+
         Collider[] playerInRange = Physics.OverlapSphere(transform.position, viewRadius, playerMask);  // Collider array of player colliders that are in range
 
         for (int i = 0; i < playerInRange.Length; i++) 
@@ -202,6 +204,7 @@ public class MazeAIController : MonoBehaviour
                 float playerDistance = Vector3.Distance(transform.position, playerTransform.position); // Set player distance variable
                 if (!Physics.Raycast(transform.position, playerDirection, playerDistance, obstacleMask)) // Check for any obstacles in the way of raycast
                 {
+                    Debug.DrawRay(this.transform.position, playerDirection, Color.green, playerDistance);
                     _isChasing = true; // Set AI to chase player
                     _isPatrolling = false; // Set AI to no longer patrol
                     break;
@@ -225,5 +228,18 @@ public class MazeAIController : MonoBehaviour
     private void PlayerCaught()
     {
         _playerCaught = true; // Set player caught status to caught (true)
+    }
+
+    private void DrawDebugVisionArc()
+    {
+        Vector3 forward = transform.forward; // Get forward vector
+        float rightAngle = (viewAngle / 2); // Set angle of right boundary to half of the view angle
+        float leftAngle = -rightAngle; // Set angle of left boundary to opposite of the right view angle
+        Vector3 rightBoundary = Quaternion.Euler(0, rightAngle, 0) * forward; // Create forward vector in direction of right angle to define right vision boundary
+        Vector3 leftBoundary = Quaternion.Euler(0, leftAngle, 0) * forward; // Create forward vector in direction of left angle to define left vision boundary
+
+        Debug.DrawLine(transform.position, transform.position + rightBoundary * viewRadius, Color.green); // Draw right boundary line
+        Debug.DrawLine(transform.position, transform.position + leftBoundary * viewRadius, Color.green); // Draw left boundary line
+        Debug.DrawLine(transform.position + rightBoundary * viewRadius, transform.position + leftBoundary * viewRadius, Color.green); // Draw a line between the two boundary end points to show view radius
     }
 }

@@ -16,7 +16,9 @@ public class MazeAIController : MonoBehaviour
     public int raycastEdgeIterations = 4; // Number of times raycast will iterate to increase mesh filter performance
     public float raycastEdgeDistance = 0.5f; // Maximum distance used to calculate the minimum and maximimum when ray cast hits
     public Transform[] patrolPoints; // An array containing points the AI patrols
+    public float waitTimeout = 5.0f;
 
+    private float _lastMoveTime;
     public float _waitTime; // Wait time delay variable for value tracking
     public float _detectionTime; // Detection rotate time variable for value tracking
     public bool _isPatrolling; // True if AI is patrolling
@@ -55,12 +57,31 @@ public class MazeAIController : MonoBehaviour
         {
             Patrol(); // Patrol maze
         }
+
+        if (navMeshAgent.velocity.magnitude <= navMeshAgent.stoppingDistance &&
+            navMeshAgent.velocity.magnitude < 0.1f)
+        {
+            _lastMoveTime += Time.deltaTime;          
+        }
+        else
+        {
+            _lastMoveTime = 0;
+        }
+
+        if (_lastMoveTime > waitTimeout && !_isChasing)
+        {
+            SwitchNextPoint();
+        }
+
     }
 
     public void SwitchNextPoint()
     {
         _currentPatrolPointIndex = Random.Range(0, patrolPoints.Length); // Set new random patrol point
         navMeshAgent.SetDestination(patrolPoints[_currentPatrolPointIndex].position); // Set new patrol point as destination
+        Move(walkSpeed);
+
+        _lastMoveTime = 0;
     }
 
     private void Move(float moveSpeed)

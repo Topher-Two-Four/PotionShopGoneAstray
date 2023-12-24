@@ -152,12 +152,12 @@ public class PotionCraftingSystem : MonoBehaviour
         shouldBeStirred = potionRecipe.needStirring;
         desiredTemp = potionRecipe.desiredTemp;
         lidDesired = potionRecipe.needsLidOn;
-        Debug.Log("Needs stirring:" + shouldBeStirred);
+        //Debug.Log("Needs stirring:" + shouldBeStirred);
         ingredient1 = null;
         ingredient2 = null;
         ingredient3 = null;
         ingredient4 = null;
-        Debug.Log("Brewing process started");
+        //Debug.Log("Brewing process started");
         while (timeCooked < potionRecipe.cookTime)
         {
 
@@ -168,7 +168,7 @@ public class PotionCraftingSystem : MonoBehaviour
                 timeCooked += Time.deltaTime;
                 timeAtDesiredTemp += Time.deltaTime;
                 timeWithLidInDesiredState += Time.deltaTime;
-                Debug.Log("At desired temp, lid in correct state.");
+                //Debug.Log("At desired temp, lid in correct state.");
             }
             else if (currentTemp == desiredTemp && potionRecipe.needsLidOn != isLidOn)
             {
@@ -176,7 +176,7 @@ public class PotionCraftingSystem : MonoBehaviour
                 UpdateBrewingTimerDisplay(timeRemaining);
                 timeCooked += Time.deltaTime;
                 timeAtDesiredTemp += Time.deltaTime;
-                Debug.Log("At desired temp, but needs lid corrected.");
+                //Debug.Log("At desired temp, but needs lid corrected.");
             }
             else if (currentTemp != desiredTemp && potionRecipe.needsLidOn == isLidOn)
             {
@@ -184,14 +184,14 @@ public class PotionCraftingSystem : MonoBehaviour
                 UpdateBrewingTimerDisplay(timeRemaining);
                 timeCooked += Time.deltaTime;
                 timeWithLidInDesiredState += Time.deltaTime;
-                Debug.Log("Not at desired temp, but lid correct.");
+                //Debug.Log("Not at desired temp, but lid correct.");
             }
             else
             {
                 float timeRemaining = Mathf.Max(0, cookTime - timeCooked);
                 UpdateBrewingTimerDisplay(timeRemaining);
                 timeCooked += Time.deltaTime;
-                Debug.Log("Not at desired temp and needs lid corrected.");
+                //Debug.Log("Not at desired temp and needs lid corrected.");
             }
             
             CheckPotionQuality(potionRecipe.cookTime, timeAtDesiredTemp);
@@ -340,7 +340,7 @@ public class PotionCraftingSystem : MonoBehaviour
 
     private void DisplayBrewingComplete()
     {
-        Debug.Log("Brewing complete.");
+        //Debug.Log("Brewing complete.");
         timeRemainingText.text = ("Done!");
         isBrewing = false;
         isRetrievable = true;
@@ -403,7 +403,7 @@ public class PotionCraftingSystem : MonoBehaviour
 
     public void AddIngredientToSlot(ItemData ingredient) // Add an ingredient from the inventory into the crafting slot
     {
-        Debug.Log("Adding " + ingredient);
+        //Debug.Log("Adding " + ingredient);
         if (ingredient.isIngredient) // Check whether the item is an ingredient
         {
             if (ingredient1 == null)
@@ -427,14 +427,13 @@ public class PotionCraftingSystem : MonoBehaviour
             else
             {
                 ingredientSpaceLeft = false;
-                Debug.Log("No available space.");
+                //Debug.Log("No available space.");
                 return;
             }
         }
         else
-        // ********************************** STOPPING POINT FOR TROUBLESHOOTING INVENTORY ADDITION TO SLOT********************************
         {
-            Debug.Log("No available space.");
+            //Debug.Log("No available space.");
             return; // Return if no space available amongst the three ingredient spaces
         }
     }
@@ -475,11 +474,11 @@ public class PotionCraftingSystem : MonoBehaviour
 
     public void AddPotionToInventory(PotionData potionData, int qualityLevel)
     {
-        Debug.Log(potionData);
+        //Debug.Log(potionData);
         if (potionData != null)
         {
             currentQualityColor = GetPotionQualityImageColor(qualityLevel);
-            Debug.Log(currentQualityColor);
+            //Debug.Log(currentQualityColor);
             InventoryController.Instance.InsertPotion(potionData, qualityLevel, currentQualityColor);
             potionBeingBrewed = null;
             potionBackgroundImage.color = Color.clear;
@@ -607,13 +606,13 @@ public class PotionCraftingSystem : MonoBehaviour
 
     private void RetrievePotion()
     {
-        Debug.Log(potionBeingBrewed);
-        Debug.Log("Trying to retrieve potion");
+        //Debug.Log(potionBeingBrewed);
+        //Debug.Log("Trying to retrieve potion");
         if (!isBrewing)
         {
             if (isRetrievable)
             {
-                Debug.Log("Retrieving potion");
+                //Debug.Log("Retrieving potion");
                 AddPotionToInventory(potionBeingBrewed, GetPotionQuality());
                 //GameManager.Instance.AddCurrency(potionBeingBrewed.baseValue);
                 OrderSystem.Instance.CheckForCompleteOrders();
@@ -625,12 +624,12 @@ public class PotionCraftingSystem : MonoBehaviour
             }
             else
             {
-                Debug.Log("Potion not retrievable");
+                //Debug.Log("Potion not retrievable");
             }
         }
         else
         {
-            Debug.Log("Brewing not complete");
+            //Debug.Log("Brewing not complete");
         }
     }
 

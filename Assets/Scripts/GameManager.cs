@@ -52,10 +52,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         isTimerRunning = false;
-        Debug.Log(isTimerRunning);
         Cursor.lockState = CursorLockMode.Confined; // Lock cursor in one place
         Cursor.visible = true; // Hide cursor
-        Debug.Log(playerCapsule); 
         playerCapsule.SetActive(false); // Deactivate player capsule
         playerCurrencyText.text = ("Player Currency: $" + playerCurrency);
         landlordPaymentText.text = ("Landlord Payment: $" + landlordPayment);
@@ -78,9 +76,9 @@ public class GameManager : MonoBehaviour
 
     public void StartGameTimer()
     {
-        Debug.Log(isTimerRunning);
+        //Debug.Log(isTimerRunning);
         isTimerRunning = true; // Set the timer to run
-        Debug.Log(isTimerRunning);
+        //Debug.Log(isTimerRunning);
     }
 
     public void PauseGameTimer()
@@ -198,16 +196,12 @@ public class GameManager : MonoBehaviour
 
         Vector3 spawnPoint = new Vector3(-27f, -58f, 25f); // ************** EVENTUALLY NEED TO MAKE THIS INTO A SPAWN POINT AND USE MAZE SPAWN MANAGER *************************
 
-        Debug.Log(spawnPoint);
-
         controller.MoveToPosition(spawnPoint); // Move player controller to player spawn point
 
-        Debug.Log("Maze level loaded");
     }
 
     private void SetPlayerCapsuleActive()
     {
-        Debug.Log(playerCapsule);
         playerCapsule.SetActive(true); // Set player capsule active
     }
 
@@ -259,7 +253,7 @@ public class GameManager : MonoBehaviour
                 endOfDayTransitionComplete = true; // Set transition status to complete
                 timeOfDayText.text = ("End of Day"); // Display time of day text on screen
                 timeOfDayText.color = Color.red; // Set color of text to red
-                Debug.Log("The day is now over."); // Print end of day notification
+                //Debug.Log("The day is now over."); // Print end of day notification
                 EndDay();
             }
         }

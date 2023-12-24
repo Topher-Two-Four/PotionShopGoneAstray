@@ -43,7 +43,7 @@ public class InventoryItem : MonoBehaviour
     {
         quality = qualityLevel;
         potionBackground = this.gameObject.transform.GetChild(0).GetComponent<Image>();
-        Debug.Log(qualityColor);
+        //Debug.Log(qualityColor);
         potionBackground.color = qualityColor;
 
         // Assign image to potion inventory item

@@ -25,6 +25,14 @@ public class RoomManager : MonoBehaviour
 
     }
 
+    private void OnDestroy()
+    {
+        if (GameManager.Instance.doorToMaze != null)
+        {
+            GameManager.Instance.ToggleOffDoorToMaze();
+        }
+    }
+
     // Toggles on and off room game objects for navigation of 2D scene
     private void ToggleRoom(Button button)
     {

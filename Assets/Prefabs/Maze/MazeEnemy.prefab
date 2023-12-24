@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.81382, y: -64.07425, z: -71.37415}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7696251940942597363}
@@ -174,11 +174,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 0}
-  walkSpeed: 8
+  walkSpeed: 5
   sprintSpeed: 12
   waitTime: 3
   detectionTime: 6
-  viewRadius: 20
+  viewRadius: 30
   viewAngle: 90
   playerMask:
     serializedVersion: 2
@@ -258,6 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0babd36c7ebf7f1489dd94dde4fad222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  caughtTimeRemoveAmount: 120
 --- !u!1 &2204905745922153758
 GameObject:
   m_ObjectHideFlags: 0

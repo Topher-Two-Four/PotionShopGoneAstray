@@ -111,7 +111,7 @@ public class InventoryController : MonoBehaviour
 
         if (posOnGrid == null)
         {
-            Debug.Log("Space for object is null.");
+            //Debug.Log("Space for object is null.");
             isSpaceForItem = false;
             return;
         }
@@ -132,12 +132,12 @@ public class InventoryController : MonoBehaviour
 
         if (posOnGrid == null)
         {
-            Debug.Log("Space for object is null.");
+            //Debug.Log("Space for object is null.");
             isSpaceForItem = false;
             selectedItem = null;
             return false;
         }
-        Debug.Log("Room for object exists.");
+        //Debug.Log("Room for object exists.");
         isSpaceForItem = true;
         selectedItem = null;
         return true;
@@ -147,7 +147,7 @@ public class InventoryController : MonoBehaviour
     {
         if (inventoryGrid == null || !isSpaceForItem)
             {
-            Debug.Log(isSpaceForItem);
+            //Debug.Log(isSpaceForItem);
             return;
             } // Return if inventory grid doesn't exist or if there is no space for item in inventory
 
@@ -168,7 +168,7 @@ public class InventoryController : MonoBehaviour
     {
         if (inventoryGrid == null || !isSpaceForItem)
         {
-            Debug.Log(isSpaceForItem);
+            //Debug.Log(isSpaceForItem);
             return;
         } // Return if inventory grid doesn't exist or if there is no space for item in inventory
 
@@ -241,7 +241,7 @@ public class InventoryController : MonoBehaviour
                 (potion.isLucky && potionOrdered.isLucky) ||
                 (potion.isPoison && potionOrdered.isPoison)))
                 {
-                Debug.Log(potion);
+                //Debug.Log(potion);
                 return potion;
                 }
             }
@@ -308,7 +308,7 @@ public class InventoryController : MonoBehaviour
         }
         else
         {
-            Debug.Log("No way you're wasting a potion!");
+            //Debug.Log("No way you're wasting a potion!");
             return;
         }
     }

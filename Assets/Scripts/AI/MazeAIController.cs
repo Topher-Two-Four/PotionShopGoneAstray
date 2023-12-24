@@ -16,9 +16,9 @@ public class MazeAIController : MonoBehaviour
     public int raycastEdgeIterations = 4; // Number of times raycast will iterate to increase mesh filter performance
     public float raycastEdgeDistance = 0.5f; // Maximum distance used to calculate the minimum and maximimum when ray cast hits
     public Transform[] patrolPoints; // An array containing points the AI patrols
-    public float waitTimeout = 5.0f;
+    public float waitTimeout = 5.0f; // Amount of time to wait until timeout to next patrol point
 
-    private float _lastMoveTime;
+    private float _lastMoveTime; // Amount of time since AI last moved
     public float _waitTime; // Wait time delay variable for value tracking
     public float _detectionTime; // Detection rotate time variable for value tracking
     public bool _isPatrolling; // True if AI is patrolling

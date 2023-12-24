@@ -64,7 +64,7 @@ public class RecipeList : MonoBehaviour
         {
             if (recipe == potionRecipe && potionRecipe.potion != null) // Check whether a recipe exists
             {
-                Debug.Log("Created 1x "); // Display console indication that potion has been created and added to player inventory
+                //Debug.Log("Created 1x "); // Display console indication that potion has been created and added to player inventory
                 return recipe; // Return recipe of potion
             }
         }

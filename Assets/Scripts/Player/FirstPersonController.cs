@@ -147,7 +147,6 @@ namespace StarterAssets
 		public void MoveToPosition(Vector3 position)
         {
 			gameObject.transform.position = position;
-			Debug.Log(position);
         }
 
 		private void GroundedCheck()

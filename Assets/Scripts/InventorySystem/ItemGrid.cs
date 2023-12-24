@@ -91,7 +91,7 @@ public class ItemGrid : MonoBehaviour
                 }
             }
         }
-        Debug.Log("No space left for item.");
+        //Debug.Log("No space left for item.");
         return null;
     }
 
@@ -190,10 +190,8 @@ public class ItemGrid : MonoBehaviour
                 }
             }
         }
-        Debug.Log(potionsInInventory);
 
         return potionsInInventory;
-    
     }
 
     private bool CheckAvailableSpace(int posX, int posY, int width, int height)

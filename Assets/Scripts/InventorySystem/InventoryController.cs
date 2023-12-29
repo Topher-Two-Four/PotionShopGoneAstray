@@ -313,6 +313,11 @@ public class InventoryController : MonoBehaviour
         }
     }
 
+    public void ClearInventoryGrid()
+    {
+        inventoryGrid.ClearGrid(inventoryGrid);
+    }
+
     Vector2Int oldPosition;
     InventoryItem itemToHighlight;
 

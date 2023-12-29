@@ -49,6 +49,21 @@ public class ItemGrid : MonoBehaviour
         return itemToRemove;
     }
 
+    public void ClearGrid(ItemGrid inventoryGrid)
+    {
+        for (int x = 0; x < gridSizeWidth; x++)
+        {
+            for (int y = 0; y < gridSizeHeight; y++)
+            {
+                InventoryItem inventoryItem = inventoryItemSlot[x, y];
+                if (inventoryItem != null && inventoryItem.itemData)
+                {
+                    inventoryItem.Delete();
+                }
+            }
+        }
+    }
+
     private void CleanGridReference(InventoryItem item)
     {
         for (int ix = 0; ix < item.WIDTH; ix++)

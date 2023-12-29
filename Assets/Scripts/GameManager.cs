@@ -14,13 +14,18 @@ public class GameManager : MonoBehaviour
     public bool isEndOfDay; // Variable to keep track of whether the day is over
     public TMP_Text timeRemainingText; // Time remaining to display as text
     public TMP_Text timeOfDayText; // Time of day to display as text
+    public TMP_Text currentDayText;
     public TMP_Text playerCurrencyText;
     public TMP_Text landlordPaymentText;
-    public TMP_Text winOrLossText; 
+    public TMP_Text winOrLossText;
+    public TMP_Text endOfDayText;
+    public TMP_Text dayEndPlayerCurrencyText;
+    public TMP_Text dayEndLandlordPaymentText;
 
     public int playerCurrency = 0;
     public int landlordPayment = 200;
     public int potionValue;
+    private int currentDay = 0;
 
     public FirstPersonController controller; // First person controller game object
     public GameObject playerCapsule; // Player capsule collider
@@ -28,13 +33,14 @@ public class GameManager : MonoBehaviour
 
     public GameObject potionCraftingCanvas;
     public GameObject doorToMaze;
+    public GameObject endOfDayCanvas;
     public GameObject winLossCanvas;
 
-    private bool isTimerRunning = false;
-    private bool morningTransitionComplete = false; // Keep track of transition from beginning of new day to morning
-    private bool afternoonTransitionComplete = false; // Keep track of transition from morning to afternoon
-    private bool eveningTransitionComplete = false; // Keep track of transition from afternoon to evening
-    private bool endOfDayTransitionComplete = false; // Keep track of transition from evening to end of day
+    public bool isTimerRunning = false;
+    public bool morningTransitionComplete = false; // Keep track of transition from beginning of new day to morning
+    public bool afternoonTransitionComplete = false; // Keep track of transition from morning to afternoon
+    public bool eveningTransitionComplete = false; // Keep track of transition from afternoon to evening
+    public bool endOfDayTransitionComplete = false; // Keep track of transition from evening to end of day
 
     public static GameManager Instance { get; private set; } // Singleton logic
     private void Awake()
@@ -57,6 +63,7 @@ public class GameManager : MonoBehaviour
         playerCapsule.SetActive(false); // Deactivate player capsule
         playerCurrencyText.text = ("Player Currency: $" + playerCurrency);
         landlordPaymentText.text = ("Landlord Payment: $" + landlordPayment);
+        currentDayText.text = ("Day " + currentDay);
     }
 
     private void Update()
@@ -140,11 +147,32 @@ public class GameManager : MonoBehaviour
     public void SwitchSceneToPotionShopWithNewGame() // Use scene manager to switch to Main Menu
     {
         GameManager.Instance.winLossCanvas.SetActive(false);
-        SceneManager.LoadScene(2); // Load scene through scene manager
         Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
         Cursor.visible = true; // Display cursor
         GameManager.Instance.isTimerRunning = true;
         GameManager.Instance.timeRemaining = timeInDay;
+        GameManager.Instance.currentDay = 1;
+        GameManager.Instance.playerCurrency = 0;
+        GameManager.Instance.endOfDayTransitionComplete = false;
+        GameManager.Instance.morningTransitionComplete = false;
+        GameManager.Instance.afternoonTransitionComplete = false;
+        GameManager.Instance.eveningTransitionComplete = false;
+        MoralitySystem.Instance.moralityCounter = 0;
+        InventoryController.Instance.ClearInventoryGrid();
+        DayUIUpdate();
+        SceneManager.LoadScene(2); // Load scene through scene manager
+
+    }
+
+    public void SwitchSceneToPotionShopWithNewDay() // Use scene manager to switch to Main Menu
+    {
+        GameManager.Instance.endOfDayCanvas.SetActive(false);
+        Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
+        Cursor.visible = true; // Display cursor
+        GameManager.Instance.isTimerRunning = true;
+        GameManager.Instance.timeRemaining = timeInDay;
+        DayUIUpdate();
+        SceneManager.LoadScene(2); // Load scene through scene manager
     }
 
     public void SwitchSceneToBootstrapLevel() // Use scene manager to switch to Main Menu
@@ -185,6 +213,26 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
         Cursor.visible = true; // Display cursor
 
+    }
+
+    public void BeginNewDay()
+    {
+        // To Do: Invoke scene transition
+        GameManager.Instance.endOfDayTransitionComplete = false;
+        GameManager.Instance.morningTransitionComplete = false;
+        GameManager.Instance.afternoonTransitionComplete = false;
+        GameManager.Instance.eveningTransitionComplete = false;
+        GameManager.Instance.currentDay++;
+        SwitchSceneToPotionShopWithNewDay();
+    }
+
+    private void DisplayEndOfDayUI()
+    {
+        endOfDayText.gameObject.SetActive(true);
+        endOfDayText.text = ("End of Day " + currentDay);
+        dayEndPlayerCurrencyText.text = ("Player Currency: $" + playerCurrency);
+        dayEndLandlordPaymentText.text = ("Landlord Payment: $" + landlordPayment);
+        endOfDayCanvas.SetActive(true);
     }
 
     private void LoadMazeLevel() // Place player in correct spot when maze is loaded
@@ -260,6 +308,11 @@ public class GameManager : MonoBehaviour
         DisplayTime(timeRemaining); // Display time remaining
     }
 
+    public void DayUIUpdate()
+    {
+        GameManager.Instance.currentDayText.text = ("Day " + GameManager.Instance.currentDay);
+    }
+
     private void DisplayTime(float timeToDisplay)
     {
         timeToDisplay += 1; // Add a second to the time value vefore calculations of minutes and seconds, to account for final second of countdown
@@ -269,6 +322,21 @@ public class GameManager : MonoBehaviour
     }
 
     private void EndDay()
+    {
+        if (currentDay < 5)
+        {
+            playerCapsule.SetActive(false);
+            Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
+            Cursor.visible = true; // Display cursor
+            DisplayEndOfDayUI();
+        } 
+        else
+        {
+            EndWeek();
+        }
+    }
+
+    private void EndWeek()
     {
         winOrLossText.gameObject.SetActive(true);
 

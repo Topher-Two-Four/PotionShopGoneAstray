@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public GameObject dropSpawnLocation;
 
     public GameObject potionCraftingCanvas;
+    public GameObject orderCanvas;
     public GameObject doorToMaze;
     public GameObject endOfDayCanvas;
     public GameObject winLossCanvas;
@@ -130,6 +131,14 @@ public class GameManager : MonoBehaviour
     {
         doorToMaze.SetActive(false);
     }
+    public void ToggleOnOrderDisplay()
+    {
+        orderCanvas.SetActive(true);
+    }
+    public void ToggleOffOrderDisplay()
+    {
+        orderCanvas.SetActive(false);
+    }
 
     public void AddCurrency(int currencyToAdd)
     {
@@ -160,6 +169,7 @@ public class GameManager : MonoBehaviour
         MoralitySystem.Instance.moralityCounter = 0;
         InventoryController.Instance.ClearInventoryGrid();
         DayUIUpdate();
+        OrderSystem.Instance.GenerateOrderList();
         SceneManager.LoadScene(2); // Load scene through scene manager
 
     }
@@ -172,6 +182,7 @@ public class GameManager : MonoBehaviour
         GameManager.Instance.isTimerRunning = true;
         GameManager.Instance.timeRemaining = timeInDay;
         DayUIUpdate();
+        OrderSystem.Instance.GenerateOrderList();
         SceneManager.LoadScene(2); // Load scene through scene manager
     }
 
@@ -182,7 +193,7 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true; // Display cursor
     }
 
-    public void SwitchSceneToPotionLevel() // Use scene manager to switch to Potion Level
+    public void SwitchSceneToPotionLevel() // Use scene manager to switch to Potion Level from Maze Level
     {
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3))
         {
@@ -195,6 +206,7 @@ public class GameManager : MonoBehaviour
         {
             playerCapsule.SetActive(false); // Deactivate player capsule
         }
+        OrderSystem.Instance.CheckForCompleteOrders();
         SceneManager.LoadScene(2); // Load scene through scene manager
 
     }
@@ -223,6 +235,7 @@ public class GameManager : MonoBehaviour
         GameManager.Instance.afternoonTransitionComplete = false;
         GameManager.Instance.eveningTransitionComplete = false;
         GameManager.Instance.currentDay++;
+        OrderSystem.Instance.GenerateOrderList();
         SwitchSceneToPotionShopWithNewDay();
     }
 

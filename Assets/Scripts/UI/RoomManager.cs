@@ -55,16 +55,26 @@ public class RoomManager : MonoBehaviour
             {
                 GameManager.Instance.ToggleOffDoorToMaze();
                 GameManager.Instance.ToggleOnPotionCraftingCanvas();
+                GameManager.Instance.ToggleOffOrderDisplay();
             } 
             else if (currentRoom == roomList[3] || currentRoom == roomList[6])
             {
-                GameManager.Instance.ToggleOffPotionCraftingCanvas(); // Later on will have toggle batch of game objects and logic based on potion shop room
+                GameManager.Instance.ToggleOffPotionCraftingCanvas();
                 GameManager.Instance.ToggleOnDoorToMaze();
+                GameManager.Instance.ToggleOffOrderDisplay();
+            }
+            else if (currentRoom == roomList[2] || currentRoom == roomList[7])
+            {
+                GameManager.Instance.ToggleOffPotionCraftingCanvas();
+                GameManager.Instance.ToggleOffDoorToMaze();
+                GameManager.Instance.ToggleOnOrderDisplay();
             }
             else
             {
                 GameManager.Instance.ToggleOffDoorToMaze();
                 GameManager.Instance.ToggleOffPotionCraftingCanvas();
+                GameManager.Instance.ToggleOffOrderDisplay();
+
             }
         }
 

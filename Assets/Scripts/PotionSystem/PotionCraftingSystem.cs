@@ -483,6 +483,7 @@ public class PotionCraftingSystem : MonoBehaviour
             potionBeingBrewed = null;
             potionBackgroundImage.color = Color.clear;
         }
+        OrderSystem.Instance.CheckForCompleteOrders();
     }
 
     public int CheckPotionQuality(float cookTime, float timeAtDesiredTemp) // Check what quality of potion has been made, based on time in desired temperature range

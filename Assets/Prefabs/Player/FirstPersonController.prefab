@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6675413122062098297}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirstPersonController
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 1511636428850569211}
   - component: {fileID: 7899478307544988770}
   - component: {fileID: 6725445383885262082}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1927382815001453496}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerCameraRoot
   m_TagString: CinemachineTarget
   m_Icon: {fileID: 0}
@@ -242,7 +242,8 @@ GameObject:
   - component: {fileID: 7559068140093146776}
   - component: {fileID: 6073503498084768488}
   - component: {fileID: 1080296741902084667}
-  m_Layer: 8
+  - component: {fileID: 3878279027101484498}
+  m_Layer: 6
   m_Name: PlayerCapsule
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -486,6 +487,29 @@ MonoBehaviour:
   normalRunSpeed: 10
   staminaProgressUI: {fileID: 0}
   sliderCanvasGroup: {fileID: 0}
+--- !u!136 &3878279027101484498
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6073503498084768484}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.56535715
+  m_Height: 2.0606842
+  m_Direction: 1
+  m_Center: {x: 0.051952958, y: 1.035286, z: 0.0134041915}
 --- !u!1 &7311493232101657666
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,7 +521,7 @@ GameObject:
   - component: {fileID: 3236449300380667625}
   - component: {fileID: 1895311304370525441}
   - component: {fileID: 1636439168227901433}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DroppedItemSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -580,7 +604,7 @@ GameObject:
   - component: {fileID: 7567588470065450750}
   - component: {fileID: 7567588470065450751}
   - component: {fileID: 7567588470065450736}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -686,7 +710,7 @@ GameObject:
   - component: {fileID: 495592868245731863}
   - component: {fileID: 3347503898292617369}
   - component: {fileID: 2009372303958542552}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UI_EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -763,7 +787,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8482563062153054412}
   - component: {fileID: 8482563062153054413}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerFollowCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -837,7 +861,7 @@ GameObject:
   - component: {fileID: 8482563062778509577}
   - component: {fileID: 8482563062778509581}
   - component: {fileID: 8482563062778509580}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}

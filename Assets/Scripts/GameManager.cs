@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public GameObject doorToMaze;
     public GameObject endOfDayCanvas;
     public GameObject winLossCanvas;
+    public GameObject pauseMenuCanvas;
 
     public bool isTimerRunning = false;
     public bool morningTransitionComplete = false; // Keep track of transition from beginning of new day to morning
@@ -71,6 +72,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         playerCurrencyText.text = ("Player Currency: $" + playerCurrency);
         landlordPaymentText.text = ("Landlord Payment: $" + landlordPayment);
         currentDayText.text = ("Day " + currentDay);
+
     }
 
     private void Update()
@@ -86,6 +88,11 @@ public class GameManager : MonoBehaviour, IDataPersistence
             TimerUpdate();
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(0)) // Do not allow pause menu toggle when in main mainu
+            TogglePauseMenuCanvas(); // Toggle pause menu
+        } 
     }
 
     public void LoadData(GameData data)
@@ -134,6 +141,45 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public void ExitGame()
     {
         Application.Quit(); // Exit game to desktop
+    }
+
+    public void TogglePauseMenuCanvas()
+    {
+        if (pauseMenuCanvas.gameObject.activeSelf) // If on, toggle off
+        {
+            isTimerRunning = true; // Resume timer
+            pauseMenuCanvas.SetActive(false); // Deactivate pause menu canvas
+
+            if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(0) ||
+                SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(2))
+            {
+                SetPlayerCapsuleActive(); // Activate player capsule
+                Cursor.lockState = CursorLockMode.None; // Unlock cursor, confine to game screen
+                Cursor.visible = false; // Display cursor
+            }
+            
+            var foundAIObjects = FindObjectsOfType<MazeAIController>();
+            foreach (MazeAIController mazeAI in foundAIObjects)
+            {
+                Debug.Log(mazeAI);
+                mazeAI.ResumeMovement();
+            }
+        }
+        else
+        {
+            isTimerRunning = false; // Pause timer
+            pauseMenuCanvas.SetActive(true); // Activate pause menu canvas
+            SetPlayerCapsuleInactive(); // Deactivate player capsule
+            Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
+            Cursor.visible = true; // Display cursor
+
+            var foundAIObjects = FindObjectsOfType<MazeAIController>();
+            foreach (MazeAIController mazeAI in foundAIObjects)
+            {
+                Debug.Log(mazeAI);
+                mazeAI.StopMovement();
+            }
+        }
     }
 
     public void TogglePotionCraftingCanvas()
@@ -292,6 +338,12 @@ public class GameManager : MonoBehaviour, IDataPersistence
         SwitchSceneToPotionShopWithNewDay();
     }
 
+    public void CloseShopEarly()
+    {
+        GameManager.Instance.timeRemaining = 5.0f;
+        TogglePauseMenuCanvas();
+    }
+
     private void DisplayEndOfDayUI()
     {
         endOfDayText.gameObject.SetActive(true);
@@ -316,6 +368,11 @@ public class GameManager : MonoBehaviour, IDataPersistence
     private void SetPlayerCapsuleActive()
     {
         playerCapsule.SetActive(true); // Set player capsule active
+    }
+
+    private void SetPlayerCapsuleInactive()
+    {
+        playerCapsule.SetActive(false); // Set player capsule active
     }
 
     private void TimerUpdate() // Update timer and keep track of what time of day it is

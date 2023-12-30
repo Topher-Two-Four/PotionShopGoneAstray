@@ -47,32 +47,34 @@ public class MazeAIController : MonoBehaviour
 
     private void Update()
     {
-        ScanEnvironment(); // Scan environment for player
+        if (!GameManager.Instance.pauseMenuCanvas.activeSelf)
+        {
+            ScanEnvironment(); // Scan environment for player
 
-        if (_isChasing) // If AI set to chase then chase player, else patrol
-        {
-            Chase(); // Chase player
-        }
-        else
-        {
-            Patrol(); // Patrol maze
-        }
+            if (_isChasing) // If AI set to chase then chase player, else patrol
+            {
+                Chase(); // Chase player
+            }
+            else
+            {
+                Patrol(); // Patrol maze
+            }
 
-        if (navMeshAgent.velocity.magnitude <= navMeshAgent.stoppingDistance && // Check if AI is within stopping distance
-            navMeshAgent.velocity.magnitude < 0.1f) // Check if AI is stopped
-        {
-            _lastMoveTime += Time.deltaTime; // Increment last moved timer
-        }
-        else // If not within stopping distance or moving
-        {
-            _lastMoveTime = 0; // Reset last moved timer
-        }
+            if (navMeshAgent.velocity.magnitude <= navMeshAgent.stoppingDistance && // Check if AI is within stopping distance
+                navMeshAgent.velocity.magnitude < 0.1f) // Check if AI is stopped
+            {
+                _lastMoveTime += Time.deltaTime; // Increment last moved timer
+            }
+            else // If not within stopping distance or moving
+            {
+                _lastMoveTime = 0; // Reset last moved timer
+            }
 
-        if (_lastMoveTime > waitTimeout && !_isChasing) // If last moved timer has reached timeout limit and AI is not chasing player, then switch to next patrol point
-        {
-            SwitchNextPoint(); // Switch to next patrol point
+            if (_lastMoveTime > waitTimeout && !_isChasing) // If last moved timer has reached timeout limit and AI is not chasing player, then switch to next patrol point
+            {
+                SwitchNextPoint(); // Switch to next patrol point
+            }
         }
-
     }
 
     public void SwitchNextPoint()
@@ -82,6 +84,23 @@ public class MazeAIController : MonoBehaviour
         Move(walkSpeed); // Move to next patrol point (with walking feet)
 
         _lastMoveTime = 0; // Reset last moved timer
+    }
+
+    public void StopMovement()
+    {
+        Stop();
+    }
+
+    public void ResumeMovement()
+    {
+        if (_isChasing)
+        {
+            Move(sprintSpeed);
+        }
+        else
+        {
+            Move(walkSpeed);
+        }
     }
 
     private void Move(float moveSpeed)

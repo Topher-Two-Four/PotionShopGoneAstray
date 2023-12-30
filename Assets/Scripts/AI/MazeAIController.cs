@@ -87,7 +87,7 @@ public class MazeAIController : MonoBehaviour
     private void Move(float moveSpeed)
     {
         navMeshAgent.isStopped = false; // Make it so that the AI is no longer stopped
-        navMeshAgent.speed = moveSpeed; // Set AI move speed to method input speed
+        navMeshAgent.speed = moveSpeed * MoralitySystem.Instance.monsterSpeedModifier; // Set AI move speed to method input speed
     }
 
     private void Stop()

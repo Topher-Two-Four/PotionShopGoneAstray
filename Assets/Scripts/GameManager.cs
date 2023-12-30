@@ -311,7 +311,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
         Vector3 spawnPoint = new Vector3(-27f, -58f, 25f); // ************** EVENTUALLY NEED TO MAKE THIS INTO A SPAWN POINT AND USE MAZE SPAWN MANAGER *************************
 
         controller.MoveToPosition(spawnPoint); // Move player controller to player spawn point
-
     }
 
     private void SetPlayerCapsuleActive()

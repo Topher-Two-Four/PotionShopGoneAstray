@@ -7,6 +7,12 @@ public class MoralitySystem : MonoBehaviour
 {
     public int moralityCounter = 0;
 
+    public float monsterSpeedModifier;
+    public float playerSpeedModifier;
+    public float ingredientSpawnModifier;
+    public float mazeLightModifer;
+    public float mazeFogModifer;
+
     public TMP_Text[] mText;
 
     public static MoralitySystem Instance { get; private set; } // Singleton logic
@@ -14,6 +20,11 @@ public class MoralitySystem : MonoBehaviour
     private void Start()
     {
         UpdateMoralityUI();
+        monsterSpeedModifier = 1.0f;
+        playerSpeedModifier = 1.0f;
+        ingredientSpawnModifier = 1.0f;
+        mazeLightModifer = 1.0f;
+        mazeFogModifer = 1.0f;
     }
 
     private void Awake()
@@ -58,8 +69,8 @@ public class MoralitySystem : MonoBehaviour
         {
             moralityCounter -= 4;
         }
-
         UpdateMoralityUI();
+        // ApplyMoralityEffect();
     }
 
     public void UpdateMoralityUI()
@@ -121,6 +132,82 @@ public class MoralitySystem : MonoBehaviour
                 mText.color = new Color(255, 0, 0);
             }
         }
+    }
+
+    public void ApplyMoralityEffect()
+    {
+        if (moralityCounter >= 10)
+        {
+            monsterSpeedModifier = 0.5f; //Decrease monster speed
+            mazeLightModifer = 7.5f; //Increase light in maze
+            RenderSettings.sun.intensity = mazeLightModifer;
+            mazeFogModifer = 0.01f; // Decrease fog in maze
+            RenderSettings.fogDensity = mazeFogModifer;
+            ingredientSpawnModifier = 1.5f; //Increase amount of items that spawn
+            playerSpeedModifier = 1.2f; //Increase player speed
+        }
+        else if (moralityCounter >= 5 && moralityCounter < 10)
+        {
+            monsterSpeedModifier = 0.7f;//Decrease monster speed
+            mazeLightModifer = 7.0f; //Increase light in maze
+            RenderSettings.sun.intensity = mazeLightModifer;
+            mazeFogModifer = 0.03f; // Decrease fog in maze
+            RenderSettings.fogDensity = mazeFogModifer;
+            ingredientSpawnModifier = 1.3f; //Increase amount of items that spawn
+            playerSpeedModifier = 1.1f; //Increase player speed
+        }
+        else if (moralityCounter >= 1 && moralityCounter < 5)
+        {
+            monsterSpeedModifier = 0.9f; //Decrease monster speed
+            mazeLightModifer = 6.5f; //Increase light in maze
+            RenderSettings.sun.intensity = mazeLightModifer;
+            mazeFogModifer = 0.07f; // Decrease fog in maze
+            RenderSettings.fogDensity = mazeFogModifer;
+            ingredientSpawnModifier = 1.1f; //Increase amount of items that spawn
+            playerSpeedModifier = 1.0f; //Normal player speed
+        }
+        else if (moralityCounter >= -1 && moralityCounter < 1)
+        {
+            monsterSpeedModifier = 1.0f; //Normal monster speed
+            mazeLightModifer = 6.0f; //Normal light in maze
+            RenderSettings.sun.intensity = mazeLightModifer;
+            mazeFogModifer = 0.1f; // Normal fog in maze
+            RenderSettings.fogDensity = mazeFogModifer;
+            ingredientSpawnModifier = 1.0f; //Normal amount of items spawn
+            playerSpeedModifier = 1.0f; //Normal player speed
+        }
+        else if (moralityCounter >= -5 && moralityCounter < -1)
+        {
+            monsterSpeedModifier = 1.1f; //Increase monster speed
+            mazeLightModifer = 5.0f; //Decrease light in maze
+            RenderSettings.sun.intensity = mazeLightModifer;
+            mazeFogModifer = 0.15f; // Increase fog in maze
+            RenderSettings.fogDensity = mazeFogModifer;
+            ingredientSpawnModifier = 0.9f; //Decrease amount of items that spawn
+            playerSpeedModifier = 1.0f; //Normal player speed
+        }
+        else if (moralityCounter > -10 && moralityCounter < -5)
+        {
+            monsterSpeedModifier = 1.3f; //Increase monster speed
+            mazeLightModifer = 3.0f; //Decrease light in maze
+            RenderSettings.sun.intensity = mazeLightModifer;
+            mazeFogModifer = 0.23f; // Decrease fog in maze
+            RenderSettings.fogDensity = mazeFogModifer;
+            ingredientSpawnModifier = 0.7f; //Decrease amount of items that spawn
+            playerSpeedModifier = 1.0f; //Normal player speed
+        }
+        else
+        {
+            monsterSpeedModifier = 1.5f; //Increase monster speed
+            mazeLightModifer = 1.0f; //Decrease light in maze
+            RenderSettings.sun.intensity = mazeLightModifer;
+            mazeFogModifer = 0.3f; // Increase fog in maze
+            RenderSettings.fogDensity = mazeFogModifer;
+            ingredientSpawnModifier = 0.5f; //Decrease amount of items that spawn
+            playerSpeedModifier = 0.9f; //Decreased player speed
+        }
+
+        Debug.Log("Morality effect applied.");
     }
 
 }

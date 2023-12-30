@@ -43,7 +43,7 @@ public class StaminaSystem : MonoBehaviour
 
                 if (currentStamina >= 50) // Check if stamina is at or above maximum
                 {
-                    playerController.SetSprintSpeed(normalRunSpeed);
+                    playerController.SetSprintSpeed(normalRunSpeed * MoralitySystem.Instance.playerSpeedModifier);
                     hasRegeneratedStamina = true; // Set player has regenerated stamina to true
                     if (currentStamina >= maxStamina)
                     {
@@ -66,7 +66,7 @@ public class StaminaSystem : MonoBehaviour
         if (currentStamina <= 0) // Check if stamina is less than or equal to 0
         {
             hasRegeneratedStamina = false; // Set player has regenerated stamina to false
-            playerController.SetSprintSpeed(slowedRunSpeed);
+            playerController.SetSprintSpeed(slowedRunSpeed * MoralitySystem.Instance.playerSpeedModifier);
             sliderCanvasGroup.alpha = 0.2f; // Set alpha of canvas slider group to 0 so that UI will not be disabled
         }
 

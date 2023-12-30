@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 0f21fba9c84f42746a50f4f2e6178352, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -802,6 +802,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moralityCounter: 0
+  monsterSpeedModifier: 0
+  playerSpeedModifier: 0
+  ingredientSpawnModifier: 0
+  mazeLightModifer: 0
+  mazeFogModifer: 0
   mText:
   - {fileID: 2128707531}
   - {fileID: 1193363581}

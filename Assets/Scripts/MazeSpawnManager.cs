@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MazeSpawnManager : MonoBehaviour
 {
-    public int ingredientsToSpawn = 50;
+    public float baseSpawnAmount = 50;
+    public int ingredientsToSpawn;
 
 
     public GameObject[] ingredientSpawnPoints; // Array for holding ingredient spawn points
@@ -14,7 +15,10 @@ public class MazeSpawnManager : MonoBehaviour
 
     void Start()
     {
-        // Spawn like 50 random ingredients
+        MoralitySystem.Instance.ApplyMoralityEffect();
+
+        ingredientsToSpawn = Mathf.FloorToInt(baseSpawnAmount * MoralitySystem.Instance.ingredientSpawnModifier);
+
         for (int x = 0; x < ingredientsToSpawn; x++) 
         {
             int randomSpawnPointIndex = Random.Range(0, ingredientSpawnPoints.Length - 1);

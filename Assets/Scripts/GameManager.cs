@@ -4,7 +4,7 @@ using TMPro;
 using StarterAssets;
 using System.Collections;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IDataPersistence
 {
     public float timeRemaining = 0; // Time remaining in day
     public float timeInDay = 900; // Time remaining in day
@@ -23,8 +23,13 @@ public class GameManager : MonoBehaviour
     public TMP_Text dayEndLandlordPaymentText;
 
     public int playerCurrency = 0;
-    public int landlordPayment = 200;
+    public int landlordPayment = 1400;
     public int potionValue;
+
+    public int endOfDayCurrency;
+    public int endOfDayLandlordPayment;
+    public int endOfDayMorality;
+
     private int currentDay = 0;
 
     public FirstPersonController controller; // First person controller game object
@@ -44,6 +49,7 @@ public class GameManager : MonoBehaviour
     public bool endOfDayTransitionComplete = false; // Keep track of transition from evening to end of day
 
     public static GameManager Instance { get; private set; } // Singleton logic
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -82,11 +88,37 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void LoadData(GameData data)
+    {
+        Debug.Log("Loaded player currency: " + data.playerCurrency);
+        Debug.Log("Loaded landlord payment: " + data.landlordPayment);
+        Debug.Log("Loaded current day: " + data.currentDay);
+        Debug.Log("Loaded player morality: " + data.playerMorality);
+        GameManager.Instance.playerCurrency = data.playerCurrency;
+        GameManager.Instance.landlordPayment = data.landlordPayment;
+        GameManager.Instance.currentDay = data.currentDay;
+        dayEndPlayerCurrencyText.text = ("Player Currency: $" + playerCurrency);
+        dayEndLandlordPaymentText.text = ("Landlord Payment: $" + landlordPayment);
+        MoralitySystem.Instance.moralityCounter = data.playerMorality;
+        MoralitySystem.Instance.UpdateMoralityUI();
+        //InventoryController.Instance.inventoryGrid = data.playerInventory;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.playerCurrency = this.endOfDayCurrency;
+        data.landlordPayment = this.endOfDayLandlordPayment;
+        data.currentDay = this.currentDay;
+        data.playerMorality = this.endOfDayMorality;
+        //data.playerInventory = InventoryController.Instance.inventoryGrid;
+    }
+
     public void StartGameTimer()
     {
         //Debug.Log(isTimerRunning);
         isTimerRunning = true; // Set the timer to run
         //Debug.Log(isTimerRunning);
+
     }
 
     public void PauseGameTimer()
@@ -162,6 +194,7 @@ public class GameManager : MonoBehaviour
         GameManager.Instance.timeRemaining = timeInDay;
         GameManager.Instance.currentDay = 1;
         GameManager.Instance.playerCurrency = 0;
+        GameManager.Instance.landlordPayment = 1400;
         GameManager.Instance.endOfDayTransitionComplete = false;
         GameManager.Instance.morningTransitionComplete = false;
         GameManager.Instance.afternoonTransitionComplete = false;
@@ -170,6 +203,10 @@ public class GameManager : MonoBehaviour
         InventoryController.Instance.ClearInventoryGrid();
         DayUIUpdate();
         OrderSystem.Instance.GenerateOrderList();
+        playerCurrencyText.text = ("Player Currency: $" + playerCurrency);
+        landlordPaymentText.text = ("Landlord Payment: $" + landlordPayment);
+        MoralitySystem.Instance.moralityCounter = 0;
+        MoralitySystem.Instance.UpdateMoralityUI();
         SceneManager.LoadScene(2); // Load scene through scene manager
 
     }
@@ -182,6 +219,21 @@ public class GameManager : MonoBehaviour
         GameManager.Instance.isTimerRunning = true;
         GameManager.Instance.timeRemaining = timeInDay;
         DayUIUpdate();
+        OrderSystem.Instance.GenerateOrderList();
+        SceneManager.LoadScene(2); // Load scene through scene manager
+    }
+
+    public void SwitchSceneToPotionShopWithLoadGame() // Use scene manager to switch to Main Menu
+    {
+        DataPersistenceManager.Instance.LoadGame();
+        Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
+        Cursor.visible = true; // Display cursor
+        GameManager.Instance.isTimerRunning = true;
+        GameManager.Instance.timeRemaining = timeInDay;
+        GameManager.Instance.playerCurrency = this.playerCurrency;
+        GameManager.Instance.landlordPayment = this.landlordPayment;
+        DayUIUpdate();
+        AddCurrencyToPlayer(0);
         OrderSystem.Instance.GenerateOrderList();
         SceneManager.LoadScene(2); // Load scene through scene manager
     }
@@ -236,6 +288,7 @@ public class GameManager : MonoBehaviour
         GameManager.Instance.eveningTransitionComplete = false;
         GameManager.Instance.currentDay++;
         OrderSystem.Instance.GenerateOrderList();
+        DataPersistenceManager.Instance.SaveGame();
         SwitchSceneToPotionShopWithNewDay();
     }
 
@@ -338,6 +391,12 @@ public class GameManager : MonoBehaviour
     {
         if (currentDay < 5)
         {
+            this.endOfDayCurrency = this.playerCurrency;
+            this.endOfDayLandlordPayment = this.landlordPayment;
+            this.endOfDayMorality = MoralitySystem.Instance.moralityCounter;
+            OrderSystem.Instance.GenerateOrderList();
+            potionCraftingCanvas.SetActive(false);
+            orderCanvas.SetActive(false);
             playerCapsule.SetActive(false);
             Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
             Cursor.visible = true; // Display cursor
@@ -362,8 +421,7 @@ public class GameManager : MonoBehaviour
         {
             winOrLossText.text = ("You've lost!");
         }
-
-        // Button for return to main menu or quit
+        DataPersistenceManager.Instance.NewGame();
     }
 
     public void AddCurrencyToPlayer(int amountToAdd)

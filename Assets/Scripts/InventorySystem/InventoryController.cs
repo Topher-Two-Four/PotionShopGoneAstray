@@ -315,7 +315,10 @@ public class InventoryController : MonoBehaviour
 
     public void ClearInventoryGrid()
     {
-        inventoryGrid.ClearGrid(inventoryGrid);
+        if (inventoryGrid != null)
+        {
+            inventoryGrid.ClearGrid(inventoryGrid);
+        }
     }
 
     Vector2Int oldPosition;

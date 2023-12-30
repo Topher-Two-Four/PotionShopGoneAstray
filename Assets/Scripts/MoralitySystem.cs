@@ -62,7 +62,7 @@ public class MoralitySystem : MonoBehaviour
         UpdateMoralityUI();
     }
 
-    private void UpdateMoralityUI()
+    public void UpdateMoralityUI()
     {
         if (moralityCounter >= 10)
         {

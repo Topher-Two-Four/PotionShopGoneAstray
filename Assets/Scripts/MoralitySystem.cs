@@ -207,7 +207,6 @@ public class MoralitySystem : MonoBehaviour
             playerSpeedModifier = 0.9f; //Decreased player speed
         }
 
-        Debug.Log("Morality effect applied.");
     }
 
 }

@@ -103,7 +103,6 @@ public class OrderSystem : MonoBehaviour
 
     public void GenerateOrderList()
     {
-        Debug.Log("Generating order list.");
         for (int x = 0; x < orderList.Length; x++)
         {
             Order currentOrder = orderList[x];

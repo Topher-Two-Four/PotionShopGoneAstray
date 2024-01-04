@@ -123,8 +123,16 @@ namespace StarterAssets
         {
 			SprintSpeed = newSprintSpeed; // Change sprint speed
         }
+		public void SetMoveSpeed(float newMoveSpeed)
+		{
+		MoveSpeed = newMoveSpeed; // Change walk speed
+		}
 
-
+		public void StopMovement()
+        {
+			MoveSpeed = 0;
+			SprintSpeed = 0;
+        }
 
 		private void Update()
 		{

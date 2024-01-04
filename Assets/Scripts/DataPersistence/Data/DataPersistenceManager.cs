@@ -68,11 +68,6 @@ public class DataPersistenceManager : MonoBehaviour
         {
             dataPersistenceObj.SaveData(ref gameData);
         }
-
-        Debug.Log("Saved player currency: " + gameData.playerCurrency);
-        Debug.Log("Saved landlord payment: " + gameData.landlordPayment);
-        Debug.Log("Saved current day: " + gameData.currentDay);
-        Debug.Log("Saved player morality: " + gameData.playerMorality);
         //Debug.Log("Saved player inventory: " + gameData.playerInventory);
 
         // save that data to a file using the data handler 

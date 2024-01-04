@@ -6,6 +6,15 @@ using StarterAssets;
 
 public class StaminaSystem : MonoBehaviour
 {
+    public static StaminaSystem Instance { get; private set; } // Singleton logic
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this) { Destroy(this); } else { Instance = this; } // Singleton logic
+
+    }
+
+
     [Header("Stamina General Settings")] // Create project menu for general stamina settings
     public float currentStamina = 100.0f;
     [SerializeField] private float maxStamina = 100.0f;
@@ -82,6 +91,13 @@ public class StaminaSystem : MonoBehaviour
         }
     }
     
+    public void HaltMovement()
+    {
+
+        slowedRunSpeed = 0;
+        normalRunSpeed = 0;
+    }
+
     void UpdateStamina(int alphaValue)
     {
         staminaProgressUI.fillAmount = currentStamina / maxStamina; // Adjust and display stamina as percentage of slider bar

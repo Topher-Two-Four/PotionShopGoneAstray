@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         if (GameObject.FindGameObjectWithTag("PlayerSpawnPoint") != null)
         {
-            SpawnPlayerIntoMaze(level);
+            SpawnPlayerIntoMaze(level);          
         }
     }
 
@@ -262,8 +262,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         landlordPaymentText.text = ("Landlord Payment: $" + landlordPayment);
         MoralitySystem.Instance.moralityCounter = 0;
         MoralitySystem.Instance.UpdateMoralityUI();
-        SceneManager.LoadScene(2); // Load scene through scene manager
-
+        SceneManager.LoadScene(2);
     }
 
     public void SwitchSceneToPotionShopWithNewDay() // Use scene manager to switch to Main Menu
@@ -315,10 +314,10 @@ public class GameManager : MonoBehaviour, IDataPersistence
         Cursor.visible = true; // Hide cursor
         if (playerCapsule != null)
         {
-            playerCapsule.SetActive(false); // Deactivate player capsule
+            Invoke("SetPlayerCapsuleInactive", 0.5f);
         }
         OrderSystem.Instance.CheckForCompleteOrders();
-        SceneManager.LoadScene(2); // Load scene through scene manager
+        Invoke("CallLoadPotionShop", 1f);
 
     }
 
@@ -374,6 +373,11 @@ public class GameManager : MonoBehaviour, IDataPersistence
         dayEndPlayerCurrencyText.text = ("Player Currency: $" + playerCurrency);
         dayEndLandlordPaymentText.text = ("Landlord Payment: $" + landlordPayment);
         endOfDayCanvas.SetActive(true);
+    }
+
+    public void CallLoadPotionShop()
+    {
+        SceneManager.LoadScene(2); // Load scene through scene manager
     }
 
     private void LoadMazeLevelAlpha() // Place player in correct spot when maze is loaded

@@ -14,11 +14,25 @@ public class MusicBox : MonoBehaviour
     public float timeRemovedWhenCaught = 120.0f;
 
 
+    public static MusicBox Instance { get; private set; } // Singleton logic
+
     // Start is called before the first frame update
     void Start()
     {
         currentMusicPlayTime = 0f;
         musicPlaying = false;
+    }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
     }
 
     // Update is called once per frame
@@ -42,14 +56,6 @@ public class MusicBox : MonoBehaviour
                 }
             }
 
-        }
-    }
-
-    public void OnTriggerEnter(Collider collider)
-    {
-        if (collider.CompareTag("Player"))
-        {
-            PlayMusic();
         }
     }
 

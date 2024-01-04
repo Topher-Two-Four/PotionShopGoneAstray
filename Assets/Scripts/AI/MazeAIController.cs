@@ -18,6 +18,8 @@ public class MazeAIController : MonoBehaviour
     public Transform[] patrolPoints; // An array containing points the AI patrols
     public float waitTimeout = 5.0f; // Amount of time to wait until timeout to next patrol point
 
+    public bool isMusicAI = false;
+
     private float _lastMoveTime; // Amount of time since AI last moved
     public float _waitTime; // Wait time delay variable for value tracking
     public float _detectionTime; // Detection rotate time variable for value tracking
@@ -54,6 +56,10 @@ public class MazeAIController : MonoBehaviour
             if (_isChasing) // If AI set to chase then chase player, else patrol
             {
                 Chase(); // Chase player
+                if (GetComponentInChildren<MusicBox>() != null)
+                {
+                    MusicBox.Instance.PlayMusic();
+                }
             }
             else
             {

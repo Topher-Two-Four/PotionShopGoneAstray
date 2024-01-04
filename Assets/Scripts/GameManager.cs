@@ -158,8 +158,9 @@ public class GameManager : MonoBehaviour, IDataPersistence
             isTimerRunning = true; // Resume timer
             pauseMenuCanvas.SetActive(false); // Deactivate pause menu canvas
 
-            if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(0) ||
-                SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(2))
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3) ||
+                SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(4) ||
+                SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(5))
             {
                 SetPlayerCapsuleActive(); // Activate player capsule
                 Cursor.lockState = CursorLockMode.None; // Unlock cursor, confine to game screen
@@ -361,8 +362,9 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void CloseShopEarly()
     {
-        GameManager.Instance.timeRemaining = 5.0f;
-        TogglePauseMenuCanvas();
+        GameManager.Instance.timeRemaining = 0f;
+        GameManager.Instance.pauseMenuCanvas.SetActive(false);
+        EndDay();
     }
 
     private void DisplayEndOfDayUI()
@@ -495,7 +497,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
             this.endOfDayCurrency = this.playerCurrency;
             this.endOfDayLandlordPayment = this.landlordPayment;
             this.endOfDayMorality = MoralitySystem.Instance.moralityCounter;
-            OrderSystem.Instance.GenerateOrderList();
             potionCraftingCanvas.SetActive(false);
             orderCanvas.SetActive(false);
             playerCapsule.SetActive(false);

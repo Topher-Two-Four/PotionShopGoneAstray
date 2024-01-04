@@ -101,11 +101,15 @@ public class OrderSystem : MonoBehaviour
         if (Instance != null && Instance != this) { Destroy(this); } else { Instance = this; } // Singleton logic
     }
 
-    public void GenerateOrderList() 
+    public void GenerateOrderList()
     {
+        Debug.Log("Generating order list.");
         for (int x = 0; x < orderList.Length; x++)
         {
             Order currentOrder = orderList[x];
+
+            currentOrder.orderCompletedMask.gameObject.SetActive(false);
+            currentOrder.turnInPotionButton.gameObject.SetActive(true);
 
             int randomCustomerIndex = Random.Range(0, customerList.Length);
             currentOrder.customer = customerList[randomCustomerIndex];

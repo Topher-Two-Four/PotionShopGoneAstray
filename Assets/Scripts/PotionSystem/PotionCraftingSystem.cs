@@ -158,9 +158,9 @@ public class PotionCraftingSystem : MonoBehaviour
         ingredient3 = null;
         ingredient4 = null;
         //Debug.Log("Brewing process started");
-        while (timeCooked < potionRecipe.cookTime)
+        while (timeCooked < potionRecipe.cookTime &&
+               GameManager.Instance.isTimerRunning)
         {
-
             if (currentTemp == desiredTemp && potionRecipe.needsLidOn == isLidOn)
             {
                 float timeRemaining = Mathf.Max(0, cookTime - timeCooked);
@@ -600,7 +600,10 @@ public class PotionCraftingSystem : MonoBehaviour
 
     public void StirCauldron()
     {
-        isStirred = true;
+        if (timeCooked > (cookTime / 2))
+        {
+            isStirred = true;
+        }
     }
 
     // *** ITEM RETRIEVAL ***

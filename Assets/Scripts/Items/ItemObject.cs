@@ -25,9 +25,10 @@ public class ItemObject : MonoBehaviour
 
     private void RotateTowardsTarget()
     {
-        if (SceneManager.GetActiveScene().Equals(SceneManager.GetSceneByBuildIndex(3)) ||
+        if ((SceneManager.GetActiveScene().Equals(SceneManager.GetSceneByBuildIndex(3)) ||
             SceneManager.GetActiveScene().Equals(SceneManager.GetSceneByBuildIndex(4)) ||
-            SceneManager.GetActiveScene().Equals(SceneManager.GetSceneByBuildIndex(5)))
+            SceneManager.GetActiveScene().Equals(SceneManager.GetSceneByBuildIndex(5))) &&
+            GameObject.FindGameObjectWithTag("ItemTarget") != null)
         {
             GameObject itemTarget = GameObject.FindGameObjectWithTag("ItemTarget");
             transform.LookAt(itemTarget.transform);

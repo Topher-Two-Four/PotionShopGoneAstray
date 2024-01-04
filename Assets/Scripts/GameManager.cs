@@ -95,6 +95,14 @@ public class GameManager : MonoBehaviour, IDataPersistence
         } 
     }
 
+    public void OnLevelWasLoaded(int level)
+    {
+        if (GameObject.FindGameObjectWithTag("PlayerSpawnPoint") != null)
+        {
+            SpawnPlayerIntoMaze(level);
+        }
+    }
+
     public void LoadData(GameData data)
     {
         Debug.Log("Loaded player currency: " + data.playerCurrency);
@@ -394,6 +402,12 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
         controller._speed = 0; // Make it so player doesn't jut forward when entering maze
         controller._rotationVelocity = 0; // Make it so player doesn't rotate uncontrollably when entering maze
+    }
+
+    private void SpawnPlayerIntoMaze(int level)
+    {
+        controller.MoveToPosition(GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform.position);
+        controller.transform.rotation = GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform.rotation;
     }
 
     private void SetPlayerCapsuleActive()

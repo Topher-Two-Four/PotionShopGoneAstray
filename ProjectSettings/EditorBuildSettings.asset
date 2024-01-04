@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/CurrentBuild/PotionShopLevel.unity
     guid: dc7fb4771bf4b034a9894fc35f9331f5
   - enabled: 1
+    path: Assets/Scenes/CurrentBuild/MazeBuildBravo.unity
+    guid: 98b4005e91f9aaf409051d9e8e86b09e
+  - enabled: 1
     path: Assets/Scenes/CurrentBuild/MazeBuildAlpha.unity
     guid: a7277d6fbcc6d5f4dba9db35380b624e
   - enabled: 1

@@ -295,7 +295,11 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3))
         {
-            LoadMazeLevel();
+            LoadMazeLevelAlpha();
+        } 
+        else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(4))
+        {
+            LoadMazeLevelBravo();
         }
 
         Cursor.lockState = CursorLockMode.Confined; // Lock cursor in one place
@@ -311,8 +315,17 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void SwitchSceneToMazeLevel() // Use scene manager to switch to Maze Level
     {
-        SceneManager.LoadScene(3); // Use scene manager to load second scene from scene list (settings menu)
-        LoadMazeLevel();
+        int randomSceneIndex = Random.Range(3, 5);
+        if (randomSceneIndex == 3)
+        {
+            LoadMazeLevelAlpha();
+            SceneManager.LoadScene(3); // Use scene manager to load second scene from scene list (settings menu)
+        } else
+        {
+            LoadMazeLevelBravo();
+            SceneManager.LoadScene(4); // Use scene manager to load second scene from scene list (settings menu)
+        }
+
         controller._speed = 0; // Make it so player doesn't jut forward when entering maze
         controller._rotationVelocity = 0; // Make it so player doesn't rotate uncontrollably when entering maze
     }
@@ -353,16 +366,34 @@ public class GameManager : MonoBehaviour, IDataPersistence
         endOfDayCanvas.SetActive(true);
     }
 
-    private void LoadMazeLevel() // Place player in correct spot when maze is loaded
+    private void LoadMazeLevelAlpha() // Place player in correct spot when maze is loaded
     {
         Cursor.lockState = CursorLockMode.Locked; // Unlock cursor, confine to game screen
         Cursor.visible = false; // Display cursor
 
         SetPlayerCapsuleActive(); // Ensure the player capsule is active
 
-        Vector3 spawnPoint = new Vector3(136f, 4f, -125.9f); // ************** EVENTUALLY NEED TO MAKE THIS INTO A SPAWN POINT AND USE MAZE SPAWN MANAGER *************************
+        Vector3 spawnPoint = new Vector3(-27f, -58f, 25f); // ************** EVENTUALLY NEED TO MAKE THIS INTO A SPAWN POINT AND USE MAZE SPAWN MANAGER *************************
 
         controller.MoveToPosition(spawnPoint); // Move player controller to player spawn point
+
+        controller._speed = 0; // Make it so player doesn't jut forward when entering maze
+        controller._rotationVelocity = 0; // Make it so player doesn't rotate uncontrollably when entering maze
+    }
+
+    private void LoadMazeLevelBravo() // Place player in correct spot when maze is loaded
+    {
+        Cursor.lockState = CursorLockMode.Locked; // Unlock cursor, confine to game screen
+        Cursor.visible = false; // Display cursor
+
+        SetPlayerCapsuleActive(); // Ensure the player capsule is active
+
+        Vector3 spawnPoint = new Vector3(136f, 3f, -125.9f); // ************** EVENTUALLY NEED TO MAKE THIS INTO A SPAWN POINT AND USE MAZE SPAWN MANAGER *************************
+
+        controller.MoveToPosition(spawnPoint); // Move player controller to player spawn point
+
+        controller._speed = 0; // Make it so player doesn't jut forward when entering maze
+        controller._rotationVelocity = 0; // Make it so player doesn't rotate uncontrollably when entering maze
     }
 
     private void SetPlayerCapsuleActive()

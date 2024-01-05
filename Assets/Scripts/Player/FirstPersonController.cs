@@ -56,7 +56,15 @@ namespace StarterAssets
 		public float currentStamina = 100f;
 		public float staminaDrainAmount = 0.5f;
 		public float staminaRegenAmount = 0.2f;
-		
+
+		public float viewRadius = 20f; // Distance AI can see
+		public float viewAngle = 90f; // AI cone of vision
+		public LayerMask playerMask; // Used with raycast to detect player
+		public LayerMask obstacleMask; // Used with raycast to detect obstacles
+		public float raycastMeshResolution = 1.0f; // Amount of rays that are cast per degree to increase mesh filter resolution
+		public int raycastEdgeIterations = 4; // Number of times raycast will iterate to increase mesh filter performance
+		public float raycastEdgeDistance = 0.5f; // Maximum distance used to calculate the minimum and maximimum when ray cast hits
+
 		// cinemachine
 		private float _cinemachineTargetPitch;
 
@@ -119,6 +127,23 @@ namespace StarterAssets
 			_fallTimeoutDelta = FallTimeout;
 		}
 
+		private void ScanEnvironment()
+		{
+			DrawDebugVisionArc();
+		}
+		private void DrawDebugVisionArc()
+		{
+			Vector3 forward = transform.forward; // Get forward vector
+			float rightAngle = (viewAngle / 2); // Set angle of right boundary to half of the view angle
+			float leftAngle = -rightAngle; // Set angle of left boundary to opposite of the right view angle
+			Vector3 rightBoundary = Quaternion.Euler(0, rightAngle, 0) * forward; // Create forward vector in direction of right angle to define right vision boundary
+			Vector3 leftBoundary = Quaternion.Euler(0, leftAngle, 0) * forward; // Create forward vector in direction of left angle to define left vision boundary
+
+			Debug.DrawLine(transform.position, transform.position + rightBoundary * viewRadius, Color.green); // Draw right boundary line
+			Debug.DrawLine(transform.position, transform.position + leftBoundary * viewRadius, Color.green); // Draw left boundary line
+			Debug.DrawLine(transform.position + rightBoundary * viewRadius, transform.position + leftBoundary * viewRadius, Color.green); // Draw a line between the two boundary end points to show view radius
+		}
+
 		public void SetSprintSpeed(float newSprintSpeed)
         {
 			SprintSpeed = newSprintSpeed; // Change sprint speed
@@ -150,6 +175,7 @@ namespace StarterAssets
 		private void LateUpdate()
 		{
 			CameraRotation();
+			ScanEnvironment();
 		}
 
 		public void MoveToPosition(Vector3 position)

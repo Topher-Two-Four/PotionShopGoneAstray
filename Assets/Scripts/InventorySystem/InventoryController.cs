@@ -225,6 +225,27 @@ public class InventoryController : MonoBehaviour
         }
     }
 
+    public void ToggleInventoryCanvasOff()
+    {
+        GameManager.Instance.controller.RotationSpeed = 1;
+
+        if (inventoryCanvas.gameObject.activeSelf) // If inventory canvas is active then deactivate it
+        {
+            Cursor.visible = false; // Hide cursor
+            Cursor.lockState = CursorLockMode.Locked; // Unlock and confine cursor to game screen
+            inventoryCanvas.gameObject.SetActive(false); // Deactivate canvas object
+
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0) ||
+                SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1) ||
+                SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(2))
+            {
+                Cursor.lockState = CursorLockMode.Confined; // Unlock cursor and confine to game screen
+                Cursor.visible = true; // Show cursor
+            }
+        }
+    }
+
+
     public PotionData FindPotionOfType(Order potionOrdered)
     {
         List<PotionData> potionsInInvetory = inventoryGrid.FindPotionsInInventory();

@@ -21,8 +21,6 @@ public class RoomManager : MonoBehaviour
             button.onClick.AddListener(() => ToggleRoom(button));
         }
 
-        GameManager.Instance.ToggleOnDoorToMaze();
-
     }
 
     private void OnDestroy()

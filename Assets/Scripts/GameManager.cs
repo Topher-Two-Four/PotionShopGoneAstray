@@ -262,6 +262,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         landlordPaymentText.text = ("Landlord Payment: $" + landlordPayment);
         MoralitySystem.Instance.moralityCounter = 0;
         MoralitySystem.Instance.UpdateMoralityUI();
+        InventoryController.Instance.ToggleInventoryCanvasOff();
         SceneManager.LoadScene(2);
     }
 
@@ -289,6 +290,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         DayUIUpdate();
         AddCurrencyToPlayer(0);
         OrderSystem.Instance.GenerateOrderList();
+        InventoryController.Instance.ToggleInventoryCanvasOff();
         SceneManager.LoadScene(2); // Load scene through scene manager
     }
 
@@ -318,7 +320,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
         }
         OrderSystem.Instance.CheckForCompleteOrders();
         Invoke("CallLoadPotionShop", 1f);
-
     }
 
     public void SwitchSceneToMazeLevel() // Use scene manager to switch to Maze Level

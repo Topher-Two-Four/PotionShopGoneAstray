@@ -58,7 +58,7 @@ public class DataPersistenceManager : MonoBehaviour
         Debug.Log("Loaded landlord payment: " + gameData.landlordPayment);
         Debug.Log("Loaded current day: " + gameData.currentDay);
         Debug.Log("Loaded player morality: " + gameData.playerMorality);
-        //Debug.Log("Loaded player inventory: " + gameData.playerInventory);
+        Debug.Log("Loaded player inventory: " + gameData.playerInventory);
 }
 
     public void SaveGame()

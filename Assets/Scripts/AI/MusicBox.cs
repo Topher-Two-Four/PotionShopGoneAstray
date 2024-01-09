@@ -45,7 +45,6 @@ public class MusicBox : MonoBehaviour
             if (currentMusicPlayTime < musicLength)
             {
                 currentMusicPlayTime += Time.deltaTime;
-                Debug.Log(playerDistance);
             }
             else
             {

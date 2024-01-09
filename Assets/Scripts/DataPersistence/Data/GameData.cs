@@ -10,6 +10,7 @@ public class GameData
 	public int landlordPayment;
 	public int currentDay;
 	public int playerMorality;
+	public ItemGrid playerInventory;
 
 	public GameData()
 	{
@@ -17,5 +18,6 @@ public class GameData
 		this.landlordPayment = 1400;
 		this.currentDay = 1;
 		this.playerMorality = 0;
+		this.playerInventory = null;
 	}
 }

@@ -109,9 +109,11 @@ public class GameManager : MonoBehaviour, IDataPersistence
         Debug.Log("Loaded landlord payment: " + data.landlordPayment);
         Debug.Log("Loaded current day: " + data.currentDay);
         Debug.Log("Loaded player morality: " + data.playerMorality);
+        Debug.Log("Loaded player inventory: " + data.playerInventory);
         GameManager.Instance.playerCurrency = data.playerCurrency;
         GameManager.Instance.landlordPayment = data.landlordPayment;
         GameManager.Instance.currentDay = data.currentDay;
+        InventoryController.Instance.inventoryGrid = data.playerInventory;
         dayEndPlayerCurrencyText.text = ("Player Currency: $" + playerCurrency);
         dayEndLandlordPaymentText.text = ("Landlord Payment: $" + landlordPayment);
         MoralitySystem.Instance.moralityCounter = data.playerMorality;
@@ -388,9 +390,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
         SetPlayerCapsuleActive(); // Ensure the player capsule is active
 
-        Vector3 spawnPoint = new Vector3(-27f, -58f, 25f); // ************** EVENTUALLY NEED TO MAKE THIS INTO A SPAWN POINT AND USE MAZE SPAWN MANAGER *************************
-
-        controller.MoveToPosition(spawnPoint); // Move player controller to player spawn point
 
         controller._speed = 0; // Make it so player doesn't jut forward when entering maze
         controller._rotationVelocity = 0; // Make it so player doesn't rotate uncontrollably when entering maze
@@ -402,10 +401,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
         Cursor.visible = false; // Display cursor
 
         SetPlayerCapsuleActive(); // Ensure the player capsule is active
-
-        Vector3 spawnPoint = new Vector3(136f, 3f, -125.9f); // ************** EVENTUALLY NEED TO MAKE THIS INTO A SPAWN POINT AND USE MAZE SPAWN MANAGER *************************
-
-        controller.MoveToPosition(spawnPoint); // Move player controller to player spawn point
 
         controller._speed = 0; // Make it so player doesn't jut forward when entering maze
         controller._rotationVelocity = 0; // Make it so player doesn't rotate uncontrollably when entering maze
@@ -502,7 +497,10 @@ public class GameManager : MonoBehaviour, IDataPersistence
             this.endOfDayCurrency = this.playerCurrency;
             this.endOfDayLandlordPayment = this.landlordPayment;
             this.endOfDayMorality = MoralitySystem.Instance.moralityCounter;
-            potionCraftingCanvas.SetActive(false);
+            if (potionCraftingCanvas != null)
+            {
+                potionCraftingCanvas.SetActive(false);
+            }
             orderCanvas.SetActive(false);
             playerCapsule.SetActive(false);
             Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
@@ -535,6 +533,11 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         playerCurrency += amountToAdd;
         playerCurrencyText.text = ("Player Currency: $" + playerCurrency);
+    }
+
+    public void MovePlayerToSpawnPoint()
+    {
+
     }
 
 }

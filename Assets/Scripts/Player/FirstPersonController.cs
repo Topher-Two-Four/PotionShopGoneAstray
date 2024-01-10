@@ -65,7 +65,6 @@ namespace StarterAssets
 
 		public float viewRadius = 20f; // Distance AI can see
 		public float viewAngle = 90f; // AI cone of vision
-		public LayerMask playerMask; // Used with raycast to detect player
 		public LayerMask obstacleMask; // Used with raycast to detect obstacles
 		public float raycastMeshResolution = 1.0f; // Amount of rays that are cast per degree to increase mesh filter resolution
 		public int raycastEdgeIterations = 4; // Number of times raycast will iterate to increase mesh filter performance
@@ -150,18 +149,21 @@ namespace StarterAssets
 					{
 						Debug.DrawRay(this.transform.position, enemyDirection, Color.green, enemyDistance);
 						Teleportation.Instance.playerIsLooking = true;
+						isLooking = true;
 						Debug.Log(isLooking);
 						break;
 					}
 					else
 					{
 						Teleportation.Instance.playerIsLooking = false; // Player not looking
+						isLooking = false;
 						Debug.Log(isLooking);
 					}
 				}
 				if (Vector3.Distance(transform.position, enemyTransform.position) > viewRadius) // If enemy distance is not within viewing radius
 				{
 					Teleportation.Instance.playerIsLooking = false;
+					isLooking = false;
 					Debug.Log(isLooking);
 				}
 			}

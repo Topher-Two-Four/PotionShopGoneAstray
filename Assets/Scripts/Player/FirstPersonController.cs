@@ -57,6 +57,9 @@ namespace StarterAssets
 		public float staminaDrainAmount = 0.5f;
 		public float staminaRegenAmount = 0.2f;
 
+		public float previousMoveSpeed;
+		public float previousSprintSpeed;
+
 		public float viewRadius = 20f; // Distance AI can see
 		public float viewAngle = 90f; // AI cone of vision
 		public LayerMask playerMask; // Used with raycast to detect player
@@ -155,9 +158,17 @@ namespace StarterAssets
 
 		public void StopMovement()
         {
+			previousMoveSpeed = MoveSpeed;
+			previousSprintSpeed = SprintSpeed;
 			MoveSpeed = 0;
 			SprintSpeed = 0;
         }
+
+		public void ResumeMovement()
+		{
+			MoveSpeed = previousMoveSpeed;
+			SprintSpeed = previousSprintSpeed;
+		}
 
 		private void Update()
 		{
@@ -171,6 +182,11 @@ namespace StarterAssets
             }
 
 		}
+
+		public void CallMove()
+        {
+			Move();
+        }
 
 		private void LateUpdate()
 		{

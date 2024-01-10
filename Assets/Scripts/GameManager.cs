@@ -43,6 +43,9 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public GameObject winLossCanvas;
     public GameObject pauseMenuCanvas;
 
+    public GameObject alphaPlayerSpawn;
+    public GameObject bravoPlayerSpawn;
+
     public bool isTimerRunning = false;
     public bool morningTransitionComplete = false; // Keep track of transition from beginning of new day to morning
     public bool afternoonTransitionComplete = false; // Keep track of transition from morning to afternoon
@@ -95,13 +98,17 @@ public class GameManager : MonoBehaviour, IDataPersistence
         } 
     }
 
-    public void OnLevelWasLoaded(int level)
+    /*public void OnLevelWasLoaded(int level)
     {
         if (GameObject.FindGameObjectWithTag("PlayerSpawnPoint") != null)
         {
-            SpawnPlayerIntoMaze(level);          
+            SpawnPlayerIntoMaze(level);
+            controller.CallMove();
+            //controller.StopMovement();
+            //controller.ResumeMovement();
         }
     }
+    */
 
     public void LoadData(GameData data)
     {
@@ -129,6 +136,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         data.playerMorality = this.endOfDayMorality;
         //data.playerInventory = InventoryController.Instance.inventoryGrid;
     }
+
 
     public void StartGameTimer()
     {
@@ -318,10 +326,10 @@ public class GameManager : MonoBehaviour, IDataPersistence
         Cursor.visible = true; // Hide cursor
         if (playerCapsule != null)
         {
-            Invoke("SetPlayerCapsuleInactive", 0.5f);
+            SetPlayerCapsuleInactive();
         }
         OrderSystem.Instance.CheckForCompleteOrders();
-        Invoke("CallLoadPotionShop", 1f);
+        CallLoadPotionShop();
     }
 
     public void SwitchSceneToMazeLevel() // Use scene manager to switch to Maze Level
@@ -390,6 +398,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
         SetPlayerCapsuleActive(); // Ensure the player capsule is active
 
+        controller.MoveToPosition(alphaPlayerSpawn.transform.position);
+        playerCapsule.transform.rotation = alphaPlayerSpawn.transform.rotation;
 
         controller._speed = 0; // Make it so player doesn't jut forward when entering maze
         controller._rotationVelocity = 0; // Make it so player doesn't rotate uncontrollably when entering maze
@@ -401,12 +411,14 @@ public class GameManager : MonoBehaviour, IDataPersistence
         Cursor.visible = false; // Display cursor
 
         SetPlayerCapsuleActive(); // Ensure the player capsule is active
+        controller.MoveToPosition(bravoPlayerSpawn.transform.position);
+        playerCapsule.transform.rotation = bravoPlayerSpawn.transform.rotation;
 
         controller._speed = 0; // Make it so player doesn't jut forward when entering maze
         controller._rotationVelocity = 0; // Make it so player doesn't rotate uncontrollably when entering maze
     }
 
-    private void SpawnPlayerIntoMaze(int level)
+    private void SpawnPlayerIntoMaze()
     {
         controller.MoveToPosition(GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform.position);
         controller.transform.rotation = GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform.rotation;

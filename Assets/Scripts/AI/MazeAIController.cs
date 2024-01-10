@@ -18,10 +18,7 @@ public class MazeAIController : MonoBehaviour
     public Transform[] patrolPoints; // An array containing points the AI patrols
     public float waitTimeout = 5.0f; // Amount of time to wait until timeout to next patrol point
 
-    public float phaseCooldownTimerAmount = 10.0f;
-    public float timeSinceLastPhase = 0f;
-    public bool phaseCooldownComplete = true;
-    public bool phaseCooldownTimerRunning = false;
+    public bool isPhasedIn = false;
 
     public bool isMusicAI = false;
 
@@ -66,42 +63,16 @@ public class MazeAIController : MonoBehaviour
                     MusicBox.Instance.PlayMusic();
                 }
 
-                if (GetComponentInChildren<Teleportation>() != null)
+                if (GetComponentInChildren<Teleportation>() != null && !isPhasedIn)
                 {
-                    if (phaseCooldownComplete)
-                    {
-                        Teleportation.Instance.PhaseIn();
-                        phaseCooldownTimerRunning = false;
-                    }
-
-                    if (phaseCooldownTimerRunning)
-                    {
-                        if (timeSinceLastPhase >= phaseCooldownTimerAmount)
-                        {
-
-                            phaseCooldownTimerRunning = false;
-                            phaseCooldownComplete = true;
-                            timeSinceLastPhase = 0f;
-                        }
-                        else
-                        {
-                            timeSinceLastPhase += Time.deltaTime;
-                            phaseCooldownComplete = false;
-                        }
-                    }
-
+                    Teleportation.Instance.PhaseIn();
+                    isPhasedIn = true;
                 }
             }
+
             else
             {
                 Patrol(); // Patrol maze
-                if (GetComponentInChildren<Teleportation>() != null)
-                {
-                    if (!phaseCooldownTimerRunning)
-                    {
-                        phaseCooldownTimerRunning = true;
-                    }
-                }
             }
 
             if (navMeshAgent.velocity.magnitude <= navMeshAgent.stoppingDistance && // Check if AI is within stopping distance
@@ -128,6 +99,21 @@ public class MazeAIController : MonoBehaviour
         Move(walkSpeed); // Move to next patrol point (with walking feet)
 
         _lastMoveTime = 0; // Reset last moved timer
+    }
+
+    public void MoveToPosition(Vector3 position)
+    {
+        gameObject.transform.position = position;
+    }
+
+    public void MakeInvisible()
+    {
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+    }
+
+    public void MakeVisible()
+    {
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 
     public void StopMovement()

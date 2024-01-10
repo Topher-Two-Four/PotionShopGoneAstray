@@ -54,7 +54,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 395485503890509800}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -236,11 +236,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   waitTimeout: 5
-  phaseCooldownTimerAmount: 10
-  timeSinceLastPhase: 0
-  phaseCooldownComplete: 1
-  phaseCooldownTimerRunning: 0
+  isPhasedIn: 0
   isMusicAI: 0
   _waitTime: 0
   _detectionTime: 0
@@ -303,7 +301,9 @@ MonoBehaviour:
   phasedIn: 0
   phaseCatchDistance: 40
   timeRemovedWhenCaught: 120
-  playerHasLooked: 0
+  playerIsLooking: 0
+  hasPhasedOut: 1
+  mazeAIController: {fileID: 3763263676343624898}
 --- !u!1 &5026945704411923157
 GameObject:
   m_ObjectHideFlags: 0

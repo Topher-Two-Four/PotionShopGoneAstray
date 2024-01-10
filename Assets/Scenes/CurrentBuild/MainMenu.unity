@@ -4245,6 +4245,26 @@ PrefabInstance:
       propertyPath: m_LocalRotation.y
       value: 0.008726558
       objectReference: {fileID: 0}
+    - target: {fileID: 6073503498084768483, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+      propertyPath: isLooking
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073503498084768483, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+      propertyPath: viewRadius
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073503498084768483, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+      propertyPath: enemyMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073503498084768483, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+      propertyPath: playerMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073503498084768483, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+      propertyPath: obstacleMask.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 6675413122062098297, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

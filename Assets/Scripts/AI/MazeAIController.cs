@@ -18,6 +18,11 @@ public class MazeAIController : MonoBehaviour
     public Transform[] patrolPoints; // An array containing points the AI patrols
     public float waitTimeout = 5.0f; // Amount of time to wait until timeout to next patrol point
 
+    public float phaseCooldownTimerAmount = 10.0f;
+    public float timeSinceLastPhase = 0f;
+    public bool phaseCooldownComplete = true;
+    public bool phaseCooldownTimerRunning = false;
+
     public bool isMusicAI = false;
 
     private float _lastMoveTime; // Amount of time since AI last moved
@@ -60,10 +65,43 @@ public class MazeAIController : MonoBehaviour
                 {
                     MusicBox.Instance.PlayMusic();
                 }
+
+                if (GetComponentInChildren<Teleportation>() != null)
+                {
+                    if (phaseCooldownComplete)
+                    {
+                        Teleportation.Instance.PhaseIn();
+                        phaseCooldownTimerRunning = false;
+                    }
+
+                    if (phaseCooldownTimerRunning)
+                    {
+                        if (timeSinceLastPhase >= phaseCooldownTimerAmount)
+                        {
+
+                            phaseCooldownTimerRunning = false;
+                            phaseCooldownComplete = true;
+                            timeSinceLastPhase = 0f;
+                        }
+                        else
+                        {
+                            timeSinceLastPhase += Time.deltaTime;
+                            phaseCooldownComplete = false;
+                        }
+                    }
+
+                }
             }
             else
             {
                 Patrol(); // Patrol maze
+                if (GetComponentInChildren<Teleportation>() != null)
+                {
+                    if (!phaseCooldownTimerRunning)
+                    {
+                        phaseCooldownTimerRunning = true;
+                    }
+                }
             }
 
             if (navMeshAgent.velocity.magnitude <= navMeshAgent.stoppingDistance && // Check if AI is within stopping distance

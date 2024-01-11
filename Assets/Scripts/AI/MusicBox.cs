@@ -45,7 +45,6 @@ public class MusicBox : MonoBehaviour
             if (currentMusicPlayTime < musicLength)
             {
                 currentMusicPlayTime += Time.deltaTime;
-                Debug.Log(playerDistance);
             }
             else
             {
@@ -65,7 +64,6 @@ public class MusicBox : MonoBehaviour
         {
             audioSource.Play(0);
             musicPlaying = true;
-            Debug.Log("Music started.");
         }
     }
 
@@ -74,12 +72,10 @@ public class MusicBox : MonoBehaviour
         audioSource.Stop();
         musicPlaying = false;
         currentMusicPlayTime = 0f;
-        Debug.Log("Music stopped.");
     }
 
     private void PlayerCaught()
     {
-        Debug.Log("Player caught.");
         GameManager.Instance.timeRemaining -= timeRemovedWhenCaught;
         GameManager.Instance.SwitchSceneToPotionLevel();
     }

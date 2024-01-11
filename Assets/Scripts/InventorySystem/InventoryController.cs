@@ -225,6 +225,27 @@ public class InventoryController : MonoBehaviour
         }
     }
 
+    public void ToggleInventoryCanvasOff()
+    {
+        GameManager.Instance.controller.RotationSpeed = 1;
+
+        if (inventoryCanvas.gameObject.activeSelf) // If inventory canvas is active then deactivate it
+        {
+            Cursor.visible = false; // Hide cursor
+            Cursor.lockState = CursorLockMode.Locked; // Unlock and confine cursor to game screen
+            inventoryCanvas.gameObject.SetActive(false); // Deactivate canvas object
+
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0) ||
+                SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1) ||
+                SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(2))
+            {
+                Cursor.lockState = CursorLockMode.Confined; // Unlock cursor and confine to game screen
+                Cursor.visible = true; // Show cursor
+            }
+        }
+    }
+
+
     public PotionData FindPotionOfType(Order potionOrdered)
     {
         List<PotionData> potionsInInvetory = inventoryGrid.FindPotionsInInventory();
@@ -241,7 +262,6 @@ public class InventoryController : MonoBehaviour
                 (potion.isLucky && potionOrdered.isLucky) ||
                 (potion.isPoison && potionOrdered.isPoison)))
                 {
-                //Debug.Log(potion);
                 return potion;
                 }
             }
@@ -278,7 +298,6 @@ public class InventoryController : MonoBehaviour
         {
             selectedItemGrid.RemoveItem(tileGridPosition.x, tileGridPosition.y);
 
-            //SellPotion(selectedItem.potionData);
             Destroy(selectedItem.gameObject);
         }
         
@@ -308,17 +327,13 @@ public class InventoryController : MonoBehaviour
         }
         else
         {
-            //Debug.Log("No way you're wasting a potion!");
             return;
         }
     }
 
     public void ClearInventoryGrid()
     {
-        if (inventoryGrid != null)
-        {
-            inventoryGrid.ClearGrid(inventoryGrid);
-        }
+        inventoryGrid?.ClearGrid(inventoryGrid); // If inventory grid exists then clear it
     }
 
     Vector2Int oldPosition;

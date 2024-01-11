@@ -7,20 +7,24 @@ public class Teleportation : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip triggeredMusic;
     public AudioClip caughtSound;
-    public float lookTimeElapsed = 0f;
-    public float timeToLook = 4.0f;
-    public bool playerMustLook = false;
-    public bool playerIsLooking = false;
+    public float currentPhaseTime = 0f;
+    public float phaseLength = 10.0f;
+    public bool phasedIn = false;
+    public float phaseCatchDistance = 20.0f;
     public float timeRemovedWhenCaught = 120.0f;
+
+    public bool playerIsLooking = false;
+    public bool hasPhasedOut = true;
+    public MazeAIController mazeAIController;
 
     public static Teleportation Instance { get; private set; } // Singleton logic
 
     // Start is called before the first frame update
     void Start()
     {
-        lookTimeElapsed = 0f;
-        playerMustLook = false;
-        playerIsLooking = false;
+        currentPhaseTime = 0f;
+        phasedIn = false;
+        mazeAIController.MakeInvisible();
     }
 
     private void Awake()
@@ -38,48 +42,49 @@ public class Teleportation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerMustLook == true)
+        if (phasedIn == true && !hasPhasedOut)
         {
-            float playerDistance = Vector3.Distance(GameManager.Instance.playerCapsule.transform.position, transform.position);
-
-            if (lookTimeElapsed < timeToLook)
+            if (currentPhaseTime < phaseLength && !playerIsLooking)
             {
-                lookTimeElapsed += Time.deltaTime;
-                Debug.Log(playerDistance);
+                currentPhaseTime += Time.deltaTime;
             }
             else
             {
-                if (playerIsLooking)
-                {
-                    TeleportOut();
-                }
-                else
-                {
-                    PlayerCaught();
-                }
+                PhaseOut();
             }
 
         }
     }
 
-    public void TeleportIn()
+    public void PhaseIn()
     {
-        if (!playerMustLook)
+        if (!phasedIn)
         {
-            audioSource.Play(0);
-            GetComponent<MeshRenderer>().gameObject.SetActive(true);
-            playerMustLook = true;
-            Debug.Log("Music started.");
+            phasedIn = true;
+            mazeAIController.MakeVisible();
+            hasPhasedOut = false;
+            Debug.Log("Phased in.");
         }
     }
 
-    public void TeleportOut()
+    public void PhaseOut()
     {
-        audioSource.Stop();
-        GetComponent<MeshRenderer>().gameObject.SetActive(false);
-        playerMustLook = false;
-        lookTimeElapsed = 0f;
-        Debug.Log("Music stopped.");
+        phasedIn = false;
+        currentPhaseTime = 0f;
+
+        float playerDistance = Vector3.Distance(GameManager.Instance.playerCapsule.transform.position, transform.position);
+        mazeAIController.gameObject.transform.position = Vector3.zero;
+        mazeAIController.isPhasedIn = false;
+        //mazeAIController.MakeInvisible();
+
+        if (playerDistance <= phaseCatchDistance && !playerIsLooking)
+        {
+            PlayerCaught();
+        }
+        mazeAIController.MoveToPosition(new Vector3(60, -64, 22));
+
+        hasPhasedOut = true;
+        Debug.Log("Phased out.");
     }
 
     private void PlayerCaught()
@@ -88,7 +93,4 @@ public class Teleportation : MonoBehaviour
         GameManager.Instance.timeRemaining -= timeRemovedWhenCaught;
         GameManager.Instance.SwitchSceneToPotionLevel();
     }
-
-
-
 }

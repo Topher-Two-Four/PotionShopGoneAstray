@@ -610,15 +610,11 @@ public class PotionCraftingSystem : MonoBehaviour
 
     private void RetrievePotion()
     {
-        //Debug.Log(potionBeingBrewed);
-        //Debug.Log("Trying to retrieve potion");
         if (!isBrewing)
         {
             if (isRetrievable)
             {
-                //Debug.Log("Retrieving potion");
                 AddPotionToInventory(potionBeingBrewed, GetPotionQuality());
-                //GameManager.Instance.AddCurrency(potionBeingBrewed.baseValue);
                 OrderSystem.Instance.CheckForCompleteOrders();
                 potionBeingBrewed = null;
                 isRetrievable = false; // Reset is retrievable variable
@@ -626,14 +622,6 @@ public class PotionCraftingSystem : MonoBehaviour
                 UpdatePotionQualityIndicator();
                 ResetBrewingTimer();
             }
-            else
-            {
-                //Debug.Log("Potion not retrievable");
-            }
-        }
-        else
-        {
-            //Debug.Log("Brewing not complete");
         }
     }
 

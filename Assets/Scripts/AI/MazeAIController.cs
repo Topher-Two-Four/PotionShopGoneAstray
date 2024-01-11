@@ -18,6 +18,8 @@ public class MazeAIController : MonoBehaviour
     public Transform[] patrolPoints; // An array containing points the AI patrols
     public float waitTimeout = 5.0f; // Amount of time to wait until timeout to next patrol point
 
+    public bool isPhasedIn = false;
+
     public bool isMusicAI = false;
 
     private float _lastMoveTime; // Amount of time since AI last moved
@@ -60,7 +62,14 @@ public class MazeAIController : MonoBehaviour
                 {
                     MusicBox.Instance.PlayMusic();
                 }
+
+                if (GetComponentInChildren<Teleportation>() != null && !isPhasedIn)
+                {
+                    Teleportation.Instance.PhaseIn();
+                    isPhasedIn = true;
+                }
             }
+
             else
             {
                 Patrol(); // Patrol maze
@@ -90,6 +99,21 @@ public class MazeAIController : MonoBehaviour
         Move(walkSpeed); // Move to next patrol point (with walking feet)
 
         _lastMoveTime = 0; // Reset last moved timer
+    }
+
+    public void MoveToPosition(Vector3 position)
+    {
+        gameObject.transform.position = position;
+    }
+
+    public void MakeInvisible()
+    {
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+    }
+
+    public void MakeVisible()
+    {
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 
     public void StopMovement()
@@ -214,7 +238,7 @@ public class MazeAIController : MonoBehaviour
         }
     }
 
-    private void ScanEnvironment() 
+    private void ScanEnvironment()
     {
         DrawDebugVisionArc(); // Use to show arc of AI vision
 

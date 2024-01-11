@@ -57,9 +57,14 @@ namespace StarterAssets
 		public float staminaDrainAmount = 0.5f;
 		public float staminaRegenAmount = 0.2f;
 
+		public float previousMoveSpeed;
+		public float previousSprintSpeed;
+
+		public LayerMask enemyMask;
+		public bool isLooking = true;
+
 		public float viewRadius = 20f; // Distance AI can see
 		public float viewAngle = 90f; // AI cone of vision
-		public LayerMask playerMask; // Used with raycast to detect player
 		public LayerMask obstacleMask; // Used with raycast to detect obstacles
 		public float raycastMeshResolution = 1.0f; // Amount of rays that are cast per degree to increase mesh filter resolution
 		public int raycastEdgeIterations = 4; // Number of times raycast will iterate to increase mesh filter performance
@@ -130,6 +135,38 @@ namespace StarterAssets
 		private void ScanEnvironment()
 		{
 			DrawDebugVisionArc();
+
+			Collider[] enemyInRange = Physics.OverlapSphere(transform.position, viewRadius, enemyMask);  // Collider array of enemy colliders that are in range
+
+			for (int i = 0; i < enemyInRange.Length; i++)
+			{
+				Transform enemyTransform = enemyInRange[i].transform; // Set enemy transform variable
+				Vector3 enemyDirection = (enemyTransform.position - transform.position).normalized; // Set enemy direction variable
+				if (Vector3.Angle(transform.forward, enemyDirection) < viewAngle / 2) // If enemy is spotted, then begin chasing, if not then don't chase
+				{
+					float enemyDistance = Vector3.Distance(transform.position, enemyTransform.position); // Set enemy distance variable
+					if (!Physics.Raycast(transform.position, enemyDirection, enemyDistance, obstacleMask)) // Check for any obstacles in the way of raycast
+					{
+						Debug.DrawRay(this.transform.position, enemyDirection, Color.green, enemyDistance);
+						Teleportation.Instance.playerIsLooking = true;
+						isLooking = true;
+						Debug.Log(isLooking);
+						break;
+					}
+					else
+					{
+						Teleportation.Instance.playerIsLooking = false; // Player not looking
+						isLooking = false;
+						Debug.Log(isLooking);
+					}
+				}
+				if (Vector3.Distance(transform.position, enemyTransform.position) > viewRadius) // If enemy distance is not within viewing radius
+				{
+					Teleportation.Instance.playerIsLooking = false;
+					isLooking = false;
+					Debug.Log(isLooking);
+				}
+			}
 		}
 		private void DrawDebugVisionArc()
 		{
@@ -155,9 +192,17 @@ namespace StarterAssets
 
 		public void StopMovement()
         {
+			previousMoveSpeed = MoveSpeed;
+			previousSprintSpeed = SprintSpeed;
 			MoveSpeed = 0;
 			SprintSpeed = 0;
         }
+
+		public void ResumeMovement()
+		{
+			MoveSpeed = previousMoveSpeed;
+			SprintSpeed = previousSprintSpeed;
+		}
 
 		private void Update()
 		{
@@ -171,6 +216,11 @@ namespace StarterAssets
             }
 
 		}
+
+		public void CallMove()
+        {
+			Move();
+        }
 
 		private void LateUpdate()
 		{

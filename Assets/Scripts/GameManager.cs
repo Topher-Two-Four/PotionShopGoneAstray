@@ -54,6 +54,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public static GameManager Instance { get; private set; } // Singleton logic
 
+    // - GENERAL -
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -69,8 +71,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     private void Start()
     {
         isTimerRunning = false;
-        Cursor.lockState = CursorLockMode.Confined; // Lock cursor in one place
-        Cursor.visible = true; // Hide cursor
+        ToggleCursorOn();
         playerCapsule.SetActive(false); // Deactivate player capsule
         playerCurrencyText.text = ("Player Currency: $" + playerCurrency);
         landlordPaymentText.text = ("Landlord Payment: $" + landlordPayment);
@@ -110,6 +111,17 @@ public class GameManager : MonoBehaviour, IDataPersistence
     }
     */
 
+    // - SAVE/LOAD GAME -
+
+    public void SaveData(ref GameData data)
+    {
+        data.playerCurrency = this.endOfDayCurrency;
+        data.landlordPayment = this.endOfDayLandlordPayment;
+        data.currentDay = this.currentDay;
+        data.playerMorality = this.endOfDayMorality;
+        //data.playerInventory = InventoryController.Instance.inventoryGrid;
+    }
+
     public void LoadData(GameData data)
     {
         Debug.Log("Loaded player currency: " + data.playerCurrency);
@@ -128,21 +140,11 @@ public class GameManager : MonoBehaviour, IDataPersistence
         //InventoryController.Instance.inventoryGrid = data.playerInventory;
     }
 
-    public void SaveData(ref GameData data)
-    {
-        data.playerCurrency = this.endOfDayCurrency;
-        data.landlordPayment = this.endOfDayLandlordPayment;
-        data.currentDay = this.currentDay;
-        data.playerMorality = this.endOfDayMorality;
-        //data.playerInventory = InventoryController.Instance.inventoryGrid;
-    }
-
+    // - GAME TIMER -
 
     public void StartGameTimer()
     {
-        //Debug.Log(isTimerRunning);
         isTimerRunning = true; // Set the timer to run
-        //Debug.Log(isTimerRunning);
 
     }
 
@@ -153,13 +155,64 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void ResetGameTimer()
     {
-        timeRemaining = timeInDay;
+        timeRemaining = timeInDay; // Reset time of day timer
     }
 
-    public void ExitGame()
+    private void StartNewDayTimer()
     {
-        Application.Quit(); // Exit game to desktop
+        GameManager.Instance.isTimerRunning = true; // Run timer
+        GameManager.Instance.timeRemaining = timeInDay; // Reset time of day
     }
+
+    private void TimerUpdate() // Update timer and keep track of what time of day it is
+    {
+        if (timeRemaining > 600)
+        {
+            isMorning = true; isAfternoon = false; isEvening = false; isEndOfDay = false; // Set time of day to morning
+
+            if (morningTransitionComplete == false) // Morning transition block, which will run once at the beginning of the morning
+            {
+                morningTransitionComplete = true; // Set transition status to complete
+                timeOfDayText.text = ("Morning"); // Display time of day text on screen
+                timeOfDayText.color = Color.white; // Set color of text to white
+            }
+        }
+        else if (timeRemaining <= 600 && timeRemaining > 300)
+        {
+            isMorning = false; isAfternoon = true; isEvening = false; isEndOfDay = false; // Set time of day to afternoon
+            if (afternoonTransitionComplete == false) // Afternoon transition block, which will run once at the beginning of the afternoon
+            {
+                afternoonTransitionComplete = true; // Set transition status to complete
+                timeOfDayText.text = ("Afternoon"); // Display time of day text on screen
+            }
+        }
+        else if (timeRemaining <= 300 && timeRemaining > 0)
+        {
+            isMorning = false; isAfternoon = false; isEvening = true; isEndOfDay = false; // Set time of day to evening
+            if (eveningTransitionComplete == false) // Evening transition block, which will run once at the beginning of the evening
+            {
+                eveningTransitionComplete = true; // Set transition status to complete
+                timeOfDayText.text = ("Evening"); // Display time of day text on screen
+            }
+        }
+        else
+        {
+            isMorning = false; isAfternoon = false; isEvening = false; isEndOfDay = true; // Set time of day to end of day
+            timeRemaining = 0; // Stop timer at 0, instead of becoming negative value
+            isTimerRunning = false; // Turn off timer
+            if (endOfDayTransitionComplete == false) // End of day transition block, which will run once at the end of the day
+            {
+                endOfDayTransitionComplete = true; // Set transition status to complete
+                timeOfDayText.text = ("End of Day"); // Display time of day text on screen
+                timeOfDayText.color = Color.red; // Set color of text to red
+                EndDay();
+            }
+        }
+        DisplayTime(timeRemaining); // Display time remaining
+    }
+
+    // - GAME MANAGEMENT -
+
 
     public void TogglePauseMenuCanvas()
     {
@@ -173,15 +226,13 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(5))
             {
                 SetPlayerCapsuleActive(); // Activate player capsule
-                Cursor.lockState = CursorLockMode.None; // Unlock cursor, confine to game screen
-                Cursor.visible = false; // Display cursor
+                ToggleCursorOff(); // Lock and hide cursor
             }
             
             var foundAIObjects = FindObjectsOfType<MazeAIController>();
             foreach (MazeAIController mazeAI in foundAIObjects)
             {
-                Debug.Log(mazeAI);
-                mazeAI.ResumeMovement();
+                mazeAI.ResumeMovement(); // Resume AI movement when game is unpaused
             }
         }
         else
@@ -189,181 +240,19 @@ public class GameManager : MonoBehaviour, IDataPersistence
             isTimerRunning = false; // Pause timer
             pauseMenuCanvas.SetActive(true); // Activate pause menu canvas
             SetPlayerCapsuleInactive(); // Deactivate player capsule
-            Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
-            Cursor.visible = true; // Display cursor
+            ToggleCursorOn(); // Unlock and display cursor
 
             var foundAIObjects = FindObjectsOfType<MazeAIController>();
             foreach (MazeAIController mazeAI in foundAIObjects)
             {
-                Debug.Log(mazeAI);
-                mazeAI.StopMovement();
+                mazeAI.StopMovement(); // Pause AI movement when game is paused
             }
         }
     }
 
-    public void TogglePotionCraftingCanvas()
-    {
-        if (potionCraftingCanvas.gameObject.activeSelf)
-        {
-            potionCraftingCanvas.SetActive(false);
-        }
-        else
-        {
-            potionCraftingCanvas.SetActive(true);
-        }
-    }
-    public void ToggleOnPotionCraftingCanvas()
-    {
-            potionCraftingCanvas.SetActive(true);
-    }
-    public void ToggleOffPotionCraftingCanvas()
-    {
-            potionCraftingCanvas.SetActive(false);
-    }
-    public void ToggleOnDoorToMaze()
-    {
-        doorToMaze.SetActive(true);
-    }
-    public void ToggleOffDoorToMaze()
-    {
-        doorToMaze.SetActive(false);
-    }
-    public void ToggleOnOrderDisplay()
-    {
-        orderCanvas.SetActive(true);
-    }
-    public void ToggleOffOrderDisplay()
-    {
-        orderCanvas.SetActive(false);
-    }
-
-    public void AddCurrency(int currencyToAdd)
-    {
-        playerCurrency += currencyToAdd;
-        playerCurrencyText.text = ("Player Currency: $" + playerCurrency);
-    }
-
-    public void SwitchSceneToMainMenu() // Use scene manager to switch to Main Menu
-    {
-        SceneManager.LoadScene(0); // Load scene through scene manager
-        Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
-        Cursor.visible = true; // Display cursor
-    }
-
-    public void SwitchSceneToPotionShopWithNewGame() // Use scene manager to switch to Main Menu
-    {
-        GameManager.Instance.winLossCanvas.SetActive(false);
-        Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
-        Cursor.visible = true; // Display cursor
-        GameManager.Instance.isTimerRunning = true;
-        GameManager.Instance.timeRemaining = timeInDay;
-        GameManager.Instance.currentDay = 1;
-        GameManager.Instance.playerCurrency = 0;
-        GameManager.Instance.landlordPayment = 1400;
-        GameManager.Instance.endOfDayTransitionComplete = false;
-        GameManager.Instance.morningTransitionComplete = false;
-        GameManager.Instance.afternoonTransitionComplete = false;
-        GameManager.Instance.eveningTransitionComplete = false;
-        MoralitySystem.Instance.moralityCounter = 0;
-        InventoryController.Instance.ClearInventoryGrid();
-        DayUIUpdate();
-        OrderSystem.Instance.GenerateOrderList();
-        playerCurrencyText.text = ("Player Currency: $" + playerCurrency);
-        landlordPaymentText.text = ("Landlord Payment: $" + landlordPayment);
-        MoralitySystem.Instance.moralityCounter = 0;
-        MoralitySystem.Instance.UpdateMoralityUI();
-        InventoryController.Instance.ToggleInventoryCanvasOff();
-        SceneManager.LoadScene(2);
-    }
-
-    public void SwitchSceneToPotionShopWithNewDay() // Use scene manager to switch to Main Menu
-    {
-        GameManager.Instance.endOfDayCanvas.SetActive(false);
-        Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
-        Cursor.visible = true; // Display cursor
-        GameManager.Instance.isTimerRunning = true;
-        GameManager.Instance.timeRemaining = timeInDay;
-        DayUIUpdate();
-        OrderSystem.Instance.GenerateOrderList();
-        SceneManager.LoadScene(2); // Load scene through scene manager
-    }
-
-    public void SwitchSceneToPotionShopWithLoadGame() // Use scene manager to switch to Main Menu
-    {
-        DataPersistenceManager.Instance.LoadGame();
-        Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
-        Cursor.visible = true; // Display cursor
-        GameManager.Instance.isTimerRunning = true;
-        GameManager.Instance.timeRemaining = timeInDay;
-        GameManager.Instance.playerCurrency = this.playerCurrency;
-        GameManager.Instance.landlordPayment = this.landlordPayment;
-        DayUIUpdate();
-        AddCurrencyToPlayer(0);
-        OrderSystem.Instance.GenerateOrderList();
-        InventoryController.Instance.ToggleInventoryCanvasOff();
-        SceneManager.LoadScene(2); // Load scene through scene manager
-    }
-
-    public void SwitchSceneToBootstrapLevel() // Use scene manager to switch to Main Menu
-    {
-        SceneManager.LoadScene(1); // Load scene through scene manager
-        Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
-        Cursor.visible = true; // Display cursor
-    }
-
-    public void SwitchSceneToPotionLevel() // Use scene manager to switch to Potion Level from Maze Level
-    {
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3))
-        {
-            LoadMazeLevelAlpha();
-        } 
-        else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(4))
-        {
-            LoadMazeLevelBravo();
-        }
-
-        Cursor.lockState = CursorLockMode.Confined; // Lock cursor in one place
-        Cursor.visible = true; // Hide cursor
-        if (playerCapsule != null)
-        {
-            SetPlayerCapsuleInactive();
-        }
-        OrderSystem.Instance.CheckForCompleteOrders();
-        CallLoadPotionShop();
-    }
-
-    public void SwitchSceneToMazeLevel() // Use scene manager to switch to Maze Level
-    {
-        int randomSceneIndex = Random.Range(3, 5);
-        if (randomSceneIndex == 3)
-        {
-            LoadMazeLevelAlpha();
-            SceneManager.LoadScene(3); // Use scene manager to load second scene from scene list (settings menu)
-        } else
-        {
-            LoadMazeLevelBravo();
-            SceneManager.LoadScene(4); // Use scene manager to load second scene from scene list (settings menu)
-        }
-
-        controller._speed = 0; // Make it so player doesn't jut forward when entering maze
-        controller._rotationVelocity = 0; // Make it so player doesn't rotate uncontrollably when entering maze
-    }
-
-    public void SwitchSceneToSettingsMenu() // Use scene manager to switch to Settings Menu
-    {
-        SceneManager.LoadScene(4); // Load scene through scene manager
-        Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
-        Cursor.visible = true; // Display cursor
-
-    }
-
     public void BeginNewDay()
     {
-        // To Do: Invoke scene transition
-        GameManager.Instance.endOfDayTransitionComplete = false;
-        GameManager.Instance.morningTransitionComplete = false;
-        GameManager.Instance.afternoonTransitionComplete = false;
-        GameManager.Instance.eveningTransitionComplete = false;
+        ResetDayTransitionStates();
         GameManager.Instance.currentDay++;
         OrderSystem.Instance.GenerateOrderList();
         DataPersistenceManager.Instance.SaveGame();
@@ -375,131 +264,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
         GameManager.Instance.timeRemaining = 0f;
         GameManager.Instance.pauseMenuCanvas.SetActive(false);
         EndDay();
-    }
-
-    private void DisplayEndOfDayUI()
-    {
-        endOfDayText.gameObject.SetActive(true);
-        endOfDayText.text = ("End of Day " + currentDay);
-        dayEndPlayerCurrencyText.text = ("Player Currency: $" + playerCurrency);
-        dayEndLandlordPaymentText.text = ("Landlord Payment: $" + landlordPayment);
-        endOfDayCanvas.SetActive(true);
-    }
-
-    public void CallLoadPotionShop()
-    {
-        SceneManager.LoadScene(2); // Load scene through scene manager
-    }
-
-    private void LoadMazeLevelAlpha() // Place player in correct spot when maze is loaded
-    {
-        Cursor.lockState = CursorLockMode.Locked; // Unlock cursor, confine to game screen
-        Cursor.visible = false; // Display cursor
-
-        SetPlayerCapsuleActive(); // Ensure the player capsule is active
-
-        controller.MoveToPosition(alphaPlayerSpawn.transform.position);
-        playerCapsule.transform.rotation = alphaPlayerSpawn.transform.rotation;
-
-        controller._speed = 0; // Make it so player doesn't jut forward when entering maze
-        controller._rotationVelocity = 0; // Make it so player doesn't rotate uncontrollably when entering maze
-    }
-
-    private void LoadMazeLevelBravo() // Place player in correct spot when maze is loaded
-    {
-        Cursor.lockState = CursorLockMode.Locked; // Unlock cursor, confine to game screen
-        Cursor.visible = false; // Display cursor
-
-        SetPlayerCapsuleActive(); // Ensure the player capsule is active
-        controller.MoveToPosition(bravoPlayerSpawn.transform.position);
-        playerCapsule.transform.rotation = bravoPlayerSpawn.transform.rotation;
-
-        controller._speed = 0; // Make it so player doesn't jut forward when entering maze
-        controller._rotationVelocity = 0; // Make it so player doesn't rotate uncontrollably when entering maze
-    }
-
-    private void SpawnPlayerIntoMaze()
-    {
-        controller.MoveToPosition(GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform.position);
-        controller.transform.rotation = GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform.rotation;
-    }
-
-    private void SetPlayerCapsuleActive()
-    {
-        playerCapsule.SetActive(true); // Set player capsule active
-    }
-
-    private void SetPlayerCapsuleInactive()
-    {
-        playerCapsule.SetActive(false); // Set player capsule active
-    }
-
-    private void TimerUpdate() // Update timer and keep track of what time of day it is
-    {
-        if (timeRemaining > 600)
-        {
-            isMorning = true; isAfternoon = false; isEvening = false; isEndOfDay = false; // Set time of day to morning
-
-            if (morningTransitionComplete == false) // Morning transition block, which will run once at the beginning of the morning
-            {
-                // Add additional new day to morning transition logic here as needed
-                morningTransitionComplete = true; // Set transition status to complete
-                timeOfDayText.text = ("Morning"); // Display time of day text on screen
-                timeOfDayText.color = Color.white; // Set color of text to white
-                //Debug.Log("It's now morning."); // Print morning notification
-            }
-        }
-        else if (timeRemaining <= 600 && timeRemaining > 300)
-        {
-            isMorning = false; isAfternoon = true; isEvening = false; isEndOfDay = false; // Set time of day to afternoon
-            if (afternoonTransitionComplete == false) // Afternoon transition block, which will run once at the beginning of the afternoon
-            {
-                // Add additional morning to afternoon transition logic here as needed
-                afternoonTransitionComplete = true; // Set transition status to complete
-                timeOfDayText.text = ("Afternoon"); // Display time of day text on screen
-                //Debug.Log("It's now afternoon."); // Print afternoon notification
-            }
-        }
-        else if (timeRemaining <= 300 && timeRemaining > 0)
-        {
-            isMorning = false; isAfternoon = false; isEvening = true; isEndOfDay = false; // Set time of day to evening
-            if (eveningTransitionComplete == false) // Evening transition block, which will run once at the beginning of the evening
-            {
-                // Add additional afternoon to evening transition logic here as needed
-                eveningTransitionComplete = true; // Set transition status to complete
-                timeOfDayText.text = ("Evening"); // Display time of day text on screen
-                //Debug.Log("It's now evening."); // Print evening notification
-            }
-        }
-        else
-        {
-            isMorning = false; isAfternoon = false; isEvening = false; isEndOfDay = true; // Set time of day to end of day
-            timeRemaining = 0; // Stop timer at 0, instead of becoming negative value
-            isTimerRunning = false; // Turn off timer
-            if (endOfDayTransitionComplete == false) // End of day transition block, which will run once at the end of the day
-            {
-                // Add additional evening to end of day transition logic here as needed
-                endOfDayTransitionComplete = true; // Set transition status to complete
-                timeOfDayText.text = ("End of Day"); // Display time of day text on screen
-                timeOfDayText.color = Color.red; // Set color of text to red
-                //Debug.Log("The day is now over."); // Print end of day notification
-                EndDay();
-            }
-        }
-        DisplayTime(timeRemaining); // Display time remaining
-    }
-
-    public void DayUIUpdate()
-    {
-        GameManager.Instance.currentDayText.text = ("Day " + GameManager.Instance.currentDay);
-    }
-
-    private void DisplayTime(float timeToDisplay)
-    {
-        timeToDisplay += 1; // Add a second to the time value vefore calculations of minutes and seconds, to account for final second of countdown
-        float minutes = Mathf.FloorToInt(timeRemaining / 60); // Calculate remaining minutes
-        float seconds = Mathf.FloorToInt(timeRemaining % 60); // Calculate remaining seconds
-        timeRemainingText.text = string.Format("{0:00}:{1:00}", minutes, seconds); // The value on the left determines which values to use (minutes, seconds) and the right is how it's formatted
     }
 
     private void EndDay()
@@ -515,10 +279,9 @@ public class GameManager : MonoBehaviour, IDataPersistence
             }
             orderCanvas.SetActive(false);
             playerCapsule.SetActive(false);
-            Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
-            Cursor.visible = true; // Display cursor
+            ToggleCursorOn(); // Unlock and display cursor
             DisplayEndOfDayUI();
-        } 
+        }
         else
         {
             EndWeek();
@@ -534,22 +297,238 @@ public class GameManager : MonoBehaviour, IDataPersistence
         if (playerCurrency >= landlordPayment)
         {
             winOrLossText.text = ("You've won!");
-        } else
+        }
+        else
         {
             winOrLossText.text = ("You've lost!");
         }
         DataPersistenceManager.Instance.NewGame();
     }
 
-    public void AddCurrencyToPlayer(int amountToAdd)
+    private void ResetDayTransitionStates()
     {
-        playerCurrency += amountToAdd;
-        playerCurrencyText.text = ("Player Currency: $" + playerCurrency);
+        GameManager.Instance.endOfDayTransitionComplete = false;
+        GameManager.Instance.morningTransitionComplete = false;
+        GameManager.Instance.afternoonTransitionComplete = false;
+        GameManager.Instance.eveningTransitionComplete = false;
     }
 
-    public void MovePlayerToSpawnPoint()
+    public void ExitGame()
     {
+        Application.Quit(); // Exit game to desktop
+    }
 
+    // - SCENE MANAGEMENT -
+
+    public void SwitchSceneToMainMenu() // Use scene manager to switch to Main Menu
+    {
+        SceneManager.LoadScene(0); // Load main menu scene
+        ToggleCursorOn(); // Unlock and display cursor
+    }
+
+    public void SwitchSceneToSettingsMenu() // Use scene manager to switch to Settings Menu
+    {
+        SceneManager.LoadScene(1); // Load scene through scene manager
+        ToggleCursorOn(); // Unlock and display cursor
+    }
+
+    public void SwitchSceneToPotionShopWithNewGame() // Use scene manager to switch to Main Menu
+    {
+        GameManager.Instance.winLossCanvas.SetActive(false); // Hide win/loss canvas
+        ToggleCursorOn(); // Unlock and display cursor
+        GameManager.Instance.currentDay = 1; // Reset to day 1
+        StartNewDayTimer(); // Restart and resume timer at beginning of day
+        GameManager.Instance.playerCurrency = 0;
+        GameManager.Instance.landlordPayment = 1400;
+        ResetDayTransitionStates();
+        MoralitySystem.Instance.moralityCounter = 0;
+        InventoryController.Instance.ClearInventoryGrid();
+        DayUIUpdate();
+        OrderSystem.Instance.GenerateOrderList();
+        playerCurrencyText.text = ("Player Currency: $" + playerCurrency);
+        landlordPaymentText.text = ("Landlord Payment: $" + landlordPayment);
+        MoralitySystem.Instance.moralityCounter = 0;
+        MoralitySystem.Instance.UpdateMoralityUI();
+        InventoryController.Instance.ToggleInventoryCanvasOff();
+        SceneManager.LoadScene(2);
+    }
+
+    public void SwitchSceneToPotionShopWithNewDay()
+    {
+        GameManager.Instance.endOfDayCanvas.SetActive(false);
+        ToggleCursorOn(); // Unlock and display cursor
+        StartNewDayTimer(); // Restart and resume timer at beginning of day
+        DayUIUpdate(); // Update UI
+        OrderSystem.Instance.GenerateOrderList(); // Generate new list of orders
+        SceneManager.LoadScene(2); // Load scene through scene manager
+    }
+
+    public void SwitchSceneToPotionShopWithLoadGame()
+    {
+        DataPersistenceManager.Instance.LoadGame();
+        ToggleCursorOn(); // Unlock and display cursor
+        StartNewDayTimer(); // Restart and resume timer at beginning of day
+        GameManager.Instance.playerCurrency = this.playerCurrency; // Set player currency from loaded game
+        GameManager.Instance.landlordPayment = this.landlordPayment; // Set landlord payment amount from loaded game
+        DayUIUpdate(); // Update UI
+        AddCurrencyToPlayer(0); // Update currency
+        OrderSystem.Instance.GenerateOrderList(); // Generate new list of orders
+        InventoryController.Instance.ToggleInventoryCanvasOff(); // Toggle off inventory canvas (***Important for inventory functioning***)
+        SceneManager.LoadScene(2); // Load scene through scene manager
+    }
+
+    public void SwitchSceneToPotionLevel() // Use scene manager to switch to Potion Level from Maze Level
+    {
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3))
+        {
+            LoadMazeLevelAlpha();
+        }
+        else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(4))
+        {
+            LoadMazeLevelBravo();
+        }
+
+        ToggleCursorOn();
+        if (playerCapsule != null)
+        {
+            SetPlayerCapsuleInactive(); // Deactivate player capsule
+        }
+        OrderSystem.Instance.CheckForCompleteOrders(); // Check for any complete orders to update order UI
+        CallLoadPotionShop(); // Call load potion shop function, which is staggered to allow it to be invoked if neccessary
+    }
+
+    public void CallLoadPotionShop()
+    {
+        SceneManager.LoadScene(2); // Load scene through scene manager
+    }
+
+    public void SwitchSceneToMazeLevel() // Use scene manager to switch to Maze Level
+    {
+        int randomSceneIndex = Random.Range(3, 5); // Choose random maze scene to load
+        if (randomSceneIndex == 3)
+        {
+            LoadMazeLevelAlpha();
+            SceneManager.LoadScene(3); // Use scene manager to load second scene from scene list (settings menu)
+        }
+        else
+        {
+            LoadMazeLevelBravo();
+            SceneManager.LoadScene(4); // Use scene manager to load second scene from scene list (settings menu)
+        }
+    }
+
+    private void LoadMazeLevelAlpha() // Place player in correct spot when maze is loaded
+    {
+        ToggleCursorOff(); // Lock and hide cursor
+
+        SetPlayerCapsuleActive(); // Ensure the player capsule is active
+
+        controller.MoveToPosition(alphaPlayerSpawn.transform.position);
+        playerCapsule.transform.rotation = alphaPlayerSpawn.transform.rotation;
+
+        StopPlayerControllerMovement(); // Attempt to control player movement
+    }
+
+    private void LoadMazeLevelBravo() // Place player in correct spot when maze is loaded
+    {
+        ToggleCursorOff(); // Lock and hide cursor
+
+        SetPlayerCapsuleActive(); // Ensure the player capsule is active
+        controller.MoveToPosition(bravoPlayerSpawn.transform.position);
+        playerCapsule.transform.rotation = bravoPlayerSpawn.transform.rotation;
+
+        StopPlayerControllerMovement(); // Attempt to control player movement
+    }
+
+    // - UI -
+
+    public void ToggleOnPotionCraftingCanvas()
+    {
+            potionCraftingCanvas.SetActive(true); // Display potion crafting canvas
+    }
+
+    public void ToggleOffPotionCraftingCanvas()
+    {
+            potionCraftingCanvas.SetActive(false); // Hide potion crafting canvas
+    }
+
+    public void ToggleOnDoorToMaze()
+    {
+        doorToMaze.SetActive(true); // Display door to maze from potion shop
+    }
+
+    public void ToggleOffDoorToMaze()
+    {
+        doorToMaze.SetActive(false); // Hide door to maze from potion shop
+    }
+
+    public void ToggleOnOrderDisplay()
+    {
+        orderCanvas.SetActive(true); // Display order canvas
+    }
+
+    public void ToggleOffOrderDisplay()
+    {
+        orderCanvas.SetActive(false); // Hide order canvas
+    }
+
+    private void DisplayEndOfDayUI()
+    {
+        endOfDayText.gameObject.SetActive(true);
+        endOfDayText.text = ("End of Day " + currentDay);
+        dayEndPlayerCurrencyText.text = ("Player Currency: $" + playerCurrency);
+        dayEndLandlordPaymentText.text = ("Landlord Payment: $" + landlordPayment);
+        endOfDayCanvas.SetActive(true);
+    }
+
+    private void DayUIUpdate()
+    {
+        GameManager.Instance.currentDayText.text = ("Day " + GameManager.Instance.currentDay);
+    }
+
+    private void DisplayTime(float timeToDisplay)
+    {
+        timeToDisplay += 1; // Add a second to the time value vefore calculations of minutes and seconds, to account for final second of countdown
+        float minutes = Mathf.FloorToInt(timeRemaining / 60); // Calculate remaining minutes
+        float seconds = Mathf.FloorToInt(timeRemaining % 60); // Calculate remaining seconds
+        timeRemainingText.text = string.Format("{0:00}:{1:00}", minutes, seconds); // The value on the left determines which values to use (minutes, seconds) and the right is how it's formatted
+    }
+
+
+    private void ToggleCursorOn()
+    {
+        Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
+        Cursor.visible = true; // Display cursor
+    }
+
+    private void ToggleCursorOff()
+    {
+        Cursor.lockState = CursorLockMode.None; // Unlock cursor, confine to game screen
+        Cursor.visible = false; // Display cursor
+    }
+
+    // - PLAYER -
+
+    public void AddCurrencyToPlayer(int currencyToAdd)
+    {
+        playerCurrency += currencyToAdd; // Add money to player currency
+        playerCurrencyText.text = ("Player Currency: $" + playerCurrency); // Update player currency UI display
+    }
+
+    private void SetPlayerCapsuleActive()
+    {
+        playerCapsule.SetActive(true); // Set player capsule active
+    }
+
+    private void SetPlayerCapsuleInactive()
+    {
+        playerCapsule.SetActive(false); // Set player capsule active
+    }
+
+    private void StopPlayerControllerMovement()
+    {
+        controller._speed = 0; // Make it so player doesn't jut forward when entering maze
+        controller._rotationVelocity = 0; // Make it so player doesn't rotate uncontrollably when entering maze
     }
 
 }

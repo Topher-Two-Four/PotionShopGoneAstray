@@ -238,7 +238,7 @@ public class MazeAIController : MonoBehaviour
         }
     }
 
-    private void ScanEnvironment() 
+    private void ScanEnvironment()
     {
         DrawDebugVisionArc(); // Use to show arc of AI vision
 

@@ -262,7 +262,6 @@ public class InventoryController : MonoBehaviour
                 (potion.isLucky && potionOrdered.isLucky) ||
                 (potion.isPoison && potionOrdered.isPoison)))
                 {
-                //Debug.Log(potion);
                 return potion;
                 }
             }
@@ -299,7 +298,6 @@ public class InventoryController : MonoBehaviour
         {
             selectedItemGrid.RemoveItem(tileGridPosition.x, tileGridPosition.y);
 
-            //SellPotion(selectedItem.potionData);
             Destroy(selectedItem.gameObject);
         }
         
@@ -329,17 +327,13 @@ public class InventoryController : MonoBehaviour
         }
         else
         {
-            //Debug.Log("No way you're wasting a potion!");
             return;
         }
     }
 
     public void ClearInventoryGrid()
     {
-        if (inventoryGrid != null)
-        {
-            inventoryGrid.ClearGrid(inventoryGrid);
-        }
+        inventoryGrid?.ClearGrid(inventoryGrid); // If inventory grid exists then clear it
     }
 
     Vector2Int oldPosition;

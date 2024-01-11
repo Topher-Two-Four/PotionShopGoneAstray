@@ -17,7 +17,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnSettingsPressed()
     {
-
+        GameManager.Instance.SwitchSceneToSettingsMenu();
     }
 
     public void OnQuitPressed()

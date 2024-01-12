@@ -3,10 +3,13 @@ using UnityEngine.AI;
 
 public class MazeAIController : MonoBehaviour
 {
+    [Header("Movement Settings:")]
     public NavMeshAgent navMeshAgent; // Nav Mesh Agent component of game object
     public float walkSpeed = 4f; // Walking speed of the AI
     public float sprintSpeed = 5f; // Sprinting speed of the AI
     public float waitTime = 3f; // Time to wait between actions
+
+    [Header("Detection Settings:")]
     public float detectionTime = 6f; // Time until the AI rotates towards the player due to proximity
     public float viewRadius = 20f; // Distance AI can see
     public float viewAngle = 90f; // AI cone of vision
@@ -15,24 +18,26 @@ public class MazeAIController : MonoBehaviour
     public float raycastMeshResolution = 1.0f; // Amount of rays that are cast per degree to increase mesh filter resolution
     public int raycastEdgeIterations = 4; // Number of times raycast will iterate to increase mesh filter performance
     public float raycastEdgeDistance = 0.5f; // Maximum distance used to calculate the minimum and maximimum when ray cast hits
-    public Transform[] patrolPoints; // An array containing points the AI patrols
-    public float waitTimeout = 5.0f; // Amount of time to wait until timeout to next patrol point
-
-    public bool isPhasedIn = false;
-
-    public bool isMusicAI = false;
-
-    private float _lastMoveTime; // Amount of time since AI last moved
-    public float _waitTime; // Wait time delay variable for value tracking
-    public float _detectionTime; // Detection rotate time variable for value tracking
-    public bool _isPatrolling; // True if AI is patrolling
-    public bool _isChasing; // True if player is within range of visibility and being chased
-    public bool _isDetectingPlayer; // True if player is nearby and in the process of being detected
-    public bool _playerCaught; // True if player has been caught
-    public int _currentPatrolPointIndex; // The patrol point that the AI is currently moving to
     public Vector3 _lastSeenLocation; // The location where the player was last seen
     public Vector3 _lastDetectedLocation = Vector3.zero; // The location where the player was last detected
 
+    [Header("Patrol Settings:")]
+    public float waitTimeout = 5.0f; // Amount of time to wait until timeout to next patrol point
+    public Transform[] patrolPoints; // An array containing points the AI patrols
+    public int _currentPatrolPointIndex; // The patrol point that the AI is currently moving to
+
+    [Header("Special AI Settings:")]
+    public bool isPhasedIn = false;
+
+    [HideInInspector] public bool _isPatrolling; // True if AI is patrolling
+    [HideInInspector] public bool _isChasing; // True if player is within range of visibility and being chased
+    [HideInInspector] public bool _isDetectingPlayer; // True if player is nearby and in the process of being detected
+    [HideInInspector] public bool _playerCaught; // True if player has been caught
+    private float _detectionTime; // Detection rotate time variable for value tracking
+    private float _lastMoveTime; // Amount of time since AI last moved
+    private float _waitTime; // Wait time delay variable for value tracking
+
+    [HideInInspector]
     private void Start()
     {
         _waitTime = waitTime; // Set initial wait time

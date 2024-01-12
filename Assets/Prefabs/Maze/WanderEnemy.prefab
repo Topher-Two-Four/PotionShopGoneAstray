@@ -383,6 +383,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   waitTimeout: 5
+  isPhasedIn: 0
   _waitTime: 0
   _detectionTime: 0
   _isPatrolling: 0

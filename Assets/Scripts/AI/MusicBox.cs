@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class MusicBox : MonoBehaviour
 {
-    public AudioSource audioSource;
-    public AudioClip triggeredMusic;
-    public AudioClip caughtSound;
+    [Header("Music Box Settings:")]
     public float currentMusicPlayTime = 0f;
     public float musicLength = 10.0f;
     public bool musicPlaying = false;
     public float musicCatchDistance = 20.0f;
     public float timeRemovedWhenCaught = 120.0f;
+
+    [Header("Audio Settings:")]
+    public AudioSource audioSource;
+    public AudioClip triggeredMusic;
+    public AudioClip caughtSound;
+
 
 
     public static MusicBox Instance { get; private set; } // Singleton logic

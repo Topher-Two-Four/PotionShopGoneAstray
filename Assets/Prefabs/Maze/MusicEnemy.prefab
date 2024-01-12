@@ -237,11 +237,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   waitTimeout: 5
-  phaseCooldownTimerAmount: 10
-  timeSinceLastPhase: 0
-  phaseCooldownComplete: 1
-  phaseCooldownTimerRunning: 0
-  isMusicAI: 0
+  isPhasedIn: 0
   _waitTime: 0
   _detectionTime: 0
   _isPatrolling: 0

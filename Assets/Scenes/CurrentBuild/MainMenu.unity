@@ -4225,49 +4225,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirstPersonController
       objectReference: {fileID: 0}
-    - target: {fileID: 1523856400312017891, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 136
-      objectReference: {fileID: 0}
-    - target: {fileID: 1523856400312017891, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 30.065
-      objectReference: {fileID: 0}
-    - target: {fileID: 1523856400312017891, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -125.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1523856400312017891, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.999962
-      objectReference: {fileID: 0}
-    - target: {fileID: 1523856400312017891, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.008726558
-      objectReference: {fileID: 0}
     - target: {fileID: 6073503498084768483, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: isLooking
+      propertyPath: GroundLayers.m_Bits
+      value: 129
+      objectReference: {fileID: 0}
+    - target: {fileID: 6637198244512304310, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+      propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6073503498084768483, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: viewRadius
-      value: 90
+    - target: {fileID: 6637198244512304310, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 6073503498084768483, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: RotationSpeed
-      value: 1.2
+    - target: {fileID: 6637198244512304310, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6073503498084768483, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: enemyMask.m_Bits
-      value: 256
+    - target: {fileID: 6637198244512304310, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6073503498084768483, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: playerMask.m_Bits
-      value: 64
+    - target: {fileID: 6637198244512304310, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6073503498084768483, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: obstacleMask.m_Bits
-      value: 128
+    - target: {fileID: 6637198244512304310, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6637198244512304310, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6675413122062098297, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4313,34 +4301,6 @@ PrefabInstance:
       propertyPath: highlighter
       value: 
       objectReference: {fileID: 132737697}
-    - target: {fileID: 6846241006579286110, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 136
-      objectReference: {fileID: 0}
-    - target: {fileID: 6846241006579286110, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 28.69
-      objectReference: {fileID: 0}
-    - target: {fileID: 6846241006579286110, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -125.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6846241006579286110, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.999962
-      objectReference: {fileID: 0}
-    - target: {fileID: 6846241006579286110, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.008726558
-      objectReference: {fileID: 0}
-    - target: {fileID: 6846241006579286110, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7567588470065450738, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_TagString
-      value: ItemTarget
-      objectReference: {fileID: 0}
     - target: {fileID: 7899478307544988770, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
       propertyPath: trashButton
       value: 
@@ -4357,21 +4317,8 @@ PrefabInstance:
       propertyPath: inventoryCanvas
       value: 
       objectReference: {fileID: 977770114}
-    - target: {fileID: 8482563062153054412, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 136
-      objectReference: {fileID: 0}
-    - target: {fileID: 8482563062153054412, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 30.065
-      objectReference: {fileID: 0}
-    - target: {fileID: 8482563062153054412, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -125.9
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 7275050969785835646, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
@@ -14405,30 +14352,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2f1a2cd3dd5114429fdb2b1d5ac25b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFailed: 0
-  currentTemp: 3
-  cookTime: 60
-  timeCooked: 0
-  desiredTemp: 3
-  timeAtDesiredTemp: 0
   potionQuality: 4
-  timeWithLidInDesiredState: 0
-  ingredient1: {fileID: 0}
-  ingredient2: {fileID: 0}
-  ingredient3: {fileID: 0}
-  ingredient4: {fileID: 0}
-  potionBeingBrewed: {fileID: 0}
+  ingredientSpaceLeft: 1
+  isBrewing: 0
+  isRetrievable: 0
+  cookTime: 60
+  freezingTempDisplayColor: {r: 0, g: 0.4572503, b: 0.7490196, a: 1}
+  lowTempDisplayColor: {r: 0, g: 0, b: 255, a: 1}
+  mediumTempDisplayColor: {r: 0, g: 1, b: 0, a: 1}
+  hotTempDisplayColor: {r: 1, g: 0.42267352, b: 0, a: 1}
+  boilingTempDisplayColor: {r: 255, g: 0, b: 0, a: 1}
   ultraQualityTimePercentage: 0.9
   highQualityTimePercentage: 0.7
   mediumQualityTimePercentage: 0.5
   lowQualityTimePercentage: 0.3
-  isStirred: 0
-  isLidOn: 0
-  isBrewing: 0
-  isRetrievable: 0
-  ingredientSpaceLeft: 1
-  shouldBeStirred: 0
-  lidDesired: 0
+  ultraQualityColor: {r: 0.9339623, g: 0, b: 0.5869062, a: 0.47058824}
+  highQualityColor: {r: 0, g: 0, b: 0.74901974, a: 0.47058824}
+  mediumQualityColor: {r: 0, g: 0.74901974, b: 0, a: 0.47058824}
+  lowQualityColor: {r: 1, g: 1, b: 0, a: 0.47058824}
+  failedColor: {r: 0.74901974, g: 0, b: 0, a: 0.47058824}
+  temperatureDisplayImage: {fileID: 773830184}
+  ingredient1Image: {fileID: 183108071}
+  ingredient2Image: {fileID: 816354662}
+  ingredient3Image: {fileID: 1399944314}
+  ingredient4Image: {fileID: 789180104}
+  potionImage: {fileID: 2120093469}
+  potionBackgroundImage: {fileID: 303446426}
+  emptySlotImage: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   ingredient1Button: {fileID: 906768649}
   ingredient2Button: {fileID: 1382049138}
   ingredient3Button: {fileID: 1040210777}
@@ -14440,28 +14390,8 @@ MonoBehaviour:
   removeLidButton: {fileID: 1538596755}
   stirButton: {fileID: 108490806}
   brewButton: {fileID: 1123780896}
-  freezingTempDisplayColor: {r: 0, g: 0.4572503, b: 0.7490196, a: 1}
-  lowTempDisplayColor: {r: 0, g: 0, b: 255, a: 1}
-  mediumTempDisplayColor: {r: 0, g: 1, b: 0, a: 1}
-  hotTempDisplayColor: {r: 1, g: 0.42267352, b: 0, a: 1}
-  boilingTempDisplayColor: {r: 255, g: 0, b: 0, a: 1}
-  ultraQualityColor: {r: 0.9339623, g: 0, b: 0.5869062, a: 0.47058824}
-  highQualityColor: {r: 0, g: 0, b: 0.74901974, a: 0.47058824}
-  mediumQualityColor: {r: 0, g: 0.74901974, b: 0, a: 0.47058824}
-  lowQualityColor: {r: 1, g: 1, b: 0, a: 0.47058824}
-  failedColor: {r: 0.74901974, g: 0, b: 0, a: 0.47058824}
-  currentQualityColor: {r: 0, g: 0, b: 0, a: 0}
-  temperatureDisplayImage: {fileID: 773830184}
-  ingredient1Image: {fileID: 183108071}
-  ingredient2Image: {fileID: 816354662}
-  ingredient3Image: {fileID: 1399944314}
-  ingredient4Image: {fileID: 789180104}
-  potionImage: {fileID: 2120093469}
-  potionBackgroundImage: {fileID: 303446426}
-  emptySlotImage: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   temperatureDisplayText: {fileID: 49256573}
   timeRemainingText: {fileID: 1271069269}
-  potionRecipe: {fileID: 0}
 --- !u!1 &1921065547
 GameObject:
   m_ObjectHideFlags: 0

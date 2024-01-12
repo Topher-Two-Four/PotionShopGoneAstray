@@ -6,12 +6,36 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour, IDataPersistence
 {
-    public float timeRemaining = 0; // Time remaining in day
+    [Header("General Settings:")]
+    public FirstPersonController controller; // First person controller game object
+    public int playerCurrency = 0;
+    public int landlordPayment = 1400;
+
+    [Header("Time and Day Settings:")]
+   
     public float timeInDay = 900; // Time remaining in day
-    public bool isMorning; // Variable to keep track of whether it's morning
-    public bool isAfternoon; // Variable to keep track of whether it's afternoon
-    public bool isEvening; // Variable to keep track of whether it's evening
-    public bool isEndOfDay; // Variable to keep track of whether the day is over
+    public bool isTimerRunning = false;
+    [HideInInspector] public float timeRemaining = 0; // Time remaining in day
+    [HideInInspector] public bool isMorning; // Variable to keep track of whether it's morning
+    [HideInInspector] public bool isAfternoon; // Variable to keep track of whether it's afternoon
+    [HideInInspector] public bool isEvening; // Variable to keep track of whether it's evening
+    [HideInInspector] public bool isEndOfDay; // Variable to keep track of whether the day is over
+
+    [Header("Maze Settings:")]
+    public GameObject playerCapsule; // Player capsule collider
+    public GameObject dropSpawnLocation;
+    public GameObject alphaPlayerSpawn;
+    public GameObject bravoPlayerSpawn;
+
+    [Header("Canvas Settings:")]
+    public GameObject potionCraftingCanvas;
+    public GameObject orderCanvas;
+    public GameObject doorToMaze;
+    public GameObject endOfDayCanvas;
+    public GameObject winLossCanvas;
+    public GameObject pauseMenuCanvas;
+
+    [Header("Text-Related Settings:")]
     public TMP_Text timeRemainingText; // Time remaining to display as text
     public TMP_Text timeOfDayText; // Time of day to display as text
     public TMP_Text currentDayText;
@@ -22,35 +46,15 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public TMP_Text dayEndPlayerCurrencyText;
     public TMP_Text dayEndLandlordPaymentText;
 
-    public int playerCurrency = 0;
-    public int landlordPayment = 1400;
-    public int potionValue;
-
-    public int endOfDayCurrency;
-    public int endOfDayLandlordPayment;
-    public int endOfDayMorality;
-
+    private int endOfDayCurrency;
+    private int endOfDayLandlordPayment;
+    private int endOfDayMorality;
     private int currentDay = 0;
+    private bool morningTransitionComplete = false; // Keep track of transition from beginning of new day to morning
+    private bool afternoonTransitionComplete = false; // Keep track of transition from morning to afternoon
+    private bool eveningTransitionComplete = false; // Keep track of transition from afternoon to evening
+    private bool endOfDayTransitionComplete = false; // Keep track of transition from evening to end of day
 
-    public FirstPersonController controller; // First person controller game object
-    public GameObject playerCapsule; // Player capsule collider
-    public GameObject dropSpawnLocation;
-
-    public GameObject potionCraftingCanvas;
-    public GameObject orderCanvas;
-    public GameObject doorToMaze;
-    public GameObject endOfDayCanvas;
-    public GameObject winLossCanvas;
-    public GameObject pauseMenuCanvas;
-
-    public GameObject alphaPlayerSpawn;
-    public GameObject bravoPlayerSpawn;
-
-    public bool isTimerRunning = false;
-    public bool morningTransitionComplete = false; // Keep track of transition from beginning of new day to morning
-    public bool afternoonTransitionComplete = false; // Keep track of transition from morning to afternoon
-    public bool eveningTransitionComplete = false; // Keep track of transition from afternoon to evening
-    public bool endOfDayTransitionComplete = false; // Keep track of transition from evening to end of day
 
     public static GameManager Instance { get; private set; } // Singleton logic
 
@@ -96,7 +100,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         {
             if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(0)) // Do not allow pause menu toggle when in main mainu
             TogglePauseMenuCanvas(); // Toggle pause menu
-        } 
+        }
     }
 
     /*public void OnLevelWasLoaded(int level)
@@ -426,7 +430,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
         controller.MoveToPosition(alphaPlayerSpawn.transform.position);
         playerCapsule.transform.rotation = alphaPlayerSpawn.transform.rotation;
 
-        StopPlayerControllerMovement(); // Attempt to control player movement
+        controller.StopMovement(); // Attempt to control player movement
+        controller.ResumeMovement();
     }
 
     private void LoadMazeLevelBravo() // Place player in correct spot when maze is loaded
@@ -437,7 +442,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
         controller.MoveToPosition(bravoPlayerSpawn.transform.position);
         playerCapsule.transform.rotation = bravoPlayerSpawn.transform.rotation;
 
-        StopPlayerControllerMovement(); // Attempt to control player movement
+        controller.StopMovement(); // Attempt to control player movement
+        controller.ResumeMovement();
     }
 
     // - UI -
@@ -523,12 +529,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
     private void SetPlayerCapsuleInactive()
     {
         playerCapsule.SetActive(false); // Set player capsule active
-    }
-
-    private void StopPlayerControllerMovement()
-    {
-        controller._speed = 0; // Make it so player doesn't jut forward when entering maze
-        controller._rotationVelocity = 0; // Make it so player doesn't rotate uncontrollably when entering maze
     }
 
 }

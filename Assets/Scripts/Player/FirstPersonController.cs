@@ -52,30 +52,28 @@ namespace StarterAssets
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -90.0f;
 
-		public float maxStamina = 100f;
-		public float currentStamina = 100f;
-		public float staminaDrainAmount = 0.5f;
-		public float staminaRegenAmount = 0.2f;
+		[HideInInspector] public float maxStamina = 100f;
+		[HideInInspector] public float currentStamina = 100f;
+		[HideInInspector] public float staminaDrainAmount = 0.5f;
+		[HideInInspector] public float staminaRegenAmount = 0.2f;
 
-		public float previousMoveSpeed;
-		public float previousSprintSpeed;
+		private float previousMoveSpeed;
+		private float previousSprintSpeed;
 
 		public LayerMask enemyMask;
 		public bool isLooking = true;
 
-		public float viewRadius = 20f; // Distance AI can see
-		public float viewAngle = 90f; // AI cone of vision
-		public LayerMask obstacleMask; // Used with raycast to detect obstacles
-		public float raycastMeshResolution = 1.0f; // Amount of rays that are cast per degree to increase mesh filter resolution
-		public int raycastEdgeIterations = 4; // Number of times raycast will iterate to increase mesh filter performance
-		public float raycastEdgeDistance = 0.5f; // Maximum distance used to calculate the minimum and maximimum when ray cast hits
+		[SerializeField] private float viewRadius = 20f; // Distance AI can see
+		[SerializeField] private float viewAngle = 90f; // AI cone of vision
+		[SerializeField] private LayerMask obstacleMask; // Used with raycast to detect obstacles
+
 
 		// cinemachine
 		private float _cinemachineTargetPitch;
 
 		// player
 		public float _speed;
-		public float _rotationVelocity;
+		private float _rotationVelocity;
 		private float _verticalVelocity;
 		private float _terminalVelocity = 53.0f;
 
@@ -196,7 +194,9 @@ namespace StarterAssets
 			previousSprintSpeed = SprintSpeed;
 			MoveSpeed = 0;
 			SprintSpeed = 0;
-        }
+			_speed = 0; // Make it so player doesn't jut forward when entering maze
+			_rotationVelocity = 0; // Make it so player doesn't rotate uncontrollably when entering maze
+		}
 
 		public void ResumeMovement()
 		{
@@ -335,7 +335,7 @@ namespace StarterAssets
 		public void PlayerJump()
         {
 			_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity); // The square root of H * -2 * G = how much velocity needed to reach desired height
-
+			Debug.Log("Jump");
 		}
 
 		private void JumpAndGravity()

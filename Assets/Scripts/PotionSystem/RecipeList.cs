@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class RecipeList : MonoBehaviour
 {
+    [Header("List of Recipes:")]
     public Recipe[] recipeList; // List of recipe scriptable objects, which contains the recipes available for crafting in the game
 
     private ItemData ingredient1; // First ingredient ItemData object

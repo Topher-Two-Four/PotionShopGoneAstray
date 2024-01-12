@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class MazeSpawnManager : MonoBehaviour
 {
+    [Header("Ingredient Spawn Settings:")]
     public float baseSpawnAmount = 50;
     public int ingredientsToSpawn;
-
-
     public GameObject[] ingredientSpawnPoints; // Array for holding ingredient spawn points
-    public GameObject[] enemySpawnPoint; // List for holding enemy spawn points
 
+    [Header("List of Ingredients:")]
     public ItemObject[] ingredientsArray; // List of all ingredients in the game, which the manager will use to spawn random ingredients
+
+    [Header("AI Spawn Settings:")]
+    public GameObject[] enemySpawnPoint; // List for holding enemy spawn points
 
     void Start()
     {

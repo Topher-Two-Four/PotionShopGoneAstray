@@ -136,12 +136,11 @@ public class GameManager : MonoBehaviour, IDataPersistence
         GameManager.Instance.playerCurrency = data.playerCurrency;
         GameManager.Instance.landlordPayment = data.landlordPayment;
         GameManager.Instance.currentDay = data.currentDay;
-        InventoryController.Instance.inventoryGrid = data.playerInventory;
+        InventoryController.Instance.SetInventoryGrid(data.playerInventory);
         dayEndPlayerCurrencyText.text = ("Player Currency: $" + playerCurrency);
         dayEndLandlordPaymentText.text = ("Landlord Payment: $" + landlordPayment);
-        MoralitySystem.Instance.moralityCounter = data.playerMorality;
+        MoralitySystem.Instance.SetMoralityCount(data.playerMorality);
         MoralitySystem.Instance.UpdateMoralityUI();
-        //InventoryController.Instance.inventoryGrid = data.playerInventory;
     }
 
     // - GAME TIMER -
@@ -276,7 +275,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         {
             this.endOfDayCurrency = this.playerCurrency;
             this.endOfDayLandlordPayment = this.landlordPayment;
-            this.endOfDayMorality = MoralitySystem.Instance.moralityCounter;
+            this.endOfDayMorality = MoralitySystem.Instance.GetMoralityCount();
             if (potionCraftingCanvas != null)
             {
                 potionCraftingCanvas.SetActive(false);
@@ -345,13 +344,13 @@ public class GameManager : MonoBehaviour, IDataPersistence
         GameManager.Instance.playerCurrency = 0;
         GameManager.Instance.landlordPayment = 1400;
         ResetDayTransitionStates();
-        MoralitySystem.Instance.moralityCounter = 0;
+        MoralitySystem.Instance.ResetMoralityCounter();
         InventoryController.Instance.ClearInventoryGrid();
         DayUIUpdate();
         OrderSystem.Instance.GenerateOrderList();
         playerCurrencyText.text = ("Player Currency: $" + playerCurrency);
         landlordPaymentText.text = ("Landlord Payment: $" + landlordPayment);
-        MoralitySystem.Instance.moralityCounter = 0;
+        MoralitySystem.Instance.ResetMoralityCounter();
         MoralitySystem.Instance.UpdateMoralityUI();
         InventoryController.Instance.ToggleInventoryCanvasOff();
         SceneManager.LoadScene(2);

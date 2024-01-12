@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class Teleportation : MonoBehaviour
 {
-    public AudioSource audioSource;
-    public AudioClip triggeredMusic;
-    public AudioClip caughtSound;
-    public float currentPhaseTime = 0f;
-    public float phaseLength = 10.0f;
-    public bool phasedIn = false;
-    public float phaseCatchDistance = 20.0f;
-    public float timeRemovedWhenCaught = 120.0f;
+    [Header("Teleportation/Phase Settings:")]
+    [SerializeField] private float phaseLength = 10.0f;
+    [SerializeField] private float phaseCatchDistance = 20.0f;
+    [SerializeField] private float timeRemovedWhenCaught = 120.0f;
+    [SerializeField] private MazeAIController mazeAIController;
 
-    public bool playerIsLooking = false;
-    public bool hasPhasedOut = true;
-    public MazeAIController mazeAIController;
+    [Header("Audio Settings:")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip triggeredMusic;
+    [SerializeField] private AudioClip caughtSound;
+
+    private float currentPhaseTime = 0f;
+    private bool phasedIn = false;
+    private bool playerHasLooked = false;
+    private bool hasPhasedOut = true;
+
 
     public static Teleportation Instance { get; private set; } // Singleton logic
 
@@ -44,7 +48,7 @@ public class Teleportation : MonoBehaviour
     {
         if (phasedIn == true && !hasPhasedOut)
         {
-            if (currentPhaseTime < phaseLength && !playerIsLooking)
+            if (currentPhaseTime < phaseLength && !playerHasLooked)
             {
                 currentPhaseTime += Time.deltaTime;
             }
@@ -77,7 +81,7 @@ public class Teleportation : MonoBehaviour
         mazeAIController.isPhasedIn = false;
         //mazeAIController.MakeInvisible();
 
-        if (playerDistance <= phaseCatchDistance && !playerIsLooking)
+        if (playerDistance <= phaseCatchDistance && !playerHasLooked)
         {
             PlayerCaught();
         }
@@ -86,6 +90,17 @@ public class Teleportation : MonoBehaviour
         hasPhasedOut = true;
         Debug.Log("Phased out.");
     }
+
+    public void PlayerHasLooked()
+    {
+        playerHasLooked = true;
+    }
+
+    public void PlayerHasNotLooked()
+    {
+        playerHasLooked = false;
+    }
+
 
     private void PlayerCaught()
     {

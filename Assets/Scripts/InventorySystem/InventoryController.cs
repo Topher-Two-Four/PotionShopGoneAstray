@@ -8,13 +8,16 @@ using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour
 {
-    public GameObject inventoryCanvas;
-    public ItemGrid inventoryGrid; // Inventory grid used by the player
+    [Header("Inventory Settings:")]
+    [SerializeField] private List<ItemData> items; // List of ItemData scriptable objects
+    [SerializeField] private GameObject itemPrefab; // Prefab for the item object
+    [SerializeField] private GameObject potionPrefab; // Prefab for the potion object
+    [SerializeField] private Transform canvasTransform; // Transform of the inventory canvas
+    [SerializeField] private GameObject inventoryCanvas;
+    [SerializeField] private ItemGrid inventoryGrid; // Inventory grid used by the player
 
-    private bool isSpaceForItem;
-
-    [HideInInspector]
-    private ItemGrid selectedItemGrid; // Item grid that is currently selected
+    [Header("Button Settings:")]
+    [SerializeField] private Button trashButton;
 
     public ItemGrid SelectedItemGrid {
         get => selectedItemGrid; // Get currently selected item grid
@@ -25,19 +28,12 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    InventoryItem selectedItem; // Item that is currently selected
-    InventoryItem overlapItem; // Item that is overlapping the currently selected item
-    RectTransform rectTransform; // Rectangular transform used for highlighter
-
-    [SerializeField] List<ItemData> items; // List of ItemData scriptable objects
-    [SerializeField] GameObject itemPrefab; // Prefab for the item object
-    [SerializeField] GameObject potionPrefab; // Prefab for the potion object
-    [SerializeField] Transform canvasTransform; // Transform of the inventory canvas
-
-    InventoryHighlight inventoryHighlight; // Inventory item highlighter
-
-    public Button trashButton;
-
+    private ItemGrid selectedItemGrid; // Item grid that is currently selected
+    private InventoryHighlight inventoryHighlight; // Inventory item highlighter
+    private InventoryItem selectedItem; // Item that is currently selected
+    private InventoryItem overlapItem; // Item that is overlapping the currently selected item
+    private RectTransform rectTransform; // Rectangular transform used for highlighter
+    private bool isSpaceForItem;
 
     public static InventoryController Instance { get; private set; } // Singleton logic
 
@@ -198,7 +194,7 @@ public class InventoryController : MonoBehaviour
 
     public void ToggleInventoryCanvas()
     {
-        GameManager.Instance.controller.RotationSpeed = 1;
+
 
         if (inventoryCanvas.gameObject.activeSelf) // If inventory canvas is active then deactivate it
         {
@@ -216,7 +212,6 @@ public class InventoryController : MonoBehaviour
         } 
         else // If inventory canvas is inactive then activate it
         {
-            GameManager.Instance.controller.RotationSpeed = 0;
 
             Cursor.lockState = CursorLockMode.Confined; // Lock cursor in one place
             Cursor.visible = true; // Hide cursor
@@ -227,7 +222,6 @@ public class InventoryController : MonoBehaviour
 
     public void ToggleInventoryCanvasOff()
     {
-        GameManager.Instance.controller.RotationSpeed = 1;
 
         if (inventoryCanvas.gameObject.activeSelf) // If inventory canvas is active then deactivate it
         {
@@ -338,6 +332,11 @@ public class InventoryController : MonoBehaviour
 
     Vector2Int oldPosition;
     InventoryItem itemToHighlight;
+
+    public void SetInventoryGrid(ItemGrid savedPlayerInventory)
+    {
+        inventoryGrid = savedPlayerInventory;
+    }
 
     private void HandleHighlight()
     {

@@ -5,15 +5,22 @@ using TMPro;
 
 public class MoralitySystem : MonoBehaviour
 {
-    public int moralityCounter = 0;
+    [Header("Button Settings:")]
 
+
+    [Header("Maze Modifier Settings:")]
     public float monsterSpeedModifier;
     public float playerSpeedModifier;
     public float ingredientSpawnModifier;
-    public float mazeLightModifer;
-    public float mazeFogModifer;
+    [SerializeField] private float mazeLightModifer;
+    [SerializeField] private float mazeFogModifer;
 
-    public TMP_Text[] mText;
+    [Header("Text Settings:")]
+    [SerializeField] private TMP_Text[] mText;
+
+    private int moralityCounter = 0;
+
+
 
     public static MoralitySystem Instance { get; private set; } // Singleton logic
 
@@ -132,6 +139,20 @@ public class MoralitySystem : MonoBehaviour
                 mText.color = new Color(255, 0, 0);
             }
         }
+    }
+
+    public int GetMoralityCount()
+    {
+        return moralityCounter;
+    }
+    public void SetMoralityCount(int moralityCount)
+    {
+        moralityCounter = moralityCount;
+    }
+
+    public void ResetMoralityCounter()
+    {
+        moralityCounter = 0;
     }
 
     public void ApplyMoralityEffect()

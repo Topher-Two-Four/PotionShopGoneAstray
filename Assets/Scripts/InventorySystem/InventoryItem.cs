@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class InventoryItem : MonoBehaviour
 {
-    [Header("Inventory Item Settings:")]
-    [SerializeField] private ItemData itemData;
-    [SerializeField] private int quality;
-    [SerializeField] private Image potionBackground;
+    [HideInInspector] public int quality;
+
+    private ItemData itemData;
+    private Image potionBackground;
 
     public int HEIGHT
     {
@@ -78,9 +78,9 @@ public class InventoryItem : MonoBehaviour
 
     public void Drop()
     {
-        if (GameManager.Instance.playerCapsule.activeSelf)
+        if (GameManager.Instance.GetPlayerCapsule().activeSelf)
         {
-            Vector3 spawnLocation = GameManager.Instance.dropSpawnLocation.transform.position;
+            Vector3 spawnLocation = GameManager.Instance.GetDropSpawnLocation().transform.position;
             Instantiate(itemData.itemObject, spawnLocation, Quaternion.identity);
             Destroy(gameObject);
         }

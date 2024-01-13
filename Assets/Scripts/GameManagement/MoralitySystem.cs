@@ -9,14 +9,16 @@ public class MoralitySystem : MonoBehaviour
 
 
     [Header("Maze Modifier Settings:")]
-    public float monsterSpeedModifier;
-    public float playerSpeedModifier;
-    public float ingredientSpawnModifier;
+
     [SerializeField] private float mazeLightModifer;
     [SerializeField] private float mazeFogModifer;
 
     [Header("Text Settings:")]
     [SerializeField] private TMP_Text[] mText;
+
+    [HideInInspector] public float monsterSpeedModifier;
+    [HideInInspector] public float playerSpeedModifier;
+    [HideInInspector] public float ingredientSpawnModifier;
 
     private int moralityCounter = 0;
 
@@ -77,7 +79,6 @@ public class MoralitySystem : MonoBehaviour
             moralityCounter -= 4;
         }
         UpdateMoralityUI();
-        // ApplyMoralityEffect();
     }
 
     public void UpdateMoralityUI()
@@ -227,7 +228,11 @@ public class MoralitySystem : MonoBehaviour
             ingredientSpawnModifier = 0.5f; //Decrease amount of items that spawn
             playerSpeedModifier = 0.9f; //Decreased player speed
         }
+    }
 
+    public float GetIngredientSpawnModifier()
+    {
+        return ingredientSpawnModifier;
     }
 
 }

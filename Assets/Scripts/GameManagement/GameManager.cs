@@ -7,45 +7,72 @@ using System.Collections;
 public class GameManager : MonoBehaviour, IDataPersistence
 {
     [Header("General Settings:")]
-    public FirstPersonController controller; // First person controller game object
-    public int playerCurrency = 0;
-    public int landlordPayment = 1400;
+    [Tooltip("The first person controller game object.")]
+    [SerializeField] private FirstPersonController controller; // First person controller game object
+    [Tooltip("The landlord payment amount.")]
+    [SerializeField] private int landlordPayment = 1400;
 
     [Header("Time and Day Settings:")]
-   
-    public float timeInDay = 900; // Time remaining in day
-    public bool isTimerRunning = false;
+    [Tooltip("The total amount of time in a game day in seconds.")]
+    [SerializeField] private float timeInDay = 900; // Time remaining in day
+    [Tooltip("Is timer running or not running.")]
+    [SerializeField] private bool isTimerRunning = false;
+
+    [Header("Maze Settings:")]
+    [Tooltip("The player capsule for the first person controller.")]
+    [SerializeField] private GameObject playerCapsule; // Player capsule collider
+    [Tooltip("The location where dropped items from the player will be dropped.")]
+    [SerializeField] private GameObject dropSpawnLocation;
+    [Tooltip("The player spawn point game object for Maze Level Alpha.")]
+    [SerializeField] private GameObject alphaPlayerSpawn;
+    [Tooltip("The player spawn point game object for Maze Level Bravo.")]
+    [SerializeField] private GameObject bravoPlayerSpawn;
+    [Tooltip("The player spawn point game object for Maze Level Charlie.")]
+    [SerializeField] private GameObject charliePlayerSpawn;
+    [Tooltip("The player spawn point game object for Maze Level Delta.")]
+    [SerializeField] private GameObject deltaPlayerSpawn;
+
+    [Header("Canvas Settings:")]
+    [Tooltip("The canvas that holds the potion crafting UI elements.")]
+    [SerializeField] private GameObject potionCraftingCanvas;
+    [Tooltip("The canvas that holds the order system UI elements.")]
+    [SerializeField] private GameObject orderCanvas;
+    [Tooltip("The door from the potion shop to the maze.")]
+    [SerializeField] private GameObject doorToMaze;
+    [Tooltip("The canvas that holds the end of day screen UI elements.")]
+    [SerializeField] private GameObject endOfDayCanvas;
+    [Tooltip("The canvas that holds the win/loss screen UI elements.")]
+    [SerializeField] private GameObject winLossCanvas;
+    [Tooltip("The canvas that holds the pause menu screen UI elements.")]
+    [SerializeField] private GameObject pauseMenuCanvas;
+
+    [Header("Text-Related Settings:")]
+    [Tooltip("The time remaining text for UI display.")]
+    [SerializeField] private TMP_Text timeRemainingText; // Time remaining to display as text
+    [Tooltip("The time of day text for UI display.")]
+    [SerializeField] private TMP_Text timeOfDayText; // Time of day to display as text
+    [Tooltip("The current time of day text for UI display.")]
+    [SerializeField] private TMP_Text currentDayText;
+    [Tooltip("The text showing player currency amount for UI display.")]
+    [SerializeField] private TMP_Text playerCurrencyText;
+    [Tooltip("The text showing landlord payment amount for UI display.")]
+    [SerializeField] private TMP_Text landlordPaymentText;
+    [Tooltip("The win/loss text for UI display.")]
+    [SerializeField] private TMP_Text winOrLossText;
+    [Tooltip("The end of day text for UI display.")]
+    [SerializeField] private TMP_Text endOfDayText;
+    [Tooltip("The text showing player currency amount for the end of day UI.")]
+    [SerializeField] private TMP_Text dayEndPlayerCurrencyText;
+    [Tooltip("The text showing landlord payment amount for the end of day UI.")]
+    [SerializeField] private TMP_Text dayEndLandlordPaymentText;
+
     [HideInInspector] public float timeRemaining = 0; // Time remaining in day
     [HideInInspector] public bool isMorning; // Variable to keep track of whether it's morning
     [HideInInspector] public bool isAfternoon; // Variable to keep track of whether it's afternoon
     [HideInInspector] public bool isEvening; // Variable to keep track of whether it's evening
     [HideInInspector] public bool isEndOfDay; // Variable to keep track of whether the day is over
 
-    [Header("Maze Settings:")]
-    public GameObject playerCapsule; // Player capsule collider
-    public GameObject dropSpawnLocation;
-    public GameObject alphaPlayerSpawn;
-    public GameObject bravoPlayerSpawn;
-
-    [Header("Canvas Settings:")]
-    public GameObject potionCraftingCanvas;
-    public GameObject orderCanvas;
-    public GameObject doorToMaze;
-    public GameObject endOfDayCanvas;
-    public GameObject winLossCanvas;
-    public GameObject pauseMenuCanvas;
-
-    [Header("Text-Related Settings:")]
-    public TMP_Text timeRemainingText; // Time remaining to display as text
-    public TMP_Text timeOfDayText; // Time of day to display as text
-    public TMP_Text currentDayText;
-    public TMP_Text playerCurrencyText;
-    public TMP_Text landlordPaymentText;
-    public TMP_Text winOrLossText;
-    public TMP_Text endOfDayText;
-    public TMP_Text dayEndPlayerCurrencyText;
-    public TMP_Text dayEndLandlordPaymentText;
-
+    private int playerCurrency = 0;
     private int endOfDayCurrency;
     private int endOfDayLandlordPayment;
     private int endOfDayMorality;
@@ -161,6 +188,11 @@ public class GameManager : MonoBehaviour, IDataPersistence
         timeRemaining = timeInDay; // Reset time of day timer
     }
 
+    public bool CheckIfTimerRunning()
+    {
+        return isTimerRunning;
+    }
+
     private void StartNewDayTimer()
     {
         GameManager.Instance.isTimerRunning = true; // Run timer
@@ -215,7 +247,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
     }
 
     // - GAME MANAGEMENT -
-
 
     public void TogglePauseMenuCanvas()
     {
@@ -477,6 +508,16 @@ public class GameManager : MonoBehaviour, IDataPersistence
         orderCanvas.SetActive(false); // Hide order canvas
     }
 
+    public GameObject GetDoorToMaze()
+    {
+        return doorToMaze;
+    }
+
+    public GameObject GetPauseMenuCanvas()
+    {
+        return pauseMenuCanvas;
+    }
+
     private void DisplayEndOfDayUI()
     {
         endOfDayText.gameObject.SetActive(true);
@@ -513,6 +554,16 @@ public class GameManager : MonoBehaviour, IDataPersistence
     }
 
     // - PLAYER -
+
+    public GameObject GetPlayerCapsule()
+    {
+        return playerCapsule;
+    }
+
+    public GameObject GetDropSpawnLocation()
+    {
+        return dropSpawnLocation;
+    }
 
     public void AddCurrencyToPlayer(int currencyToAdd)
     {

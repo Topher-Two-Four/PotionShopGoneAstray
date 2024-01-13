@@ -4224,6 +4224,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirstPersonController
       objectReference: {fileID: 0}
+    - target: {fileID: 6073503498084768483, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+      propertyPath: viewRadius
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6675413122062098297, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6202,6 +6206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   apothecaryManualCanvas: {fileID: 713665283}
+  inventoryGrid: {fileID: 0}
   bookPageIndex: 0
   bookPages:
   - {fileID: 792297225}
@@ -6221,7 +6226,6 @@ MonoBehaviour:
   pageForwardButton: {fileID: 448462924}
   pageBackButton: {fileID: 298660801}
   toggleBookCanvasButton: {fileID: 1302267596}
-  inventoryGrid: {fileID: 0}
 --- !u!1 &713665282
 GameObject:
   m_ObjectHideFlags: 0
@@ -14319,10 +14323,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2f1a2cd3dd5114429fdb2b1d5ac25b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  potionQuality: 4
-  ingredientSpaceLeft: 1
-  isBrewing: 0
-  isRetrievable: 0
   cookTime: 60
   freezingTempDisplayColor: {r: 0, g: 0.4572503, b: 0.7490196, a: 1}
   lowTempDisplayColor: {r: 0, g: 0, b: 255, a: 1}
@@ -14359,6 +14359,12 @@ MonoBehaviour:
   brewButton: {fileID: 1123780896}
   temperatureDisplayText: {fileID: 49256573}
   timeRemainingText: {fileID: 1271069269}
+  lidDesired: 0
+  potionRecipe: {fileID: 0}
+  potionQuality: 4
+  ingredientSpaceLeft: 1
+  isBrewing: 0
+  isRetrievable: 0
 --- !u!1 &1921065547
 GameObject:
   m_ObjectHideFlags: 0

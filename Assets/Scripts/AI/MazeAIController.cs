@@ -4,40 +4,50 @@ using UnityEngine.AI;
 public class MazeAIController : MonoBehaviour
 {
     [Header("Movement Settings:")]
-    public NavMeshAgent navMeshAgent; // Nav Mesh Agent component of game object
-    public float walkSpeed = 4f; // Walking speed of the AI
-    public float sprintSpeed = 5f; // Sprinting speed of the AI
-    public float waitTime = 3f; // Time to wait between actions
+    [Tooltip("The nav mesh agent component attached to the maze enemy.")]
+    [SerializeField] private NavMeshAgent navMeshAgent; // Nav Mesh Agent component of game object
+    [Tooltip("The walk speed of the maze enemy.")]
+    [SerializeField] private float walkSpeed = 4f; // Walking speed of the AI
+    [Tooltip("The sprint speed of the maze enemy.")]
+    [SerializeField] private float sprintSpeed = 5f; // Sprinting speed of the AI
+    [Tooltip("The length of time the maze enemy pauses between patrol points.")]
+    [SerializeField] private float waitTime = 3f; // Time to wait between actions
 
     [Header("Detection Settings:")]
-    public float detectionTime = 6f; // Time until the AI rotates towards the player due to proximity
-    public float viewRadius = 20f; // Distance AI can see
-    public float viewAngle = 90f; // AI cone of vision
-    public LayerMask playerMask; // Used with raycast to detect player
-    public LayerMask obstacleMask; // Used with raycast to detect obstacles
-    public float raycastMeshResolution = 1.0f; // Amount of rays that are cast per degree to increase mesh filter resolution
-    public int raycastEdgeIterations = 4; // Number of times raycast will iterate to increase mesh filter performance
-    public float raycastEdgeDistance = 0.5f; // Maximum distance used to calculate the minimum and maximimum when ray cast hits
-    public Vector3 _lastSeenLocation; // The location where the player was last seen
-    public Vector3 _lastDetectedLocation = Vector3.zero; // The location where the player was last detected
+    [Tooltip("The amount of time before the maze enemy detects the player based on close proximity.")]
+    [SerializeField] private float detectionTime = 6f; // Time until the AI rotates towards the player due to proximity
+    [Tooltip("The view radius of the maze enemy.")]
+    [SerializeField] private float viewRadius = 20f; // Distance AI can see
+    [Tooltip("The cone of vision of the maze enemy.")]
+    [SerializeField] private float viewAngle = 90f; // AI cone of vision
+    [Tooltip("The layer mask for the player.")]
+    [SerializeField] private LayerMask playerMask; // Used with raycast to detect player
+    [Tooltip("The layer mask for raycast obstacles.")]
+    [SerializeField] private LayerMask obstacleMask; // Used with raycast to detect obstacles
 
     [Header("Patrol Settings:")]
-    public float waitTimeout = 5.0f; // Amount of time to wait until timeout to next patrol point
-    public Transform[] patrolPoints; // An array containing points the AI patrols
-    public int _currentPatrolPointIndex; // The patrol point that the AI is currently moving to
-
-    [Header("Special AI Settings:")]
-    public bool isPhasedIn = false;
+    [Tooltip("The amount of time the maze enemy waits to try moving to a patrol point before timing out and switching to the next.")]
+    [SerializeField] private float waitTimeout = 5.0f; // Amount of time to wait until timeout to next patrol point
+    [Tooltip("The list of patrol points that the maze enemy will choose from to move to.")]
+    [SerializeField] private Transform[] patrolPoints; // An array containing points the AI patrols
 
     [HideInInspector] public bool _isPatrolling; // True if AI is patrolling
     [HideInInspector] public bool _isChasing; // True if player is within range of visibility and being chased
     [HideInInspector] public bool _isDetectingPlayer; // True if player is nearby and in the process of being detected
     [HideInInspector] public bool _playerCaught; // True if player has been caught
+
+    [HideInInspector] public float raycastMeshResolution = 1.0f; // Amount of rays that are cast per degree to increase mesh filter resolution
+    [HideInInspector] public int raycastEdgeIterations = 4; // Number of times raycast will iterate to increase mesh filter performance
+    [HideInInspector] public float raycastEdgeDistance = 0.5f; // Maximum distance used to calculate the minimum and maximimum when ray cast hits
+
     private float _detectionTime; // Detection rotate time variable for value tracking
     private float _lastMoveTime; // Amount of time since AI last moved
     private float _waitTime; // Wait time delay variable for value tracking
+    private Vector3 _lastSeenLocation; // The location where the player was last seen
+    private Vector3 _lastDetectedLocation = Vector3.zero; // The location where the player was last detected
+    private int _currentPatrolPointIndex; // The patrol point that the AI is currently moving to
+    private bool isPhasedIn = false;
 
-    [HideInInspector]
     private void Start()
     {
         _waitTime = waitTime; // Set initial wait time
@@ -56,7 +66,7 @@ public class MazeAIController : MonoBehaviour
 
     private void Update()
     {
-        if (!GameManager.Instance.pauseMenuCanvas.activeSelf)
+        if (!GameManager.Instance.GetPauseMenuCanvas().activeSelf)
         {
             ScanEnvironment(); // Scan environment for player
 
@@ -136,6 +146,11 @@ public class MazeAIController : MonoBehaviour
         {
             Move(walkSpeed);
         }
+    }
+
+    public void SetPhasedIn(bool isCurrentlyPhased)
+    {
+        isPhasedIn = isCurrentlyPhased;
     }
 
     private void Move(float moveSpeed)

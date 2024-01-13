@@ -6,16 +6,23 @@ using UnityEngine.UI;
 public class RecipeBookManager : MonoBehaviour
 {
     [Header("Recipe Book General Settings:")]
+    [Tooltip("The UI canvas for the potion shop manual.")]
     [SerializeField] private Canvas apothecaryManualCanvas;
+    [Tooltip("The player's inventory grid.")]
     [SerializeField] private GameObject inventoryGrid;
 
     [Header("Page Settings:")]
+    [Tooltip("The index of the current book page.")]
     [SerializeField] private int bookPageIndex;
+    [Tooltip("The list of book page game objects.")]
     [SerializeField] private GameObject[] bookPages; // Add in desired order
 
     [Header("Button Settings:")]
+    [Tooltip("The button to turn the page forward.")]
     [SerializeField] private Button pageForwardButton;
+    [Tooltip("The button to turn the page backwards.")]
     [SerializeField] private Button pageBackButton;
+    [Tooltip("The button to toggle on and off the potion shop manual canvas.")]
     [SerializeField] private Button toggleBookCanvasButton;
 
 

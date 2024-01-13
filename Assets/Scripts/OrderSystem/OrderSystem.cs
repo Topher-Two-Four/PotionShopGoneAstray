@@ -6,18 +6,29 @@ using UnityEngine.UI;
 public class OrderSystem : MonoBehaviour
 {
     [Header("Order and Customer Lists:")]
+    [Tooltip("The list of orders that is randomly generated each new day.")]
     [SerializeField] private Order[] orderList;
+    [Tooltip("The list of customers that can be chosen at random to be the orderer.")]
     [SerializeField] private Customer[] customerList;
 
     [Header("Potion Icons:")]
+    [Tooltip("The sprite for the antidote potion icon.")]
     [SerializeField] private Sprite antidoteIcon;
+    [Tooltip("The sprite for the benefit potion icon.")]
     [SerializeField] private Sprite benefitIcon;
+    [Tooltip("The sprite for the crippling potion icon.")]
     [SerializeField] private Sprite cripplingIcon;
+    [Tooltip("The sprite for the death potion icon.")]
     [SerializeField] private Sprite deathIcon;
+    [Tooltip("The sprite for the hatred potion icon.")]
     [SerializeField] private Sprite hatredIcon;
+    [Tooltip("The sprite for the health potion icon.")]
     [SerializeField] private Sprite healthIcon;
+    [Tooltip("The sprite for the love potion icon.")]
     [SerializeField] private Sprite loveIcon;
+    [Tooltip("The sprite for the lucky potion icon.")]
     [SerializeField] private Sprite luckyIcon;
+    [Tooltip("The sprite for the poison potion icon.")]
     [SerializeField] private Sprite poisonIcon;
 
     [Header("Text Settings:")]

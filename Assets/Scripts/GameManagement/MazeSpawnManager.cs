@@ -5,21 +5,26 @@ using UnityEngine;
 public class MazeSpawnManager : MonoBehaviour
 {
     [Header("Ingredient Spawn Settings:")]
-    public float baseSpawnAmount = 50;
-    public int ingredientsToSpawn;
-    public GameObject[] ingredientSpawnPoints; // Array for holding ingredient spawn points
+    [Tooltip("The base amount of ingredients to spawn without morality modifier applied.")]
+    [SerializeField] private float baseSpawnAmount = 50;
+    [Tooltip("The amount of ingredients to spawn after morality modifier is appplied.")]
+    [SerializeField] private int ingredientsToSpawn;
+    [Tooltip("The list of spawn point game objects that ingredients have a possibility to spawn at.")]
+    [SerializeField] private GameObject[] ingredientSpawnPoints; // Array for holding ingredient spawn points
 
     [Header("List of Ingredients:")]
-    public ItemObject[] ingredientsArray; // List of all ingredients in the game, which the manager will use to spawn random ingredients
+    [Tooltip("The list of ingredients that can possibly spawn in the maze.")]
+    [SerializeField] private ItemObject[] ingredientsArray; // List of all ingredients in the game, which the manager will use to spawn random ingredients
 
-    [Header("AI Spawn Settings:")]
-    public GameObject[] enemySpawnPoint; // List for holding enemy spawn points
+    [Header("Maze Enemy Settings:")]
+    [Tooltip("The list of spawn points for the maze enemy (not yet implemented).")]
+    [SerializeField] private GameObject[] enemySpawnPoint; // List for holding enemy spawn points
 
     void Start()
     {
         MoralitySystem.Instance.ApplyMoralityEffect();
 
-        ingredientsToSpawn = Mathf.FloorToInt(baseSpawnAmount * MoralitySystem.Instance.ingredientSpawnModifier);
+        ingredientsToSpawn = Mathf.FloorToInt(baseSpawnAmount * MoralitySystem.Instance.GetIngredientSpawnModifier());
 
         for (int x = 0; x < ingredientsToSpawn; x++) 
         {

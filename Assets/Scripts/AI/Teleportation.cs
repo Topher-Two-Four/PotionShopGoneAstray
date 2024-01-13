@@ -5,14 +5,21 @@ using UnityEngine;
 public class Teleportation : MonoBehaviour
 {
     [Header("Teleportation/Phase Settings:")]
+    [Tooltip("The length of time from teleport in to teleport out for the maze enemy.")]
     [SerializeField] private float phaseLength = 10.0f;
+    [Tooltip("The distance from which the player will be caught if they are within this radius when enemy teleports out.")]
     [SerializeField] private float phaseCatchDistance = 20.0f;
+    [Tooltip("The amount of time to remove from the player's day when caught by the maze enemy.")]
     [SerializeField] private float timeRemovedWhenCaught = 120.0f;
+    [Tooltip("The maze enemy AI controller.")]
     [SerializeField] private MazeAIController mazeAIController;
 
     [Header("Audio Settings:")]
+    [Tooltip("The audio source attached to the maze enemy.")]
     [SerializeField] private AudioSource audioSource;
+    [Tooltip("The audio clip that plays when the maze enemy is triggered.")]
     [SerializeField] private AudioClip triggeredMusic;
+    [Tooltip("The audio clip that plays when the maze enemy catches the player.")]
     [SerializeField] private AudioClip caughtSound;
 
     private float currentPhaseTime = 0f;
@@ -76,9 +83,9 @@ public class Teleportation : MonoBehaviour
         phasedIn = false;
         currentPhaseTime = 0f;
 
-        float playerDistance = Vector3.Distance(GameManager.Instance.playerCapsule.transform.position, transform.position);
+        float playerDistance = Vector3.Distance(GameManager.Instance.GetPlayerCapsule().transform.position, transform.position);
         mazeAIController.gameObject.transform.position = Vector3.zero;
-        mazeAIController.isPhasedIn = false;
+        mazeAIController.SetPhasedIn(false);
         //mazeAIController.MakeInvisible();
 
         if (playerDistance <= phaseCatchDistance && !playerHasLooked)

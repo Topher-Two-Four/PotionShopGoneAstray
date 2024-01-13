@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class RoomManager : MonoBehaviour
 {
     [Header("List of Rooms:")]
+    [Tooltip("The list of room game objects in the potion shop.")]
     [SerializeField] private List<GameObject> roomList = new List<GameObject>(); // List for holding room game objects
 
     [Header("List of Buttons Corresponding to Rooms:")]
+    [Tooltip("The list of navigational buttons which correspond to rooms in the potion shop.")]
     [SerializeField] private List<Button> buttonList = new List<Button>(); // List for holding buttons, index corresponding to each room
 
     [HideInInspector] public GameObject currentRoom; // The current room that is active/open
@@ -28,7 +30,7 @@ public class RoomManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (GameManager.Instance.doorToMaze != null)
+        if (GameManager.Instance.GetDoorToMaze() != null)
         {
             GameManager.Instance.ToggleOffDoorToMaze();
         }

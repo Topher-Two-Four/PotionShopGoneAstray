@@ -9,14 +9,19 @@ using UnityEngine.UI;
 public class InventoryController : MonoBehaviour
 {
     [Header("Inventory Settings:")]
-    [SerializeField] private List<ItemData> items; // List of ItemData scriptable objects
+    [Tooltip("The prefab for items.")]
     [SerializeField] private GameObject itemPrefab; // Prefab for the item object
+    [Tooltip("The prefab for potions.")]
     [SerializeField] private GameObject potionPrefab; // Prefab for the potion object
+    [Tooltip("The transform of the inventory canvas.")]
     [SerializeField] private Transform canvasTransform; // Transform of the inventory canvas
+    [Tooltip("The inventory canvas game object.")]
     [SerializeField] private GameObject inventoryCanvas;
+    [Tooltip("The inventory grid used by the player.")]
     [SerializeField] private ItemGrid inventoryGrid; // Inventory grid used by the player
 
     [Header("Button Settings:")]
+    [Tooltip("The button that trashes an item when pressed.")]
     [SerializeField] private Button trashButton;
 
     public ItemGrid SelectedItemGrid {
@@ -27,6 +32,8 @@ public class InventoryController : MonoBehaviour
             inventoryHighlight.SetParent(value); // Add highlight to inventory item
         }
     }
+
+    [HideInInspector] public List<ItemData> items; // List of ItemData scriptable objects in the player's inventory
 
     private ItemGrid selectedItemGrid; // Item grid that is currently selected
     private InventoryHighlight inventoryHighlight; // Inventory item highlighter

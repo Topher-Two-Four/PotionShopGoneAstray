@@ -6,64 +6,90 @@ using UnityEngine.UI;
 
 public class PotionCraftingSystem : MonoBehaviour
 {
+    [Header("Brew Time Settings:")]
+    [Tooltip("The amount of time it takes to brew a potion.")]
+    [SerializeField] private float cookTime = 60f; // Total cook time of the potion
+
+    [Header("Dispay Color Settings:")]
+    [Tooltip("The display color for the freezing temperature setting.")]
+    [SerializeField] private Color freezingTempDisplayColor = new Color(0, 117, 191);
+    [Tooltip("The display color for the low temperature setting.")]
+    [SerializeField] private Color lowTempDisplayColor = new Color(0, 0, 255);
+    [Tooltip("The display color for the medium temperature setting.")]
+    [SerializeField] private Color mediumTempDisplayColor = new Color(0, 255, 0);
+    [Tooltip("The display color for the hot temperature setting.")]
+    [SerializeField] private Color hotTempDisplayColor = new Color(108, 255, 0);
+    [Tooltip("The display color for the boiling temperature setting.")]
+    [SerializeField] private Color boilingTempDisplayColor = new Color(255, 0, 0);
+
+    [Header("Quality Settings:")]
+    [Tooltip("The percentage of quality needed when brewing to make a potion of ultra quality.")]
+    [SerializeField] private float ultraQualityTimePercentage = .9f; // Time in desired temperature range required to make an ultra quality potion
+    [Tooltip("The percentage of quality needed when brewing to make a potion of high quality.")]
+    [SerializeField] private float highQualityTimePercentage = .7f;// Time in desired temperature range required to make a high quality potion
+    [Tooltip("The percentage of quality needed when brewing to make a potion of medium quality.")]
+    [SerializeField] private float mediumQualityTimePercentage = .5f; // Time in desired temperature range required to make a medium quality potion
+    [Tooltip("The percentage of quality needed when brewing to make a potion of low quality.")]
+    [SerializeField] private float lowQualityTimePercentage = .3f; // Time in desired temperature range required to make a low quality potion
+
+    [Header("Potion Quality Color Settings:")]
+    [Tooltip("The background color for an ultra quality potion.")]
+    [SerializeField] private Color ultraQualityColor = new Color(25, 25, 99, 120); // Purple
+    [Tooltip("The background color for a high quality potion.")]
+    [SerializeField] private Color highQualityColor = new Color(0, 1, 255, 120); // Blue
+    [Tooltip("The background color for a medium quality potion.")]
+    [SerializeField] private Color mediumQualityColor = new Color(255, 0, 0, 120); // Red
+    [Tooltip("The background color for a low quality potion.")]
+    [SerializeField] private Color lowQualityColor = new Color(255, 103, 0, 120); // Orange
+    [Tooltip("The background color for a failed/inert quality potion.")]
+    [SerializeField] private Color failedColor = new Color(109, 109, 109, 120); // Gray
+
+    [Header("Display Image Settings:")]
+    [Tooltip("The background image for the temperature display.")]
+    [SerializeField] private Image temperatureDisplayImage; // Background image for the temperature display
+    [Tooltip("The placeholder image for an empty slot.")]
+    [SerializeField] private Sprite emptySlotImage; // Image for an empty slot
+
+    [Header("Button Settings:")]
+    [Tooltip("The button for ingredient 1.")]
+    [SerializeField] private Button ingredient1Button; // Button for the first ingredient
+    [Tooltip("The button for ingredient 2.")]
+    [SerializeField] private Button ingredient2Button; // Button for the second ingredient
+    [Tooltip("The button for ingredient 3.")]
+    [SerializeField] private Button ingredient3Button; // Button for the third ingredient
+    [Tooltip("The button for ingredient 4.")]
+    [SerializeField] private Button ingredient4Button; // Button for the fourth ingredient
+    [Tooltip("The button for potion retrieval.")]
+    [SerializeField] private Button potionRetrievalButton; // Button for potion retrieval
+    [Tooltip("The button for increasing brewing temperature.")]
+    [SerializeField] private Button increaseTempButton; // Button to increase cooking temperature
+    [Tooltip("The button for decreasing brewing temperature.")]
+    [SerializeField] private Button decreaseTempButton; // Button to increase cooking temperature
+    [Tooltip("The button to put the lid on the cauldron.")]
+    [SerializeField] private Button putOnLidButton;
+    [Tooltip("The button to remove the lid from the cauldrom.")]
+    [SerializeField] private Button removeLidButton;
+    [Tooltip("The button to stir the cauldron.")]
+    [SerializeField] private Button stirButton; // Button to stir the caudron
+    [Tooltip("The button to begin brewing a potion.")]
+    [SerializeField] private Button brewButton; // Button to begin brewing
+
+    [Header("Text Settings:")]
+    [Tooltip("The text that displays current brewing temperature.")]
+    [SerializeField] private TMP_Text temperatureDisplayText; // TMP text game object for displaying the current temperature
+    [Tooltip("The text that displays brew time remaining.")]
+    [SerializeField] private TMP_Text timeRemainingText; // TMP text game object for displaying amount of cook time remaining
+
+    [HideInInspector] public bool lidDesired = false;
+    [HideInInspector] public Recipe potionRecipe;
     [HideInInspector] public int potionQuality = 4; // Quality of the potion crafted
     [HideInInspector] public bool ingredientSpaceLeft = true;
     [HideInInspector] public bool isBrewing = false; // Variable to track whether a potion is currently being brewed
     [HideInInspector] public bool isRetrievable = false; // Variable to track whether a potion is ready to be retrieved
 
-    [Header("Brew Time:")]
-    [SerializeField] private float cookTime = 60f; // Total cook time of the potion
-
-    [Header("Dispay Color Settings:")]
-    [SerializeField] private Color freezingTempDisplayColor = new Color(0, 117, 191);
-    [SerializeField] private Color lowTempDisplayColor = new Color(0, 0, 255);
-    [SerializeField] private Color mediumTempDisplayColor = new Color(0, 255, 0);
-    [SerializeField] private Color hotTempDisplayColor = new Color(108, 255, 0);
-    [SerializeField] private Color boilingTempDisplayColor = new Color(255, 0, 0);
-
-    [Header("Quality Settings:")]
-    [SerializeField] private float ultraQualityTimePercentage = .9f; // Time in desired temperature range required to make an ultra quality potion
-    [SerializeField] private float highQualityTimePercentage = .7f;// Time in desired temperature range required to make a high quality potion
-    [SerializeField] private float mediumQualityTimePercentage = .5f; // Time in desired temperature range required to make a medium quality potion
-    [SerializeField] private float lowQualityTimePercentage = .3f; // Time in desired temperature range required to make a low quality potion
-
-    [Header("Potion Quality Color Settings:")]
-    [SerializeField] private Color ultraQualityColor = new Color(25, 25, 99, 120); // Purple
-    [SerializeField] private Color highQualityColor = new Color(0, 1, 255, 120); // Blue
-    [SerializeField] private Color mediumQualityColor = new Color(255, 0, 0, 120); // Red
-    [SerializeField] private Color lowQualityColor = new Color(255, 103, 0, 120); // Orange
-    [SerializeField] private Color failedColor = new Color(109, 109, 109, 120); // Gray
-    private Color currentQualityColor = new Color(255, 255, 255, 1);
-
-    [Header("Display Image Settings:")]
-    [SerializeField] private Image temperatureDisplayImage; // Background image for the temperature display
-    [SerializeField] private Image ingredient1Image; // Image for the first ingredient
-    [SerializeField] private Image ingredient2Image; // Image for the second ingredient
-    [SerializeField] private Image ingredient3Image; // Image for the third ingredient
-    [SerializeField] private Image ingredient4Image; // Image for the third ingredient
-    [SerializeField] private Image potionImage; // Image for the potion created or being created
-    [SerializeField] private Image potionBackgroundImage; // Image for the background of the potion, which represents its quality
-    [SerializeField] private Sprite emptySlotImage; // Image for an empty slot
-
-    [Header("Button Settings:")]
-    [SerializeField] private Button ingredient1Button; // Button for the first ingredient
-    [SerializeField] private Button ingredient2Button; // Button for the second ingredient
-    [SerializeField] private Button ingredient3Button; // Button for the third ingredient
-    [SerializeField] private Button ingredient4Button; // Button for the fourth ingredient
-    [SerializeField] private Button potionRetrievalButton; // Button for potion retrieval
-    [SerializeField] private Button increaseTempButton; // Button to increase cooking temperature
-    [SerializeField] private Button decreaseTempButton; // Button to increase cooking temperature
-    [SerializeField] private Button putOnLidButton;
-    [SerializeField] private Button removeLidButton;
-    [SerializeField] private Button stirButton; // Button to stir the caudron
-    [SerializeField] private Button brewButton; // Button to begin brewing
-
-    [Header("Text Settings:")]
-    [SerializeField] private TMP_Text temperatureDisplayText; // TMP text game object for displaying the current temperature
-    [SerializeField] private TMP_Text timeRemainingText; // TMP text game object for displaying amount of cook time remaining
-
     private int currentTemp = 3; // Current temperature of the cauldron
     private float timeCooked = 0f; // Time that the potion has been cooking
+    private Color currentQualityColor = new Color(255, 255, 255, 1);
     private int desiredTemp = 3; // Desired temperature for the potion being made
     private float timeAtDesiredTemp = 0f; // Time that potion has been cooking at the desired temperature
     private float timeWithLidInDesiredState = 0f;
@@ -74,13 +100,16 @@ public class PotionCraftingSystem : MonoBehaviour
     private ItemData ingredient4; // Third ingredient ItemData scriptable object
     private PotionData potionBeingBrewed; // Third ingredient ItemData scriptable object
 
-
+    private Image ingredient1Image; // Image for the first ingredient
+    private Image ingredient2Image; // Image for the second ingredient
+    private Image ingredient3Image; // Image for the third ingredient
+    private Image ingredient4Image; // Image for the third ingredient
+    private Image potionImage; // Image for the potion created or being created
+    private Image potionBackgroundImage; // Image for the background of the potion, which represents its quality
 
     private bool isStirred = false;
     private bool isLidOn = false;
     private bool shouldBeStirred = false;
-    private bool lidDesired = false;
-    private Recipe potionRecipe;
 
     public static PotionCraftingSystem Instance { get; private set; } // Singleton logic
 
@@ -168,7 +197,7 @@ public class PotionCraftingSystem : MonoBehaviour
         ingredient4 = null;
         //Debug.Log("Brewing process started");
         while (timeCooked < potionRecipe.cookTime &&
-               GameManager.Instance.isTimerRunning)
+               GameManager.Instance.CheckIfTimerRunning())
         {
             if (currentTemp == desiredTemp && potionRecipe.needsLidOn == isLidOn)
             {
@@ -226,6 +255,7 @@ public class PotionCraftingSystem : MonoBehaviour
         timeRemainingText.text = isRetrievable || isBrewing ? "Done!" : cookTime.ToString();
         brewButton.interactable = !isBrewing && (isRetrievable || potionRecipe != null);
     }
+
     private void UpdateBrewingTimerDisplay(float timeRemaining)
     {
         timeRemainingText.text = (((int)timeRemaining).ToString());
@@ -406,7 +436,6 @@ public class PotionCraftingSystem : MonoBehaviour
             potionBackgroundImage.gameObject.SetActive(false);
         }
     }
-
 
     public void AddIngredientToSlot(ItemData ingredient) // Add an ingredient from the inventory into the crafting slot
     {
@@ -653,5 +682,4 @@ public class PotionCraftingSystem : MonoBehaviour
         }
 
     }
-
 }

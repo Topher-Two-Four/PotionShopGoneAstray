@@ -7,7 +7,9 @@ using UnityEngine.SceneManagement;
 public class ItemObject : MonoBehaviour
 {
     [Header("General Settings:")]
+    [Tooltip("The rigid body for the item object.")]
     [SerializeField] private Rigidbody rigidBody;
+    [Tooltip("The item data for the item object.")]
     [SerializeField] private ItemData itemData;
 
     private void Update()

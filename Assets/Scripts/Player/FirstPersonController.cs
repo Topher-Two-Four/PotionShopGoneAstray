@@ -23,10 +23,15 @@ namespace StarterAssets
 		[SerializeField] private float SpeedChangeRate = 10.0f;
 
 		[Header("Detection:")]
+		[Tooltip("The layer mask for the maze enemy.")]
 		[SerializeField] private LayerMask enemyMask;
-		[SerializeField] private float viewRadius = 20f; // Distance AI can see
-		[SerializeField] private float viewAngle = 90f; // AI cone of vision
-		[SerializeField] private LayerMask obstacleMask; // Used with raycast to detect obstacles
+		[Tooltip("The layer mask for raycast obstacles.")]
+		[SerializeField] private LayerMask obstacleMask;
+		[Tooltip("The view radius of the player.")]
+		[SerializeField] private float viewRadius = 20f;
+		[Tooltip("The view angle of the player.")]
+		[SerializeField] private float viewAngle = 90f;
+
 
 		[Header("Jump Settings:")]
 		[Tooltip("The height the player can jump")]

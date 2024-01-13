@@ -8,24 +8,32 @@ public class StaminaSystem : MonoBehaviour
 {
 
     [Header("Stamina General Settings")] // Create project menu for general stamina settings
+    [Tooltip("The first person controller for the player character.")]
     [SerializeField] private FirstPersonController playerController;
+    [Tooltip("The player's maximum stamina.")]
     [SerializeField] private float maxStamina = 100.0f;
+    [Tooltip("The amount of stamina that it costs for the player to jump.")]
     [SerializeField] private float jumpStaminaCost = 20.0f;
-    [HideInInspector] public float currentStamina = 100.0f;
-    [HideInInspector] public bool hasRegeneratedStamina = true;
-    [HideInInspector] public bool isCurrentlySprinting = false;
 
     [Header("Stamina Regeneration Settings")] // Create project menu for stamina regeneration settings
+    [Tooltip("The rate at which stamina is depleted.")]
     [Range(0, 50)] [SerializeField] private float staminaDepletionRate = 0.5f;
+    [Tooltip("The rate at which stamina is regenerated.")]
     [Range(0, 50)] [SerializeField] private float staminaRegenerationRate = 0.5f;
 
     [Header("Stamina Speed Settings")] // Create project menu for stamina speed settings
+    [Tooltip("The speed that the player runs at when out of stamina.")]
     [SerializeField] private float slowedRunSpeed = 4.0f;
+    [Tooltip("The speed that the player runs at normally.")]
     [SerializeField] private float normalRunSpeed = 4.0f;
 
     [Header("Stamina UI Settings")] // Create project menu for stamina UI settings
-    [SerializeField] private Image staminaProgressUI = null;
-    [SerializeField] private CanvasGroup sliderCanvasGroup = null;
+    public Image staminaProgressUI = null;
+    public CanvasGroup sliderCanvasGroup = null;
+
+    [HideInInspector] public float currentStamina = 100.0f;
+    [HideInInspector] public bool hasRegeneratedStamina = true;
+    [HideInInspector] public bool isCurrentlySprinting = false;
 
     public static StaminaSystem Instance { get; private set; } // Singleton logic
 

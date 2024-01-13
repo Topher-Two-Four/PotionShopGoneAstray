@@ -327,7 +327,6 @@ namespace StarterAssets
 		public void PlayerJump()
         {
 			_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity); // The square root of H * -2 * G = how much velocity needed to reach desired height
-			Debug.Log("Jump");
 		}
 
 		private void JumpAndGravity()

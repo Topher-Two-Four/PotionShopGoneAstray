@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class ItemObject : MonoBehaviour
 {
-    public Rigidbody rigidBody;
-    public ItemData itemData;
+    [Header("General Settings:")]
+    [SerializeField] private Rigidbody rigidBody;
+    [SerializeField] private ItemData itemData;
 
     private void Update()
     {

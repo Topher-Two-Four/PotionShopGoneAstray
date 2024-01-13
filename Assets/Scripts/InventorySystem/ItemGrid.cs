@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ItemGrid : MonoBehaviour
 {
-    public const float tileSizeWidth = 32;
-    public const float tileSizeHeight = 32;
+    [HideInInspector] public const float tileSizeWidth = 32;
+    [HideInInspector] public const float tileSizeHeight = 32;
 
     InventoryItem[,] inventoryItemSlot;
 
@@ -56,7 +56,7 @@ public class ItemGrid : MonoBehaviour
             for (int y = 0; y < gridSizeHeight; y++)
             {
                 InventoryItem inventoryItem = inventoryItemSlot[x, y];
-                if (inventoryItem != null && inventoryItem.itemData)
+                if (inventoryItem != null && inventoryItem.GetInventoryItemData())
                 {
                     inventoryItem.Delete();
                 }
@@ -196,7 +196,7 @@ public class ItemGrid : MonoBehaviour
             for (int y = 0; y < gridSizeHeight; y++)
             {
                 InventoryItem inventoryItem = inventoryItemSlot[x, y];
-                if (inventoryItem != null && inventoryItem.itemData is PotionData potionData)
+                if (inventoryItem != null && inventoryItem.GetInventoryItemData() is PotionData potionData)
                 {
                     if (!potionsInInventory.Contains(potionData))
                     {
@@ -268,7 +268,7 @@ public class ItemGrid : MonoBehaviour
             for (int y = 0; y < gridSizeHeight; y++)
             {
                 InventoryItem item = inventoryItemSlot[x, y];
-                if (item != null && item.itemData == potionData)
+                if (item != null && item.GetInventoryItemData() == potionData)
                 {
                     RemoveItem(x, y);
                     return;

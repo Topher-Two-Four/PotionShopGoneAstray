@@ -6,9 +6,10 @@ using UnityEngine.UI;
 
 public class InventoryItem : MonoBehaviour
 {
-    public ItemData itemData;
-    public int quality;
-    public Image potionBackground;
+    [Header("Inventory Item Settings:")]
+    [SerializeField] private ItemData itemData;
+    [SerializeField] private int quality;
+    [SerializeField] private Image potionBackground;
 
     public int HEIGHT
     {
@@ -83,6 +84,11 @@ public class InventoryItem : MonoBehaviour
             Instantiate(itemData.itemObject, spawnLocation, Quaternion.identity);
             Destroy(gameObject);
         }
+    }
+
+    public ItemData GetInventoryItemData()
+    {
+        return itemData;
     }
 
 }

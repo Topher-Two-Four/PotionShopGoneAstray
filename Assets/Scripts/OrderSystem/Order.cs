@@ -6,24 +6,26 @@ using TMPro;
 
 public class Order : MonoBehaviour
 {
-    public Customer customer;
-    public string customerName;
-    public Sprite customerPortrait;
-    public PotionData potionRequested;
+    [Header("Item Traits:")]
+
     public Image customerPortraitDisplay;
     public TMP_Text orderText;
     public Button turnInPotionButton;
     public Image turnInPotionButtonImage;
     public Image orderCompletedMask;
 
-    public bool isHealth;
-    public bool isLove;
-    public bool isHatred;
-    public bool isAntidote;
-    public bool isDeath;
-    public bool isLucky;
-    public bool isPoison;
-    public bool isBenefit;
-    public bool isCrippling;
+    [HideInInspector] public Customer customer;
+    [HideInInspector] public string customerName;
+    [HideInInspector] public Sprite customerPortrait;
+    [HideInInspector] public PotionData potionRequested;
 
+    [HideInInspector] public bool isHealth;
+    [HideInInspector] public bool isLove;
+    [HideInInspector] public bool isHatred;
+    [HideInInspector] public bool isAntidote;
+    [HideInInspector] public bool isDeath;
+    [HideInInspector] public bool isLucky;
+    [HideInInspector] public bool isPoison;
+    [HideInInspector] public bool isBenefit;
+    [HideInInspector] public bool isCrippling;
 }

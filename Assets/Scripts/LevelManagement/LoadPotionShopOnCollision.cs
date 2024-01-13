@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class LoadPotionShopOnCollision : MonoBehaviour
 {
-    public float caughtTimeRemoveAmount = 120.0f;
+    [Header("Time Removed On Collision:")]
+    [SerializeField] private float caughtTimeRemoveAmount = 120.0f;
 
     // Switch to potion shop scene on collision with this game object
     private void OnCollisionEnter(Collision collision)

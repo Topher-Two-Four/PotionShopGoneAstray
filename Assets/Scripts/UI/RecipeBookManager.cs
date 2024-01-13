@@ -5,15 +5,19 @@ using UnityEngine.UI;
 
 public class RecipeBookManager : MonoBehaviour
 {
-    public Canvas apothecaryManualCanvas;
+    [Header("Recipe Book General Settings:")]
+    [SerializeField] private Canvas apothecaryManualCanvas;
+    [SerializeField] private GameObject inventoryGrid;
 
-    public int bookPageIndex;
-    public GameObject[] bookPages; // Add in desired order
+    [Header("Page Settings:")]
+    [SerializeField] private int bookPageIndex;
+    [SerializeField] private GameObject[] bookPages; // Add in desired order
 
-    public Button pageForwardButton;
-    public Button pageBackButton;
-    public Button toggleBookCanvasButton;
-    public GameObject inventoryGrid;
+    [Header("Button Settings:")]
+    [SerializeField] private Button pageForwardButton;
+    [SerializeField] private Button pageBackButton;
+    [SerializeField] private Button toggleBookCanvasButton;
+
 
     private void Start()
     {

@@ -6,19 +6,12 @@ using StarterAssets;
 
 public class StaminaSystem : MonoBehaviour
 {
-    public static StaminaSystem Instance { get; private set; } // Singleton logic
-
-    private void Awake()
-    {
-        if (Instance != null && Instance != this) { Destroy(this); } else { Instance = this; } // Singleton logic
-
-    }
-
 
     [Header("Stamina General Settings")] // Create project menu for general stamina settings
-    public float currentStamina = 100.0f;
+    [SerializeField] private FirstPersonController playerController;
     [SerializeField] private float maxStamina = 100.0f;
     [SerializeField] private float jumpStaminaCost = 20.0f;
+    [HideInInspector] public float currentStamina = 100.0f;
     [HideInInspector] public bool hasRegeneratedStamina = true;
     [HideInInspector] public bool isCurrentlySprinting = false;
 
@@ -34,7 +27,13 @@ public class StaminaSystem : MonoBehaviour
     [SerializeField] private Image staminaProgressUI = null;
     [SerializeField] private CanvasGroup sliderCanvasGroup = null;
 
-    private FirstPersonController playerController;
+    public static StaminaSystem Instance { get; private set; } // Singleton logic
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this) { Destroy(this); } else { Instance = this; } // Singleton logic
+
+    }
 
     private void Start()
     {

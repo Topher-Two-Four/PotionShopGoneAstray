@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class PotionData : ItemData
 {
+    [Header("Potion Type:")]
     public bool isHealth;
     public bool isLove;
     public bool isHatred;
@@ -16,8 +17,8 @@ public class PotionData : ItemData
     public bool isBenefit;
     public bool isCrippling;
 
-    public int quality; // The quality of the item from 1-5
-    public int baseValue; // The base currency value of this item
-    public int sellPrice;
-    public int numberOfIngredients;
+    [HideInInspector] public int quality; // The quality of the item from 1-5
+    [HideInInspector] public int baseValue; // The base currency value of this item
+    [HideInInspector] public int sellPrice;
+    [HideInInspector] public int numberOfIngredients;
 }

@@ -5,11 +5,14 @@ using UnityEngine.UI;
 
 public class RoomManager : MonoBehaviour
 {
+    [Header("List of Rooms:")]
+    [SerializeField] private List<GameObject> roomList = new List<GameObject>(); // List for holding room game objects
 
-    public List<GameObject> roomList = new List<GameObject>(); // List for holding room game objects
-    public List<Button> buttonList = new List<Button>(); // List for holding buttons, index corresponding to each room
-    public GameObject currentRoom; // The current room that is active/open
-    public bool isCauldronRoom; 
+    [Header("List of Buttons Corresponding to Rooms:")]
+    [SerializeField] private List<Button> buttonList = new List<Button>(); // List for holding buttons, index corresponding to each room
+
+    [HideInInspector] public GameObject currentRoom; // The current room that is active/open
+    [HideInInspector] public bool isCauldronRoom; 
 
     //private bool isAnyRoomOpen; // Keep track of whether a room canvas is open or not
 

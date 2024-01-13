@@ -281,11 +281,11 @@ public class InventoryController : MonoBehaviour
 
         if  (PotionCraftingSystem.Instance.isBrewing || PotionCraftingSystem.Instance.isRetrievable) { return; }
 
-        if (selectedItem != null && selectedItem.itemData.isIngredient && isSpaceForItem)
+        if (selectedItem != null && selectedItem.GetInventoryItemData().isIngredient && isSpaceForItem)
         {
             selectedItemGrid.RemoveItem(tileGridPosition.x, tileGridPosition.y);
 
-            PotionCraftingSystem.Instance.AddIngredientToSlot(selectedItem.itemData);
+            PotionCraftingSystem.Instance.AddIngredientToSlot(selectedItem.GetInventoryItemData());
             Destroy(selectedItem.gameObject);
         }
         else if (selectedItem != null && selectedItem.GetType() == typeof(PotionData))

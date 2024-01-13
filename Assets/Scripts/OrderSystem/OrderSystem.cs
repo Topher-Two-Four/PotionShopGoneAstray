@@ -5,20 +5,23 @@ using UnityEngine.UI;
 
 public class OrderSystem : MonoBehaviour
 {
-    public Order[] orderList;
-    public Customer[] customerList;
+    [Header("Order and Customer Lists:")]
+    [SerializeField] private Order[] orderList;
+    [SerializeField] private Customer[] customerList;
 
-    public Sprite antidoteIcon;
-    public Sprite benefitIcon;
-    public Sprite cripplingIcon;
-    public Sprite deathIcon;
-    public Sprite hatredIcon;
-    public Sprite healthIcon;
-    public Sprite loveIcon;
-    public Sprite luckyIcon;
-    public Sprite poisonIcon;
+    [Header("Potion Icons:")]
+    [SerializeField] private Sprite antidoteIcon;
+    [SerializeField] private Sprite benefitIcon;
+    [SerializeField] private Sprite cripplingIcon;
+    [SerializeField] private Sprite deathIcon;
+    [SerializeField] private Sprite hatredIcon;
+    [SerializeField] private Sprite healthIcon;
+    [SerializeField] private Sprite loveIcon;
+    [SerializeField] private Sprite luckyIcon;
+    [SerializeField] private Sprite poisonIcon;
 
-    public string potionTypeText;
+    [Header("Text Settings:")]
+    [SerializeField] private string potionTypeText;
 
     public static OrderSystem Instance { get; private set; } // Singleton logic
 

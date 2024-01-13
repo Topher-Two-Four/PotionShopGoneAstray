@@ -813,7 +813,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a2d8b5fdd9478c4790841da007368d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moralityCounter: 0
   monsterSpeedModifier: 0
   playerSpeedModifier: 0
   ingredientSpawnModifier: 0
@@ -4224,38 +4223,6 @@ PrefabInstance:
     - target: {fileID: 1326623294078144235, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
       propertyPath: m_Name
       value: FirstPersonController
-      objectReference: {fileID: 0}
-    - target: {fileID: 6073503498084768483, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: GroundLayers.m_Bits
-      value: 129
-      objectReference: {fileID: 0}
-    - target: {fileID: 6637198244512304310, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6637198244512304310, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6637198244512304310, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6637198244512304310, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6637198244512304310, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6637198244512304310, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6637198244512304310, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6675413122062098297, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
       propertyPath: m_LocalPosition.x

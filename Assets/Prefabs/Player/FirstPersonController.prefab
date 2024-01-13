@@ -176,12 +176,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a84c835212d49cf46941e31e97c7081c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryCanvas: {fileID: 0}
-  inventoryGrid: {fileID: 0}
   items: []
   itemPrefab: {fileID: 3761654210620089128, guid: 6c69ccac8bd83f94eb1782d99ff66571, type: 3}
   potionPrefab: {fileID: 3761654210620089128, guid: 18758571485f014479423ac07bc72006, type: 3}
   canvasTransform: {fileID: 0}
+  inventoryCanvas: {fileID: 0}
+  inventoryGrid: {fileID: 0}
   trashButton: {fileID: 0}
 --- !u!114 &6725445383885262082
 MonoBehaviour:
@@ -238,9 +238,9 @@ GameObject:
   - component: {fileID: 6846241006579286110}
   - component: {fileID: 6073503498084768494}
   - component: {fileID: 6073503498084768483}
-  - component: {fileID: 1080296741902084667}
   - component: {fileID: 7559068140093146776}
   - component: {fileID: 6073503498084768488}
+  - component: {fileID: 1080296741902084667}
   - component: {fileID: 3878279027101484498}
   m_Layer: 6
   m_Name: PlayerCapsule
@@ -309,6 +309,14 @@ MonoBehaviour:
   SprintSpeed: 10
   RotationSpeed: 1.2
   SpeedChangeRate: 10
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 256
+  viewRadius: 90
+  viewAngle: 90
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 128
   JumpHeight: 1.2
   Gravity: -15
   JumpTimeout: 0.3
@@ -322,42 +330,11 @@ MonoBehaviour:
   CinemachineCameraTarget: {fileID: 1927382815001453503}
   TopClamp: 89
   BottomClamp: -89
-  enemyMask:
-    serializedVersion: 2
-    m_Bits: 256
-  viewRadius: 90
-  viewAngle: 90
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 128
   maxStamina: 100
   currentStamina: 100
   staminaDrainAmount: 0.5
   staminaRegenAmount: 0.2
   _staminaSystem: {fileID: 0}
---- !u!114 &1080296741902084667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6073503498084768484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a838fa12ae57b1c4b873b84cee4d1014, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentStamina: 100
-  maxStamina: 100
-  jumpStaminaCost: 20
-  hasRegeneratedStamina: 1
-  isCurrentlySprinting: 0
-  staminaDepletionRate: 25
-  staminaRegenerationRate: 15
-  slowedRunSpeed: 6
-  normalRunSpeed: 10
-  staminaProgressUI: {fileID: 0}
-  sliderCanvasGroup: {fileID: 0}
 --- !u!114 &7559068140093146776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -475,6 +452,29 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1080296741902084667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6073503498084768484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a838fa12ae57b1c4b873b84cee4d1014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentStamina: 100
+  maxStamina: 100
+  jumpStaminaCost: 20
+  hasRegeneratedStamina: 1
+  isCurrentlySprinting: 0
+  staminaDepletionRate: 25
+  staminaRegenerationRate: 15
+  slowedRunSpeed: 6
+  normalRunSpeed: 10
+  staminaProgressUI: {fileID: 0}
+  sliderCanvasGroup: {fileID: 0}
 --- !u!136 &3878279027101484498
 CapsuleCollider:
   m_ObjectHideFlags: 0

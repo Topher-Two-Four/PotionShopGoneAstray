@@ -46,9 +46,9 @@ public class PotionCraftingSystem : MonoBehaviour
 
     [Header("Display Image Settings:")]
     [Tooltip("The background image for the temperature display.")]
-    [SerializeField] private Image temperatureDisplayImage; // Background image for the temperature display
+    public Image temperatureDisplayImage; // Background image for the temperature display
     [Tooltip("The placeholder image for an empty slot.")]
-    [SerializeField] private Sprite emptySlotImage; // Image for an empty slot
+    public Sprite emptySlotImage; // Image for an empty slot
 
     [Header("Button Settings:")]
     [Tooltip("The button for ingredient 1.")]
@@ -94,18 +94,18 @@ public class PotionCraftingSystem : MonoBehaviour
     private float timeAtDesiredTemp = 0f; // Time that potion has been cooking at the desired temperature
     private float timeWithLidInDesiredState = 0f;
 
-    private ItemData ingredient1; // First ingredient ItemData scriptable object
-    private ItemData ingredient2; // Second ingredient ItemData scriptable object
-    private ItemData ingredient3; // Third ingredient ItemData scriptable object
-    private ItemData ingredient4; // Third ingredient ItemData scriptable object
-    private PotionData potionBeingBrewed; // Third ingredient ItemData scriptable object
+    public ItemData ingredient1; // First ingredient ItemData scriptable object
+    public ItemData ingredient2; // Second ingredient ItemData scriptable object
+    public ItemData ingredient3; // Third ingredient ItemData scriptable object
+    public ItemData ingredient4; // Third ingredient ItemData scriptable object
+    public PotionData potionBeingBrewed; // Third ingredient ItemData scriptable object
 
-    private Image ingredient1Image; // Image for the first ingredient
-    private Image ingredient2Image; // Image for the second ingredient
-    private Image ingredient3Image; // Image for the third ingredient
-    private Image ingredient4Image; // Image for the third ingredient
-    private Image potionImage; // Image for the potion created or being created
-    private Image potionBackgroundImage; // Image for the background of the potion, which represents its quality
+    public Image ingredient1Image; // Image for the first ingredient
+    public Image ingredient2Image; // Image for the second ingredient
+    public Image ingredient3Image; // Image for the third ingredient
+    public Image ingredient4Image; // Image for the third ingredient
+    public Image potionImage; // Image for the potion created or being created
+    public Image potionBackgroundImage; // Image for the background of the potion, which represents its quality
 
     private bool isStirred = false;
     private bool isLidOn = false;

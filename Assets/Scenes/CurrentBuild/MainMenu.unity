@@ -813,14 +813,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a2d8b5fdd9478c4790841da007368d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterSpeedModifier: 0
-  playerSpeedModifier: 0
-  ingredientSpawnModifier: 0
   mazeLightModifer: 0
   mazeFogModifer: 0
   mText:
   - {fileID: 2128707531}
   - {fileID: 1193363581}
+  monsterSpeedModifier: 0
+  playerSpeedModifier: 0
+  ingredientSpawnModifier: 0
 --- !u!4 &74132072
 Transform:
   m_ObjectHideFlags: 0
@@ -14339,12 +14339,6 @@ MonoBehaviour:
   lowQualityColor: {r: 1, g: 1, b: 0, a: 0.47058824}
   failedColor: {r: 0.74901974, g: 0, b: 0, a: 0.47058824}
   temperatureDisplayImage: {fileID: 773830184}
-  ingredient1Image: {fileID: 183108071}
-  ingredient2Image: {fileID: 816354662}
-  ingredient3Image: {fileID: 1399944314}
-  ingredient4Image: {fileID: 789180104}
-  potionImage: {fileID: 2120093469}
-  potionBackgroundImage: {fileID: 303446426}
   emptySlotImage: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   ingredient1Button: {fileID: 906768649}
   ingredient2Button: {fileID: 1382049138}
@@ -14365,6 +14359,17 @@ MonoBehaviour:
   ingredientSpaceLeft: 1
   isBrewing: 0
   isRetrievable: 0
+  ingredient1: {fileID: 0}
+  ingredient2: {fileID: 0}
+  ingredient3: {fileID: 0}
+  ingredient4: {fileID: 0}
+  potionBeingBrewed: {fileID: 0}
+  ingredient1Image: {fileID: 0}
+  ingredient2Image: {fileID: 0}
+  ingredient3Image: {fileID: 0}
+  ingredient4Image: {fileID: 0}
+  potionImage: {fileID: 0}
+  potionBackgroundImage: {fileID: 0}
 --- !u!1 &1921065547
 GameObject:
   m_ObjectHideFlags: 0

@@ -413,15 +413,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void SwitchSceneToPotionLevel() // Use scene manager to switch to Potion Level from Maze Level
     {
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3))
-        {
-            LoadMazeLevelAlpha();
-        }
-        else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(4))
-        {
-            LoadMazeLevelBravo();
-        }
-
         ToggleCursorOn();
         if (playerCapsule != null)
         {
@@ -439,41 +430,13 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public void SwitchSceneToMazeLevel() // Use scene manager to switch to Maze Level
     {
         int randomSceneIndex = Random.Range(3, 5); // Choose random maze scene to load
-        if (randomSceneIndex == 3)
-        {
-            LoadMazeLevelAlpha();
-            SceneManager.LoadScene(3); // Use scene manager to load second scene from scene list (settings menu)
-        }
-        else
-        {
-            LoadMazeLevelBravo();
-            SceneManager.LoadScene(4); // Use scene manager to load second scene from scene list (settings menu)
-        }
+        SceneManager.LoadScene(randomSceneIndex);
     }
 
-    private void LoadMazeLevelAlpha() // Place player in correct spot when maze is loaded
+    public void HaltMovement() // Place player in correct spot when maze is loaded
     {
-        ToggleCursorOff(); // Lock and hide cursor
-
-        SetPlayerCapsuleActive(); // Ensure the player capsule is active
-
-        controller.MoveToPosition(alphaPlayerSpawn.transform.position);
-        playerCapsule.transform.rotation = alphaPlayerSpawn.transform.rotation;
-
-        controller.StopMovement(); // Attempt to control player movement
-        controller.ResumeMovement();
-    }
-
-    private void LoadMazeLevelBravo() // Place player in correct spot when maze is loaded
-    {
-        ToggleCursorOff(); // Lock and hide cursor
-
-        SetPlayerCapsuleActive(); // Ensure the player capsule is active
-        controller.MoveToPosition(bravoPlayerSpawn.transform.position);
-        playerCapsule.transform.rotation = bravoPlayerSpawn.transform.rotation;
-
-        controller.StopMovement(); // Attempt to control player movement
-        controller.ResumeMovement();
+        playerCapsule.GetComponent<CharacterController>().gameObject.SetActive(false);
+        playerCapsule.GetComponent<CharacterController>().gameObject.SetActive(true);
     }
 
     // - UI -
@@ -541,13 +504,13 @@ public class GameManager : MonoBehaviour, IDataPersistence
     }
 
 
-    private void ToggleCursorOn()
+    public void ToggleCursorOn()
     {
         Cursor.lockState = CursorLockMode.Confined; // Unlock cursor, confine to game screen
         Cursor.visible = true; // Display cursor
     }
 
-    private void ToggleCursorOff()
+    public void ToggleCursorOff()
     {
         Cursor.lockState = CursorLockMode.None; // Unlock cursor, confine to game screen
         Cursor.visible = false; // Display cursor
@@ -571,12 +534,12 @@ public class GameManager : MonoBehaviour, IDataPersistence
         playerCurrencyText.text = ("Player Currency: $" + playerCurrency); // Update player currency UI display
     }
 
-    private void SetPlayerCapsuleActive()
+    public void SetPlayerCapsuleActive()
     {
         playerCapsule.SetActive(true); // Set player capsule active
     }
 
-    private void SetPlayerCapsuleInactive()
+    public void SetPlayerCapsuleInactive()
     {
         playerCapsule.SetActive(false); // Set player capsule active
     }

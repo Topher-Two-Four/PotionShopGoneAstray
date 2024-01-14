@@ -12,15 +12,15 @@ public class PotionCraftingSystem : MonoBehaviour
 
     [Header("Dispay Color Settings:")]
     [Tooltip("The display color for the freezing temperature setting.")]
-    [SerializeField] private Color freezingTempDisplayColor = new Color(0, 117, 191);
+    public Color freezingTempDisplayColor = new Color(0, 117, 191);
     [Tooltip("The display color for the low temperature setting.")]
-    [SerializeField] private Color lowTempDisplayColor = new Color(0, 0, 255);
+    public Color lowTempDisplayColor = new Color(0, 0, 255);
     [Tooltip("The display color for the medium temperature setting.")]
-    [SerializeField] private Color mediumTempDisplayColor = new Color(0, 255, 0);
+    public Color mediumTempDisplayColor = new Color(0, 255, 0);
     [Tooltip("The display color for the hot temperature setting.")]
-    [SerializeField] private Color hotTempDisplayColor = new Color(108, 255, 0);
+    public Color hotTempDisplayColor = new Color(108, 255, 0);
     [Tooltip("The display color for the boiling temperature setting.")]
-    [SerializeField] private Color boilingTempDisplayColor = new Color(255, 0, 0);
+    public Color boilingTempDisplayColor = new Color(255, 0, 0);
 
     [Header("Quality Settings:")]
     [Tooltip("The percentage of quality needed when brewing to make a potion of ultra quality.")]

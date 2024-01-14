@@ -38,6 +38,10 @@ public class MazeSpawnManager : MonoBehaviour
 
         }
 
+        GameManager.Instance.GetPlayerCapsule().transform.position = GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform.position;
+        GameManager.Instance.SetPlayerCapsuleActive();
+        GameManager.Instance.ToggleCursorOff();
+        GameManager.Instance.HaltMovement();
         // Spawn AI in random area
     }
 

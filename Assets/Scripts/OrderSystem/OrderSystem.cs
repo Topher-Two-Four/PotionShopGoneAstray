@@ -198,7 +198,6 @@ public class OrderSystem : MonoBehaviour
             if (potion != null)
             {
                 order.turnInPotionButton.interactable = true;
-                Debug.Log(potion);
             } 
             else
             {

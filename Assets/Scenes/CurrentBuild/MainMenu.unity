@@ -4224,6 +4224,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirstPersonController
       objectReference: {fileID: 0}
+    - target: {fileID: 1523856400312017892, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+      propertyPath: field of view
+      value: 58.715508
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523856400312017892, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+      propertyPath: m_FOVAxisMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523856400312017892, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+      propertyPath: m_FocalLength
+      value: 32.96973
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523856400312017892, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+      propertyPath: m_projectionMatrixMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6073503498084768483, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
       propertyPath: viewRadius
       value: 20
@@ -4288,6 +4304,10 @@ PrefabInstance:
       propertyPath: inventoryCanvas
       value: 
       objectReference: {fileID: 977770114}
+    - target: {fileID: 8482563062153054413, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+      propertyPath: m_Lens.FieldOfView
+      value: 58.715508
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

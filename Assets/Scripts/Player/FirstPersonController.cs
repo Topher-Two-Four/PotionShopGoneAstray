@@ -68,6 +68,7 @@ namespace StarterAssets
 
 		private float previousMoveSpeed;
 		private float previousSprintSpeed;
+		private float previousRotationSpeed;
 		private bool isLooking = true;
 
 		// cinemachine
@@ -205,6 +206,17 @@ namespace StarterAssets
 			MoveSpeed = previousMoveSpeed;
 			SprintSpeed = previousSprintSpeed;
 		}
+
+		public void FreezeRotation()
+        {
+			previousRotationSpeed = RotationSpeed;
+			RotationSpeed = 0;
+        }
+
+		public void UnfreezeRotation()
+        {
+			RotationSpeed = previousRotationSpeed;
+        }
 
 		private void Update()
 		{

@@ -20,13 +20,17 @@ public class MazeSpawnManager : MonoBehaviour
     [Tooltip("The list of spawn points for the maze enemy (not yet implemented).")]
     [SerializeField] private GameObject[] enemySpawnPoint; // List for holding enemy spawn points
 
+    [Header("Player Spawn Settings:")]
+    [Tooltip("Transformational zero for the maze level.")]
+    [SerializeField] private GameObject zero; // List for holding enemy spawn points
+
     void Start()
     {
         MoralitySystem.Instance.ApplyMoralityEffect();
 
         ingredientsToSpawn = Mathf.FloorToInt(baseSpawnAmount * MoralitySystem.Instance.GetIngredientSpawnModifier());
 
-        for (int x = 0; x < ingredientsToSpawn; x++) 
+        for (int x = 0; x < ingredientsToSpawn; x++)
         {
             int randomSpawnPointIndex = Random.Range(0, ingredientSpawnPoints.Length - 1);
             GameObject spawnPoint = ingredientSpawnPoints[randomSpawnPointIndex];
@@ -37,11 +41,8 @@ public class MazeSpawnManager : MonoBehaviour
             Instantiate(ingredientsArray[randomIngredientIndex], spawnLocation, Quaternion.identity);
 
         }
-
         GameManager.Instance.GetPlayerCapsule().transform.position = GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform.position;
-        GameManager.Instance.SetPlayerCapsuleActive();
         GameManager.Instance.ToggleCursorOff();
-        GameManager.Instance.HaltMovement();
         // Spawn AI in random area
     }
 

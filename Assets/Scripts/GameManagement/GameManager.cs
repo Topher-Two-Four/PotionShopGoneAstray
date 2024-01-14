@@ -103,7 +103,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         isTimerRunning = false;
         ToggleCursorOn();
-        playerCapsule.SetActive(false); // Deactivate player capsule
         playerCurrencyText.text = ("Player Currency: $" + playerCurrency);
         landlordPaymentText.text = ("Landlord Payment: $" + landlordPayment);
         currentDayText.text = ("Day " + currentDay);
@@ -115,7 +114,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
         if (isTimerRunning == true) // Calculate time if timer is still running
         {
             timeRemaining -= Time.deltaTime; // Decrement time using deltaTime
-            //Debug.Log(timeRemaining); // Print remaining time
             TimerUpdate(); // Update timer every frame
         } 
         else
@@ -129,18 +127,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
             TogglePauseMenuCanvas(); // Toggle pause menu
         }
     }
-
-    /*public void OnLevelWasLoaded(int level)
-    {
-        if (GameObject.FindGameObjectWithTag("PlayerSpawnPoint") != null)
-        {
-            SpawnPlayerIntoMaze(level);
-            controller.CallMove();
-            //controller.StopMovement();
-            //controller.ResumeMovement();
-        }
-    }
-    */
 
     // - SAVE/LOAD GAME -
 
@@ -312,7 +298,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 potionCraftingCanvas.SetActive(false);
             }
             orderCanvas.SetActive(false);
-            playerCapsule.SetActive(false);
             ToggleCursorOn(); // Unlock and display cursor
             DisplayEndOfDayUI();
         }
@@ -356,8 +341,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void SwitchSceneToMainMenu() // Use scene manager to switch to Main Menu
     {
-        SceneManager.LoadScene(0); // Load main menu scene
         ToggleCursorOn(); // Unlock and display cursor
+        SceneManager.LoadScene(0); // Load main menu scene
     }
 
     public void SwitchSceneToSettingsMenu() // Use scene manager to switch to Settings Menu
@@ -414,11 +399,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public void SwitchSceneToPotionLevel() // Use scene manager to switch to Potion Level from Maze Level
     {
         ToggleCursorOn();
-        if (playerCapsule != null)
-        {
-            SetPlayerCapsuleInactive(); // Deactivate player capsule
-        }
         OrderSystem.Instance.CheckForCompleteOrders(); // Check for any complete orders to update order UI
+
         CallLoadPotionShop(); // Call load potion shop function, which is staggered to allow it to be invoked if neccessary
     }
 
@@ -433,10 +415,14 @@ public class GameManager : MonoBehaviour, IDataPersistence
         SceneManager.LoadScene(randomSceneIndex);
     }
 
-    public void HaltMovement() // Place player in correct spot when maze is loaded
+    public void FreezeRotation()
     {
-        playerCapsule.GetComponent<CharacterController>().gameObject.SetActive(false);
-        playerCapsule.GetComponent<CharacterController>().gameObject.SetActive(true);
+        controller.FreezeRotation();
+    }
+
+    public void UnfreezeRotation()
+    {
+        controller.UnfreezeRotation();
     }
 
     // - UI -
@@ -541,7 +527,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void SetPlayerCapsuleInactive()
     {
-        playerCapsule.SetActive(false); // Set player capsule active
+        //playerCapsule.SetActive(false); // Set player capsule active
     }
 
 }

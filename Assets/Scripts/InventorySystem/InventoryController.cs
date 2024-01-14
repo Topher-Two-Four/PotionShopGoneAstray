@@ -202,12 +202,11 @@ public class InventoryController : MonoBehaviour
     public void ToggleInventoryCanvas()
     {
 
-
         if (inventoryCanvas.gameObject.activeSelf) // If inventory canvas is active then deactivate it
         {
             Cursor.visible = false; // Hide cursor
             Cursor.lockState = CursorLockMode.Locked; // Unlock and confine cursor to game screen
-
+            GameManager.Instance.UnfreezeRotation();
             if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(2))
             {
                 Cursor.lockState = CursorLockMode.Confined; // Unlock cursor and confine to game screen
@@ -219,10 +218,9 @@ public class InventoryController : MonoBehaviour
         } 
         else // If inventory canvas is inactive then activate it
         {
-
             Cursor.lockState = CursorLockMode.Confined; // Lock cursor in one place
             Cursor.visible = true; // Hide cursor
-
+            GameManager.Instance.FreezeRotation();
             inventoryCanvas.gameObject.SetActive(true); // Activate canvas object
         }
     }

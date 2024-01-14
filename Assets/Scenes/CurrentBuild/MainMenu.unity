@@ -5404,6 +5404,97 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 586496103}
   m_CullTransparentMesh: 1
+--- !u!1 &610218685
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 610218687}
+  - component: {fileID: 610218686}
+  m_Layer: 0
+  m_Name: PotionCraftingSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &610218686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610218685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2f1a2cd3dd5114429fdb2b1d5ac25b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cookTime: 60
+  freezingTempDisplayColor: {r: 0, g: 117, b: 191, a: 1}
+  lowTempDisplayColor: {r: 0, g: 0, b: 255, a: 1}
+  mediumTempDisplayColor: {r: 0, g: 255, b: 0, a: 1}
+  hotTempDisplayColor: {r: 108, g: 255, b: 0, a: 1}
+  boilingTempDisplayColor: {r: 255, g: 0, b: 0, a: 1}
+  ultraQualityTimePercentage: 0.9
+  highQualityTimePercentage: 0.7
+  mediumQualityTimePercentage: 0.5
+  lowQualityTimePercentage: 0.3
+  ultraQualityColor: {r: 25, g: 25, b: 99, a: 120}
+  highQualityColor: {r: 0, g: 1, b: 255, a: 120}
+  mediumQualityColor: {r: 255, g: 0, b: 0, a: 120}
+  lowQualityColor: {r: 255, g: 103, b: 0, a: 120}
+  failedColor: {r: 109, g: 109, b: 109, a: 120}
+  temperatureDisplayImage: {fileID: 1926490602}
+  emptySlotImage: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  ingredient1Button: {fileID: 906768649}
+  ingredient2Button: {fileID: 1382049138}
+  ingredient3Button: {fileID: 1040210777}
+  ingredient4Button: {fileID: 675249426}
+  potionRetrievalButton: {fileID: 9196758}
+  increaseTempButton: {fileID: 2116619}
+  decreaseTempButton: {fileID: 1230897562}
+  putOnLidButton: {fileID: 570254847}
+  removeLidButton: {fileID: 1538596755}
+  stirButton: {fileID: 108490806}
+  brewButton: {fileID: 1123780896}
+  temperatureDisplayText: {fileID: 49256573}
+  timeRemainingText: {fileID: 1271069269}
+  lidDesired: 0
+  potionRecipe: {fileID: 0}
+  potionQuality: 4
+  ingredientSpaceLeft: 1
+  isBrewing: 0
+  isRetrievable: 0
+  ingredient1: {fileID: 0}
+  ingredient2: {fileID: 0}
+  ingredient3: {fileID: 0}
+  ingredient4: {fileID: 0}
+  potionBeingBrewed: {fileID: 0}
+  ingredient1Image: {fileID: 183108071}
+  ingredient2Image: {fileID: 816354662}
+  ingredient3Image: {fileID: 1399944314}
+  ingredient4Image: {fileID: 789180104}
+  potionImage: {fileID: 2120093469}
+  potionBackgroundImage: {fileID: 303446426}
+--- !u!4 &610218687
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610218685}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 932.16284, y: 488.67108, z: -1636.723}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &613655013
 GameObject:
   m_ObjectHideFlags: 0
@@ -7665,7 +7756,6 @@ Transform:
   - {fileID: 646153688}
   - {fileID: 1390966928}
   - {fileID: 1453070999}
-  - {fileID: 1917571815}
   - {fileID: 696367858}
   - {fileID: 952736682}
   - {fileID: 713665286}
@@ -14279,97 +14369,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1872212031}
   m_CullTransparentMesh: 1
---- !u!1 &1917571814
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1917571815}
-  - component: {fileID: 1917571816}
-  m_Layer: 0
-  m_Name: PotionCraftingSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1917571815
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917571814}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 618.7548, y: 335.13495, z: 7474.335}
-  m_LocalScale: {x: 0, y: 0, z: 0}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 824281643}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1917571816
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917571814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2f1a2cd3dd5114429fdb2b1d5ac25b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cookTime: 60
-  freezingTempDisplayColor: {r: 0, g: 0.4572503, b: 0.7490196, a: 1}
-  lowTempDisplayColor: {r: 0, g: 0, b: 255, a: 1}
-  mediumTempDisplayColor: {r: 0, g: 1, b: 0, a: 1}
-  hotTempDisplayColor: {r: 1, g: 0.42267352, b: 0, a: 1}
-  boilingTempDisplayColor: {r: 255, g: 0, b: 0, a: 1}
-  ultraQualityTimePercentage: 0.9
-  highQualityTimePercentage: 0.7
-  mediumQualityTimePercentage: 0.5
-  lowQualityTimePercentage: 0.3
-  ultraQualityColor: {r: 0.9339623, g: 0, b: 0.5869062, a: 0.47058824}
-  highQualityColor: {r: 0, g: 0, b: 0.74901974, a: 0.47058824}
-  mediumQualityColor: {r: 0, g: 0.74901974, b: 0, a: 0.47058824}
-  lowQualityColor: {r: 1, g: 1, b: 0, a: 0.47058824}
-  failedColor: {r: 0.74901974, g: 0, b: 0, a: 0.47058824}
-  temperatureDisplayImage: {fileID: 773830184}
-  emptySlotImage: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
-  ingredient1Button: {fileID: 906768649}
-  ingredient2Button: {fileID: 1382049138}
-  ingredient3Button: {fileID: 1040210777}
-  ingredient4Button: {fileID: 675249426}
-  potionRetrievalButton: {fileID: 9196758}
-  increaseTempButton: {fileID: 2116619}
-  decreaseTempButton: {fileID: 1230897562}
-  putOnLidButton: {fileID: 570254847}
-  removeLidButton: {fileID: 1538596755}
-  stirButton: {fileID: 108490806}
-  brewButton: {fileID: 1123780896}
-  temperatureDisplayText: {fileID: 49256573}
-  timeRemainingText: {fileID: 1271069269}
-  lidDesired: 0
-  potionRecipe: {fileID: 0}
-  potionQuality: 4
-  ingredientSpaceLeft: 1
-  isBrewing: 0
-  isRetrievable: 0
-  ingredient1: {fileID: 0}
-  ingredient2: {fileID: 0}
-  ingredient3: {fileID: 0}
-  ingredient4: {fileID: 0}
-  potionBeingBrewed: {fileID: 0}
-  ingredient1Image: {fileID: 0}
-  ingredient2Image: {fileID: 0}
-  ingredient3Image: {fileID: 0}
-  ingredient4Image: {fileID: 0}
-  potionImage: {fileID: 0}
-  potionBackgroundImage: {fileID: 0}
 --- !u!1 &1921065547
 GameObject:
   m_ObjectHideFlags: 0
@@ -16264,3 +16263,4 @@ SceneRoots:
   - {fileID: 1353563308}
   - {fileID: 295410661}
   - {fileID: 824281643}
+  - {fileID: 610218687}

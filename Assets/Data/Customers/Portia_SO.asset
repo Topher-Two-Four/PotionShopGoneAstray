@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 250d5f515a6f4fa4c9094fc5cc743468, type: 3}
+  m_Name: Portia_SO
+  m_EditorClassIdentifier: 
+  customerName: Portia
+  customerPortrait: {fileID: 21300000, guid: f217128ce5bea9148890cb9cdd0c78e6, type: 3}

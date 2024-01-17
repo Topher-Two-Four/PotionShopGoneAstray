@@ -6,52 +6,110 @@ using UnityEngine.UI;
 
 public class PotionCraftingSystem : MonoBehaviour
 {
-    public bool isFailed = false; // Variable to track whether potion crafting process has failed
-    public int currentTemp = 3; // Current temperature of the cauldron
-    public float cookTime = 120f; // Total cook time of the potion
-    public float timeCooked = 0f; // Time that the potion has been cooking
-    public int desiredTemp = 3; // Desired temperature for the potion being made
-    public float timeAtDesiredTemp = 0f; // Time that potion has been cooking at the desired temperature
-    public int potionQuality = 4; // Quality of the potion crafted
+    [Header("Brew Time Settings:")]
+    [Tooltip("The amount of time it takes to brew a potion.")]
+    [SerializeField] private float cookTime = 60f; // Total cook time of the potion
+
+    [Header("Dispay Color Settings:")]
+    [Tooltip("The display color for the freezing temperature setting.")]
+    public Color freezingTempDisplayColor = new Color(0, 117, 191);
+    [Tooltip("The display color for the low temperature setting.")]
+    public Color lowTempDisplayColor = new Color(0, 0, 255);
+    [Tooltip("The display color for the medium temperature setting.")]
+    public Color mediumTempDisplayColor = new Color(0, 255, 0);
+    [Tooltip("The display color for the hot temperature setting.")]
+    public Color hotTempDisplayColor = new Color(108, 255, 0);
+    [Tooltip("The display color for the boiling temperature setting.")]
+    public Color boilingTempDisplayColor = new Color(255, 0, 0);
+
+    [Header("Quality Settings:")]
+    [Tooltip("The percentage of quality needed when brewing to make a potion of ultra quality.")]
+    [SerializeField] private float ultraQualityTimePercentage = .9f; // Time in desired temperature range required to make an ultra quality potion
+    [Tooltip("The percentage of quality needed when brewing to make a potion of high quality.")]
+    [SerializeField] private float highQualityTimePercentage = .7f;// Time in desired temperature range required to make a high quality potion
+    [Tooltip("The percentage of quality needed when brewing to make a potion of medium quality.")]
+    [SerializeField] private float mediumQualityTimePercentage = .5f; // Time in desired temperature range required to make a medium quality potion
+    [Tooltip("The percentage of quality needed when brewing to make a potion of low quality.")]
+    [SerializeField] private float lowQualityTimePercentage = .3f; // Time in desired temperature range required to make a low quality potion
+
+    [Header("Potion Quality Color Settings:")]
+    [Tooltip("The background color for an ultra quality potion.")]
+    [SerializeField] private Color ultraQualityColor = new Color(25, 25, 99, 120); // Purple
+    [Tooltip("The background color for a high quality potion.")]
+    [SerializeField] private Color highQualityColor = new Color(0, 1, 255, 120); // Blue
+    [Tooltip("The background color for a medium quality potion.")]
+    [SerializeField] private Color mediumQualityColor = new Color(255, 0, 0, 120); // Red
+    [Tooltip("The background color for a low quality potion.")]
+    [SerializeField] private Color lowQualityColor = new Color(255, 103, 0, 120); // Orange
+    [Tooltip("The background color for a failed/inert quality potion.")]
+    [SerializeField] private Color failedColor = new Color(109, 109, 109, 120); // Gray
+
+    [Header("Display Image Settings:")]
+    [Tooltip("The background image for the temperature display.")]
+    public Image temperatureDisplayImage; // Background image for the temperature display
+    [Tooltip("The placeholder image for an empty slot.")]
+    public Sprite emptySlotImage; // Image for an empty slot
+
+    [Header("Button Settings:")]
+    [Tooltip("The button for ingredient 1.")]
+    [SerializeField] private Button ingredient1Button; // Button for the first ingredient
+    [Tooltip("The button for ingredient 2.")]
+    [SerializeField] private Button ingredient2Button; // Button for the second ingredient
+    [Tooltip("The button for ingredient 3.")]
+    [SerializeField] private Button ingredient3Button; // Button for the third ingredient
+    [Tooltip("The button for ingredient 4.")]
+    [SerializeField] private Button ingredient4Button; // Button for the fourth ingredient
+    [Tooltip("The button for potion retrieval.")]
+    [SerializeField] private Button potionRetrievalButton; // Button for potion retrieval
+    [Tooltip("The button for increasing brewing temperature.")]
+    [SerializeField] private Button increaseTempButton; // Button to increase cooking temperature
+    [Tooltip("The button for decreasing brewing temperature.")]
+    [SerializeField] private Button decreaseTempButton; // Button to increase cooking temperature
+    [Tooltip("The button to put the lid on the cauldron.")]
+    [SerializeField] private Button putOnLidButton;
+    [Tooltip("The button to remove the lid from the cauldrom.")]
+    [SerializeField] private Button removeLidButton;
+    [Tooltip("The button to stir the cauldron.")]
+    [SerializeField] private Button stirButton; // Button to stir the caudron
+    [Tooltip("The button to begin brewing a potion.")]
+    [SerializeField] private Button brewButton; // Button to begin brewing
+
+    [Header("Text Settings:")]
+    [Tooltip("The text that displays current brewing temperature.")]
+    [SerializeField] private TMP_Text temperatureDisplayText; // TMP text game object for displaying the current temperature
+    [Tooltip("The text that displays brew time remaining.")]
+    [SerializeField] private TMP_Text timeRemainingText; // TMP text game object for displaying amount of cook time remaining
+
+    [HideInInspector] public bool lidDesired = false;
+    [HideInInspector] public Recipe potionRecipe;
+    [HideInInspector] public int potionQuality = 4; // Quality of the potion crafted
+    [HideInInspector] public bool ingredientSpaceLeft = true;
+    [HideInInspector] public bool isBrewing = false; // Variable to track whether a potion is currently being brewed
+    [HideInInspector] public bool isRetrievable = false; // Variable to track whether a potion is ready to be retrieved
+
+    private int currentTemp = 3; // Current temperature of the cauldron
+    private float timeCooked = 0f; // Time that the potion has been cooking
+    private Color currentQualityColor = new Color(255, 255, 255, 1);
+    private int desiredTemp = 3; // Desired temperature for the potion being made
+    private float timeAtDesiredTemp = 0f; // Time that potion has been cooking at the desired temperature
+    private float timeWithLidInDesiredState = 0f;
 
     public ItemData ingredient1; // First ingredient ItemData scriptable object
     public ItemData ingredient2; // Second ingredient ItemData scriptable object
     public ItemData ingredient3; // Third ingredient ItemData scriptable object
-    public ItemData potionBeingBrewed; // Third ingredient ItemData scriptable object
+    public ItemData ingredient4; // Third ingredient ItemData scriptable object
+    public PotionData potionBeingBrewed; // Third ingredient ItemData scriptable object
 
-    public float ultraQualityTimeLimit = 90f; // Time in desired temperature range required to make an ultra quality potion
-    public float highQualityTimeLimit = 70f;// Time in desired temperature range required to make a high quality potion
-    public float mediumQualityTimeLimit = 50f; // Time in desired temperature range required to make a medium quality potion
-    public float lowQualityTimeLimit = 30f; // Time in desired temperature range required to make a low quality potion
-
-    public bool isBrewing = false; // Variable to track whether a potion is currently being brewed
-    public bool isRetrievable = false; // Variable to track whether a potion is ready to be retrieved
-
-    public Button ingredient1Button; // Button for the first ingredient
-    public Button ingredient2Button; // Button for the second ingredient
-    public Button ingredient3Button; // Button for the third ingredient
-    public Button potionRetrievalButton; // Button for potion retrieval
-    public Button increaseTempButton; // Button to increase cooking temperature
-    public Button decreaseTempButton; // Button to increase cooking temperature
-    public Button brewButton; // Button to begin brewing
-
-    public Color freezingTempDisplayColor = new Color(0, 117, 191);
-    public Color lowTempDisplayColor = new Color(0, 0, 255);
-    public Color mediumTempDisplayColor = new Color(0, 255, 0);
-    public Color hotTempDisplayColor = new Color(108, 255, 0);
-    public Color boilingTempDisplayColor = new Color(255, 0, 0);
-
-    public Image temperatureDisplayImage; // Background image for the temperature display
     public Image ingredient1Image; // Image for the first ingredient
     public Image ingredient2Image; // Image for the second ingredient
     public Image ingredient3Image; // Image for the third ingredient
+    public Image ingredient4Image; // Image for the third ingredient
     public Image potionImage; // Image for the potion created or being created
-    public Sprite emptySlotImage; // Image for an empty slot
+    public Image potionBackgroundImage; // Image for the background of the potion, which represents its quality
 
-    public TMP_Text temperatureDisplayText; // TMP text game object for displaying the current temperature
-    public TMP_Text timeRemainingText; // TMP text game object for displaying amount of cook time remaining
-
-    public Recipe potionRecipe;
+    private bool isStirred = false;
+    private bool isLidOn = false;
+    private bool shouldBeStirred = false;
 
     public static PotionCraftingSystem Instance { get; private set; } // Singleton logic
 
@@ -71,10 +129,14 @@ public class PotionCraftingSystem : MonoBehaviour
         ingredient1Button.onClick.AddListener(() => RetrieveItem(ingredient1, 1)); // Add button listener for first ingredient space
         ingredient2Button.onClick.AddListener(() => RetrieveItem(ingredient2, 2)); // Add button listener for second ingredient space
         ingredient3Button.onClick.AddListener(() => RetrieveItem(ingredient3, 3)); // Add button listener for third ingredient space
-        
+        ingredient4Button.onClick.AddListener(() => RetrieveItem(ingredient4, 4)); // Add button listener for third ingredient space
+
         increaseTempButton.onClick.AddListener(() => IncreaseTemperature()); // Add button listener for increase temperature button
         decreaseTempButton.onClick.AddListener(() => DecreaseTemperature());// Add button listener for decrease temperature button
-        
+        putOnLidButton.onClick.AddListener(() => ToggleLid());
+        removeLidButton.onClick.AddListener(() => ToggleLid());
+        stirButton.onClick.AddListener(() => StirCauldron());
+
         brewButton.onClick.AddListener(() => BrewPotion(ingredient1, ingredient2, ingredient3)); // Add button listener to brew potion when pressed
         
         potionRetrievalButton.onClick.AddListener(() => RetrievePotion());// Add button listener for potion retrieval area
@@ -94,20 +156,27 @@ public class PotionCraftingSystem : MonoBehaviour
 
     public void BrewPotion(ItemData ingredient1, ItemData ingredient2, ItemData ingredient3) // Brew potion using three ingredients
     {
-        Recipe potionRecipe = RecipeList.Instance.FindRecipe(ingredient1, ingredient2, ingredient3);
+        Recipe potionRecipe = RecipeList.Instance.FindRecipe(ingredient1, ingredient2, ingredient3, ingredient4);
 
         if (potionRecipe != null)
         {
             isBrewing = true;
             BrewPotionWIthRecipe(potionRecipe);
-            potionImage.sprite = potionRecipe.potionIcon;
+            potionImage.sprite = potionRecipe.potion.itemIcon;
+            potionBackgroundImage.color = currentQualityColor;
             UpdateBrewingTimerDisplay(potionRecipe.cookTime);
-            Debug.Log(potionRecipe);
+            //Debug.Log(potionRecipe); //MAKE INTO QUICK DISPLAY TEXT AFTER BEGINNING BREW
+        }
+        else
+        {
+            potionImage.sprite = null;
         }
     }
 
     private void BrewPotionWIthRecipe(Recipe potionRecipe)
     {
+        if (potionRecipe == null) { return; }
+
         StartCoroutine(BrewingProcess(potionRecipe));
     }
 
@@ -115,63 +184,76 @@ public class PotionCraftingSystem : MonoBehaviour
     {
         timeCooked = 0f;
         timeAtDesiredTemp = 0f;
+        timeWithLidInDesiredState = 0f;
+        isStirred = false;
         potionBeingBrewed = potionRecipe.potion;
+        shouldBeStirred = potionRecipe.needStirring;
+        desiredTemp = potionRecipe.desiredTemp;
+        lidDesired = potionRecipe.needsLidOn;
+        //Debug.Log("Needs stirring:" + shouldBeStirred);
         ingredient1 = null;
         ingredient2 = null;
         ingredient3 = null;
-        Debug.Log("Brewing process started");
-        while (timeCooked < potionRecipe.cookTime)
+        ingredient4 = null;
+        //Debug.Log("Brewing process started");
+        while (timeCooked < potionRecipe.cookTime &&
+               GameManager.Instance.CheckIfTimerRunning())
         {
-
-            if (currentTemp == desiredTemp)
+            if (currentTemp == desiredTemp && potionRecipe.needsLidOn == isLidOn)
             {
                 float timeRemaining = Mathf.Max(0, cookTime - timeCooked);
                 UpdateBrewingTimerDisplay(timeRemaining);
                 timeCooked += Time.deltaTime;
                 timeAtDesiredTemp += Time.deltaTime;
-                Debug.Log("At desired temp");
-            } 
+                timeWithLidInDesiredState += Time.deltaTime;
+                //Debug.Log("At desired temp, lid in correct state.");
+            }
+            else if (currentTemp == desiredTemp && potionRecipe.needsLidOn != isLidOn)
+            {
+                float timeRemaining = Mathf.Max(0, cookTime - timeCooked);
+                UpdateBrewingTimerDisplay(timeRemaining);
+                timeCooked += Time.deltaTime;
+                timeAtDesiredTemp += Time.deltaTime;
+                //Debug.Log("At desired temp, but needs lid corrected.");
+            }
+            else if (currentTemp != desiredTemp && potionRecipe.needsLidOn == isLidOn)
+            {
+                float timeRemaining = Mathf.Max(0, cookTime - timeCooked);
+                UpdateBrewingTimerDisplay(timeRemaining);
+                timeCooked += Time.deltaTime;
+                timeWithLidInDesiredState += Time.deltaTime;
+                //Debug.Log("Not at desired temp, but lid correct.");
+            }
             else
             {
                 float timeRemaining = Mathf.Max(0, cookTime - timeCooked);
                 UpdateBrewingTimerDisplay(timeRemaining);
                 timeCooked += Time.deltaTime;
-                Debug.Log("Not at desired temp");
+                //Debug.Log("Not at desired temp and needs lid corrected.");
             }
+            
+            CheckPotionQuality(potionRecipe.cookTime, timeAtDesiredTemp);
+            UpdatePotionQualityIndicator();
+
             yield return null;
         }
+        CheckPotionQuality(potionRecipe.cookTime, timeAtDesiredTemp);
         DisplayBrewingComplete();
     }
 
     public void UpdateBrewButtonStatus()
     {
-        Recipe potionRecipe = RecipeList.Instance.FindRecipe(ingredient1, ingredient2, ingredient3); // Get potion recipe from instance of the recipe list
-        if (potionRecipe != null) // Check whether a potion recipe exists with the combination of these three ingredients
-        {
-            if (isBrewing) // If recipe is not currently brewing
-            {
-                brewButton.interactable = false; // If a recipe with this ingredient combination does not exist then make the brew button uninteractable (and grayed out)
-            }
-            else
-            {
-                if (!isRetrievable) // If recipe is not retrievable
-                {
-                    brewButton.interactable = false;
-                    potionImage.sprite = potionRecipe.potionIcon;
-                    timeRemainingText.text = ("Done!");
-                }
-                else
-                {
-                    brewButton.interactable = true;
-                    potionImage.sprite = potionRecipe.potionIcon;
-                    timeRemainingText.text = cookTime.ToString();
-                }
-                brewButton.interactable = true; // If a recipe with this ingredient combination does exist then make the brew button interactable
-                potionImage.sprite = potionRecipe.potionIcon;
-                timeRemainingText.text = cookTime.ToString();
-            }
+        Recipe potionRecipe = RecipeList.Instance.FindRecipe(ingredient1, ingredient2, ingredient3, ingredient4); // Get potion recipe from instance of the recipe list
 
+        if (potionRecipe == null)
+        {
+            brewButton.interactable = false;
+            return;
         }
+
+        potionImage.sprite = potionRecipe.potion.itemIcon;
+        timeRemainingText.text = isRetrievable || isBrewing ? "Done!" : cookTime.ToString();
+        brewButton.interactable = !isBrewing && (isRetrievable || potionRecipe != null);
     }
 
     private void UpdateBrewingTimerDisplay(float timeRemaining)
@@ -179,13 +261,128 @@ public class PotionCraftingSystem : MonoBehaviour
         timeRemainingText.text = (((int)timeRemaining).ToString());
     }
 
+    private void ResetBrewingTimer()
+    {
+        timeRemainingText.text = ("000");
+    }
+
+    private void UpdatePotionQualityIndicator()
+    {
+        int currentQuality = GetPotionQuality();
+        //Debug.Log(currentQuality);
+
+        switch (currentQuality)
+        {
+            case 4:
+                potionBackgroundImage.color = ultraQualityColor;
+                break;
+
+            case 3:
+                potionBackgroundImage.color = highQualityColor;
+                break;
+
+            case 2:
+                potionBackgroundImage.color = mediumQualityColor;
+                break;
+
+            case 1:
+                potionBackgroundImage.color = lowQualityColor;
+                break;
+
+            default:
+                potionBackgroundImage.color = failedColor;
+                break;
+        }
+    }
+
+    private int GetPotionQuality()
+    {
+        float _qualityPointsFromStirring = 0;
+        if (shouldBeStirred && isStirred)
+        {
+            _qualityPointsFromStirring = .1f;
+        } else if (!shouldBeStirred && !isStirred)
+        {
+            _qualityPointsFromStirring = .1f;
+        } 
+        else
+        {
+            _qualityPointsFromStirring = 0f;
+        }
+
+        float _qualityPointsFromTemperature = (timeAtDesiredTemp / cookTime) * .7f;
+
+        float _qualityPointsFromLid = (timeWithLidInDesiredState / cookTime) * .2f;
+
+        //Debug.Log("Lid points " + _qualityPointsFromLid);
+        //Debug.Log("Stir points " + _qualityPointsFromStirring);
+        //Debug.Log("Temperature points " + _qualityPointsFromTemperature);
+        float qualityPercentage = (_qualityPointsFromStirring + _qualityPointsFromTemperature + _qualityPointsFromLid);
+
+        // Need to make this deductive
+        if (qualityPercentage >= ultraQualityTimePercentage) 
+        {
+            potionQuality = 4;
+            return 4;
+        }
+        if (qualityPercentage >= highQualityTimePercentage) 
+        {
+            potionQuality = 3;
+            return 3; 
+        }
+        if (qualityPercentage >= mediumQualityTimePercentage) 
+        {
+            potionQuality = 2;
+            return 2; 
+        }
+        if (qualityPercentage >= lowQualityTimePercentage) 
+        {
+            potionQuality = 1;
+            return 1; 
+        }
+        potionQuality = 0;
+        return 0;
+    }
+
+    private Color GetPotionQualityImageColor(int qualityLevel)
+    {
+        switch (qualityLevel)
+        {
+            case 4:
+                currentQualityColor = ultraQualityColor;
+                break;
+
+            case 3:
+                currentQualityColor = highQualityColor;
+                break;
+
+            case 2:
+                currentQualityColor = mediumQualityColor;
+                break;
+
+            case 1:
+                currentQualityColor = lowQualityColor;
+                break;
+
+            case 0:
+                currentQualityColor = failedColor;
+                break;
+            default:
+                currentQualityColor = Color.clear;
+                break;
+        }
+
+        return currentQualityColor;
+    }
+
     private void DisplayBrewingComplete()
     {
-        Debug.Log("Brewing complete.");
+        //Debug.Log("Brewing complete.");
         timeRemainingText.text = ("Done!");
         isBrewing = false;
         isRetrievable = true;
         potionRetrievalButton.interactable = true;
+        UpdatePotionQualityIndicator();
     }
 
     private void UpdateIngredientIcons()
@@ -216,25 +413,34 @@ public class PotionCraftingSystem : MonoBehaviour
         {
             ingredient3Image.sprite = emptySlotImage;
         }
+
+        if (ingredient4 != null)
+        {
+            ingredient4Image.sprite = ingredient4.itemIcon;
+        }
+        else
+        {
+            ingredient4Image.sprite = emptySlotImage;
+        }
     }
 
     private void UpdatePotionIcon()
     {
-        if (potionBeingBrewed != null)
+        if (potionBeingBrewed != null || isRetrievable)
         {
-            potionImage.sprite = potionBeingBrewed.itemIcon;
+            potionBackgroundImage.gameObject.SetActive(true);
         }
         else
         {
             potionImage.sprite = emptySlotImage;
+            potionBackgroundImage.gameObject.SetActive(false);
         }
     }
 
-
     public void AddIngredientToSlot(ItemData ingredient) // Add an ingredient from the inventory into the crafting slot
     {
-        Debug.Log("Adding " + ingredient);
-        if (ingredient.isIngredient == true) // Check whether the item is an ingredient
+        //Debug.Log("Adding " + ingredient);
+        if (ingredient.isIngredient) // Check whether the item is an ingredient
         {
             if (ingredient1 == null)
             {
@@ -248,21 +454,28 @@ public class PotionCraftingSystem : MonoBehaviour
             {
                 ingredient3 = ingredient;
             }
+            else if (ingredient4 == null)
+            {
+                ingredient4 = ingredient;
+                ingredientSpaceLeft = false;
+                return;
+            }
             else
             {
+                ingredientSpaceLeft = false;
+                //Debug.Log("No available space.");
                 return;
             }
         }
         else
         {
-            Debug.Log("No available space.");
+            //Debug.Log("No available space.");
             return; // Return if no space available amongst the three ingredient spaces
         }
     }
 
     public void AddItemToInventory(ItemData itemData)
     {
-        Debug.Log(itemData);
         if (itemData != null)
         {
             InventoryController.Instance.InsertItem(itemData);
@@ -283,6 +496,10 @@ public class PotionCraftingSystem : MonoBehaviour
             {
                 itemData = null;
             }
+            else if (itemData == ingredient4)
+            {
+                itemData = null;
+            }
             else
             {
                 return;
@@ -291,54 +508,53 @@ public class PotionCraftingSystem : MonoBehaviour
 
     }
 
-    public int CheckPotionQuality(int cookTime, float timeAtDesiredTemp) // Check what quality of potion has been made, based on time in desired temperature range
+    public void AddPotionToInventory(PotionData potionData, int qualityLevel)
     {
-        float qualityPercentage = (timeAtDesiredTemp / cookTime); // Calculate variable to represent the quality of potion made, based on time in desired temperature range
-
-        if (qualityPercentage >= ultraQualityTimeLimit) // Check whether quality percentage is within ultra quality time range
+        //Debug.Log(potionData);
+        if (potionData != null)
         {
-            isFailed = false; // Declare that the potion crafting process has succeeded
+            currentQualityColor = GetPotionQualityImageColor(qualityLevel);
+            //Debug.Log(currentQualityColor);
+            InventoryController.Instance.InsertPotion(potionData, qualityLevel, currentQualityColor);
+            potionBeingBrewed = null;
+            potionBackgroundImage.color = Color.clear;
+        }
+        OrderSystem.Instance.CheckForCompleteOrders();
+    }
+
+    public int CheckPotionQuality(float cookTime, float timeAtDesiredTemp) // Check what quality of potion has been made, based on time in desired temperature range
+    {
+       float qualityPercentage = GetPotionQuality(); // Calculate variable to represent the quality of potion made, based on time in desired temperature range
+
+        if (qualityPercentage >= ultraQualityTimePercentage) // Check whether quality percentage is within ultra quality time range
+        {
+            currentQualityColor = ultraQualityColor;
+            //isFailed = false; // Declare that the potion crafting process has succeeded
             return 4; // Return variable to represent an ultra quality potion (4)
         }
-        else if (qualityPercentage >= highQualityTimeLimit) // Check whether quality percentage is within high quality time range
+        else if (qualityPercentage >= highQualityTimePercentage) // Check whether quality percentage is within high quality time range
         {
-            isFailed = false; // Declare that the potion crafting process has succeeded
+            //isFailed = false; // Declare that the potion crafting process has succeeded
+            currentQualityColor = highQualityColor;
             return 3; // Return variable to represent an ultra quality potion (3)
         }
-        else if (qualityPercentage >= mediumQualityTimeLimit) // Check whether quality percentage is within medium quality time range
+        else if (qualityPercentage >= mediumQualityTimePercentage) // Check whether quality percentage is within medium quality time range
         {
-            isFailed = false; // Declare that the potion crafting process has succeeded
+            //isFailed = false; // Declare that the potion crafting process has succeeded
+            currentQualityColor = mediumQualityColor;
             return 2; // Return variable to represent an ultra quality potion (2)
         }
-        else if (qualityPercentage >= lowQualityTimeLimit) // Check whether quality percentage is within low quality time range
+        else if (qualityPercentage >= lowQualityTimePercentage) // Check whether quality percentage is within low quality time range
         {
-            isFailed = false; // Declare that the potion crafting process has succeeded
+            //isFailed = false; // Declare that the potion crafting process has succeeded
+            currentQualityColor = lowQualityColor;
             return 1; // Return variable to represent an ultra quality potion (1)
         }
         else // Potion making has failed if lower that the low quality time limit
         {
-            isFailed = true; // Declare that the potion crafting process has failed
+            //isFailed = true; // Declare that the potion crafting process has failed
+            currentQualityColor = failedColor;
             return 0; // // Return variable to represent that a potion was not crafted, or if it was it is inert (0)
-        }
-    }
-
-    public void SetPotionRetrievalArea() // Set the image for the potion retrieval area
-    {
-        Recipe potionRecipe = RecipeList.Instance.FindRecipe(ingredient1, ingredient2, ingredient3); // Get potio
-        Debug.Log("Setting retrieval area.");
-
-        if (isBrewing) // Check whether brewing is occurring
-        {
-            potionImage.sprite = potionRecipe.potionIcon; // Display potion image if it's being brewed
-            // Add grayish tranpsparency over top of image while unable to be retrieved
-        }
-        else if (isRetrievable) // Check whether the potion is retrievable
-        {
-            potionImage.sprite = potionRecipe.potionIcon; // Display potion image if it's ready to be retrieved
-        }
-        else // If brewing isn't occurring and a potion isn't ready to be retrieved then assume potion image doesn't need to be there
-        {
-            potionImage = null; // Set potion image to null to remove potion image from screen display
         }
     }
 
@@ -402,29 +618,46 @@ public class PotionCraftingSystem : MonoBehaviour
         }           
     }
 
+    public void ToggleLid()
+    {
+        if (!isLidOn)
+        {
+            putOnLidButton.gameObject.SetActive(false);
+            removeLidButton.gameObject.SetActive(true);
+            isLidOn = true;
+        }
+        else
+        {
+            removeLidButton.gameObject.SetActive(false);
+            putOnLidButton.gameObject.SetActive(true);
+            isLidOn = false;
+        }
+    }
+
+    public void StirCauldron()
+    {
+        if (timeCooked > (cookTime / 2))
+        {
+            isStirred = true;
+        }
+    }
+
     // *** ITEM RETRIEVAL ***
 
     private void RetrievePotion()
     {
-        Debug.Log(potionBeingBrewed);
-        Debug.Log("Trying to retrieve potion");
         if (!isBrewing)
         {
             if (isRetrievable)
             {
-                Debug.Log("Retrieving potion");
-                AddItemToInventory(potionBeingBrewed);
-                GameManager.Instance.AddCurrency(potionBeingBrewed.baseValue);
+                AddPotionToInventory(potionBeingBrewed, GetPotionQuality());
+                OrderSystem.Instance.CheckForCompleteOrders();
                 potionBeingBrewed = null;
+                isRetrievable = false; // Reset is retrievable variable
+                potionQuality = -1;
+                UpdatePotionQualityIndicator();
+                ResetBrewingTimer();
             }
-            else
-            {
-                Debug.Log("Potion not retrievable");
-            }
-        }
-        else
-        {
-            Debug.Log("Brewing not complete");
         }
     }
 
@@ -439,11 +672,14 @@ public class PotionCraftingSystem : MonoBehaviour
         {
             ingredient2 = null;
         }
-        else
+        else if (ingredientSlot == 3)
         {
             ingredient3 = null;
+        } 
+        else
+        {
+            ingredient4 = null;
         }
 
     }
-
 }

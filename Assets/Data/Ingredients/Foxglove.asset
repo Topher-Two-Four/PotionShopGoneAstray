@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 176ca328fce37d04882be2baab705bcd, type: 3}
+  m_Name: Foxglove
+  m_EditorClassIdentifier: 
+  width: 2
+  height: 3
+  isIngredient: 1
+  isSellable: 0
+  itemIcon: {fileID: 21300000, guid: 11b2a56c9484afd4eb9faff1389678f6, type: 3}
+  itemObject: {fileID: 3728056772645781790, guid: f32f4a2bed4d990438cb5cdefe6f31f7, type: 3}

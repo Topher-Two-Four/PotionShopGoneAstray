@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7115564010251222282
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1769581635852068536}
+  - component: {fileID: 6366682580641172927}
+  m_Layer: 0
+  m_Name: OrderManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1769581635852068536
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7115564010251222282}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 790.80035, y: 623.5913, z: 1035.825}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6366682580641172927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7115564010251222282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45fa1ae9d5a5e2047855eda868ff1104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orderList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  customerList:
+  - {fileID: 11400000, guid: 2cbcbd7be3452e3429a4be3d31bad0cd, type: 2}
+  - {fileID: 11400000, guid: de265f6e22e3a6d48b5fcdda029ceda6, type: 2}
+  - {fileID: 11400000, guid: 15a8c4eab48ded24db0066bdc2b7d275, type: 2}
+  - {fileID: 11400000, guid: 786a91bd1edfa2d4695ff677603e2a9a, type: 2}
+  - {fileID: 11400000, guid: d960aac32a1d17945bdf0a1ee555809d, type: 2}
+  - {fileID: 11400000, guid: ab324fc7fd3473f48b19ac7c641058a7, type: 2}
+  - {fileID: 11400000, guid: 153c49157ae87e14383be803555769cb, type: 2}
+  - {fileID: 11400000, guid: 89ab489e864d17a4590cf9906c2ce040, type: 2}
+  - {fileID: 11400000, guid: 51d2c4a966fdf884f9db3f5a4e93a58c, type: 2}
+  - {fileID: 11400000, guid: e8da664de47c73444a87b29922b29ebb, type: 2}
+  - {fileID: 11400000, guid: 2bedb578c965013418728e3ad64a6585, type: 2}
+  antidoteIcon: {fileID: 21300000, guid: db15db7f0c3ee52448c7bb04a51fdd9c, type: 3}
+  benefitIcon: {fileID: 21300000, guid: 20a9f598cee410e4a8bd2ef9d2f10c0c, type: 3}
+  cripplingIcon: {fileID: 21300000, guid: 38199e37bcae61f49be3bfcbb00c7225, type: 3}
+  deathIcon: {fileID: 21300000, guid: 87f2cfa5ce9be6e41b3ecedc1a720d68, type: 3}
+  hatredIcon: {fileID: 21300000, guid: c65d53919ef56ac429a7294b26c8df99, type: 3}
+  healthIcon: {fileID: 21300000, guid: 317e67a8281c2cb4d9bb30e7ea812b76, type: 3}
+  loveIcon: {fileID: 21300000, guid: 632a9156505a90d49bb59fa3364a5bff, type: 3}
+  luckyIcon: {fileID: 21300000, guid: caab3bce15c2a844d82f4485f38bb0cc, type: 3}
+  poisonIcon: {fileID: 21300000, guid: 8877d00db2b680c42b35e01bc3cbe340, type: 3}
+  potionTypeText: 

@@ -6,7 +6,10 @@ using UnityEngine.UI;
 
 public class InventoryItem : MonoBehaviour
 {
-    public ItemData itemData;
+    [HideInInspector] public int quality;
+
+    private ItemData itemData;
+    private Image potionBackground;
 
     public int HEIGHT
     {
@@ -37,6 +40,16 @@ public class InventoryItem : MonoBehaviour
 
     public bool rotated = false;
 
+    public void SetQuality(int qualityLevel, Color qualityColor)
+    {
+        quality = qualityLevel;
+        potionBackground = this.gameObject.transform.GetChild(0).GetComponent<Image>();
+        //Debug.Log(qualityColor);
+        potionBackground.color = qualityColor;
+
+        // Assign image to potion inventory item
+    }
+
     internal void Set(ItemData itemData)
     {
         this.itemData = itemData;
@@ -57,4 +70,25 @@ public class InventoryItem : MonoBehaviour
         rectTransform.rotation = Quaternion.Euler(0, 0, rotated == true ? 90f : 0f);
 
     }
+
+    public void Delete()
+    {
+        Destroy(gameObject);
+    }
+
+    public void Drop()
+    {
+        if (GameManager.Instance.GetPlayerCapsule().activeSelf)
+        {
+            Vector3 spawnLocation = GameManager.Instance.GetDropSpawnLocation().transform.position;
+            Instantiate(itemData.itemObject, spawnLocation, Quaternion.identity);
+            Destroy(gameObject);
+        }
+    }
+
+    public ItemData GetInventoryItemData()
+    {
+        return itemData;
+    }
+
 }

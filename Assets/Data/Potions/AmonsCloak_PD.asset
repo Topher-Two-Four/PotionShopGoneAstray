@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c2163ed23c45274abea9e832adece52, type: 3}
+  m_Name: AmonsCloak_PD
+  m_EditorClassIdentifier: 
+  width: 2
+  height: 2
+  isIngredient: 0
+  isSellable: 1
+  itemIcon: {fileID: 21300000, guid: 20a9f598cee410e4a8bd2ef9d2f10c0c, type: 3}
+  itemObject: {fileID: 0}
+  isHealth: 0
+  isLove: 0
+  isHatred: 0
+  isAntidote: 0
+  isDeath: 0
+  isLucky: 0
+  isPoison: 0
+  isBenefit: 1
+  isCrippling: 0
+  quality: 0
+  baseValue: 10
+  sellPrice: 0
+  numberOfIngredients: 1

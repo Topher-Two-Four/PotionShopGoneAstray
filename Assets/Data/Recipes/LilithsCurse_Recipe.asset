@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208b1537c6b018c438507b1122182a38, type: 3}
+  m_Name: LilithsCurse_Recipe
+  m_EditorClassIdentifier: 
+  potion: {fileID: 11400000, guid: 90860b2fd2189104fa161d5022537238, type: 2}
+  ingredient1: {fileID: 11400000, guid: b8561349d1619bf40903234a844739fb, type: 2}
+  ingredient2: {fileID: 11400000, guid: 6b9fbc0cb50cb484ab56051abea53508, type: 2}
+  ingredient3: {fileID: 0}
+  ingredient4: {fileID: 0}
+  cookTime: 60
+  desiredTemp: 1
+  quality: 5
+  ultraQualityTimeLimit: 0
+  highQualityTimeLimit: 0
+  mediumQualityTimeLimit: 0
+  lowQualityTimeLimit: 0

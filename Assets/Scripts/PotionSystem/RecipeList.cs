@@ -5,11 +5,14 @@ using UnityEngine;
 
 public class RecipeList : MonoBehaviour
 {
+    [Header("List of Recipes:")]
+    [Tooltip("The master list of all recipes in the game.")]
     public Recipe[] recipeList; // List of recipe scriptable objects, which contains the recipes available for crafting in the game
 
     private ItemData ingredient1; // First ingredient ItemData object
     private ItemData ingredient2; // Second ingredient ItemData object
     private ItemData ingredient3; // Third ingredient ItemData object
+    private ItemData ingredient4; // Fourth ingredient ItemData object
 
     public static RecipeList Instance { get; private set; } // Make recipe list into a singleton
     private void Awake()
@@ -24,33 +27,37 @@ public class RecipeList : MonoBehaviour
         }
     }
 
-    public Recipe FindRecipe(ItemData item1, ItemData item2, ItemData item3) // Search if a recipe exists containing a combination of three ingredients
+    public Recipe FindRecipe(ItemData item1, ItemData item2, ItemData item3, ItemData item4)
     {
+        List<ItemData> playerIngredients = new List<ItemData> {item1, item2, item3, item4 }.FindAll(item => item != null); // Create list from player ingredients that aren't null
+
         foreach (Recipe recipe in recipeList) // Iterate through recipes in the list of recipes
         {
-            if (recipe.ingredient1 == item1 || recipe.ingredient2 == item1 || recipe.ingredient3 == item1) // Check whether the first ItemData object is in any recipes
+            List<ItemData> recipeIngredients = new List<ItemData> { recipe.ingredient1, recipe.ingredient2, recipe.ingredient3, recipe.ingredient4 }.FindAll(item => item != null); // Create list from recipe ingredients that aren't null
+
+            if (AreIngredientsIdentical(playerIngredients, recipeIngredients)) // Compare ingredients between the player and recipe ingredient lists using method that compares them
             {
-                ingredient1 = item1; // If the first ItemData object is in a recipe then set it as the first ingredient
-                if (recipe.ingredient1 == item2 || recipe.ingredient2 == item2 || recipe.ingredient3 == item2) // Check whether the second ItemData object is in any recipes
-                {
-                    ingredient2 = item2; // If the second ItemData object is in a recipe then set it as the second ingredient
-                    if (recipe.ingredient3 == null) // Check whether a third ingredient exists
-                    {
-                        return recipe; // Return two-ingredient recipe if there is not a third ingredient
-                    }
-                    if (recipe.ingredient3 == item3 || recipe.ingredient2 == item3 || recipe.ingredient3 == item3 && item3 != null)
-                    {
-                        ingredient3 = item3; // If the third ItemData object is in a recipe then set it as the third ingredient
-                        return recipe; // Return three-ingredient recipe
-                    }
-                }
-                else // Recipe has not been found in recipe list
-                {
-                    return null; // Return null if recipe not found
-                }
-            } 
+                return recipe; // Return recipe if a recipe with the current ingredients is found
+            }
         }
-            return null; // Return null if recipe not found
+        return null; // Return null if a recipe with the current ingredients isn't found
+    }
+
+    public bool AreIngredientsIdentical(List<ItemData> playerIngredients, List<ItemData> recipeIngredients)
+    {
+        if (playerIngredients.Count != recipeIngredients.Count) // Check if the number of ingredients between the player and recipe ingredients lists differ
+        {
+            return false; // Return false if the two lists have differing numbers of ingredients
+        }
+
+        foreach (ItemData ingredient in playerIngredients) // Iterate through player ingredients list
+        {
+            if (!recipeIngredients.Contains(ingredient)) // Check if the recipe list contains an ingredient that the player list has
+            {
+                return false; // Return false if an ingredient does not have a match in both lists
+            }
+        }
+        return true; // Return true if the two lists have the same number of ingredients and if they have equal matching ingredients in each
     }
 
     internal Recipe AddPotionToInventory(Recipe potionRecipe) // Add crafted potion to player inventory
@@ -59,7 +66,7 @@ public class RecipeList : MonoBehaviour
         {
             if (recipe == potionRecipe && potionRecipe.potion != null) // Check whether a recipe exists
             {
-                Debug.Log("Created 1x "); // Display console indication that potion has been created and added to player inventory
+                //Debug.Log("Created 1x "); // Display console indication that potion has been created and added to player inventory
                 return recipe; // Return recipe of potion
             }
         }

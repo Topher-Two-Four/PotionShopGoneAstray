@@ -3,29 +3,50 @@ using UnityEngine.AI;
 
 public class MazeAIController : MonoBehaviour
 {
-    public NavMeshAgent navMeshAgent; // Nav Mesh Agent component of game object
-    public float walkSpeed = 4f; // Walking speed of the AI
-    public float sprintSpeed = 5f; // Sprinting speed of the AI
-    public float waitTime = 3f; // Time to wait between actions
-    public float detectionTime = 6f; // Time until the AI rotates towards the player due to proximity
-    public float viewRadius = 20f; // Distance AI can see
-    public float viewAngle = 90f; // AI cone of vision
-    public LayerMask playerMask; // Used with raycast to detect player
-    public LayerMask obstacleMask; // Used with raycast to detect obstacles
-    public float raycastMeshResolution = 1.0f; // Amount of rays that are cast per degree to increase mesh filter resolution
-    public int raycastEdgeIterations = 4; // Number of times raycast will iterate to increase mesh filter performance
-    public float raycastEdgeDistance = 0.5f; // Maximum distance used to calculate the minimum and maximimum when ray cast hits
-    public Transform[] patrolPoints; // An array containing points the AI patrols
+    [Header("Movement Settings:")]
+    [Tooltip("The nav mesh agent component attached to the maze enemy.")]
+    [SerializeField] private NavMeshAgent navMeshAgent; // Nav Mesh Agent component of game object
+    [Tooltip("The walk speed of the maze enemy.")]
+    [SerializeField] private float walkSpeed = 4f; // Walking speed of the AI
+    [Tooltip("The sprint speed of the maze enemy.")]
+    [SerializeField] private float sprintSpeed = 5f; // Sprinting speed of the AI
+    [Tooltip("The length of time the maze enemy pauses between patrol points.")]
+    [SerializeField] private float waitTime = 3f; // Time to wait between actions
 
-    public float _waitTime; // Wait time delay variable for value tracking
-    public float _detectionTime; // Detection rotate time variable for value tracking
-    public bool _isPatrolling; // True if AI is patrolling
-    public bool _isChasing; // True if player is within range of visibility and being chased
-    public bool _isDetectingPlayer; // True if player is nearby and in the process of being detected
-    public bool _playerCaught; // True if player has been caught
-    public int _currentPatrolPointIndex; // The patrol point that the AI is currently moving to
-    public Vector3 _lastSeenLocation; // The location where the player was last seen
-    public Vector3 _lastDetectedLocation = Vector3.zero; // The location where the player was last detected
+    [Header("Detection Settings:")]
+    [Tooltip("The amount of time before the maze enemy detects the player based on close proximity.")]
+    [SerializeField] private float detectionTime = 6f; // Time until the AI rotates towards the player due to proximity
+    [Tooltip("The view radius of the maze enemy.")]
+    [SerializeField] private float viewRadius = 20f; // Distance AI can see
+    [Tooltip("The cone of vision of the maze enemy.")]
+    [SerializeField] private float viewAngle = 90f; // AI cone of vision
+    [Tooltip("The layer mask for the player.")]
+    [SerializeField] private LayerMask playerMask; // Used with raycast to detect player
+    [Tooltip("The layer mask for raycast obstacles.")]
+    [SerializeField] private LayerMask obstacleMask; // Used with raycast to detect obstacles
+
+    [Header("Patrol Settings:")]
+    [Tooltip("The amount of time the maze enemy waits to try moving to a patrol point before timing out and switching to the next.")]
+    [SerializeField] private float waitTimeout = 5.0f; // Amount of time to wait until timeout to next patrol point
+    [Tooltip("The list of patrol points that the maze enemy will choose from to move to.")]
+    [SerializeField] private Transform[] patrolPoints; // An array containing points the AI patrols
+
+    [HideInInspector] public bool _isPatrolling; // True if AI is patrolling
+    [HideInInspector] public bool _isChasing; // True if player is within range of visibility and being chased
+    [HideInInspector] public bool _isDetectingPlayer; // True if player is nearby and in the process of being detected
+    [HideInInspector] public bool _playerCaught; // True if player has been caught
+
+    [HideInInspector] public float raycastMeshResolution = 1.0f; // Amount of rays that are cast per degree to increase mesh filter resolution
+    [HideInInspector] public int raycastEdgeIterations = 4; // Number of times raycast will iterate to increase mesh filter performance
+    [HideInInspector] public float raycastEdgeDistance = 0.5f; // Maximum distance used to calculate the minimum and maximimum when ray cast hits
+
+    private float _detectionTime; // Detection rotate time variable for value tracking
+    private float _lastMoveTime; // Amount of time since AI last moved
+    private float _waitTime; // Wait time delay variable for value tracking
+    private Vector3 _lastSeenLocation; // The location where the player was last seen
+    private Vector3 _lastDetectedLocation = Vector3.zero; // The location where the player was last detected
+    private int _currentPatrolPointIndex; // The patrol point that the AI is currently moving to
+    private bool isPhasedIn = false;
 
     private void Start()
     {
@@ -45,15 +66,44 @@ public class MazeAIController : MonoBehaviour
 
     private void Update()
     {
-        ScanEnvironment(); // Scan environment for player
+        if (!GameManager.Instance.GetPauseMenuCanvas().activeSelf)
+        {
+            ScanEnvironment(); // Scan environment for player
 
-        if (_isChasing) // If AI set to chase then chase player, else patrol
-        {
-            Chase(); // Chase player
-        }
-        else
-        {
-            Patrol(); // Patrol maze
+            if (_isChasing) // If AI set to chase then chase player, else patrol
+            {
+                Chase(); // Chase player
+                if (GetComponentInChildren<MusicBox>() != null)
+                {
+                    MusicBox.Instance.PlayMusic();
+                }
+
+                if (GetComponentInChildren<Teleportation>() != null && !isPhasedIn)
+                {
+                    Teleportation.Instance.PhaseIn();
+                    isPhasedIn = true;
+                }
+            }
+
+            else
+            {
+                Patrol(); // Patrol maze
+            }
+
+            if (navMeshAgent.velocity.magnitude <= navMeshAgent.stoppingDistance && // Check if AI is within stopping distance
+                navMeshAgent.velocity.magnitude < 0.1f) // Check if AI is stopped
+            {
+                _lastMoveTime += Time.deltaTime; // Increment last moved timer
+            }
+            else // If not within stopping distance or moving
+            {
+                _lastMoveTime = 0; // Reset last moved timer
+            }
+
+            if (_lastMoveTime > waitTimeout && !_isChasing) // If last moved timer has reached timeout limit and AI is not chasing player, then switch to next patrol point
+            {
+                SwitchNextPoint(); // Switch to next patrol point
+            }
         }
     }
 
@@ -61,12 +111,52 @@ public class MazeAIController : MonoBehaviour
     {
         _currentPatrolPointIndex = Random.Range(0, patrolPoints.Length); // Set new random patrol point
         navMeshAgent.SetDestination(patrolPoints[_currentPatrolPointIndex].position); // Set new patrol point as destination
+        Move(walkSpeed); // Move to next patrol point (with walking feet)
+
+        _lastMoveTime = 0; // Reset last moved timer
+    }
+
+    public void MoveToPosition(Vector3 position)
+    {
+        gameObject.transform.position = position;
+    }
+
+    public void MakeInvisible()
+    {
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+    }
+
+    public void MakeVisible()
+    {
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+    }
+
+    public void StopMovement()
+    {
+        Stop();
+    }
+
+    public void ResumeMovement()
+    {
+        if (_isChasing)
+        {
+            Move(sprintSpeed);
+        }
+        else
+        {
+            Move(walkSpeed);
+        }
+    }
+
+    public void SetPhasedIn(bool isCurrentlyPhased)
+    {
+        isPhasedIn = isCurrentlyPhased;
     }
 
     private void Move(float moveSpeed)
     {
         navMeshAgent.isStopped = false; // Make it so that the AI is no longer stopped
-        navMeshAgent.speed = moveSpeed; // Set AI move speed to method input speed
+        navMeshAgent.speed = moveSpeed * MoralitySystem.Instance.monsterSpeedModifier; // Set AI move speed to method input speed
     }
 
     private void Stop()
@@ -168,8 +258,10 @@ public class MazeAIController : MonoBehaviour
         }
     }
 
-    private void ScanEnvironment() 
+    private void ScanEnvironment()
     {
+        DrawDebugVisionArc(); // Use to show arc of AI vision
+
         Collider[] playerInRange = Physics.OverlapSphere(transform.position, viewRadius, playerMask);  // Collider array of player colliders that are in range
 
         for (int i = 0; i < playerInRange.Length; i++) 
@@ -181,6 +273,7 @@ public class MazeAIController : MonoBehaviour
                 float playerDistance = Vector3.Distance(transform.position, playerTransform.position); // Set player distance variable
                 if (!Physics.Raycast(transform.position, playerDirection, playerDistance, obstacleMask)) // Check for any obstacles in the way of raycast
                 {
+                    Debug.DrawRay(this.transform.position, playerDirection, Color.green, playerDistance);
                     _isChasing = true; // Set AI to chase player
                     _isPatrolling = false; // Set AI to no longer patrol
                     break;
@@ -204,5 +297,18 @@ public class MazeAIController : MonoBehaviour
     private void PlayerCaught()
     {
         _playerCaught = true; // Set player caught status to caught (true)
+    }
+
+    private void DrawDebugVisionArc()
+    {
+        Vector3 forward = transform.forward; // Get forward vector
+        float rightAngle = (viewAngle / 2); // Set angle of right boundary to half of the view angle
+        float leftAngle = -rightAngle; // Set angle of left boundary to opposite of the right view angle
+        Vector3 rightBoundary = Quaternion.Euler(0, rightAngle, 0) * forward; // Create forward vector in direction of right angle to define right vision boundary
+        Vector3 leftBoundary = Quaternion.Euler(0, leftAngle, 0) * forward; // Create forward vector in direction of left angle to define left vision boundary
+
+        Debug.DrawLine(transform.position, transform.position + rightBoundary * viewRadius, Color.green); // Draw right boundary line
+        Debug.DrawLine(transform.position, transform.position + leftBoundary * viewRadius, Color.green); // Draw left boundary line
+        Debug.DrawLine(transform.position + rightBoundary * viewRadius, transform.position + leftBoundary * viewRadius, Color.green); // Draw a line between the two boundary end points to show view radius
     }
 }

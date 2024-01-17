@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ItemGrid : MonoBehaviour
 {
-    public const float tileSizeWidth = 32;
-    public const float tileSizeHeight = 32;
+    [HideInInspector] public const float tileSizeWidth = 32;
+    [HideInInspector] public const float tileSizeHeight = 32;
 
     InventoryItem[,] inventoryItemSlot;
 
@@ -47,6 +47,21 @@ public class ItemGrid : MonoBehaviour
         inventoryItemSlot[x, y] = null;
 
         return itemToRemove;
+    }
+
+    public void ClearGrid(ItemGrid inventoryGrid)
+    {
+        for (int x = 0; x < gridSizeWidth; x++)
+        {
+            for (int y = 0; y < gridSizeHeight; y++)
+            {
+                InventoryItem inventoryItem = inventoryItemSlot[x, y];
+                if (inventoryItem != null && inventoryItem.GetInventoryItemData())
+                {
+                    inventoryItem.Delete();
+                }
+            }
+        }
     }
 
     private void CleanGridReference(InventoryItem item)
@@ -91,7 +106,7 @@ public class ItemGrid : MonoBehaviour
                 }
             }
         }
-
+        //Debug.Log("No space left for item.");
         return null;
     }
 
@@ -172,6 +187,28 @@ public class ItemGrid : MonoBehaviour
         return true;
     }
 
+    public List<PotionData> FindPotionsInInventory()
+    {
+        List<PotionData> potionsInInventory = new List<PotionData>();
+    
+        for (int x = 0; x < gridSizeWidth; x++)
+        {
+            for (int y = 0; y < gridSizeHeight; y++)
+            {
+                InventoryItem inventoryItem = inventoryItemSlot[x, y];
+                if (inventoryItem != null && inventoryItem.GetInventoryItemData() is PotionData potionData)
+                {
+                    if (!potionsInInventory.Contains(potionData))
+                    {
+                        potionsInInventory.Add(potionData);
+                    }
+                }
+            }
+        }
+
+        return potionsInInventory;
+    }
+
     private bool CheckAvailableSpace(int posX, int posY, int width, int height)
     {
         for (int x = 0; x < width; x++)
@@ -223,4 +260,21 @@ public class ItemGrid : MonoBehaviour
 
             return true;
         }
+
+    public void RemovePotionFromInventory(PotionData potionData)
+    {
+        for (int x = 0; x < gridSizeWidth; x++)
+        {
+            for (int y = 0; y < gridSizeHeight; y++)
+            {
+                InventoryItem item = inventoryItemSlot[x, y];
+                if (item != null && item.GetInventoryItemData() == potionData)
+                {
+                    RemoveItem(x, y);
+                    return;
+                }
+            }
+        }
+    }
+
 }

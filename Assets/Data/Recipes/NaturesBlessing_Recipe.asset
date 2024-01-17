@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208b1537c6b018c438507b1122182a38, type: 3}
+  m_Name: NaturesBlessing_Recipe
+  m_EditorClassIdentifier: 
+  potion: {fileID: 11400000, guid: c7966043fe8391c47be7d4320325365c, type: 2}
+  ingredient1: {fileID: 11400000, guid: dcceffc03aaaf634cb3bb435242c39dc, type: 2}
+  ingredient2: {fileID: 11400000, guid: c12183cd88442d14c962100452b5c60a, type: 2}
+  ingredient3: {fileID: 11400000, guid: 57b141b33fde4ce48845950dc08834b7, type: 2}
+  ingredient4: {fileID: 11400000, guid: 2eea3438c414e014fb9e61b0dfaacf2f, type: 2}
+  cookTime: 60
+  desiredTemp: 1
+  needStirring: 1
+  needsLidOn: 1
+  quality: 5
+  ultraQualityTimeLimit: 0
+  highQualityTimeLimit: 0
+  mediumQualityTimeLimit: 0
+  lowQualityTimeLimit: 0

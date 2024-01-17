@@ -2,16 +2,29 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StarterAssets;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour
 {
-    public GameObject inventoryCanvas;
-    public ItemGrid inventoryGrid; // Inventory grid used by the player
+    [Header("Inventory Settings:")]
+    [Tooltip("The prefab for items.")]
+    [SerializeField] private GameObject itemPrefab; // Prefab for the item object
+    [Tooltip("The prefab for potions.")]
+    [SerializeField] private GameObject potionPrefab; // Prefab for the potion object
+    [Tooltip("The transform of the inventory canvas.")]
+    [SerializeField] private Transform canvasTransform; // Transform of the inventory canvas
+    [Tooltip("The inventory canvas game object.")]
+    [SerializeField] private GameObject inventoryCanvas;
+    [Tooltip("The inventory grid used by the player.")]
+    [SerializeField] private ItemGrid inventoryGrid; // Inventory grid used by the player
 
-    [HideInInspector]
-    private ItemGrid selectedItemGrid; // Item grid that is currently selected
+    [Header("Button Settings:")]
+    [Tooltip("The button that trashes an item when pressed.")]
+    [SerializeField] private Button trashButton;
 
-    public ItemGrid SelectedItemGrid {  
+    public ItemGrid SelectedItemGrid {
         get => selectedItemGrid; // Get currently selected item grid
         set // Set as currently selected item grid
         {
@@ -20,41 +33,53 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    InventoryItem selectedItem; // Item that is currently selected
-    InventoryItem overlapItem; // Item that is overlapping the currently selected item
-    RectTransform rectTransform; // Rectangular transform used for highlighter
+    [HideInInspector] public List<ItemData> items; // List of ItemData scriptable objects in the player's inventory
 
-    [SerializeField] List<ItemData> items; // List of ItemData scriptable objects
-    [SerializeField] GameObject itemPrefab; // Prefab for the item object
-    [SerializeField] Transform canvasTransform; // Transform of the inventory canvas
-
-    InventoryHighlight inventoryHighlight; // Inventory item highlighter
-
+    private ItemGrid selectedItemGrid; // Item grid that is currently selected
+    private InventoryHighlight inventoryHighlight; // Inventory item highlighter
+    private InventoryItem selectedItem; // Item that is currently selected
+    private InventoryItem overlapItem; // Item that is overlapping the currently selected item
+    private RectTransform rectTransform; // Rectangular transform used for highlighter
+    private bool isSpaceForItem;
 
     public static InventoryController Instance { get; private set; } // Singleton logic
+
+    private void Start()
+    {
+        isSpaceForItem = true; // Set initially true when beginning the game
+    }
 
     private void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(this);} else { Instance = this;} // Singleton logic
 
-        inventoryHighlight = GetComponent<InventoryHighlight>(); // Get highlight componenet
+        inventoryHighlight = GetComponent<InventoryHighlight>(); // Get highlight component
+
+        trashButton.onClick.AddListener(() => DeleteItem());
     }
 
     private void Update()
     {
-        ItemIconDrag(); // Drag item icon using script
-
-        if (Input.GetKeyDown(KeyCode.R)) { RotateItem(); } // Rotate selected inventory item
-
-        if (selectedItemGrid == null) { inventoryHighlight.Show(false); return; } // Don't show highlight if selected item grid doesn't exist and return from method
-
-        HandleHighlight(); // Use script to handle highlight of inventory item
-
         if (Input.GetKeyDown(KeyCode.Tab)) { ToggleInventoryCanvas(); } // When left mouse button is pressed run method
 
-        if (Input.GetMouseButtonDown(0)) { LeftMouseButtonPress(); } // When left mouse button is pressed run method
+        if (inventoryCanvas.activeSelf) // Only do the following code if the inventory canvas is open
+        {
+            ItemIconDrag(); // Drag item icon using script
 
-        if (Input.GetMouseButton(1)) { RightMouseButtonPress(); } // When right mouse button is pressed run method
+            if (Input.GetKeyDown(KeyCode.R)) { RotateItem(); } // Rotate selected inventory item
+
+            if (Input.GetKeyDown(KeyCode.Delete)) { DeleteItem(); } // Rotate selected inventory item
+
+            if (Input.GetKeyDown(KeyCode.G)) { DropItem(); } // Rotate selected inventory item
+
+            if (selectedItemGrid == null) { inventoryHighlight.Show(false); return; } // Don't show highlight if selected item grid doesn't exist and return from method
+
+            HandleHighlight(); // Use script to handle highlight of inventory item
+
+            if (Input.GetMouseButtonDown(0)) { LeftMouseButtonPress(); } // When left mouse button is pressed run method
+
+            if (Input.GetMouseButton(1)) { RightMouseButtonPress(); } // When right mouse button is pressed run method
+        }
 
     }
 
@@ -70,33 +95,104 @@ public class InventoryController : MonoBehaviour
         inventoryItem.Set(itemData);
     }
 
+    public void CreateInventoryItem(PotionData potionData, int qualityLevel, Color qualityColor)
+    {
+        InventoryItem inventoryItem = Instantiate(potionPrefab).GetComponent<InventoryItem>();
+        selectedItem = inventoryItem;
+        inventoryItem.SetQuality(qualityLevel, qualityColor);
+
+        rectTransform = inventoryItem.GetComponent<RectTransform>();
+        rectTransform.SetParent(canvasTransform);
+        rectTransform.SetAsLastSibling();
+
+        inventoryItem.Set(potionData);
+    }
+
     public void InsertItem(InventoryItem itemToInsert)
     {
         Vector2Int? posOnGrid = inventoryGrid.FindSpaceForObject(itemToInsert);
 
-        if (posOnGrid == null) { return; }
+        if (posOnGrid == null)
+        {
+            //Debug.Log("Space for object is null.");
+            isSpaceForItem = false;
+            return;
+        }
 
         inventoryGrid.PlaceItem(itemToInsert, posOnGrid.Value.x, posOnGrid.Value.y);
     }
 
+    // Figure out how InventoryItem relates to ItemData
+
+    public bool CheckForItemSpace(ItemData itemData)
+    {
+        InventoryItem inventoryItem = Instantiate(potionPrefab).GetComponent<InventoryItem>();
+        selectedItem = inventoryItem;
+
+        inventoryItem.Set(itemData);
+
+        Vector2Int? posOnGrid = inventoryGrid.FindSpaceForObject(inventoryItem);
+
+        if (posOnGrid == null)
+        {
+            //Debug.Log("Space for object is null.");
+            isSpaceForItem = false;
+            selectedItem = null;
+            return false;
+        }
+        //Debug.Log("Room for object exists.");
+        isSpaceForItem = true;
+        selectedItem = null;
+        return true;
+    }
+
     public void InsertItem(ItemData itemData)
     {
-        if (inventoryGrid == null) { return; } // Return if inventory grid doesn't exist
+        if (inventoryGrid == null || !isSpaceForItem)
+            {
+            //Debug.Log(isSpaceForItem);
+            return;
+            } // Return if inventory grid doesn't exist or if there is no space for item in inventory
 
+            // Need to return if FindSpaceForObject(itemToInsert) is false
+            
             CreateInventoryItem(itemData); // Create new inventory item from ItemData object
             
             InventoryItem itemToInsert = selectedItem; // Declare inventory item to insert to be currently selected item
+
+            Vector2Int? posOnGrid = inventoryGrid.FindSpaceForObject(itemToInsert);
             
             InsertItem(itemToInsert); // Insert inventory item into next open spot in inventory
             
             selectedItem = null; // Reset selected item to null to clear selection
-
     }
+
+    public void InsertPotion(PotionData potionData, int qualityLevel, Color qualityColor)
+    {
+        if (inventoryGrid == null || !isSpaceForItem)
+        {
+            //Debug.Log(isSpaceForItem);
+            return;
+        } // Return if inventory grid doesn't exist or if there is no space for item in inventory
+
+        // Need to return if FindSpaceForObject(itemToInsert) is false
+
+        potionData.quality = qualityLevel;
+
+        CreateInventoryItem(potionData, qualityLevel, qualityColor); // Create new inventory item from ItemData object
+
+        InventoryItem itemToInsert = selectedItem; // Declare inventory item to insert to be currently selected item
+
+        InsertItem(itemToInsert); // Insert inventory item into next open spot in inventory
+
+        selectedItem = null; // Reset selected item to null to clear selection
+    }
+
 
     public void AddItemObjectToInventory(ItemData itemData)
     {
-        Debug.Log(itemData);
-        if (itemData != null)
+        //Debug.Log(itemData);
+        if (itemData != null && isSpaceForItem)
         {
             InsertItem(itemData);
             itemData = null;
@@ -105,39 +201,116 @@ public class InventoryController : MonoBehaviour
 
     public void ToggleInventoryCanvas()
     {
-        if (inventoryCanvas.gameObject.activeSelf)
+
+        if (inventoryCanvas.gameObject.activeSelf) // If inventory canvas is active then deactivate it
         {
-            inventoryCanvas.gameObject.SetActive(false);
+            Cursor.visible = false; // Hide cursor
+            Cursor.lockState = CursorLockMode.Locked; // Unlock and confine cursor to game screen
+            GameManager.Instance.UnfreezeRotation();
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(2))
+            {
+                Cursor.lockState = CursorLockMode.Confined; // Unlock cursor and confine to game screen
+                Cursor.visible = true; // Show cursor
+            }
+
+
+            inventoryCanvas.gameObject.SetActive(false); // Deactivate canvas object
         } 
-        else
+        else // If inventory canvas is inactive then activate it
         {
-            inventoryCanvas.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.Confined; // Lock cursor in one place
+            Cursor.visible = true; // Hide cursor
+            GameManager.Instance.FreezeRotation();
+            inventoryCanvas.gameObject.SetActive(true); // Activate canvas object
         }
     }
 
-    public void SellPotion(ItemData itemData)
+    public void ToggleInventoryCanvasOff()
     {
-        int potionValue = (itemData.quality * itemData.baseValue);
-        GameManager.Instance.playerCurrency += potionValue;
+
+        if (inventoryCanvas.gameObject.activeSelf) // If inventory canvas is active then deactivate it
+        {
+            Cursor.visible = false; // Hide cursor
+            Cursor.lockState = CursorLockMode.Locked; // Unlock and confine cursor to game screen
+            inventoryCanvas.gameObject.SetActive(false); // Deactivate canvas object
+
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0) ||
+                SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1) ||
+                SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(2))
+            {
+                Cursor.lockState = CursorLockMode.Confined; // Unlock cursor and confine to game screen
+                Cursor.visible = true; // Show cursor
+            }
+        }
+    }
+
+
+    public PotionData FindPotionOfType(Order potionOrdered)
+    {
+        List<PotionData> potionsInInvetory = inventoryGrid.FindPotionsInInventory();
+
+        foreach (PotionData potion in potionsInInvetory)
+        {
+            if ((potion.isAntidote && potionOrdered.isAntidote) ||
+                (potion.isBenefit && potionOrdered.isBenefit) ||
+                (potion.isCrippling && potionOrdered.isCrippling) ||
+                (potion.isDeath && potionOrdered.isDeath) ||
+                (potion.isHatred && potionOrdered.isHatred ||
+                (potion.isHealth && potionOrdered.isHealth) ||
+                (potion.isLove && potionOrdered.isLove) ||
+                (potion.isLucky && potionOrdered.isLucky) ||
+                (potion.isPoison && potionOrdered.isPoison)))
+                {
+                return potion;
+                }
+            }
+
+        return null;
+        }
+
+    public void SellPotion(Order order)
+    {
+        PotionData potionData = FindPotionOfType(order);
+        potionData.sellPrice = (potionData.quality * potionData.baseValue) * potionData.numberOfIngredients;
+        GameManager.Instance.AddCurrencyToPlayer(potionData.sellPrice);
+        MoralitySystem.Instance.AdjustMoralityCounter(potionData);
+        inventoryGrid.RemovePotionFromInventory(potionData);
+        order.orderCompletedMask.gameObject.SetActive(true);
+        order.turnInPotionButton.gameObject.SetActive(false);
+        OrderSystem.Instance.CheckForCompleteOrders();
     }
 
     public void AddIngredientToPotionCraftingSpace(Vector2Int tileGridPosition)
     {
         InventoryItem selectedItem = selectedItemGrid.GetItem(tileGridPosition.x, tileGridPosition.y);
-        Debug.Log(selectedItem);
-        if (selectedItem != null && selectedItem.itemData.isIngredient)
+
+        if  (PotionCraftingSystem.Instance.isBrewing || PotionCraftingSystem.Instance.isRetrievable) { return; }
+
+        if (selectedItem != null && selectedItem.GetInventoryItemData().isIngredient && isSpaceForItem)
         {
             selectedItemGrid.RemoveItem(tileGridPosition.x, tileGridPosition.y);
 
-            PotionCraftingSystem.Instance.AddIngredientToSlot(selectedItem.itemData);
+            PotionCraftingSystem.Instance.AddIngredientToSlot(selectedItem.GetInventoryItemData());
             Destroy(selectedItem.gameObject);
         }
-        else if (selectedItem != null && selectedItem.itemData.isPotion)
+        else if (selectedItem != null && selectedItem.GetType() == typeof(PotionData))
         {
             selectedItemGrid.RemoveItem(tileGridPosition.x, tileGridPosition.y);
 
-            SellPotion(selectedItem.itemData);
             Destroy(selectedItem.gameObject);
+        }
+        
+        else
+        {
+            return;
+        }
+    }
+
+    public void DeleteItem()
+    {
+        if (selectedItem != null)
+        {
+            selectedItem.Delete();
         }
         else
         {
@@ -145,8 +318,30 @@ public class InventoryController : MonoBehaviour
         }
     }
 
+    public void DropItem()
+    {
+        if (selectedItem != null && selectedItem.GetType() != typeof(PotionData))
+        {
+            selectedItem.Drop();
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    public void ClearInventoryGrid()
+    {
+        inventoryGrid?.ClearGrid(inventoryGrid); // If inventory grid exists then clear it
+    }
+
     Vector2Int oldPosition;
     InventoryItem itemToHighlight;
+
+    public void SetInventoryGrid(ItemGrid savedPlayerInventory)
+    {
+        inventoryGrid = savedPlayerInventory;
+    }
 
     private void HandleHighlight()
     {
@@ -217,7 +412,6 @@ public class InventoryController : MonoBehaviour
         else
         {
             AddIngredientToPotionCraftingSpace(tileGridPosition);
-            Debug.Log("Call to add ingredient to inventory space");
         }
     }
 

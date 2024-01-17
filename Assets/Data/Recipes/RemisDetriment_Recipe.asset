@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208b1537c6b018c438507b1122182a38, type: 3}
+  m_Name: RemisDetriment_Recipe
+  m_EditorClassIdentifier: 
+  potion: {fileID: 11400000, guid: 4936155d717aa81489a81fe48d0d46b3, type: 2}
+  ingredient1: {fileID: 11400000, guid: f6043f9bd250a884d8ef97bd0cf65f30, type: 2}
+  ingredient2: {fileID: 11400000, guid: 655444a1c1e6f934db69150a099528c2, type: 2}
+  ingredient3: {fileID: 11400000, guid: 4b29a8316115e7f4099fb6289e48477c, type: 2}
+  ingredient4: {fileID: 0}
+  cookTime: 60
+  desiredTemp: 1
+  needStirring: 0
+  needsLidOn: 1
+  quality: 5
+  ultraQualityTimeLimit: 0
+  highQualityTimeLimit: 0
+  mediumQualityTimeLimit: 0
+  lowQualityTimeLimit: 0

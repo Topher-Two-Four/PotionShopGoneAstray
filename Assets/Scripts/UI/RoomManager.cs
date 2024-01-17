@@ -5,11 +5,16 @@ using UnityEngine.UI;
 
 public class RoomManager : MonoBehaviour
 {
+    [Header("List of Rooms:")]
+    [Tooltip("The list of room game objects in the potion shop.")]
+    [SerializeField] private List<GameObject> roomList = new List<GameObject>(); // List for holding room game objects
 
-    public List<GameObject> roomList = new List<GameObject>(); // List for holding room game objects
-    public List<Button> buttonList = new List<Button>(); // List for holding buttons, index corresponding to each room
-    public GameObject currentRoom; // The current room that is active/open
-    public bool isCauldronRoom; 
+    [Header("List of Buttons Corresponding to Rooms:")]
+    [Tooltip("The list of navigational buttons which correspond to rooms in the potion shop.")]
+    [SerializeField] private List<Button> buttonList = new List<Button>(); // List for holding buttons, index corresponding to each room
+
+    [HideInInspector] public GameObject currentRoom; // The current room that is active/open
+    [HideInInspector] public bool isCauldronRoom; 
 
     //private bool isAnyRoomOpen; // Keep track of whether a room canvas is open or not
 
@@ -21,13 +26,14 @@ public class RoomManager : MonoBehaviour
             button.onClick.AddListener(() => ToggleRoom(button));
         }
 
-        GameManager.Instance.ToggleOnDoorToMaze();
-
     }
 
     private void OnDestroy()
     {
-        GameManager.Instance.ToggleOffDoorToMaze();
+        if (GameManager.Instance.GetDoorToMaze() != null)
+        {
+            GameManager.Instance.ToggleOffDoorToMaze();
+        }
     }
 
     // Toggles on and off room game objects for navigation of 2D scene
@@ -50,21 +56,28 @@ public class RoomManager : MonoBehaviour
 
             if (currentRoom == roomList[1] || currentRoom == roomList[4])
             {
-                Debug.Log(currentRoom);
                 GameManager.Instance.ToggleOffDoorToMaze();
                 GameManager.Instance.ToggleOnPotionCraftingCanvas();
+                GameManager.Instance.ToggleOffOrderDisplay();
             } 
             else if (currentRoom == roomList[3] || currentRoom == roomList[6])
             {
-                Debug.Log(currentRoom);
-                GameManager.Instance.ToggleOffPotionCraftingCanvas(); // Later on will have toggle batch of game objects and logic based on potion shop room
+                GameManager.Instance.ToggleOffPotionCraftingCanvas();
                 GameManager.Instance.ToggleOnDoorToMaze();
+                GameManager.Instance.ToggleOffOrderDisplay();
+            }
+            else if (currentRoom == roomList[2] || currentRoom == roomList[7])
+            {
+                GameManager.Instance.ToggleOffPotionCraftingCanvas();
+                GameManager.Instance.ToggleOffDoorToMaze();
+                GameManager.Instance.ToggleOnOrderDisplay();
             }
             else
             {
-                Debug.Log(currentRoom);
                 GameManager.Instance.ToggleOffDoorToMaze();
                 GameManager.Instance.ToggleOffPotionCraftingCanvas();
+                GameManager.Instance.ToggleOffOrderDisplay();
+
             }
         }
 

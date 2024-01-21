@@ -24,6 +24,9 @@ public class RecipeBookManager : MonoBehaviour
     [SerializeField] private Button pageBackButton;
     [Tooltip("The button to toggle on and off the potion shop manual canvas.")]
     [SerializeField] private Button toggleBookCanvasButton;
+    [Tooltip("The button to close the potion shop manual canvas.")]
+    [SerializeField] private Button closeBookCanvasButton;
+
 
 
     private void Start()
@@ -35,6 +38,7 @@ public class RecipeBookManager : MonoBehaviour
     private void Awake()
     {
         toggleBookCanvasButton.onClick.AddListener(() => ToggleBook()); // Add button listener for toggling on and off manual from inventory
+        closeBookCanvasButton.onClick.AddListener(() => CloseBook()); // Add button listener for toggling on and off manual from inventory
         pageForwardButton.onClick.AddListener(() => TurnPageForward()); // Add button listener for first ingredient space
         pageBackButton.onClick.AddListener(() => TurnPageBack()); // Add button listener for second ingredient space
     }
@@ -50,6 +54,11 @@ public class RecipeBookManager : MonoBehaviour
         {
             apothecaryManualCanvas.gameObject.SetActive(true);
         }
+    }
+
+    private void CloseBook()
+    {
+        apothecaryManualCanvas.gameObject.SetActive(false);
     }
 
     private void TurnPageForward()

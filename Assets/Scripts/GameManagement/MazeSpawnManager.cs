@@ -45,5 +45,4 @@ public class MazeSpawnManager : MonoBehaviour
         GameManager.Instance.ToggleCursorOff();
         // Spawn AI in random area
     }
-
 }

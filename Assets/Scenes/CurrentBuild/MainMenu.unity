@@ -2681,8 +2681,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4284671265
+  m_fontColor: {r: 0.13105197, g: 0.8962264, b: 0.38244572, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -9068,7 +9068,7 @@ MonoBehaviour:
   - {fileID: 576545492}
   pageForwardButton: {fileID: 448462924}
   pageBackButton: {fileID: 298660801}
-  toggleBookCanvasButton: {fileID: 1302267596}
+  toggleBookCanvasButton: {fileID: 50103}
   closeBookCanvasButton: {fileID: 943942596}
 --- !u!1 &713665282
 GameObject:
@@ -12572,7 +12572,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!1 &1023384745
 GameObject:
@@ -14867,7 +14867,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1302267595
 RectTransform:
   m_ObjectHideFlags: 0

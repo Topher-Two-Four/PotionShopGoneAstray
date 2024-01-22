@@ -54,29 +54,33 @@ public class RoomManager : MonoBehaviour
             // Keep track that a room game object is open and being displayed
             //isAnyRoomOpen = true;
 
-            if (currentRoom == roomList[1] || currentRoom == roomList[4])
+            if (currentRoom == roomList[1] || currentRoom == roomList[4]) // Cauldron room
             {
                 GameManager.Instance.ToggleOffDoorToMaze();
                 GameManager.Instance.ToggleOnPotionCraftingCanvas();
                 GameManager.Instance.ToggleOffOrderDisplay();
+                GameManager.Instance.ToggleOnBookshelfCanvas();
             } 
-            else if (currentRoom == roomList[3] || currentRoom == roomList[6])
+            else if (currentRoom == roomList[3] || currentRoom == roomList[6]) // Door to maze room
             {
                 GameManager.Instance.ToggleOffPotionCraftingCanvas();
                 GameManager.Instance.ToggleOnDoorToMaze();
                 GameManager.Instance.ToggleOffOrderDisplay();
+                GameManager.Instance.ToggleOffBookshelfCanvas();
             }
-            else if (currentRoom == roomList[2] || currentRoom == roomList[7])
+            else if (currentRoom == roomList[2] || currentRoom == roomList[7]) // Order room
             {
                 GameManager.Instance.ToggleOffPotionCraftingCanvas();
                 GameManager.Instance.ToggleOffDoorToMaze();
                 GameManager.Instance.ToggleOnOrderDisplay();
+                GameManager.Instance.ToggleOffBookshelfCanvas();
             }
-            else
+            else // Front register room
             {
                 GameManager.Instance.ToggleOffDoorToMaze();
                 GameManager.Instance.ToggleOffPotionCraftingCanvas();
                 GameManager.Instance.ToggleOffOrderDisplay();
+                GameManager.Instance.ToggleOffBookshelfCanvas();
 
             }
         }

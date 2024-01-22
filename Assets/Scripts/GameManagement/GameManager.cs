@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
     [Header("Canvas Settings:")]
     [Tooltip("The canvas that holds the potion crafting UI elements.")]
     [SerializeField] private GameObject potionCraftingCanvas;
+    [Tooltip("The canvas that holds the bookshelf UI elements.")]
+    [SerializeField] private GameObject bookshelfCanvas;
     [Tooltip("The canvas that holds the order system UI elements.")]
     [SerializeField] private GameObject orderCanvas;
     [Tooltip("The door from the potion shop to the maze.")]
@@ -435,6 +437,15 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public void ToggleOffPotionCraftingCanvas()
     {
             potionCraftingCanvas.SetActive(false); // Hide potion crafting canvas
+    }
+    public void ToggleOnBookshelfCanvas()
+    {
+        bookshelfCanvas.SetActive(true); // Display bookshelf canvas
+    }
+
+    public void ToggleOffBookshelfCanvas()
+    {
+        bookshelfCanvas.SetActive(false); // Hide bookshelf canvas
     }
 
     public void ToggleOnDoorToMaze()

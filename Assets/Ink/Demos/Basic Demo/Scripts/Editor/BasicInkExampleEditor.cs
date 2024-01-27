@@ -2,6 +2,7 @@
 using Ink.UnityIntegration;
 using UnityEditor;
 using UnityEngine;
+using TMPro;
 
 [CustomEditor(typeof(BasicInkExample))]
 [InitializeOnLoad]

@@ -288,6 +288,12 @@ public class GameManager : MonoBehaviour, IDataPersistence
         EndDay();
     }
 
+    private void DisplayCauldronItems()
+    {
+        ToggleOnBookshelfCanvas();
+        ToggleOnPotionCraftingCanvas();
+    }
+
     private void EndDay()
     {
         if (currentDay < 5)
@@ -402,7 +408,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         ToggleCursorOn();
         OrderSystem.Instance.CheckForCompleteOrders(); // Check for any complete orders to update order UI
-
         CallLoadPotionShop(); // Call load potion shop function, which is staggered to allow it to be invoked if neccessary
     }
 

@@ -3943,7 +3943,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &275407603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7832,11 +7832,11 @@ MonoBehaviour:
   highQualityTimePercentage: 0.7
   mediumQualityTimePercentage: 0.5
   lowQualityTimePercentage: 0.3
-  ultraQualityColor: {r: 0.7490196, g: 0.19215684, b: 0.44863635, a: 120}
-  highQualityColor: {r: 0, g: 0.005235672, b: 1, a: 120}
-  mediumQualityColor: {r: 0.6132076, g: 0.4705513, b: 0, a: 120}
+  ultraQualityColor: {r: 0.7490196, g: 0.19215684, b: 0.44863635, a: 0.54509807}
+  highQualityColor: {r: 0, g: 0.005235672, b: 1, a: 0.54509807}
+  mediumQualityColor: {r: 0.6132076, g: 0.4705513, b: 0, a: 0.54509807}
   lowQualityColor: {r: 255, g: 103, b: 0, a: 120}
-  failedColor: {r: 1, g: 0, b: 0, a: 120}
+  failedColor: {r: 1, g: 0, b: 0, a: 0.54509807}
   temperatureDisplayImage: {fileID: 773830184}
   emptySlotImage: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   ingredient1Button: {fileID: 906768649}

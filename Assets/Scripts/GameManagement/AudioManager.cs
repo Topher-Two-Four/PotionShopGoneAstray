@@ -4,63 +4,63 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] private AudioSource MenuButtonHoverSound;
-    [SerializeField] private AudioSource MenuButtonClickSound;
-    [SerializeField] private AudioSource NewDaySound;
-    [SerializeField] private AudioSource EndDaySound;
-    [SerializeField] private AudioSource PauseGameSound;
-    [SerializeField] private AudioSource UnpauseGameSound;
-    [SerializeField] private AudioSource WinGameSound;
-    [SerializeField] private AudioSource LoseGameSound;
-    [SerializeField] private AudioSource NavigatePotionShopSound;
+    [SerializeField] private AudioClip MenuButtonHoverSound;
+    [SerializeField] private AudioClip MenuButtonClickSound;
+    [SerializeField] private AudioClip NewDaySound;
+    [SerializeField] private AudioClip EndDaySound;
+    [SerializeField] private AudioClip PauseGameSound;
+    [SerializeField] private AudioClip UnpauseGameSound;
+    [SerializeField] private AudioClip WinGameSound;
+    [SerializeField] private AudioClip LoseGameSound;
+    [SerializeField] private AudioClip NavigatePotionShopSound;
 
-    [SerializeField] private AudioSource OpenInventorySound;
-    [SerializeField] private AudioSource CloseInventorySound;
-    [SerializeField] private AudioSource PickUpInventoryItemSound; 
-    [SerializeField] private AudioSource RotateInventoryItemSound;
-    [SerializeField] private AudioSource PlaceInventoryItemSound;
-    [SerializeField] private AudioSource TrashInventorySound;
-    [SerializeField] private AudioSource DropItemSound;
+    [SerializeField] private AudioClip OpenInventorySound;
+    [SerializeField] private AudioClip CloseInventorySound;
+    [SerializeField] private AudioClip PickUpInventoryItemSound; 
+    [SerializeField] private AudioClip RotateInventoryItemSound;
+    [SerializeField] private AudioClip PlaceInventoryItemSound;
+    [SerializeField] private AudioClip TrashInventorySound;
+    [SerializeField] private AudioClip DropItemSound;
 
-    [SerializeField] private AudioSource OpenBookSound;
-    [SerializeField] private AudioSource CloseBookSound;
-    [SerializeField] private AudioSource SwitchPageSound;
+    [SerializeField] private AudioClip OpenBookSound;
+    [SerializeField] private AudioClip CloseBookSound;
+    [SerializeField] private AudioClip SwitchPageSound;
 
-    [SerializeField] private AudioSource CharacterSpeechSound;
-    [SerializeField] private AudioSource CompleteOrderSound;
-    [SerializeField] private AudioSource IncreaseMoralitySound;
-    [SerializeField] private AudioSource DecreaseMoralitySound;
+    [SerializeField] private AudioClip CharacterSpeechSound;
+    [SerializeField] private AudioClip CompleteOrderSound;
+    [SerializeField] private AudioClip IncreaseMoralitySound;
+    [SerializeField] private AudioClip DecreaseMoralitySound;
 
-    [SerializeField] private AudioSource CauldronBrewingSound;
-    [SerializeField] private AudioSource CauldronBubbleSound;
-    [SerializeField] private AudioSource CauldronFireSound;
-    [SerializeField] private AudioSource StirSound;
-    [SerializeField] private AudioSource PutLidOnSound;
-    [SerializeField] private AudioSource TakeLidOffSound;
-    [SerializeField] private AudioSource PotionStartBrewingSound;
-    [SerializeField] private AudioSource PotionFinishedBrewingSound;
-    [SerializeField] private AudioSource RetrievePotionSound;
-    [SerializeField] private AudioSource AddIngredientSound;
-    [SerializeField] private AudioSource RemoveIngredientSound;
-    [SerializeField] private AudioSource SwitchToFreezingTempSound;
-    [SerializeField] private AudioSource SwitchToColdTempSound;
-    [SerializeField] private AudioSource SwitchToMediumTempSound;
-    [SerializeField] private AudioSource SwitchToHotTempSound;
-    [SerializeField] private AudioSource SwitchToBoilingTempSound;
+    [SerializeField] private AudioClip CauldronBrewingSound;
+    [SerializeField] private AudioClip CauldronBubbleSound;
+    [SerializeField] private AudioClip CauldronFireSound;
+    [SerializeField] private AudioClip StirSound;
+    [SerializeField] private AudioClip PutLidOnSound;
+    [SerializeField] private AudioClip TakeLidOffSound;
+    [SerializeField] private AudioClip PotionStartBrewingSound;
+    [SerializeField] private AudioClip PotionFinishedBrewingSound;
+    [SerializeField] private AudioClip RetrievePotionSound;
+    [SerializeField] private AudioClip AddIngredientSound;
+    [SerializeField] private AudioClip RemoveIngredientSound;
+    [SerializeField] private AudioClip SwitchToFreezingTempSound;
+    [SerializeField] private AudioClip SwitchToColdTempSound;
+    [SerializeField] private AudioClip SwitchToMediumTempSound;
+    [SerializeField] private AudioClip SwitchToHotTempSound;
+    [SerializeField] private AudioClip SwitchToBoilingTempSound;
 
-    [SerializeField] private AudioSource MusicScore1;
-    [SerializeField] private AudioSource MusicScore2;
-    [SerializeField] private AudioSource MenuMusic1;
-    [SerializeField] private AudioSource PotionShopAmbience1;
-    [SerializeField] private AudioSource PotionShopAmbience2;
+    [SerializeField] private AudioClip MusicScore1;
+    [SerializeField] private AudioClip MusicScore2;
+    [SerializeField] private AudioClip MenuMusic1;
+    [SerializeField] private AudioClip PotionShopAmbience1;
+    [SerializeField] private AudioClip PotionShopAmbience2;
 
-    [SerializeField] private AudioSource PlayerWalkSound;
-    [SerializeField] private AudioSource PlayerRunSound;
-    [SerializeField] private AudioSource PlayerJumpSound;
-    [SerializeField] private AudioSource PlayerOutOfStaminaSound;
-    [SerializeField] private AudioSource PickUpMazeItemSound;
-    [SerializeField] private AudioSource TeleportToMazeSound;
-    [SerializeField] private AudioSource TeleportToShopSound;
+    [SerializeField] private AudioClip PlayerWalkSound;
+    [SerializeField] private AudioClip PlayerRunSound;
+    [SerializeField] private AudioClip PlayerJumpSound;
+    [SerializeField] private AudioClip PlayerOutOfStaminaSound;
+    [SerializeField] private AudioClip PickUpMazeItemSound;
+    [SerializeField] private AudioClip TeleportToMazeSound;
+    [SerializeField] private AudioClip TeleportToShopSound;
 
     void Start()
     {

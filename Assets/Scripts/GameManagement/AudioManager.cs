@@ -13,19 +13,20 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource WinGameSound;
     [SerializeField] private AudioSource LoseGameSound;
     [SerializeField] private AudioSource NavigatePotionShopSound;
-    
+
     [SerializeField] private AudioSource OpenInventorySound;
     [SerializeField] private AudioSource CloseInventorySound;
-    [SerializeField] private AudioSource PickUpInventoryItemSound;
+    [SerializeField] private AudioSource PickUpInventoryItemSound; 
     [SerializeField] private AudioSource RotateInventoryItemSound;
     [SerializeField] private AudioSource PlaceInventoryItemSound;
+    [SerializeField] private AudioSource TrashInventorySound;
+    [SerializeField] private AudioSource DropItemSound;
+
     [SerializeField] private AudioSource OpenBookSound;
     [SerializeField] private AudioSource CloseBookSound;
     [SerializeField] private AudioSource SwitchPageSound;
 
-    [SerializeField] private AudioSource CharacterSpeakSound1;
-    [SerializeField] private AudioSource CharacterSpeakSound2;
-    [SerializeField] private AudioSource CharacterSpeakSound3;
+    [SerializeField] private AudioSource CharacterSpeechSound;
     [SerializeField] private AudioSource CompleteOrderSound;
     [SerializeField] private AudioSource IncreaseMoralitySound;
     [SerializeField] private AudioSource DecreaseMoralitySound;
@@ -61,13 +62,12 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource TeleportToMazeSound;
     [SerializeField] private AudioSource TeleportToShopSound;
 
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    public void ButtonPressSound() 
+    public void ButtonPressSound()
     { 
     
     }

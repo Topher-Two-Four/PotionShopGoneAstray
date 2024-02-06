@@ -247,6 +247,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(4) ||
                 SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(5))
             {
+                AudioManager.Instance.PlaySFX(unpauseGameSound);
                 SetPlayerCapsuleActive(); // Activate player capsule
                 ToggleCursorOff(); // Lock and hide cursor
             }
@@ -263,6 +264,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
             pauseMenuCanvas.SetActive(true); // Activate pause menu canvas
             SetPlayerCapsuleInactive(); // Deactivate player capsule
             ToggleCursorOn(); // Unlock and display cursor
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.pauseGameSound);
 
             var foundAIObjects = FindObjectsOfType<MazeAIController>();
             foreach (MazeAIController mazeAI in foundAIObjects)

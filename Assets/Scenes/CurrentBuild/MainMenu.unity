@@ -4206,13 +4206,14 @@ GameObject:
   - component: {fileID: 295410661}
   - component: {fileID: 295410662}
   - component: {fileID: 295410663}
+  - component: {fileID: 295410664}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &295410661
 Transform:
   m_ObjectHideFlags: 0
@@ -4240,57 +4241,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39c680943bd675c4fa07a244b6a23957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MenuButtonHoverSound: {fileID: 8300000, guid: 0f205d58d80b738499501c4951cf24ca, type: 3}
-  MenuButtonClickSound: {fileID: 8300000, guid: f12b15c443b9934419cdba6fe761b9ef, type: 3}
-  NewDaySound: {fileID: 8300000, guid: 73264292b824c164896bb6ed58769dd1, type: 3}
-  EndDaySound: {fileID: 8300000, guid: cbb2f7d8a937f7347a825c3d2f1547ad, type: 3}
-  PauseGameSound: {fileID: 8300000, guid: abe2401f9cc644148a7dec77fde6cbd9, type: 3}
-  UnpauseGameSound: {fileID: 8300000, guid: abe2401f9cc644148a7dec77fde6cbd9, type: 3}
-  WinGameSound: {fileID: 8300000, guid: 5d53c99f72348a8428d38af657114528, type: 3}
-  LoseGameSound: {fileID: 8300000, guid: 0ec8125eaee844346b093bfebd3e014d, type: 3}
-  NavigatePotionShopSound: {fileID: 8300000, guid: f9164d8500f78f24988db3bf86c68850, type: 3}
-  OpenInventorySound: {fileID: 8300000, guid: 80fcd5520d183e3489e8c6ddab66515a, type: 3}
-  CloseInventorySound: {fileID: 8300000, guid: 74e91f1f2f448174b868bc77785638a8, type: 3}
-  PickUpInventoryItemSound: {fileID: 8300000, guid: 29935e3c8a59d2749976a4d4ed6714b7, type: 3}
-  RotateInventoryItemSound: {fileID: 8300000, guid: b69c7e6dd91579f4cbd7131ce3cf5209, type: 3}
-  PlaceInventoryItemSound: {fileID: 8300000, guid: fe9a05bf3e94cb34ea54c7dc8082272c, type: 3}
-  TrashInventorySound: {fileID: 8300000, guid: 28a2bd829f961e346b00591236f61509, type: 3}
-  DropItemSound: {fileID: 8300000, guid: 88e392feeccfaf841ae7406ebca39340, type: 3}
-  OpenBookSound: {fileID: 8300000, guid: 0d177254b04db674d9c4a245e20b064a, type: 3}
-  CloseBookSound: {fileID: 8300000, guid: 7e1c70ca1f219f344918d949355ae615, type: 3}
-  SwitchPageSound: {fileID: 8300000, guid: 1760ef1f8d2195a488a3ccd17a361885, type: 3}
-  CharacterSpeechSound: {fileID: 8300000, guid: 81064515cbfa0c448868bf448647a1f2, type: 3}
-  CompleteOrderSound: {fileID: 8300000, guid: f12b15c443b9934419cdba6fe761b9ef, type: 3}
-  IncreaseMoralitySound: {fileID: 8300000, guid: 2c524846059fdbb46b6064c98c9e57a5, type: 3}
-  DecreaseMoralitySound: {fileID: 8300000, guid: 13bffdcace7e83945b623678e1297b15, type: 3}
-  CauldronBrewingSound: {fileID: 8300000, guid: 85c3b990c9506874d8c823823a725814, type: 3}
-  CauldronBubbleSound: {fileID: 8300000, guid: 0a62faccc5ecedb4eb6063e3ab37a352, type: 3}
-  CauldronFireSound: {fileID: 8300000, guid: d4f8867498cb70546b973298d6ad5315, type: 3}
-  StirSound: {fileID: 8300000, guid: 1260969609c20a74d899a95573b73cd1, type: 3}
-  PutLidOnSound: {fileID: 8300000, guid: b1651a34bb54ea141bf4aaa2e97eace4, type: 3}
-  TakeLidOffSound: {fileID: 8300000, guid: b445be90445549d4b880226984ead26f, type: 3}
-  PotionStartBrewingSound: {fileID: 8300000, guid: 3d8c9fedeb78c054ab3f7dc3d7a377e6, type: 3}
-  PotionFinishedBrewingSound: {fileID: 8300000, guid: 3101a72581aedfa4483bae24a0d7089d, type: 3}
-  RetrievePotionSound: {fileID: 8300000, guid: f08076e741b853842bce66e201997211, type: 3}
-  AddIngredientSound: {fileID: 8300000, guid: 62b6a24cca2ee234bbe7b81e4acde9e0, type: 3}
-  RemoveIngredientSound: {fileID: 8300000, guid: e4804defe44d22e48be061df11abee08, type: 3}
-  SwitchToFreezingTempSound: {fileID: 8300000, guid: 102e598d36fd23c41afba77117f3aa69, type: 3}
-  SwitchToColdTempSound: {fileID: 8300000, guid: 62acd04d1dde7a346b418fc611c84f63, type: 3}
-  SwitchToMediumTempSound: {fileID: 8300000, guid: e742306d03715d14c9b01b4a348c5b34, type: 3}
-  SwitchToHotTempSound: {fileID: 8300000, guid: d1f3d5442f272d74e927e250fe6d1bd9, type: 3}
-  SwitchToBoilingTempSound: {fileID: 8300000, guid: 45080cfc6b487194e9c86895731db363, type: 3}
-  MusicScore1: {fileID: 8300000, guid: 3a0889cc0019127499874c7b5b88c7ec, type: 3}
-  MusicScore2: {fileID: 8300000, guid: 2e463fe82296a5442870ca800d689a4d, type: 3}
-  MenuMusic1: {fileID: 8300000, guid: 3a0889cc0019127499874c7b5b88c7ec, type: 3}
-  PotionShopAmbience1: {fileID: 8300000, guid: 2332429183ed69e4e9153e8ac88f9f19, type: 3}
-  PotionShopAmbience2: {fileID: 8300000, guid: 4aca2890c9499bd4d90c815cc376605f, type: 3}
-  PlayerWalkSound: {fileID: 8300000, guid: 9f5b4494a3c93384da98a7bdd976e3c1, type: 3}
-  PlayerRunSound: {fileID: 8300000, guid: a5c5b0728b315384780009475d84a367, type: 3}
-  PlayerJumpSound: {fileID: 8300000, guid: f87b6a6d348ee544ca91a74b2ea7886a, type: 3}
-  PlayerOutOfStaminaSound: {fileID: 8300000, guid: 829894eff21c52c47a112a9191bf57df, type: 3}
-  PickUpMazeItemSound: {fileID: 8300000, guid: 153fbc04fc6777a448452676bf779af9, type: 3}
-  TeleportToMazeSound: {fileID: 8300000, guid: 99fe2f08d6dbf2c48b0b5da30b341790, type: 3}
-  TeleportToShopSound: {fileID: 8300000, guid: 99fe2f08d6dbf2c48b0b5da30b341790, type: 3}
+  musicSource: {fileID: 295410663}
+  sfxSource: {fileID: 295410664}
+  menuButtonHoverSound: {fileID: 0}
+  menuButtonClickSound: {fileID: 0}
+  newDaySound: {fileID: 0}
+  endDaySound: {fileID: 0}
+  pauseGameSound: {fileID: 8300000, guid: abe2401f9cc644148a7dec77fde6cbd9, type: 3}
+  unpauseGameSound: {fileID: 8300000, guid: abe2401f9cc644148a7dec77fde6cbd9, type: 3}
+  winGameSound: {fileID: 0}
+  loseGameSound: {fileID: 0}
+  navigatePotionShopSound: {fileID: 0}
+  openInventorySound: {fileID: 0}
+  closeInventorySound: {fileID: 0}
+  pickUpInventoryItemSound: {fileID: 0}
+  rotateInventoryItemSound: {fileID: 0}
+  placeInventoryItemSound: {fileID: 0}
+  trashInventorySound: {fileID: 0}
+  dropItemSound: {fileID: 0}
+  openBookSound: {fileID: 0}
+  closeBookSound: {fileID: 0}
+  switchPageSound: {fileID: 0}
+  characterSpeechSound: {fileID: 0}
+  completeOrderSound: {fileID: 0}
+  increaseMoralitySound: {fileID: 0}
+  decreaseMoralitySound: {fileID: 0}
+  cauldronBrewingSound: {fileID: 0}
+  cauldronBubbleSound: {fileID: 0}
+  cauldronFireSound: {fileID: 0}
+  stirSound: {fileID: 0}
+  putLidOnSound: {fileID: 0}
+  takeLidOffSound: {fileID: 0}
+  potionStartBrewingSound: {fileID: 0}
+  potionFinishedBrewingSound: {fileID: 0}
+  retrievePotionSound: {fileID: 0}
+  addIngredientSound: {fileID: 0}
+  removeIngredientSound: {fileID: 0}
+  switchToFreezingTempSound: {fileID: 0}
+  switchToColdTempSound: {fileID: 0}
+  switchToMediumTempSound: {fileID: 0}
+  switchToHotTempSound: {fileID: 0}
+  switchToBoilingTempSound: {fileID: 0}
+  musicScore1: {fileID: 0}
+  musicScore2: {fileID: 0}
+  menuMusic1: {fileID: 0}
+  potionShopAmbience1: {fileID: 0}
+  potionShopAmbience2: {fileID: 0}
+  playerWalkSound: {fileID: 0}
+  playerRunSound: {fileID: 0}
+  playerJumpSound: {fileID: 0}
+  playerOutOfStaminaSound: {fileID: 0}
+  pickUpMazeItemSound: {fileID: 0}
+  teleportToMazeSound: {fileID: 0}
+  teleportToShopSound: {fileID: 0}
 --- !u!82 &295410663
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4302,6 +4305,102 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2e463fe82296a5442870ca800d689a4d, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &295410664
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295410660}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

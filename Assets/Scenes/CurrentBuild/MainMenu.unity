@@ -2092,6 +2092,7 @@ GameObject:
   - component: {fileID: 137058752}
   - component: {fileID: 137058751}
   - component: {fileID: 137058750}
+  - component: {fileID: 137058753}
   m_Layer: 5
   m_Name: CreditsButton
   m_TagString: Untagged
@@ -2200,6 +2201,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 137058748}
   m_CullTransparentMesh: 1
+--- !u!114 &137058753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137058748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 191197211}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: 0f205d58d80b738499501c4951cf24ca, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 191197211}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: f12b15c443b9934419cdba6fe761b9ef, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &144820084
 GameObject:
   m_ObjectHideFlags: 0
@@ -3805,6 +3851,7 @@ GameObject:
   - component: {fileID: 256145999}
   - component: {fileID: 256145998}
   - component: {fileID: 256145997}
+  - component: {fileID: 256146000}
   m_Layer: 5
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -3874,19 +3921,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 256145998}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7191769637739229790, guid: 91d3cb84ad82a74468a13781462d10ca, type: 3}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: SwitchSceneToSettingsMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &256145998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3925,6 +3960,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 256145995}
   m_CullTransparentMesh: 1
+--- !u!114 &256146000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256145995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 191197211}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: 0f205d58d80b738499501c4951cf24ca, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 191197211}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: f12b15c443b9934419cdba6fe761b9ef, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &275407602
 GameObject:
   m_ObjectHideFlags: 0
@@ -4372,57 +4452,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 1965279476}
   sfxSource: {fileID: 1377076976}
-  menuButtonHoverSound: {fileID: 0}
-  menuButtonClickSound: {fileID: 0}
-  newDaySound: {fileID: 0}
-  endDaySound: {fileID: 0}
+  menuButtonHoverSound: {fileID: 8300000, guid: 0f205d58d80b738499501c4951cf24ca, type: 3}
+  menuButtonClickSound: {fileID: 8300000, guid: f12b15c443b9934419cdba6fe761b9ef, type: 3}
+  newDaySound: {fileID: 8300000, guid: 73264292b824c164896bb6ed58769dd1, type: 3}
+  endDaySound: {fileID: 8300000, guid: cbb2f7d8a937f7347a825c3d2f1547ad, type: 3}
   pauseGameSound: {fileID: 8300000, guid: abe2401f9cc644148a7dec77fde6cbd9, type: 3}
   unpauseGameSound: {fileID: 8300000, guid: abe2401f9cc644148a7dec77fde6cbd9, type: 3}
-  winGameSound: {fileID: 0}
-  loseGameSound: {fileID: 0}
-  navigatePotionShopSound: {fileID: 0}
-  openInventorySound: {fileID: 0}
-  closeInventorySound: {fileID: 0}
-  pickUpInventoryItemSound: {fileID: 0}
-  rotateInventoryItemSound: {fileID: 0}
-  placeInventoryItemSound: {fileID: 0}
-  trashInventorySound: {fileID: 0}
-  dropItemSound: {fileID: 0}
-  openBookSound: {fileID: 0}
-  closeBookSound: {fileID: 0}
-  switchPageSound: {fileID: 0}
-  characterSpeechSound: {fileID: 0}
+  winGameSound: {fileID: 8300000, guid: 5d53c99f72348a8428d38af657114528, type: 3}
+  loseGameSound: {fileID: 8300000, guid: 0ec8125eaee844346b093bfebd3e014d, type: 3}
+  navigatePotionShopSound: {fileID: 8300000, guid: f9164d8500f78f24988db3bf86c68850, type: 3}
+  openInventorySound: {fileID: 8300000, guid: 80fcd5520d183e3489e8c6ddab66515a, type: 3}
+  closeInventorySound: {fileID: 8300000, guid: 74e91f1f2f448174b868bc77785638a8, type: 3}
+  pickUpInventoryItemSound: {fileID: 8300000, guid: 29935e3c8a59d2749976a4d4ed6714b7, type: 3}
+  rotateInventoryItemSound: {fileID: 8300000, guid: b69c7e6dd91579f4cbd7131ce3cf5209, type: 3}
+  placeInventoryItemSound: {fileID: 8300000, guid: fe9a05bf3e94cb34ea54c7dc8082272c, type: 3}
+  trashInventorySound: {fileID: 8300000, guid: 28a2bd829f961e346b00591236f61509, type: 3}
+  dropItemSound: {fileID: 8300000, guid: 88e392feeccfaf841ae7406ebca39340, type: 3}
+  openBookSound: {fileID: 8300000, guid: 0d177254b04db674d9c4a245e20b064a, type: 3}
+  closeBookSound: {fileID: 8300000, guid: 7e1c70ca1f219f344918d949355ae615, type: 3}
+  switchPageSound: {fileID: 8300000, guid: 1760ef1f8d2195a488a3ccd17a361885, type: 3}
+  characterSpeechSound: {fileID: 8300000, guid: 81064515cbfa0c448868bf448647a1f2, type: 3}
   completeOrderSound: {fileID: 0}
-  increaseMoralitySound: {fileID: 0}
-  decreaseMoralitySound: {fileID: 0}
-  cauldronBrewingSound: {fileID: 0}
-  cauldronBubbleSound: {fileID: 0}
-  cauldronFireSound: {fileID: 0}
+  increaseMoralitySound: {fileID: 8300000, guid: 2c524846059fdbb46b6064c98c9e57a5, type: 3}
+  decreaseMoralitySound: {fileID: 8300000, guid: 13bffdcace7e83945b623678e1297b15, type: 3}
+  cauldronBrewingSound: {fileID: 8300000, guid: 85c3b990c9506874d8c823823a725814, type: 3}
+  cauldronBubbleSound: {fileID: 8300000, guid: ff3aad5a44f73bb46aada5ecb8a3023f, type: 3}
+  cauldronFireSound: {fileID: 8300000, guid: d4f8867498cb70546b973298d6ad5315, type: 3}
   stirSound: {fileID: 8300000, guid: 1260969609c20a74d899a95573b73cd1, type: 3}
   putLidOnSound: {fileID: 8300000, guid: b1651a34bb54ea141bf4aaa2e97eace4, type: 3}
-  takeLidOffSound: {fileID: 0}
-  potionStartBrewingSound: {fileID: 0}
-  potionFinishedBrewingSound: {fileID: 0}
-  retrievePotionSound: {fileID: 0}
-  addIngredientSound: {fileID: 0}
-  removeIngredientSound: {fileID: 0}
-  switchToFreezingTempSound: {fileID: 0}
-  switchToColdTempSound: {fileID: 0}
-  switchToMediumTempSound: {fileID: 0}
-  switchToHotTempSound: {fileID: 0}
-  switchToBoilingTempSound: {fileID: 0}
-  musicScore1: {fileID: 0}
-  musicScore2: {fileID: 0}
-  menuMusic1: {fileID: 0}
-  potionShopAmbience1: {fileID: 0}
-  potionShopAmbience2: {fileID: 0}
-  playerWalkSound: {fileID: 0}
-  playerRunSound: {fileID: 0}
-  playerJumpSound: {fileID: 0}
-  playerOutOfStaminaSound: {fileID: 0}
-  pickUpMazeItemSound: {fileID: 0}
-  teleportToMazeSound: {fileID: 0}
-  teleportToShopSound: {fileID: 0}
+  takeLidOffSound: {fileID: 8300000, guid: b445be90445549d4b880226984ead26f, type: 3}
+  potionStartBrewingSound: {fileID: 8300000, guid: 3d8c9fedeb78c054ab3f7dc3d7a377e6, type: 3}
+  potionFinishedBrewingSound: {fileID: 8300000, guid: 3101a72581aedfa4483bae24a0d7089d, type: 3}
+  retrievePotionSound: {fileID: 8300000, guid: f08076e741b853842bce66e201997211, type: 3}
+  addIngredientSound: {fileID: 8300000, guid: 62b6a24cca2ee234bbe7b81e4acde9e0, type: 3}
+  removeIngredientSound: {fileID: 8300000, guid: e4804defe44d22e48be061df11abee08, type: 3}
+  switchToFreezingTempSound: {fileID: 8300000, guid: 102e598d36fd23c41afba77117f3aa69, type: 3}
+  switchToColdTempSound: {fileID: 8300000, guid: 62acd04d1dde7a346b418fc611c84f63, type: 3}
+  switchToMediumTempSound: {fileID: 8300000, guid: e742306d03715d14c9b01b4a348c5b34, type: 3}
+  switchToHotTempSound: {fileID: 8300000, guid: d1f3d5442f272d74e927e250fe6d1bd9, type: 3}
+  switchToBoilingTempSound: {fileID: 8300000, guid: 409379c7880ccc541adc4f13745c77a3, type: 3}
+  musicScore1: {fileID: 8300000, guid: b88aaaffe315a544f9f777f3d6d296da, type: 3}
+  musicScore2: {fileID: 8300000, guid: ea1a7cbfb965e9144bf86617e16160ce, type: 3}
+  menuMusic1: {fileID: 8300000, guid: 084b7fef280a4234aa67f3e45dfc0915, type: 3}
+  potionShopAmbience1: {fileID: 8300000, guid: 2332429183ed69e4e9153e8ac88f9f19, type: 3}
+  potionShopAmbience2: {fileID: 8300000, guid: 4aca2890c9499bd4d90c815cc376605f, type: 3}
+  playerWalkSound: {fileID: 8300000, guid: 9f5b4494a3c93384da98a7bdd976e3c1, type: 3}
+  playerRunSound: {fileID: 8300000, guid: a5c5b0728b315384780009475d84a367, type: 3}
+  playerJumpSound: {fileID: 8300000, guid: f87b6a6d348ee544ca91a74b2ea7886a, type: 3}
+  playerOutOfStaminaSound: {fileID: 8300000, guid: 829894eff21c52c47a112a9191bf57df, type: 3}
+  pickUpMazeItemSound: {fileID: 8300000, guid: 29935e3c8a59d2749976a4d4ed6714b7, type: 3}
+  teleportToMazeSound: {fileID: 8300000, guid: 99fe2f08d6dbf2c48b0b5da30b341790, type: 3}
+  teleportToShopSound: {fileID: 8300000, guid: 99fe2f08d6dbf2c48b0b5da30b341790, type: 3}
 --- !u!1 &298660800
 GameObject:
   m_ObjectHideFlags: 0
@@ -5853,6 +5933,7 @@ GameObject:
   - component: {fileID: 411734192}
   - component: {fileID: 411734191}
   - component: {fileID: 411734190}
+  - component: {fileID: 411734193}
   m_Layer: 5
   m_Name: NewGameButton
   m_TagString: Untagged
@@ -5974,6 +6055,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 411734188}
   m_CullTransparentMesh: 1
+--- !u!114 &411734193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411734188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 191197211}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: 0f205d58d80b738499501c4951cf24ca, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 191197211}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: f12b15c443b9934419cdba6fe761b9ef, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &418743926
 GameObject:
   m_ObjectHideFlags: 0
@@ -14797,6 +14923,7 @@ GameObject:
   - component: {fileID: 1285972406}
   - component: {fileID: 1285972405}
   - component: {fileID: 1285972404}
+  - component: {fileID: 1285972407}
   m_Layer: 5
   m_Name: QuitGameButton
   m_TagString: Untagged
@@ -14867,19 +14994,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1285972405}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1353563309}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: OnQuitPressed
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1285972405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14918,6 +15033,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1285972402}
   m_CullTransparentMesh: 1
+--- !u!114 &1285972407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285972402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 191197211}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: 0f205d58d80b738499501c4951cf24ca, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 191197211}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: f12b15c443b9934419cdba6fe761b9ef, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1302267594
 GameObject:
   m_ObjectHideFlags: 0
@@ -17733,6 +17893,7 @@ GameObject:
   - component: {fileID: 1584736885}
   - component: {fileID: 1584736884}
   - component: {fileID: 1584736883}
+  - component: {fileID: 1584736886}
   m_Layer: 5
   m_Name: ContinueGameButton
   m_TagString: Untagged
@@ -17803,19 +17964,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1584736884}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1353563309}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: OnContinueGamePressed
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1584736884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17854,6 +18003,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1584736881}
   m_CullTransparentMesh: 1
+--- !u!114 &1584736886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584736881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 191197211}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: 0f205d58d80b738499501c4951cf24ca, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 191197211}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: f12b15c443b9934419cdba6fe761b9ef, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1600225219
 GameObject:
   m_ObjectHideFlags: 0
@@ -18574,6 +18768,7 @@ GameObject:
   - component: {fileID: 1693266213}
   - component: {fileID: 1693266212}
   - component: {fileID: 1693266211}
+  - component: {fileID: 1693266214}
   m_Layer: 5
   m_Name: SoundButtons
   m_TagString: Untagged
@@ -18682,6 +18877,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693266209}
   m_CullTransparentMesh: 1
+--- !u!114 &1693266214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693266209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 191197211}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: 0f205d58d80b738499501c4951cf24ca, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 191197211}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: f12b15c443b9934419cdba6fe761b9ef, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1696377351
 GameObject:
   m_ObjectHideFlags: 0

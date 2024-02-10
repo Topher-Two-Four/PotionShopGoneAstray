@@ -39,6 +39,8 @@ public class RoomManager : MonoBehaviour
     // Toggles on and off room game objects for navigation of 2D scene
     private void ToggleRoom(Button button)
     {
+        AudioManager.Instance.PlaySFX("NavigatePotionShop");
+
         // Keep track of the index number for which button was pressed
         int buttonIndex = buttonList.IndexOf(button);
 
@@ -84,7 +86,6 @@ public class RoomManager : MonoBehaviour
 
             }
         }
-
     }
 
 

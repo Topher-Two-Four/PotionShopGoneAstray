@@ -185,6 +185,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         GameManager.Instance.isTimerRunning = true; // Run timer
         GameManager.Instance.timeRemaining = timeInDay; // Reset time of day
+        AudioManager.Instance.PlaySFX("NewDay");
     }
 
     private void TimerUpdate() // Update timer and keep track of what time of day it is
@@ -242,12 +243,12 @@ public class GameManager : MonoBehaviour, IDataPersistence
         {
             isTimerRunning = true; // Resume timer
             pauseMenuCanvas.SetActive(false); // Deactivate pause menu canvas
+            AudioManager.Instance.PlaySFX("UnpauseGame");
 
             if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3) ||
                 SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(4) ||
                 SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(5))
             {
-                //AudioManager.Instance.PlaySFX(unpauseGameSound);
                 SetPlayerCapsuleActive(); // Activate player capsule
                 ToggleCursorOff(); // Lock and hide cursor
             }
@@ -264,7 +265,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
             pauseMenuCanvas.SetActive(true); // Activate pause menu canvas
             SetPlayerCapsuleInactive(); // Deactivate player capsule
             ToggleCursorOn(); // Unlock and display cursor
-            //AudioManager.Instance.PlaySFX(AudioManager.Instance.pauseGameSound);
+            AudioManager.Instance.PlaySFX("PauseGame");
 
             var foundAIObjects = FindObjectsOfType<MazeAIController>();
             foreach (MazeAIController mazeAI in foundAIObjects)
@@ -310,6 +311,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
             orderCanvas.SetActive(false);
             ToggleCursorOn(); // Unlock and display cursor
             DisplayEndOfDayUI();
+            AudioManager.Instance.PlaySFX("EndDay");
+
         }
         else
         {
@@ -326,10 +329,13 @@ public class GameManager : MonoBehaviour, IDataPersistence
         if (playerCurrency >= landlordPayment)
         {
             winOrLossText.text = ("You've won!");
+            AudioManager.Instance.PlaySFX("WinGame");
+
         }
         else
         {
             winOrLossText.text = ("You've lost!");
+            AudioManager.Instance.PlaySFX("LoseGame");
         }
         DataPersistenceManager.Instance.NewGame();
     }

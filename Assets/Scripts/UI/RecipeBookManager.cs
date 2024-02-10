@@ -47,11 +47,13 @@ public class RecipeBookManager : MonoBehaviour
     {
         if (apothecaryManualCanvas.gameObject.activeSelf)
         {
+            AudioManager.Instance.PlaySFX("CloseBook");
             apothecaryManualCanvas.gameObject.SetActive(false);
             inventoryGrid.SetActive(true);
 } 
         else
         {
+            AudioManager.Instance.PlaySFX("OpenBook");
             apothecaryManualCanvas.gameObject.SetActive(true);
         }
     }
@@ -65,6 +67,7 @@ public class RecipeBookManager : MonoBehaviour
     {
         if (bookPageIndex < bookPages.Length)
         {
+            AudioManager.Instance.PlaySFX("SwitchPage");
             bookPages[bookPageIndex].SetActive(false);
             bookPageIndex++;
             bookPages[bookPageIndex].SetActive(true);
@@ -76,6 +79,7 @@ public class RecipeBookManager : MonoBehaviour
     {
         if (bookPageIndex > 0)
         {
+            AudioManager.Instance.PlaySFX("SwitchPage");
             bookPages[bookPageIndex].SetActive(false);
             bookPageIndex--;
             bookPages[bookPageIndex].SetActive(true);

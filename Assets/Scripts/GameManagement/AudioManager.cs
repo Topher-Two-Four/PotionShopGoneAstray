@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
 
      public AudioSource musicSource;
      public AudioSource sfxSource;
+     public AudioSource sfx2Source;
 
      public AudioClip menuButtonHoverSound;
      public AudioClip menuButtonClickSound;
@@ -139,6 +140,15 @@ public class AudioManager : MonoBehaviour
     }
 
     public void PlaySFX(string name)
+    {
+        Debug.Log(name);
+        if (audioClips.TryGetValue(name, out AudioClip clip))
+        {
+            sfxSource.PlayOneShot(clip);
+            Debug.Log(clip);
+        }
+    }
+    public void PlaySFX2(string name)
     {
         Debug.Log(name);
         if (audioClips.TryGetValue(name, out AudioClip clip))

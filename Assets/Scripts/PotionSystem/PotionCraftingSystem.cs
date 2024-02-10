@@ -160,6 +160,8 @@ public class PotionCraftingSystem : MonoBehaviour
 
         if (potionRecipe != null)
         {
+            AudioManager.Instance.PlaySFX("PotionStartBrewing");
+            AudioManager.Instance.PlaySFX2("CauldronFire");
             isBrewing = true;
             BrewPotionWIthRecipe(potionRecipe);
             potionImage.sprite = potionRecipe.potion.itemIcon;
@@ -176,7 +178,6 @@ public class PotionCraftingSystem : MonoBehaviour
     private void BrewPotionWIthRecipe(Recipe potionRecipe)
     {
         if (potionRecipe == null) { return; }
-
         StartCoroutine(BrewingProcess(potionRecipe));
     }
 
@@ -235,9 +236,15 @@ public class PotionCraftingSystem : MonoBehaviour
             CheckPotionQuality(potionRecipe.cookTime, timeAtDesiredTemp);
             UpdatePotionQualityIndicator();
 
+            if (timeCooked > 29.0f &&    timeCooked < 31.0f)
+            {
+                AudioManager.Instance.PlaySFX("CauldronBubble");
+            }
+
             yield return null;
         }
         CheckPotionQuality(potionRecipe.cookTime, timeAtDesiredTemp);
+        AudioManager.Instance.PlaySFX("PotionFinishedBrewing");
         DisplayBrewingComplete();
     }
 
@@ -263,7 +270,7 @@ public class PotionCraftingSystem : MonoBehaviour
 
     private void ResetBrewingTimer()
     {
-        timeRemainingText.text = ("000");
+        timeRemainingText.text = ("00");
     }
 
     private void UpdatePotionQualityIndicator()
@@ -476,6 +483,7 @@ public class PotionCraftingSystem : MonoBehaviour
 
     public void AddItemToInventory(ItemData itemData)
     {
+        AudioManager.Instance.PlaySFX("RemoveIngredient");
         if (itemData != null)
         {
             InventoryController.Instance.InsertItem(itemData);
@@ -564,7 +572,24 @@ public class PotionCraftingSystem : MonoBehaviour
     {
         if (currentTemp < 5) 
         {
+            AudioManager.Instance.PlaySFX("SwitchToBoilingTemp");
             currentTemp++;
+            if (currentTemp == 5)
+            {
+                AudioManager.Instance.PlaySFX("SwitchToBoilingTemp");
+            } 
+            else if (currentTemp == 4)
+            {
+                AudioManager.Instance.PlaySFX("SwitchToHotTemp");
+            } 
+            else if (currentTemp == 3)
+            {
+                AudioManager.Instance.PlaySFX("SwitchToMediumTemp");
+            } 
+            else if (currentTemp == 2)
+            {
+                AudioManager.Instance.PlaySFX("SwitchToLowTemp");
+            }
             UpdateTemperatureDisplay();
         } else
         {
@@ -578,6 +603,22 @@ public class PotionCraftingSystem : MonoBehaviour
         if (currentTemp > 1)
         {
             currentTemp--;
+            if (currentTemp == 4)
+            {
+                AudioManager.Instance.PlaySFX("SwitchToHotTemp");
+            }
+            else if (currentTemp == 3)
+            {
+                AudioManager.Instance.PlaySFX("SwitchToMediumTemp");
+            }
+            else if (currentTemp == 2)
+            {
+                AudioManager.Instance.PlaySFX("SwitchToLowTemp");
+            } 
+            else if (currentTemp == 1)
+            {
+                AudioManager.Instance.PlaySFX("SwitchToFreezingTemp");
+            }
             UpdateTemperatureDisplay();
         }
         else
@@ -622,12 +663,14 @@ public class PotionCraftingSystem : MonoBehaviour
     {
         if (!isLidOn)
         {
+            AudioManager.Instance.PlaySFX("PutLidOn");
             putOnLidButton.gameObject.SetActive(false);
             removeLidButton.gameObject.SetActive(true);
             isLidOn = true;
         }
         else
         {
+            AudioManager.Instance.PlaySFX("TakeLidOff");
             removeLidButton.gameObject.SetActive(false);
             putOnLidButton.gameObject.SetActive(true);
             isLidOn = false;
@@ -651,6 +694,7 @@ public class PotionCraftingSystem : MonoBehaviour
         {
             if (isRetrievable)
             {
+                AudioManager.Instance.PlaySFX("RetrievePotion");
                 AddPotionToInventory(potionBeingBrewed, GetPotionQuality());
                 OrderSystem.Instance.CheckForCompleteOrders();
                 potionBeingBrewed = null;
@@ -665,6 +709,7 @@ public class PotionCraftingSystem : MonoBehaviour
     private void RetrieveItem(ItemData ingredient, int ingredientSlot)
     {
         AddItemToInventory(ingredient);
+        AudioManager.Instance.PlaySFX("RemoveIngredient");
         if (ingredientSlot == 1)
         {
             ingredient1 = null;
@@ -681,6 +726,5 @@ public class PotionCraftingSystem : MonoBehaviour
         {
             ingredient4 = null;
         }
-
     }
 }

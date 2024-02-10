@@ -4452,6 +4452,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 1965279476}
   sfxSource: {fileID: 1377076976}
+  sfx2Source: {fileID: 1377076976}
   menuButtonHoverSound: {fileID: 8300000, guid: 0f205d58d80b738499501c4951cf24ca, type: 3}
   menuButtonClickSound: {fileID: 8300000, guid: f12b15c443b9934419cdba6fe761b9ef, type: 3}
   newDaySound: {fileID: 8300000, guid: 73264292b824c164896bb6ed58769dd1, type: 3}
@@ -4472,7 +4473,7 @@ MonoBehaviour:
   closeBookSound: {fileID: 8300000, guid: 7e1c70ca1f219f344918d949355ae615, type: 3}
   switchPageSound: {fileID: 8300000, guid: 1760ef1f8d2195a488a3ccd17a361885, type: 3}
   characterSpeechSound: {fileID: 8300000, guid: 81064515cbfa0c448868bf448647a1f2, type: 3}
-  completeOrderSound: {fileID: 0}
+  completeOrderSound: {fileID: 8300000, guid: 69fb830aea4954843917b511c55901be, type: 3}
   increaseMoralitySound: {fileID: 8300000, guid: 2c524846059fdbb46b6064c98c9e57a5, type: 3}
   decreaseMoralitySound: {fileID: 8300000, guid: 13bffdcace7e83945b623678e1297b15, type: 3}
   cauldronBrewingSound: {fileID: 8300000, guid: 85c3b990c9506874d8c823823a725814, type: 3}

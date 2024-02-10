@@ -52,30 +52,37 @@ public class MoralitySystem : MonoBehaviour
     {
         if (potionData.isHealth)
         {
+            AudioManager.Instance.PlaySFX("IncreaseMorality");
             moralityCounter += 3;
         }
         else if (potionData.isBenefit)
         {
+            AudioManager.Instance.PlaySFX("IncreaseMorality");
             moralityCounter += 2;
         }
         else if (potionData.isAntidote)
         {
+            AudioManager.Instance.PlaySFX("IncreaseMorality");
             moralityCounter++;
         }
         else if (potionData.isHatred)
         {
+            AudioManager.Instance.PlaySFX("DecreaseMorality");
             moralityCounter--;
         }
         else if (potionData.isCrippling)
         {
+            AudioManager.Instance.PlaySFX("DecreaseMorality");
             moralityCounter -= 2;
         }
         else if (potionData.isPoison)
         {
+            AudioManager.Instance.PlaySFX("DecreaseMorality");
             moralityCounter -= 3;
         } 
         else if (potionData.isDeath)
         {
+            AudioManager.Instance.PlaySFX("DecreaseMorality");
             moralityCounter -= 4;
         }
         UpdateMoralityUI();

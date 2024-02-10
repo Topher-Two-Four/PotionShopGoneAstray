@@ -72,25 +72,79 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance != null && Instance != this) { Destroy(this); } else { Instance = this; } // Singleton logic
+        if (Instance != null && Instance != this) { Destroy(gameObject); } else { Instance = this; } // Singleton logic
+
+        audioClips.Add("MenuButtonHover", menuButtonHoverSound);
+        audioClips.Add("MenuButtonClick", menuButtonClickSound);
+        audioClips.Add("NewDay", newDaySound);
+        audioClips.Add("EndDay", endDaySound);
+        audioClips.Add("PauseGame", pauseGameSound);
+        audioClips.Add("UnpauseGame", unpauseGameSound);
+        audioClips.Add("WinGame", winGameSound);
+        audioClips.Add("LoseGame", loseGameSound);
+        audioClips.Add("NavigatePotionShop", navigatePotionShopSound);
+        audioClips.Add("OpenInventory", openInventorySound);
+        audioClips.Add("CloseInventory", closeInventorySound);
+        audioClips.Add("PickUpInventoryItem", pickUpInventoryItemSound);
+        audioClips.Add("RotateInventoryItem", rotateInventoryItemSound);
+        audioClips.Add("PlaceInventoryItem", placeInventoryItemSound);
+        audioClips.Add("TrashInventory", trashInventorySound);
+        audioClips.Add("DropItem", dropItemSound);
+        audioClips.Add("OpenBook", openBookSound);
+        audioClips.Add("CloseBook", closeBookSound);
+        audioClips.Add("SwitchPage", switchPageSound);
+        audioClips.Add("CharacterSpeech", characterSpeechSound);
+        audioClips.Add("CompleteOrder", completeOrderSound);
+        audioClips.Add("IncreaseMorality", increaseMoralitySound);
+        audioClips.Add("DecreaseMorality", decreaseMoralitySound);
+        audioClips.Add("CauldronBrewing", cauldronBrewingSound);
+        audioClips.Add("CauldronBubble", cauldronBubbleSound);
+        audioClips.Add("CauldronFire", cauldronFireSound);
+        audioClips.Add("Stir", stirSound);
+        audioClips.Add("PutLidOn", putLidOnSound);
+        audioClips.Add("TakeLidOff", takeLidOffSound);
+        audioClips.Add("PotionStartBrewing", potionStartBrewingSound);
+        audioClips.Add("PotionFinishedBrewing", potionFinishedBrewingSound);
+        audioClips.Add("RetrievePotion", retrievePotionSound);
+        audioClips.Add("AddIngredient", addIngredientSound);
+        audioClips.Add("RemoveIngredient", removeIngredientSound);
+        audioClips.Add("SwitchToFreezingTemp", switchToFreezingTempSound);
+        audioClips.Add("SwitchToColdTemp", switchToColdTempSound);
+        audioClips.Add("SwitchToMediumTemp", switchToMediumTempSound);
+        audioClips.Add("SwitchToHotTemp", switchToHotTempSound);
+        audioClips.Add("SwitchToBoilingTemp", switchToBoilingTempSound);
+        audioClips.Add("MusicScore1", musicScore1);
+        audioClips.Add("MusicScore2", musicScore2);
+        audioClips.Add("MenuMusic1", menuMusic1);
+        audioClips.Add("PotionShopAmbience1", potionShopAmbience1);
+        audioClips.Add("PotionShopAmbience2", potionShopAmbience2);
+        audioClips.Add("PlayerWalk", playerWalkSound);
+        audioClips.Add("PlayerRun", playerRunSound);
+        audioClips.Add("PlayerJump", playerJumpSound);
+        audioClips.Add("PlayerOutOfStamina", playerOutOfStaminaSound);
+        audioClips.Add("PickUpMazeItem", pickUpMazeItemSound);
+        audioClips.Add("TeleportToMaze", teleportToMazeSound);
+        audioClips.Add("TeleportToShop", teleportToShopSound);
     }
 
-    public void PlayMusic(AudioClip audioClip)
+    public void PlayMusic(string name)
     {
-        Debug.Log(audioClip);
-        { 
-            musicSource.PlayOneShot(audioClip);
-            Debug.Log(audioClip);
+        Debug.Log(name);
+        if (audioClips.TryGetValue(name, out AudioClip clip))
+        {
+            musicSource.clip = clip;
+            musicSource.Play();
+            Debug.Log(clip);
         }
     }
 
-    public void PlaySFX(AudioClip audioClip)
+    public void PlaySFX(string name)
     {
-        Debug.Log(audioClip);
+        Debug.Log(name);
         if (audioClips.TryGetValue(name, out AudioClip clip))
         {
-            sfxSource.PlayOneShot(audioClip);
-            Debug.Log(audioClip);
+            sfxSource.PlayOneShot(clip);
+            Debug.Log(clip);
         }
     }
 

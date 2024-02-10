@@ -636,6 +636,7 @@ public class PotionCraftingSystem : MonoBehaviour
 
     public void StirCauldron()
     {
+        AudioManager.Instance.PlaySFX("Stir");
         if (timeCooked > (cookTime / 2))
         {
             isStirred = true;

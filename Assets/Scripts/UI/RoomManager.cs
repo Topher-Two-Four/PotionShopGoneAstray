@@ -20,6 +20,9 @@ public class RoomManager : MonoBehaviour
 
     private void Awake()
     {
+        AudioManager.Instance.sfxSource.Stop();
+        AudioManager.Instance.sfx2Source.Stop();
+        AudioManager.Instance.musicSource.pitch = 1.0f;
         AudioManager.Instance.PlayMusic("ShopMusic");
 
         // Assign a listener to each button in the button list

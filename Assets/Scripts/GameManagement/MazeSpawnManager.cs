@@ -26,6 +26,8 @@ public class MazeSpawnManager : MonoBehaviour
 
     void Start()
     {
+        AudioManager.Instance.sfxSource.Stop();
+        AudioManager.Instance.sfx2Source.Stop();
         AudioManager.Instance.PlayMusic("MazeMusic");
 
         MoralitySystem.Instance.ApplyMoralityEffect();

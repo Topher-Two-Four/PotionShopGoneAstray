@@ -7,67 +7,75 @@ public class AudioManager : MonoBehaviour
 
     public Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
 
-     public AudioSource musicSource;
-     public AudioSource sfxSource;
-     public AudioSource sfx2Source;
+    public AudioSource musicSource;
+    public AudioSource sfxSource;
+    public AudioSource sfx2Source;
 
-     public AudioClip menuButtonHoverSound;
-     public AudioClip menuButtonClickSound;
-     public AudioClip newDaySound;
-     public AudioClip endDaySound;
-     public AudioClip pauseGameSound;
-     public AudioClip unpauseGameSound;
-     public AudioClip winGameSound;
-     public AudioClip loseGameSound;
-     public AudioClip navigatePotionShopSound;
+    public AudioClip menuButtonHoverSound;
+    public AudioClip menuButtonClickSound;
+    public AudioClip newDaySound;
+    public AudioClip endDaySound;
+    public AudioClip pauseGameSound;
+    public AudioClip unpauseGameSound;
+    public AudioClip winGameSound;
+    public AudioClip loseGameSound;
+    public AudioClip navigatePotionShopSound;
 
-     public AudioClip openInventorySound;
-     public AudioClip closeInventorySound;
-     public AudioClip pickUpInventoryItemSound; 
-     public AudioClip rotateInventoryItemSound;
-     public AudioClip placeInventoryItemSound;
-     public AudioClip trashInventorySound;
+    public AudioClip openInventorySound;
+    public AudioClip closeInventorySound;
+    public AudioClip pickUpInventoryItemSound; 
+    public AudioClip rotateInventoryItemSound;
+    public AudioClip placeInventoryItemSound;
+    public AudioClip trashInventorySound;
      public AudioClip dropItemSound;
 
-     public AudioClip openBookSound;
-     public AudioClip closeBookSound;
-     public AudioClip switchPageSound;
+    public AudioClip openBookSound;
+    public AudioClip closeBookSound;
+    public AudioClip switchPageSound;
 
-     public AudioClip characterSpeechSound;
-     public AudioClip completeOrderSound;
-     public AudioClip increaseMoralitySound;
-     public AudioClip decreaseMoralitySound;
+    public AudioClip characterSpeechSound;
+    public AudioClip completeOrderSound;
+    public AudioClip increaseMoralitySound;
+    public AudioClip decreaseMoralitySound;
 
-     public AudioClip cauldronBrewingSound;
-     public AudioClip cauldronBubbleSound;
-     public AudioClip cauldronFireSound;
-     public AudioClip stirSound;
-     public AudioClip putLidOnSound;
-     public AudioClip takeLidOffSound;
-     public AudioClip potionStartBrewingSound;
-     public AudioClip potionFinishedBrewingSound;
-     public AudioClip retrievePotionSound;
-     public AudioClip addIngredientSound;
-     public AudioClip removeIngredientSound;
-     public AudioClip switchToFreezingTempSound;
-     public AudioClip switchToColdTempSound;
-     public AudioClip switchToMediumTempSound;
-     public AudioClip switchToHotTempSound;
-     public AudioClip switchToBoilingTempSound;
+    public AudioClip cauldronBrewingSound;
+    public AudioClip cauldronBubbleSound;
+    public AudioClip cauldronFireSound;
+    public AudioClip stirSound;
+    public AudioClip putLidOnSound;
+    public AudioClip takeLidOffSound;
+    public AudioClip potionStartBrewingSound;
+    public AudioClip potionFinishedBrewingSound;
+    public AudioClip retrievePotionSound;
+    public AudioClip addIngredientSound;
+    public AudioClip removeIngredientSound;
+    public AudioClip switchToFreezingTempSound;
+    public AudioClip switchToColdTempSound;
+    public AudioClip switchToMediumTempSound;
+    public AudioClip switchToHotTempSound;
+    public AudioClip switchToBoilingTempSound;
 
-     public AudioClip potionShopMusic;
-     public AudioClip mazeMusic;
-     public AudioClip menuMusic;
-     public AudioClip potionShopAmbience1;
-     public AudioClip potionShopAmbience2;
+    public AudioClip menuMusic;
+    public AudioClip potionShopMusic;
+    public AudioClip mazeMusic;
+    public AudioClip mazeMusicAllGood;
+    public AudioClip mazeMusicVeryGood;
+    public AudioClip mazeMusicGood;
+    public AudioClip mazeMusicNeutral;
+    public AudioClip mazeMusicBad;
+    public AudioClip mazeMusicVeryBad;
+    public AudioClip mazeMusicAllBad;
 
-     public AudioClip playerWalkSound;
-     public AudioClip playerRunSound;
-     public AudioClip playerJumpSound;
-     public AudioClip playerOutOfStaminaSound;
-     public AudioClip pickUpMazeItemSound;
-     public AudioClip teleportToMazeSound;
-     public AudioClip teleportToShopSound;
+    public AudioClip potionShopAmbience1;
+    public AudioClip potionShopAmbience2;
+
+    public AudioClip playerWalkSound;
+    public AudioClip playerRunSound;
+    public AudioClip playerJumpSound;
+    public AudioClip playerOutOfStaminaSound;
+    public AudioClip pickUpMazeItemSound;
+    public AudioClip teleportToMazeSound;
+    public AudioClip teleportToShopSound;
 
     public static AudioManager Instance { get; private set; } // Singleton logic
 
@@ -114,9 +122,16 @@ public class AudioManager : MonoBehaviour
         audioClips.Add("SwitchToMediumTemp", switchToMediumTempSound);
         audioClips.Add("SwitchToHotTemp", switchToHotTempSound);
         audioClips.Add("SwitchToBoilingTemp", switchToBoilingTempSound);
+        audioClips.Add("MenuMusic", menuMusic);
         audioClips.Add("ShopMusic", potionShopMusic);
         audioClips.Add("MazeMusic", mazeMusic);
-        audioClips.Add("MenuMusic", menuMusic);
+        audioClips.Add("AllGoodMazeMusic", mazeMusicAllGood);
+        audioClips.Add("VeryGoodMazeMusic", mazeMusicVeryGood);
+        audioClips.Add("GoodMazeMusic", mazeMusicGood);
+        audioClips.Add("NeutralMazeMusic", mazeMusicNeutral);
+        audioClips.Add("BadMazeMusic", mazeMusicBad);
+        audioClips.Add("VeryBadMazeMusic", mazeMusicVeryBad); // These are not insults, it just represents music corresponding to alignment :)
+        audioClips.Add("AllBadMazeMusic", mazeMusicAllBad);
         audioClips.Add("PotionShopAmbience1", potionShopAmbience1);
         audioClips.Add("PotionShopAmbience2", potionShopAmbience2);
         audioClips.Add("PlayerWalk", playerWalkSound);

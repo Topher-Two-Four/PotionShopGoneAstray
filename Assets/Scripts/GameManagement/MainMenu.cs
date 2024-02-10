@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
+    public void Start()
+    {
+        AudioManager.Instance.PlayMusic("MenuMusic");
+    }
+
     public void OnNewGamePressed()
     {
         DataPersistenceManager.Instance.NewGame();

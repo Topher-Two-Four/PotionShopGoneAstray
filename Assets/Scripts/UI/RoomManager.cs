@@ -20,6 +20,8 @@ public class RoomManager : MonoBehaviour
 
     private void Awake()
     {
+        AudioManager.Instance.PlayMusic("ShopMusic");
+
         // Assign a listener to each button in the button list
         foreach (Button button in buttonList)
         {

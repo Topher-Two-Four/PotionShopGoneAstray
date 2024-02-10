@@ -26,6 +26,8 @@ public class MazeSpawnManager : MonoBehaviour
 
     void Start()
     {
+        AudioManager.Instance.PlayMusic("MazeMusic");
+
         MoralitySystem.Instance.ApplyMoralityEffect();
 
         ingredientsToSpawn = Mathf.FloorToInt(baseSpawnAmount * MoralitySystem.Instance.GetIngredientSpawnModifier());

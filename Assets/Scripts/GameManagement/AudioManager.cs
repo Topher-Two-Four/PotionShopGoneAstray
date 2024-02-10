@@ -55,9 +55,9 @@ public class AudioManager : MonoBehaviour
      public AudioClip switchToHotTempSound;
      public AudioClip switchToBoilingTempSound;
 
-     public AudioClip musicScore1;
-     public AudioClip musicScore2;
-     public AudioClip menuMusic1;
+     public AudioClip potionShopMusic;
+     public AudioClip mazeMusic;
+     public AudioClip menuMusic;
      public AudioClip potionShopAmbience1;
      public AudioClip potionShopAmbience2;
 
@@ -114,9 +114,9 @@ public class AudioManager : MonoBehaviour
         audioClips.Add("SwitchToMediumTemp", switchToMediumTempSound);
         audioClips.Add("SwitchToHotTemp", switchToHotTempSound);
         audioClips.Add("SwitchToBoilingTemp", switchToBoilingTempSound);
-        audioClips.Add("MusicScore1", musicScore1);
-        audioClips.Add("MusicScore2", musicScore2);
-        audioClips.Add("MenuMusic1", menuMusic1);
+        audioClips.Add("ShopMusic", potionShopMusic);
+        audioClips.Add("MazeMusic", mazeMusic);
+        audioClips.Add("MenuMusic", menuMusic);
         audioClips.Add("PotionShopAmbience1", potionShopAmbience1);
         audioClips.Add("PotionShopAmbience2", potionShopAmbience2);
         audioClips.Add("PlayerWalk", playerWalkSound);

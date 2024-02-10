@@ -4492,15 +4492,15 @@ MonoBehaviour:
   switchToMediumTempSound: {fileID: 8300000, guid: e742306d03715d14c9b01b4a348c5b34, type: 3}
   switchToHotTempSound: {fileID: 8300000, guid: d1f3d5442f272d74e927e250fe6d1bd9, type: 3}
   switchToBoilingTempSound: {fileID: 8300000, guid: 409379c7880ccc541adc4f13745c77a3, type: 3}
-  musicScore1: {fileID: 8300000, guid: b88aaaffe315a544f9f777f3d6d296da, type: 3}
-  musicScore2: {fileID: 8300000, guid: ea1a7cbfb965e9144bf86617e16160ce, type: 3}
-  menuMusic1: {fileID: 8300000, guid: 084b7fef280a4234aa67f3e45dfc0915, type: 3}
+  potionShopMusic: {fileID: 8300000, guid: 2e463fe82296a5442870ca800d689a4d, type: 3}
+  mazeMusic: {fileID: 8300000, guid: 8e6ca72b438fefa4e89a8148af085210, type: 3}
+  menuMusic: {fileID: 8300000, guid: 3a0889cc0019127499874c7b5b88c7ec, type: 3}
   potionShopAmbience1: {fileID: 8300000, guid: 2332429183ed69e4e9153e8ac88f9f19, type: 3}
   potionShopAmbience2: {fileID: 8300000, guid: 4aca2890c9499bd4d90c815cc376605f, type: 3}
   playerWalkSound: {fileID: 8300000, guid: 9f5b4494a3c93384da98a7bdd976e3c1, type: 3}
   playerRunSound: {fileID: 8300000, guid: a5c5b0728b315384780009475d84a367, type: 3}
   playerJumpSound: {fileID: 8300000, guid: f87b6a6d348ee544ca91a74b2ea7886a, type: 3}
-  playerOutOfStaminaSound: {fileID: 8300000, guid: 829894eff21c52c47a112a9191bf57df, type: 3}
+  playerOutOfStaminaSound: {fileID: 8300000, guid: 0e0d57b244ffd3344a79585edb9364bb, type: 3}
   pickUpMazeItemSound: {fileID: 8300000, guid: 29935e3c8a59d2749976a4d4ed6714b7, type: 3}
   teleportToMazeSound: {fileID: 8300000, guid: 99fe2f08d6dbf2c48b0b5da30b341790, type: 3}
   teleportToShopSound: {fileID: 8300000, guid: 99fe2f08d6dbf2c48b0b5da30b341790, type: 3}
@@ -21918,7 +21918,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

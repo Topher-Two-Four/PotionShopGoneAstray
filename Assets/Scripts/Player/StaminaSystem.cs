@@ -74,6 +74,7 @@ public class StaminaSystem : MonoBehaviour
     {
         if (hasRegeneratedStamina) // Check if player has regenerated their stamina
         {
+            //AudioManager.Instance.PlaySFX2("PlayerRun");
             isCurrentlySprinting = true; // Set player has regenerated stamina to true
             currentStamina -= staminaDepletionRate * Time.deltaTime; // Deplete stamina
             UpdateStamina(1); // Update stamina UI
@@ -81,6 +82,7 @@ public class StaminaSystem : MonoBehaviour
 
         if (currentStamina <= 0) // Check if stamina is less than or equal to 0
         {
+            AudioManager.Instance.PlaySFX("PlayerOutOfStamina");
             hasRegeneratedStamina = false; // Set player has regenerated stamina to false
             playerController.SetSprintSpeed(slowedRunSpeed * MoralitySystem.Instance.playerSpeedModifier);
             sliderCanvasGroup.alpha = 0.2f; // Set alpha of canvas slider group to 0 so that UI will not be disabled
@@ -92,15 +94,24 @@ public class StaminaSystem : MonoBehaviour
     {
         if (currentStamina >= (maxStamina * jumpStaminaCost / maxStamina)) // Check if player has stamina to jump
         {
+            AudioManager.Instance.PlaySFX2("PlayerJump");
             currentStamina -= jumpStaminaCost; // Use stamina to jump
             playerController.PlayerJump(); // Allow player to jump if they have enough stamina
             UpdateStamina(1); // Update stamina UI
+
+            if (currentStamina <= 0) // Check if stamina is less than or equal to 0
+            {
+                AudioManager.Instance.PlaySFX("PlayerOutOfStamina");
+                hasRegeneratedStamina = false; // Set player has regenerated stamina to false
+                playerController.SetSprintSpeed(slowedRunSpeed * MoralitySystem.Instance.playerSpeedModifier);
+                sliderCanvasGroup.alpha = 0.2f; // Set alpha of canvas slider group to 0 so that UI will not be disabled
+            }
         }
     }
     
     public void HaltMovement()
     {
-
+        AudioManager.Instance.sfx2Source.Stop();
         slowedRunSpeed = 0;
         normalRunSpeed = 0;
     }

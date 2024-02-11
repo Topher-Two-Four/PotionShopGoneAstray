@@ -244,10 +244,9 @@ public class GameManager : MonoBehaviour, IDataPersistence
             isTimerRunning = true; // Resume timer
             pauseMenuCanvas.SetActive(false); // Deactivate pause menu canvas
             AudioManager.Instance.PlaySFX("UnpauseGame");
-
-            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3) ||
-                SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(4) ||
-                SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(5))
+            if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(0) ||
+                SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(1) ||
+                SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(2))
             {
                 SetPlayerCapsuleActive(); // Activate player capsule
                 ToggleCursorOff(); // Lock and hide cursor
@@ -308,7 +307,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
             {
                 potionCraftingCanvas.SetActive(false);
             }
-            orderCanvas.SetActive(false);
+            //orderCanvas.SetActive(false);
             ToggleCursorOn(); // Unlock and display cursor
             DisplayEndOfDayUI();
             AudioManager.Instance.PlaySFX("EndDay");
@@ -553,7 +552,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void SetPlayerCapsuleInactive()
     {
-        //playerCapsule.SetActive(false); // Set player capsule active
+        playerCapsule.SetActive(false); // Set player capsule inactive
     }
 
 }

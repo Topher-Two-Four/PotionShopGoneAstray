@@ -145,7 +145,6 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusic(string name)
     {
-        Debug.Log(name);
         if (audioClips.TryGetValue(name, out AudioClip clip))
         {
             musicSource.clip = clip;
@@ -156,7 +155,6 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFX(string name)
     {
-        Debug.Log(name);
         if (audioClips.TryGetValue(name, out AudioClip clip))
         {
             sfxSource.PlayOneShot(clip);
@@ -165,14 +163,10 @@ public class AudioManager : MonoBehaviour
     }
     public void PlaySFX2(string name)
     {
-        Debug.Log(name);
         if (audioClips.TryGetValue(name, out AudioClip clip))
         {
             sfxSource.PlayOneShot(clip);
             Debug.Log(clip);
         }
     }
-
-    //Change music tempo and pitch based on good or bad
-
 }

@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
     [SerializeField] private GameObject winLossCanvas;
     [Tooltip("The canvas that holds the pause menu screen UI elements.")]
     [SerializeField] private GameObject pauseMenuCanvas;
+    [Tooltip("The canvas that holds the quest screen UI elements.")]
+    [SerializeField] private GameObject questCanvas;
 
     [Header("Text-Related Settings:")]
     [Tooltip("The time remaining text for UI display.")]
@@ -460,6 +462,16 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public void ToggleOffBookshelfCanvas()
     {
         bookshelfCanvas.SetActive(false); // Hide bookshelf canvas
+    }
+
+    public void ToggleOnQuestCanvas()
+    {
+        questCanvas.SetActive(true); // Display bookshelf canvas
+    }
+
+    public void ToggleOffQuestCanvas()
+    {
+        questCanvas.SetActive(false); // Hide bookshelf canvas
     }
 
     public void ToggleOnDoorToMaze()

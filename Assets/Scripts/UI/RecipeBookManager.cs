@@ -8,8 +8,8 @@ public class RecipeBookManager : MonoBehaviour
     [Header("Recipe Book General Settings:")]
     [Tooltip("The UI canvas for the potion shop manual.")]
     [SerializeField] private Canvas apothecaryManualCanvas;
-    [Tooltip("The player's inventory grid.")]
-    [SerializeField] private GameObject inventoryGrid;
+    //[Tooltip("The player's inventory grid.")]
+    //[SerializeField] private GameObject inventoryGrid;
 
     [Header("Page Settings:")]
     [Tooltip("The index of the current book page.")]
@@ -38,9 +38,12 @@ public class RecipeBookManager : MonoBehaviour
     private void Awake()
     {
         toggleBookCanvasButton.onClick.AddListener(() => ToggleBook()); // Add button listener for toggling on and off manual from inventory
-        closeBookCanvasButton.onClick.AddListener(() => CloseBook()); // Add button listener for toggling on and off manual from inventory
-        pageForwardButton.onClick.AddListener(() => TurnPageForward()); // Add button listener for first ingredient space
-        pageBackButton.onClick.AddListener(() => TurnPageBack()); // Add button listener for second ingredient space
+        if (closeBookCanvasButton != null && pageForwardButton != null && pageBackButton != null)
+        {
+            closeBookCanvasButton.onClick.AddListener(() => CloseBook()); // Add button listener for toggling on and off manual from inventory
+            pageForwardButton.onClick.AddListener(() => TurnPageForward()); // Add button listener for first ingredient space
+            pageBackButton.onClick.AddListener(() => TurnPageBack()); // Add button listener for second ingredient space\
+        }
     }
 
     private void ToggleBook()
@@ -49,7 +52,7 @@ public class RecipeBookManager : MonoBehaviour
         {
             AudioManager.Instance.PlaySFX("CloseBook");
             apothecaryManualCanvas.gameObject.SetActive(false);
-            inventoryGrid.SetActive(true);
+            //inventoryGrid.SetActive(true);
 } 
         else
         {
@@ -89,22 +92,24 @@ public class RecipeBookManager : MonoBehaviour
 
     private void UpdatePageTurnButtonVisibility()
     {
-        if (bookPageIndex == 0) // First page condition
+        if (closeBookCanvasButton != null && pageForwardButton != null && pageBackButton != null)
         {
-            pageBackButton.gameObject.SetActive(false);
-            pageForwardButton.gameObject.SetActive(true);
+            if (bookPageIndex == 0) // First page condition
+            {
+                pageBackButton.gameObject.SetActive(false);
+                pageForwardButton.gameObject.SetActive(true);
+            }
+            else if (bookPageIndex > 0 && bookPageIndex < bookPages.Length - 1) // Middle pages condition
+            {
+                pageBackButton.gameObject.SetActive(true);
+                pageForwardButton.gameObject.SetActive(true);
+            }
+            else // Last page condition
+            {
+                pageBackButton.gameObject.SetActive(true);
+                pageForwardButton.gameObject.SetActive(false);
+            }
         }
-        else if (bookPageIndex > 0 && bookPageIndex < bookPages.Length - 1) // Middle pages condition
-        {
-            pageBackButton.gameObject.SetActive(true);
-            pageForwardButton.gameObject.SetActive(true);
-        }
-        else // Last page condition
-        {
-            pageBackButton.gameObject.SetActive(true);
-            pageForwardButton.gameObject.SetActive(false);
-        }
-
     }
 
 }

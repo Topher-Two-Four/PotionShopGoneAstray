@@ -392,6 +392,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public void SwitchSceneToPotionShopWithNewDay()
     {
         GameManager.Instance.endOfDayCanvas.SetActive(false);
+        SetPlayerCapsuleInactive();
         ToggleCursorOn(); // Unlock and display cursor
         StartNewDayTimer(); // Restart and resume timer at beginning of day
         DayUIUpdate(); // Update UI
@@ -402,6 +403,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public void SwitchSceneToPotionShopWithLoadGame()
     {
         DataPersistenceManager.Instance.LoadGame();
+        SetPlayerCapsuleInactive();
         ToggleCursorOn(); // Unlock and display cursor
         StartNewDayTimer(); // Restart and resume timer at beginning of day
         GameManager.Instance.playerCurrency = this.playerCurrency; // Set player currency from loaded game
@@ -416,6 +418,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public void SwitchSceneToPotionLevel() // Use scene manager to switch to Potion Level from Maze Level
     {
         AudioManager.Instance.PlaySFX("TeleportToShop");
+        Invoke("SetPlayerCapsuleInactive", 1.0f);
         ToggleCursorOn();
         OrderSystem.Instance.CheckForCompleteOrders(); // Check for any complete orders to update order UI
         CallLoadPotionShop(); // Call load potion shop function, which is staggered to allow it to be invoked if neccessary
@@ -428,6 +431,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void SwitchSceneToMazeLevel() // Use scene manager to switch to Maze Level
     {
+        SetPlayerCapsuleActive();
         AudioManager.Instance.PlaySFX("TeleportToMaze");
         int randomSceneIndex = Random.Range(3, 6); // Choose random maze scene to load
         SceneManager.LoadScene(randomSceneIndex);

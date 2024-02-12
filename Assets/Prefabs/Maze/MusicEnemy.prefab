@@ -121,8 +121,8 @@ Rigidbody:
   m_GameObject: {fileID: 395485503890509800}
   serializedVersion: 4
   m_Mass: 35
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 10
+  m_AngularDrag: 10
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -134,10 +134,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!195 &2187457848603893384
 NavMeshAgent:
@@ -150,7 +150,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.2
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 30
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0.2
@@ -160,7 +160,7 @@ NavMeshAgent:
   m_Height: 1
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 3
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &3763263676343624898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,21 +174,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 0}
-  walkSpeed: 3
-  sprintSpeed: 5
+  walkSpeed: 12
+  sprintSpeed: 15
   waitTime: 3
-  detectionTime: 6
-  viewRadius: 30
-  viewAngle: 90
+  detectionTime: 1
+  viewRadius: 40
+  viewAngle: 110
   playerMask:
     serializedVersion: 2
     m_Bits: 64
   obstacleMask:
     serializedVersion: 2
     m_Bits: 128
-  raycastMeshResolution: 1
-  raycastEdgeIterations: 4
-  raycastEdgeDistance: 0.5
+  waitTimeout: 2
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -236,17 +234,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  waitTimeout: 5
-  isPhasedIn: 0
-  _waitTime: 0
-  _detectionTime: 0
   _isPatrolling: 0
   _isChasing: 0
   _isDetectingPlayer: 0
   _playerCaught: 0
-  _currentPatrolPointIndex: 0
-  _lastSeenLocation: {x: 0, y: 0, z: 0}
-  _lastDetectedLocation: {x: 0, y: 0, z: 0}
+  raycastMeshResolution: 1
+  raycastEdgeIterations: 4
+  raycastEdgeDistance: 0.5
 --- !u!1 &2190597334846746090
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,14 +287,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c2eb92176355349b1e4039d4a1101c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicLength: 10
+  musicCatchDistance: 10
+  timeRemovedWhenCaught: 120
   audioSource: {fileID: 745292861983091844}
   triggeredMusic: {fileID: 8300000, guid: 6069c9764a6e20e41a4470bb6fa56150, type: 3}
   caughtSound: {fileID: 8300000, guid: 15233aab885ccd9458792332fa7dbe0b, type: 3}
-  currentMusicPlayTime: 0
-  musicLength: 10
-  musicPlaying: 0
-  musicCatchDistance: 10
-  timeRemovedWhenCaught: 120
 --- !u!82 &745292861983091844
 AudioSource:
   m_ObjectHideFlags: 0

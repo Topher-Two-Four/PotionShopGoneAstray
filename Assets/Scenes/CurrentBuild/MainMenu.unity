@@ -6662,26 +6662,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirstPersonController
       objectReference: {fileID: 0}
-    - target: {fileID: 1523856400312017892, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: field of view
-      value: 58.715508
-      objectReference: {fileID: 0}
-    - target: {fileID: 1523856400312017892, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_FOVAxisMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1523856400312017892, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_FocalLength
-      value: 32.96973
-      objectReference: {fileID: 0}
-    - target: {fileID: 1523856400312017892, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_projectionMatrixMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6073503498084768483, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: viewRadius
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 6675413122062098297, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6742,17 +6722,10 @@ PrefabInstance:
       propertyPath: inventoryCanvas
       value: 
       objectReference: {fileID: 977770114}
-    - target: {fileID: 8482563062153054413, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      propertyPath: m_Lens.FieldOfView
-      value: 58.715508
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6073503498084768484, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6073503497986591915}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
 --- !u!1 &493212523
 GameObject:
@@ -26971,18 +26944,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6073503498084768484, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
   m_PrefabInstance: {fileID: 452597312}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6073503497986591915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6073503497986591908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31c6652c6661c5d4682ad4344dcbd501, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &6675413121693387065 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6675413122062098297, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}

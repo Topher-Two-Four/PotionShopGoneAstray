@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using StarterAssets;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -291,8 +290,9 @@ public class InventoryController : MonoBehaviour
     {
         InventoryItem selectedItem = selectedItemGrid.GetItem(tileGridPosition.x, tileGridPosition.y);
 
-        if  (PotionCraftingSystem.Instance.isBrewing || PotionCraftingSystem.Instance.isRetrievable) { return; }
-
+        if  ((PotionCraftingSystem.Instance.isBrewing || (PotionCraftingSystem.Instance.isRetrievable) ||
+             (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(2)))) { return; }
+        
         if (selectedItem != null && selectedItem.GetInventoryItemData().isIngredient && isSpaceForItem)
         {
             selectedItemGrid.RemoveItem(tileGridPosition.x, tileGridPosition.y);

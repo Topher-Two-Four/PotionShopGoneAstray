@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PotionCraftingSystem : MonoBehaviour
@@ -327,7 +328,7 @@ public class PotionCraftingSystem : MonoBehaviour
         float qualityPercentage = (_qualityPointsFromStirring + _qualityPointsFromTemperature + _qualityPointsFromLid);
 
         // Need to make this deductive
-        if (qualityPercentage >= ultraQualityTimePercentage) 
+        if (qualityPercentage >= ultraQualityTimePercentage)
         {
             potionQuality = 4;
             return 4;

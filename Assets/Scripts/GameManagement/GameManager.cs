@@ -427,7 +427,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public void SwitchSceneToMazeLevel() // Use scene manager to switch to Maze Level
     {
         AudioManager.Instance.PlaySFX("TeleportToMaze");
-        int randomSceneIndex = Random.Range(3, 5); // Choose random maze scene to load
+        int randomSceneIndex = Random.Range(3, 6); // Choose random maze scene to load
         SceneManager.LoadScene(randomSceneIndex);
     }
 

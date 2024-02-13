@@ -568,7 +568,10 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void SetPlayerCapsuleInactive()
     {
-        playerCapsule.SetActive(false); // Set player capsule inactive
+        if (playerCapsule != null)
+        {
+            playerCapsule.SetActive(false); // Set player capsule inactive
+        }
     }
 
 }

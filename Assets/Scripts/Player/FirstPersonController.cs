@@ -156,7 +156,7 @@ namespace StarterAssets
 					}
 					else
 					{
-						Teleportation.Instance.PlayerHasNotLooked();// Player not looking
+						//Teleportation.Instance.PlayerHasNotLooked();// Player not looking
 						isLooking = false;
 						Debug.Log(isLooking);
 					}

@@ -224,7 +224,7 @@ public class InventoryController : MonoBehaviour
 
             Cursor.lockState = CursorLockMode.Confined; // Lock cursor in one place
             Cursor.visible = true; // Hide cursor
-            GameManager.Instance.FreezeRotation();
+            //GameManager.Instance.FreezeRotation();
             inventoryCanvas.gameObject.SetActive(true); // Activate canvas object
         }
     }

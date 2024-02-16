@@ -9444,6 +9444,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirstPersonController
       objectReference: {fileID: 0}
+    - target: {fileID: 1523856400312017891, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.04
+      objectReference: {fileID: 0}
     - target: {fileID: 6073503498084768484, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -9492,6 +9496,10 @@ PrefabInstance:
       propertyPath: highlighter
       value: 
       objectReference: {fileID: 132737697}
+    - target: {fileID: 6846241006579286110, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.04
+      objectReference: {fileID: 0}
     - target: {fileID: 7899478307544988770, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
       propertyPath: trashButton
       value: 
@@ -9508,6 +9516,10 @@ PrefabInstance:
       propertyPath: inventoryCanvas
       value: 
       objectReference: {fileID: 977770114}
+    - target: {fileID: 8482563062153054412, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.04
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

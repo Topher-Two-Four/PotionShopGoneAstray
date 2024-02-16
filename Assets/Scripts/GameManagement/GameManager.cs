@@ -433,7 +433,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         SetPlayerCapsuleActive();
         AudioManager.Instance.PlaySFX("TeleportToMaze");
-        int randomSceneIndex = Random.Range(3, 6); // Choose random maze scene to load
+        int randomSceneIndex = Random.Range(3, 7); // Choose random maze scene to load
+        Invoke("CallMovePlayerToSpawn", 0.1f);
         SceneManager.LoadScene(randomSceneIndex);
     }
 
@@ -571,6 +572,17 @@ public class GameManager : MonoBehaviour, IDataPersistence
         if (playerCapsule != null)
         {
             playerCapsule.SetActive(false); // Set player capsule inactive
+        }
+    }
+
+    private void CallMovePlayerToSpawn()
+    {
+        GameObject spawnPoint = GameObject.FindGameObjectWithTag("PlayerSpawnPoint");
+        if (spawnPoint != null)
+        {
+            playerCapsule.transform.position = spawnPoint.transform.position;
+            playerCapsule.transform.rotation = spawnPoint.transform.rotation;
+            Debug.Log("Player spawned in at " + spawnPoint.transform.position);
         }
     }
 

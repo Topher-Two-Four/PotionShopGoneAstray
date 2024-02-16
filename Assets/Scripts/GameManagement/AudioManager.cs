@@ -149,7 +149,6 @@ public class AudioManager : MonoBehaviour
         {
             musicSource.clip = clip;
             musicSource.Play();
-            Debug.Log(clip);
         }
     }
 
@@ -158,7 +157,6 @@ public class AudioManager : MonoBehaviour
         if (audioClips.TryGetValue(name, out AudioClip clip))
         {
             sfxSource.PlayOneShot(clip);
-            Debug.Log(clip);
         }
     }
     public void PlaySFX2(string name)
@@ -166,7 +164,6 @@ public class AudioManager : MonoBehaviour
         if (audioClips.TryGetValue(name, out AudioClip clip))
         {
             sfxSource.PlayOneShot(clip);
-            Debug.Log(clip);
         }
     }
 }

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 176ca328fce37d04882be2baab705bcd, type: 3}
   m_Name: HoneyFlower
   m_EditorClassIdentifier: 
-  width: 2
-  height: 2
   isIngredient: 1
   isSellable: 0
+  width: 4
+  height: 6
   itemIcon: {fileID: 21300000, guid: 0293cf4d303779c4cbabcf9130060c43, type: 3}
   itemObject: {fileID: 3728056772645781790, guid: 9bd15dbd84e613a4cbd002ceac526027, type: 3}

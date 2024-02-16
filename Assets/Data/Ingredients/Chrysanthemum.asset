@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 176ca328fce37d04882be2baab705bcd, type: 3}
   m_Name: Chrysanthemum
   m_EditorClassIdentifier: 
-  width: 2
-  height: 2
   isIngredient: 1
   isSellable: 0
+  width: 4
+  height: 4
   itemIcon: {fileID: 21300000, guid: fb9ff1b8bcc6c8941a4194f2cf8d1d69, type: 3}
   itemObject: {fileID: 3728056772645781790, guid: 254fbdb4a310f544d816ba7d03651c74, type: 3}

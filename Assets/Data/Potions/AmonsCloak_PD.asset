@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c2163ed23c45274abea9e832adece52, type: 3}
   m_Name: AmonsCloak_PD
   m_EditorClassIdentifier: 
-  width: 2
-  height: 2
   isIngredient: 0
   isSellable: 1
+  width: 3
+  height: 3
   itemIcon: {fileID: 21300000, guid: 20a9f598cee410e4a8bd2ef9d2f10c0c, type: 3}
   itemObject: {fileID: 0}
   isHealth: 0

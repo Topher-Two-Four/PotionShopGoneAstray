@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CurrentBuild/MazeBuildCharlie.unity
     guid: 55ed708e508e9264db185b0a4b6ff39b
+  - enabled: 1
+    path: Assets/Scenes/CurrentBuild/MazeBuildDelta.unity
+    guid: 2c0c9e8b118cf324d85c793ea4b32e90
   m_configObjects: {}

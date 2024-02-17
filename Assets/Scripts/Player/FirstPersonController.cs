@@ -234,7 +234,7 @@ namespace StarterAssets
 		private void LateUpdate()
 		{
 			CameraRotation();
-			ScanEnvironment();
+			//ScanEnvironment();
 		}
 
 		public void MoveToPosition(Vector3 position)
@@ -333,9 +333,9 @@ namespace StarterAssets
 				// move
 				inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
 			}
-			if (SceneManager.GetActiveScene().Equals(SceneManager.GetSceneByBuildIndex(3)) ||
-			   SceneManager.GetActiveScene().Equals(SceneManager.GetSceneByBuildIndex(4)) ||
-			   SceneManager.GetActiveScene().Equals(SceneManager.GetSceneByBuildIndex(5)))
+			if (!SceneManager.GetActiveScene().Equals(SceneManager.GetSceneByBuildIndex(0)) ||
+			   !SceneManager.GetActiveScene().Equals(SceneManager.GetSceneByBuildIndex(1)) ||
+			   !SceneManager.GetActiveScene().Equals(SceneManager.GetSceneByBuildIndex(2)))
 			{
 				// move the player
 				_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 176ca328fce37d04882be2baab705bcd, type: 3}
   m_Name: TeaPlant
   m_EditorClassIdentifier: 
-  width: 2
-  height: 1
   isIngredient: 1
   isSellable: 0
+  width: 4
+  height: 2
   itemIcon: {fileID: 21300000, guid: 42507356124e7c941ba0535b3a3dce7b, type: 3}
   itemObject: {fileID: 3728056772645781790, guid: 961dab081ed334146b100d31e6a4541b, type: 3}

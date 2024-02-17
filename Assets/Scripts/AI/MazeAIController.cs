@@ -31,6 +31,10 @@ public class MazeAIController : MonoBehaviour
     [Tooltip("The list of patrol points that the maze enemy will choose from to move to.")]
     [SerializeField] private Transform[] patrolPoints; // An array containing points the AI patrols
 
+    [Header("Animation Settings:")]
+    [Tooltip("The animator component for the enemy's rigged 3D model.")]
+    [SerializeField] private Animator animator; // The animator for the AI
+
     [HideInInspector] public bool _isPatrolling; // True if AI is patrolling
     [HideInInspector] public bool _isChasing; // True if player is within range of visibility and being chased
     [HideInInspector] public bool _isDetectingPlayer; // True if player is nearby and in the process of being detected
@@ -112,7 +116,10 @@ public class MazeAIController : MonoBehaviour
         _currentPatrolPointIndex = Random.Range(0, patrolPoints.Length); // Set new random patrol point
         navMeshAgent.SetDestination(patrolPoints[_currentPatrolPointIndex].position); // Set new patrol point as destination
         Move(walkSpeed); // Move to next patrol point (with walking feet)
-
+        animator.SetBool("isIdle", false);
+        animator.SetBool("isWalking", true);
+        animator.SetBool("isRunning", false);
+        animator.SetBool("playerCaught", false);
         _lastMoveTime = 0; // Reset last moved timer
     }
 
@@ -141,10 +148,18 @@ public class MazeAIController : MonoBehaviour
         if (_isChasing)
         {
             Move(sprintSpeed);
+            animator.SetBool("isIdle", false);
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isRunning", true);
+            animator.SetBool("playerCaught", false);
         }
         else
         {
             Move(walkSpeed);
+            animator.SetBool("isIdle", false);
+            animator.SetBool("isWalking", true);
+            animator.SetBool("isRunning", false);
+            animator.SetBool("playerCaught", false);
         }
     }
 
@@ -164,6 +179,10 @@ public class MazeAIController : MonoBehaviour
         {
             navMeshAgent.isStopped = true; // Make it so that the AI is stopped
             navMeshAgent.speed = 0; // Set AI move speed to zero
+            animator.SetBool("isIdle", true);
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isRunning", false);
+            animator.SetBool("playerCaught", false);
         }
     }
 
@@ -176,6 +195,11 @@ public class MazeAIController : MonoBehaviour
             {
                 _isDetectingPlayer = false; // Set player as no longer detected
                 Move(walkSpeed); // Set AI movement speed to walk
+                animator.SetBool("isIdle", false);
+                animator.SetBool("isWalking", true);
+                animator.SetBool("isRunning", false);
+                animator.SetBool("playerCaught", false);
+
                 navMeshAgent.SetDestination(patrolPoints[_currentPatrolPointIndex].position); // Resume AI movement to current patrol point
                 _waitTime = waitTime; // Reset action wait timer
                 _detectionTime = detectionTime; // Reset player detection timer
@@ -195,6 +219,11 @@ public class MazeAIController : MonoBehaviour
             if (_detectionTime <= 0) // Continue search if player detection timer runs out
             {
                 Move(walkSpeed); // Set AI move speed to walk
+                animator.SetBool("isIdle", false);
+                animator.SetBool("isWalking", true);
+                animator.SetBool("isRunning", false);
+                animator.SetBool("playerCaught", false);
+
                 Search(_lastDetectedLocation); // Search at player's last detected location
             }
             else // If player detection timer has not yet elapsed then continue decrementing it
@@ -214,6 +243,10 @@ public class MazeAIController : MonoBehaviour
                 {
                     SwitchNextPoint(); // Switch to next patrol point and begin moving there
                     Move(walkSpeed); // Set AI move speed to walk
+                    animator.SetBool("isIdle", false);
+                    animator.SetBool("isWalking", true);
+                    animator.SetBool("isRunning", false);
+                    animator.SetBool("playerCaught", false);
                     _waitTime = waitTime; // Reset action wait timer
                 }
                 else // If action wait timer has not yet elapsed then continue decrementing it
@@ -233,6 +266,9 @@ public class MazeAIController : MonoBehaviour
         if (!_playerCaught) // If player isn't caught then chase them
         {
             Move(sprintSpeed); // Set AI move speed to sprint
+            animator.SetBool("isIdle", false);
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isRunning", true);
             navMeshAgent.SetDestination(_lastSeenLocation); // Move AI to the location where player was seen last
         }
 
@@ -243,6 +279,11 @@ public class MazeAIController : MonoBehaviour
                 _isPatrolling = true; // Set AI status to patrolling
                 _isDetectingPlayer = false; // Set player not detected
                 Move(walkSpeed); // Set AI move speed to walk
+                animator.SetBool("isIdle", false);
+                animator.SetBool("isWalking", false);
+                animator.SetBool("isRunning", false);
+                animator.SetBool("playerCaught", true);
+
                 _detectionTime = detectionTime; // Reset player detection timer
                 _waitTime = waitTime; // Reset action wait timer
                 navMeshAgent.SetDestination(patrolPoints[_currentPatrolPointIndex].position); // Resume AI movement to current patrol point

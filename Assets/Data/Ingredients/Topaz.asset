@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 176ca328fce37d04882be2baab705bcd, type: 3}
   m_Name: Topaz
   m_EditorClassIdentifier: 
-  width: 2
-  height: 2
   isIngredient: 1
   isSellable: 0
+  width: 4
+  height: 4
   itemIcon: {fileID: 21300000, guid: a8f865490cb3cfe45b21381b4eb0cc54, type: 3}
   itemObject: {fileID: 3728056772645781790, guid: 34d679ac2ce570a44953ee317fbea9f8, type: 3}

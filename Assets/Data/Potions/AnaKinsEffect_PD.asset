@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c2163ed23c45274abea9e832adece52, type: 3}
   m_Name: AnaKinsEffect_PD
   m_EditorClassIdentifier: 
-  width: 2
-  height: 2
   isIngredient: 0
   isSellable: 1
+  width: 3
+  height: 3
   itemIcon: {fileID: 21300000, guid: c65d53919ef56ac429a7294b26c8df99, type: 3}
   itemObject: {fileID: 0}
   isHealth: 0

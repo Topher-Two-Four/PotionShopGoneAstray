@@ -19,6 +19,8 @@ public class ItemObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (InventoryController.Instance.CheckForItemSelected()) { return; }
+
         if (other.gameObject.tag == "Player" && InventoryController.Instance.CheckForItemSpace(itemData))
         {
             InventoryController.Instance.AddItemObjectToInventory(itemData);

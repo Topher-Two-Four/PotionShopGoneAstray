@@ -187,11 +187,24 @@ public class InventoryController : MonoBehaviour
         selectedItem = null; // Reset selected item to null to clear selection
     }
 
+    public bool CheckForItemSelected()
+    {
+        if (selectedItem == null)
+        {
+            Debug.Log("No item selected");
+            return false;
+        }
+        else
+        {
+            Debug.Log("Item selected");
+            return true;
+        }
+    }
 
     public void AddItemObjectToInventory(ItemData itemData)
     {
         //Debug.Log(itemData);
-        if (itemData != null && isSpaceForItem)
+        if (itemData != null && isSpaceForItem && selectedItem == null)
         {
             AudioManager.Instance.PlaySFX("PickUpMazeItem");
             InsertItem(itemData);
@@ -363,7 +376,7 @@ public class InventoryController : MonoBehaviour
 
             if (itemToHighlight != null)
             {
-                AudioManager.Instance.PlaySFX("MenuButtonHover");
+                //AudioManager.Instance.PlaySFX("MenuButtonHover");
                 inventoryHighlight.Show(true);
                 inventoryHighlight.SetSize(itemToHighlight);
                 inventoryHighlight.SetPosition(selectedItemGrid, itemToHighlight);

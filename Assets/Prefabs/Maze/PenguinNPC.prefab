@@ -321,7 +321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 0}
   walkSpeed: 6
-  sprintSpeed: 10
+  sprintSpeed: 8
   waitTime: 3
   detectionTime: 6
   viewRadius: 0

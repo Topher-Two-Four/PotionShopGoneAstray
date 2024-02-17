@@ -177,15 +177,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8695877956849815455}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.9699315, z: 0, w: 0.24337804}
-  m_LocalPosition: {x: 86.36994, y: -64.42611, z: -52.120007}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2180902003727408982}
   - {fileID: 5270804483377153728}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -151.828, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4360655078239259272
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -321,8 +321,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 0}
-  walkSpeed: 8
-  sprintSpeed: 12
+  walkSpeed: 6
+  sprintSpeed: 10
   waitTime: 3
   detectionTime: 6
   viewRadius: 40
@@ -381,6 +381,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  animator: {fileID: 2289381211137023162}
   _isPatrolling: 0
   _isChasing: 0
   _isDetectingPlayer: 0
@@ -471,13 +472,30 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 033ac5010a3cd194787710478ed24a95, type: 2}
     - target: {fileID: 5866666021909216657, guid: c38cff0cea4219e49b5165ba09ebb561, type: 3}
       propertyPath: m_UpdateMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: c38cff0cea4219e49b5165ba09ebb561, type: 3}
+      propertyPath: m_CullingMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: c38cff0cea4219e49b5165ba09ebb561, type: 3}
+      propertyPath: m_WarningMessage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: c38cff0cea4219e49b5165ba09ebb561, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c38cff0cea4219e49b5165ba09ebb561, type: 3}
+--- !u!95 &2289381211137023162 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: c38cff0cea4219e49b5165ba09ebb561, type: 3}
+  m_PrefabInstance: {fileID: 5669769959572906283}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5270804483377153728 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c38cff0cea4219e49b5165ba09ebb561, type: 3}

@@ -328,7 +328,7 @@ public class InventoryController : MonoBehaviour
 
     public void DeleteItem()
     {
-        if (selectedItem != null)
+        if (selectedItem != null && !selectedItem.GetInventoryItemData().cantBeDiscarded)
         {
             AudioManager.Instance.PlaySFX("TrashInventory");
             selectedItem.Delete();
@@ -341,7 +341,9 @@ public class InventoryController : MonoBehaviour
 
     public void DropItem()
     {
-        if (selectedItem != null && selectedItem.GetType() != typeof(PotionData))
+        if (selectedItem != null && 
+            selectedItem.GetType() != typeof(PotionData) &&
+            !selectedItem.GetInventoryItemData().cantBeDiscarded)
         {
             AudioManager.Instance.PlaySFX("DropItem");
             selectedItem.Drop();

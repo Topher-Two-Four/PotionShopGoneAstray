@@ -11,6 +11,8 @@ public class ItemData : ScriptableObject
     public bool isIngredient; // Whether this item is an ingredient
     [Tooltip("Whether or not the item is sellable.")]
     public bool isSellable;
+    [Tooltip("Whether or not the item is sellable.")]
+    public bool cantBeDiscarded;
 
     [Header("2D Item Width and Height:")]
     [Tooltip("The inventory width of the item.")]

@@ -214,26 +214,6 @@ public class MazeAIController : MonoBehaviour
 
     private void Patrol()
     {
-        if (_isDetectingPlayer) // If player is detected then move to player's last detected location
-        {
-            if (_detectionTime <= 0) // Continue search if player detection timer runs out
-            {
-                Move(walkSpeed); // Set AI move speed to walk
-                animator.SetBool("isIdle", false);
-                animator.SetBool("isWalking", true);
-                animator.SetBool("isRunning", false);
-                animator.SetBool("playerCaught", false);
-
-                Search(_lastDetectedLocation); // Search at player's last detected location
-            }
-            else // If player detection timer has not yet elapsed then continue decrementing it
-            {
-                Stop(); // Stop AI movement
-                _detectionTime -= Time.deltaTime; // Decrement player detection timer
-            }
-        }
-        else // If player is not detected then continue patrolling
-        {
             _isDetectingPlayer = false; // Set player as no longer detected
             _lastDetectedLocation = Vector3.zero; // Reset location that player was last detected
             navMeshAgent.SetDestination(patrolPoints[_currentPatrolPointIndex].position); // Resume AI movement to current patrol point
@@ -255,7 +235,6 @@ public class MazeAIController : MonoBehaviour
                     _waitTime -= Time.deltaTime; // Decrement action wait timer
                 }
             }
-        }
     }
     
     private void Chase()
@@ -276,11 +255,11 @@ public class MazeAIController : MonoBehaviour
         {
             if (_waitTime <= 0 && !_playerCaught && Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 5f)
             {
-                _isPatrolling = true; // Set AI status to patrolling
-                _isDetectingPlayer = false; // Set player not detected
+                //_isPatrolling = true; // Set AI status to patrolling
+                //_isDetectingPlayer = false; // Set player not detected
                 Move(walkSpeed); // Set AI move speed to walk
                 animator.SetBool("isIdle", false);
-                animator.SetBool("isWalking", false);
+                animator.SetBool("isWalking", true);
                 animator.SetBool("isRunning", false);
                 animator.SetBool("playerCaught", true);
 

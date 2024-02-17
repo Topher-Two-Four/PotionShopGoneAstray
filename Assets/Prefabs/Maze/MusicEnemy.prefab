@@ -178,7 +178,7 @@ MonoBehaviour:
   walkSpeed: 12
   sprintSpeed: 15
   waitTime: 3
-  detectionTime: 1
+  detectionTime: 0.2
   viewRadius: 40
   viewAngle: 110
   playerMask:

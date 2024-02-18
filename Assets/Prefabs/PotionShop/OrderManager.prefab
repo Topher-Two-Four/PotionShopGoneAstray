@@ -64,7 +64,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 89ab489e864d17a4590cf9906c2ce040, type: 2}
   - {fileID: 11400000, guid: 51d2c4a966fdf884f9db3f5a4e93a58c, type: 2}
   - {fileID: 11400000, guid: e8da664de47c73444a87b29922b29ebb, type: 2}
-  - {fileID: 11400000, guid: 2bedb578c965013418728e3ad64a6585, type: 2}
   antidoteIcon: {fileID: 21300000, guid: db15db7f0c3ee52448c7bb04a51fdd9c, type: 3}
   benefitIcon: {fileID: 21300000, guid: 20a9f598cee410e4a8bd2ef9d2f10c0c, type: 3}
   cripplingIcon: {fileID: 21300000, guid: 38199e37bcae61f49be3bfcbb00c7225, type: 3}

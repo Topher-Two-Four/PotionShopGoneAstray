@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isIngredient: 1
   isSellable: 0
-  width: 4
-  height: 6
+  cantBeDiscarded: 0
+  width: 1
+  height: 1
   itemIcon: {fileID: 21300000, guid: dd3785a3221b0a441b03357694dc4e8b, type: 3}
   itemObject: {fileID: 3728056772645781790, guid: fa68102bbb3927f4782156e53b43da13, type: 3}

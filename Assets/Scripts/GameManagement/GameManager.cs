@@ -418,7 +418,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public void SwitchSceneToPotionLevel() // Use scene manager to switch to Potion Level from Maze Level
     {
         AudioManager.Instance.PlaySFX("TeleportToShop");
-        Invoke("SetPlayerCapsuleInactive", 1.0f);
+        Invoke("SetPlayerCapsuleInactive", 0.5f);
         ToggleCursorOn();
         OrderSystem.Instance.CheckForCompleteOrders(); // Check for any complete orders to update order UI
         CallLoadPotionShop(); // Call load potion shop function, which is staggered to allow it to be invoked if neccessary

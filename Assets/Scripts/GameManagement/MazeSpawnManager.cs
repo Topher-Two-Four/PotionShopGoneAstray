@@ -27,6 +27,14 @@ public class MazeSpawnManager : MonoBehaviour
     [SerializeField] private ItemObject[] ingredientsArray; // List of all ingredients in the game, which the manager will use to spawn random ingredients
 
     [Header("Maze Enemy Settings:")]
+    [Tooltip("The Bird enemy game object.")]
+    [SerializeField] private GameObject birdGameObject; // List for holding enemy spawn points
+    [Tooltip("The Music Man enemy game object.")]
+    [SerializeField] private GameObject musicManGameObject; // List for holding enemy spawn points
+    [Tooltip("The Jelly enemy game object.")]
+    [SerializeField] private GameObject jellyGameObject; // List for holding enemy spawn points
+    [Tooltip("The number of enemies to spawn after morality modifier is appplied.")]
+    [SerializeField] private int enemiesToSpawn;
     [Tooltip("The list of spawn points for the maze enemy (not yet implemented).")]
     [SerializeField] private GameObject[] enemySpawnPoint; // List for holding enemy spawn points
 
@@ -42,8 +50,12 @@ public class MazeSpawnManager : MonoBehaviour
 
         MoralitySystem.Instance.ApplyMoralityEffect();
 
+        GameManager.Instance.GetPlayerCapsule().transform.position = GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform.position;
+        GameManager.Instance.ToggleCursorOff();
+
         ingredientsToSpawn = Mathf.FloorToInt(baseIngredientSpawnAmount * MoralitySystem.Instance.GetIngredientSpawnModifier());
         skullBearsToSpawn = Mathf.FloorToInt(baseSkullBearSpawnAmount * MoralitySystem.Instance.GetSkullBearSpawnModifier());
+        enemiesToSpawn = MoralitySystem.Instance.GetEnemySpawnAmount();
 
         for (int x = 0; x < ingredientsToSpawn; x++)
         {
@@ -69,8 +81,33 @@ public class MazeSpawnManager : MonoBehaviour
 
         }
 
-        GameManager.Instance.GetPlayerCapsule().transform.position = GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform.position;
-        GameManager.Instance.ToggleCursorOff();
-        // Spawn AI in random area
+
+        bool birdSpawned = false;
+        bool musicManSpawned = false;
+        bool jellySpawned = false;
+
+        for (int x = 0; x < enemiesToSpawn; x++)
+        {
+            int randomSpawnPointIndex = Random.Range(0, 2);
+            
+            if (randomSpawnPointIndex == 0 && birdSpawned == false)
+            {
+                birdGameObject.gameObject.SetActive(true);
+                birdSpawned = true;
+            } 
+            else if (randomSpawnPointIndex == 1 && musicManSpawned == false)
+            {
+                musicManGameObject.gameObject.SetActive(true);
+                musicManSpawned = true;
+            } 
+            else if (randomSpawnPointIndex == 2 && jellySpawned == false)
+            {
+                jellyGameObject.gameObject.SetActive(true);
+                jellySpawned = true;
+            } else
+            {
+                enemiesToSpawn--;
+            }
+        }
     }
 }

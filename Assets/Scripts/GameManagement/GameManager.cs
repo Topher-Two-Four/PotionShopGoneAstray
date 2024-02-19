@@ -540,7 +540,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void ToggleCursorOff()
     {
-        Cursor.lockState = CursorLockMode.None; // Unlock cursor, confine to game screen
         Cursor.visible = false; // Display cursor
     }
 

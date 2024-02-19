@@ -271,7 +271,7 @@ public class MazeAIController : MonoBehaviour
             {
                 if (Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 2f)
                 {
-                    Stop(); // Stop AI movement
+                    //Stop(); // Stop AI movement
                     _detectionTime -= Time.deltaTime; // Decrement player detection wait timer
                 }
             }

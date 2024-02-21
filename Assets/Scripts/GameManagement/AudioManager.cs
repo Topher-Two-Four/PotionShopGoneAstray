@@ -95,7 +95,7 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-                        LoadVolumePref();
+            LoadVolumePref();
         }
     }
 
@@ -195,17 +195,17 @@ public class AudioManager : MonoBehaviour
 
     public void ChangeMusicVolume()
     {
-
+        musicSource.volume = musicVolumeSlider.value;
     }
 
     public void ChangeSFX1Volume()
     {
-
+        sfxSource.volume = sfx1VolumeSlider.value;
     }
 
     public void ChangeSFX2Volume()
     {
-
+        sfx2Source.volume = sfx2VolumeSlider.value;
     }
 
     private void LoadVolumePref()

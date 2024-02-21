@@ -7,8 +7,6 @@ public class Teleportation : MonoBehaviour
     [Header("Teleportation/Phase Settings:")]
     [Tooltip("The length of time from teleport in to teleport out for the maze enemy.")]
     [SerializeField] private float teleportLength = 10.0f;
-    [Tooltip("The distance from which the player will be caught if they are within this radius when enemy teleports out.")]
-    [SerializeField] private float teleportCatchDistance = 20.0f;
     [Tooltip("The amount of time to remove from the player's day when caught by the maze enemy.")]
     [SerializeField] private float timeRemovedWhenCaught = 120.0f;
     [Tooltip("The maze enemy AI controller.")]
@@ -25,11 +23,13 @@ public class Teleportation : MonoBehaviour
     private float teleportedInTime = 0f;
     private bool hasTeleportedIn = false;
     private bool playerHasLooked = false;
-    private bool hasTeleportedOut = true;
-
 
     public static Teleportation Instance { get; private set; } // Singleton logic
 
+    private void Start()
+    {
+        TeleportOut();
+    }
 
     private void Awake()
     {
@@ -41,25 +41,28 @@ public class Teleportation : MonoBehaviour
         {
             Instance = this;
         }
-
-        teleportedInTime = 0f;
-        hasTeleportedIn = false;
-        TeleportOut();
     }
 
     void Update()
     {
         if (hasTeleportedIn == true)
         {
-            if (teleportedInTime < teleportLength && !playerHasLooked)
-            {
-                teleportedInTime += Time.deltaTime;
-                Debug.Log("Jelly teleported in.");
-            }
-            else
+            if (playerHasLooked)
             {
                 TeleportOut();
+                hasTeleportedIn = false;
                 Debug.Log("Jelly teleported out.");
+                return;
+            }
+            else if (teleportedInTime < teleportLength)
+            {
+                teleportedInTime += Time.deltaTime;
+                //Debug.Log(teleportedInTime);
+            } 
+            else
+            {
+                PlayerCaught();
+                Debug.Log("Player caught.");
             }
 
         }
@@ -70,8 +73,8 @@ public class Teleportation : MonoBehaviour
         if (!hasTeleportedIn)
         {
             hasTeleportedIn = true;
+            teleportedInTime = 0;
             MakeVisible();
-            hasTeleportedOut = false;
             Debug.Log("Teleported in.");
         }
     }
@@ -81,18 +84,11 @@ public class Teleportation : MonoBehaviour
         hasTeleportedIn = false;
         teleportedInTime = 0f;
 
-        float playerDistance = Vector3.Distance(GameManager.Instance.GetPlayerCapsule().transform.position, transform.position);
         MakeInvisible();
 
-        if (playerDistance <= teleportCatchDistance && !playerHasLooked)
-        {
-            PlayerCaught();
-        }
-        
-         GetComponentInParent<MazeAIController>().MoveToRandomPosition();
+        GetComponentInParent<MazeAIController>().MoveToRandomPosition();
+        PlayerHasNotLooked();
 
-        hasTeleportedOut = true;
-        playerHasLooked = false;
         Debug.Log("Teleported out.");
     }
 

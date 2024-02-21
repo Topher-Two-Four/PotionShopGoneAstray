@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 133424587619720603}
   - component: {fileID: 8119892291799641206}
-  - component: {fileID: 7064497736105141789}
   - component: {fileID: 8107369098050449031}
   - component: {fileID: 4856432902138260545}
   - component: {fileID: 2187457848603893384}
@@ -48,48 +47,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 395485503890509800}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &7064497736105141789
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 395485503890509800}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 50fd3b6249f757643bf5e18cf91a00ce, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!136 &8107369098050449031
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -176,7 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 0}
   walkSpeed: 5
-  sprintSpeed: 10
+  sprintSpeed: 0.2
   waitTime: 3
   detectionTime: 6
   viewRadius: 30
@@ -289,8 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d38128797e688c84eac89104f2945bb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teleportLength: 10
-  teleportCatchDistance: 20
+  teleportLength: 7
   timeRemovedWhenCaught: 120
   jellyModel: {fileID: 1193510614406344937}
   audioSource: {fileID: 6950652183319526180}

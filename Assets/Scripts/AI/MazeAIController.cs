@@ -130,6 +130,7 @@ public class MazeAIController : MonoBehaviour
     {
         Vector3 randomPosition = patrolPoints[Random.Range(0, patrolPoints.Length - 1)].position;
         gameObject.transform.position = randomPosition;
+        _isChasing = false;
         Debug.Log("Jelly teleported to " + randomPosition);
     }
 

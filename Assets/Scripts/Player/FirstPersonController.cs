@@ -143,7 +143,7 @@ namespace StarterAssets
 			{
 				Transform enemyTransform = enemyInRange[i].transform; // Set enemy transform variable
 				Vector3 enemyDirection = (enemyTransform.position - transform.position).normalized; // Set enemy direction variable
-				if (Vector3.Angle(transform.forward, enemyDirection) < viewAngle / 2) // If enemy is spotted, then begin chasing, if not then don't chase
+				if (Vector3.Angle(transform.forward, enemyDirection) < viewAngle / 2) // If enemy is spotted...
 				{
 					float enemyDistance = Vector3.Distance(transform.position, enemyTransform.position); // Set enemy distance variable
 					if (!Physics.Raycast(transform.position, enemyDirection, enemyDistance, obstacleMask)) // Check for any obstacles in the way of raycast
@@ -152,7 +152,7 @@ namespace StarterAssets
 						Teleportation.Instance.PlayerHasLooked();
 						isLooking = true;
 						Debug.Log(isLooking);
-						break;
+						return;
 					}
 					else
 					{
@@ -160,12 +160,6 @@ namespace StarterAssets
 						isLooking = false;
 						Debug.Log(isLooking);
 					}
-				}
-				if (Vector3.Distance(transform.position, enemyTransform.position) > viewRadius) // If enemy distance is not within viewing radius
-				{
-					Teleportation.Instance.PlayerHasNotLooked();
-					isLooking = false;
-					Debug.Log(isLooking);
 				}
 			}
 		}
@@ -234,7 +228,7 @@ namespace StarterAssets
 		private void LateUpdate()
 		{
 			CameraRotation();
-			//ScanEnvironment();
+			ScanEnvironment();
 		}
 
 		public void MoveToPosition(Vector3 position)

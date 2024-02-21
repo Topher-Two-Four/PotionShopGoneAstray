@@ -49,7 +49,7 @@ public class Teleportation : MonoBehaviour
         {
             if (playerHasLooked)
             {
-                TeleportOut();
+                Invoke("TeleportOut", 1.0f);
                 hasTeleportedIn = false;
                 Debug.Log("Jelly teleported out.");
                 return;

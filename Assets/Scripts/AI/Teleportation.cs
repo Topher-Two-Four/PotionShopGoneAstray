@@ -6,13 +6,13 @@ public class Teleportation : MonoBehaviour
 {
     [Header("Teleportation/Phase Settings:")]
     [Tooltip("The length of time from teleport in to teleport out for the maze enemy.")]
-    [SerializeField] private float phaseLength = 10.0f;
+    [SerializeField] private float teleportLength = 10.0f;
     [Tooltip("The distance from which the player will be caught if they are within this radius when enemy teleports out.")]
-    [SerializeField] private float phaseCatchDistance = 20.0f;
+    [SerializeField] private float teleportCatchDistance = 20.0f;
     [Tooltip("The amount of time to remove from the player's day when caught by the maze enemy.")]
     [SerializeField] private float timeRemovedWhenCaught = 120.0f;
     [Tooltip("The maze enemy AI controller.")]
-    [SerializeField] private MazeAIController mazeAIController;
+    [SerializeField] private GameObject jellyModel;
 
     [Header("Audio Settings:")]
     [Tooltip("The audio source attached to the maze enemy.")]
@@ -22,21 +22,14 @@ public class Teleportation : MonoBehaviour
     [Tooltip("The audio clip that plays when the maze enemy catches the player.")]
     [SerializeField] private AudioClip caughtSound;
 
-    private float currentPhaseTime = 0f;
-    private bool phasedIn = false;
+    private float teleportedInTime = 0f;
+    private bool hasTeleportedIn = false;
     private bool playerHasLooked = false;
-    private bool hasPhasedOut = true;
+    private bool hasTeleportedOut = true;
 
 
     public static Teleportation Instance { get; private set; } // Singleton logic
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        currentPhaseTime = 0f;
-        phasedIn = false;
-        mazeAIController.MakeInvisible();
-    }
 
     private void Awake()
     {
@@ -48,54 +41,69 @@ public class Teleportation : MonoBehaviour
         {
             Instance = this;
         }
+
+        teleportedInTime = 0f;
+        hasTeleportedIn = false;
+        TeleportOut();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (phasedIn == true && !hasPhasedOut)
+        if (hasTeleportedIn == true)
         {
-            if (currentPhaseTime < phaseLength && !playerHasLooked)
+            if (teleportedInTime < teleportLength && !playerHasLooked)
             {
-                currentPhaseTime += Time.deltaTime;
+                teleportedInTime += Time.deltaTime;
+                Debug.Log("Jelly teleported in.");
             }
             else
             {
-                PhaseOut();
+                TeleportOut();
+                Debug.Log("Jelly teleported out.");
             }
 
         }
     }
 
-    public void PhaseIn()
+    public void TeleportIn()
     {
-        if (!phasedIn)
+        if (!hasTeleportedIn)
         {
-            phasedIn = true;
-            mazeAIController.MakeVisible();
-            hasPhasedOut = false;
-            Debug.Log("Phased in.");
+            hasTeleportedIn = true;
+            MakeVisible();
+            hasTeleportedOut = false;
+            Debug.Log("Teleported in.");
         }
     }
 
-    public void PhaseOut()
+    public void TeleportOut()
     {
-        phasedIn = false;
-        currentPhaseTime = 0f;
+        hasTeleportedIn = false;
+        teleportedInTime = 0f;
 
         float playerDistance = Vector3.Distance(GameManager.Instance.GetPlayerCapsule().transform.position, transform.position);
-        mazeAIController.gameObject.transform.position = Vector3.zero;
-        mazeAIController.SetPhasedIn(false);
-        //mazeAIController.MakeInvisible();
+        MakeInvisible();
 
-        if (playerDistance <= phaseCatchDistance && !playerHasLooked)
+        if (playerDistance <= teleportCatchDistance && !playerHasLooked)
         {
             PlayerCaught();
         }
-        mazeAIController.MoveToPosition(new Vector3(60, -64, 22));
+        
+         GetComponentInParent<MazeAIController>().MoveToRandomPosition();
 
-        hasPhasedOut = true;
-        Debug.Log("Phased out.");
+        hasTeleportedOut = true;
+        playerHasLooked = false;
+        Debug.Log("Teleported out.");
+    }
+
+    public void MakeInvisible()
+    {
+        jellyModel.SetActive(false);
+    }
+
+    public void MakeVisible()
+    {
+        jellyModel.SetActive(true);
     }
 
     public void PlayerHasLooked()

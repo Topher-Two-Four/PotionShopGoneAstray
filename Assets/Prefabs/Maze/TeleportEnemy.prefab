@@ -37,6 +37,7 @@ Transform:
   m_Children:
   - {fileID: 181986136288829003}
   - {fileID: 3248283026958005942}
+  - {fileID: 2007447888948980307}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -151.828, z: 0}
 --- !u!33 &8119892291799641206
@@ -109,9 +110,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2.0252533
+  m_Height: 3.448009
   m_Direction: 1
-  m_Center: {x: 0, y: -0.0026016235, z: 0}
+  m_Center: {x: 0, y: 0.5461941, z: 0}
 --- !u!54 &4856432902138260545
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -186,9 +187,7 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 128
-  raycastMeshResolution: 1
-  raycastEdgeIterations: 4
-  raycastEdgeDistance: 0.5
+  waitTimeout: 5
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -237,17 +236,15 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  waitTimeout: 5
-  isPhasedIn: 0
-  _waitTime: 0
-  _detectionTime: 0
+  animator: {fileID: 5565270379491274793}
+  isJelly: 1
   _isPatrolling: 0
   _isChasing: 0
   _isDetectingPlayer: 0
   _playerCaught: 0
-  _currentPatrolPointIndex: 0
-  _lastSeenLocation: {x: 0, y: 0, z: 0}
-  _lastDetectedLocation: {x: 0, y: 0, z: 0}
+  raycastMeshResolution: 1
+  raycastEdgeIterations: 4
+  raycastEdgeDistance: 0.5
 --- !u!1 &2637159167616664656
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,17 +289,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d38128797e688c84eac89104f2945bb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 6950652183319526180}
-  triggeredMusic: {fileID: 8300000, guid: 70f4f28c161cd624481b6d53391d82cc, type: 3}
-  caughtSound: {fileID: 8300000, guid: 15233aab885ccd9458792332fa7dbe0b, type: 3}
-  currentPhaseTime: 0
-  phaseLength: 10
-  phasedIn: 0
-  phaseCatchDistance: 40
+  teleportLength: 10
+  teleportCatchDistance: 20
   timeRemovedWhenCaught: 120
-  playerIsLooking: 0
-  hasPhasedOut: 1
-  mazeAIController: {fileID: 3763263676343624898}
+  jellyModel: {fileID: 1193510614406344937}
+  audioSource: {fileID: 6950652183319526180}
+  triggeredMusic: {fileID: 8300000, guid: 6069c9764a6e20e41a4470bb6fa56150, type: 3}
+  caughtSound: {fileID: 8300000, guid: 15233aab885ccd9458792332fa7dbe0b, type: 3}
 --- !u!1 &5026945704411923157
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,3 +442,103 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1001 &2040511360375459256
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 133424587619720603}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: a17ab6e43f54d404d823b27dd77bb31d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a17ab6e43f54d404d823b27dd77bb31d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.688
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a17ab6e43f54d404d823b27dd77bb31d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a17ab6e43f54d404d823b27dd77bb31d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a17ab6e43f54d404d823b27dd77bb31d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a17ab6e43f54d404d823b27dd77bb31d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a17ab6e43f54d404d823b27dd77bb31d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a17ab6e43f54d404d823b27dd77bb31d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a17ab6e43f54d404d823b27dd77bb31d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a17ab6e43f54d404d823b27dd77bb31d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3367391197238096679, guid: a17ab6e43f54d404d823b27dd77bb31d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a17ab6e43f54d404d823b27dd77bb31d, type: 3}
+      propertyPath: m_Name
+      value: Jelly
+      objectReference: {fileID: 0}
+    - target: {fileID: 2025781825372339947, guid: a17ab6e43f54d404d823b27dd77bb31d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2561538706438727180, guid: a17ab6e43f54d404d823b27dd77bb31d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2675406175014361622, guid: a17ab6e43f54d404d823b27dd77bb31d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: a17ab6e43f54d404d823b27dd77bb31d, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: fb53a6312c9f4784c9f620f6109afe18, type: 2}
+    - target: {fileID: 5967525626782119877, guid: a17ab6e43f54d404d823b27dd77bb31d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526080392368728765, guid: a17ab6e43f54d404d823b27dd77bb31d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a17ab6e43f54d404d823b27dd77bb31d, type: 3}
+--- !u!1 &1193510614406344937 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a17ab6e43f54d404d823b27dd77bb31d, type: 3}
+  m_PrefabInstance: {fileID: 2040511360375459256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2007447888948980307 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a17ab6e43f54d404d823b27dd77bb31d, type: 3}
+  m_PrefabInstance: {fileID: 2040511360375459256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5565270379491274793 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: a17ab6e43f54d404d823b27dd77bb31d, type: 3}
+  m_PrefabInstance: {fileID: 2040511360375459256}
+  m_PrefabAsset: {fileID: 0}

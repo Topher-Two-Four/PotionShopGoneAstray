@@ -88,8 +88,9 @@ public class MazeSpawnManager : MonoBehaviour
 
         for (int x = 0; x < enemiesToSpawn; x++)
         {
-            int randomSpawnPointIndex = Random.Range(0, 2);
-            
+            //int randomSpawnPointIndex = Random.Range(0, 2);
+            int randomSpawnPointIndex = 2;
+
             if (randomSpawnPointIndex == 0 && birdSpawned == false)
             {
                 birdGameObject.gameObject.SetActive(true);

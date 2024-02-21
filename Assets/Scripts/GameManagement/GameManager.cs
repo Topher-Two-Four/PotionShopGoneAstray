@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
     [SerializeField] private GameObject winLossCanvas;
     [Tooltip("The canvas that holds the pause menu screen UI elements.")]
     [SerializeField] private GameObject pauseMenuCanvas;
+    [Tooltip("The canvas that holds the pause menu game settings UI elements.")]
+    [SerializeField] private GameObject settingsCanvas;
     [Tooltip("The canvas that holds the quest screen UI elements.")]
     [SerializeField] private GameObject questCanvas;
 
@@ -497,6 +499,27 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public void ToggleOffOrderDisplay()
     {
         orderCanvas.SetActive(false); // Hide order canvas
+    }
+
+    public void TogglePauseMenuSettingsCanvas()
+    {
+        if (!settingsCanvas.activeSelf)
+        {
+            settingsCanvas.gameObject.SetActive(true);
+        }
+        else
+        {
+            {
+                settingsCanvas.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void ToggleOffPauseMenuSettingsCanvas()
+    {
+        { 
+            settingsCanvas.gameObject.SetActive(false);
+        }
     }
 
     public GameObject GetDoorToMaze()

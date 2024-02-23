@@ -538,8 +538,11 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     private void DisplayEndOfDayUI()
     {
-        endOfDayText.gameObject.SetActive(true);
-        endOfDayText.text = ("End of Day " + currentDay);
+        if (endOfDayText.gameObject != null)
+        {
+            endOfDayText.gameObject.SetActive(true);
+            endOfDayText.text = ("End of Day " + currentDay);
+        }
         dayEndPlayerCurrencyText.text = ("Player Currency: $" + playerCurrency);
         dayEndLandlordPaymentText.text = ("Landlord Payment: $" + landlordPayment);
         endOfDayCanvas.SetActive(true);

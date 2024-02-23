@@ -311,6 +311,10 @@ public class GameManager : MonoBehaviour, IDataPersistence
             {
                 potionCraftingCanvas.SetActive(false);
             }
+            if (bookshelfCanvas != null)
+            {
+                bookshelfCanvas.SetActive(false);
+            }
             //orderCanvas.SetActive(false);
             ToggleCursorOn(); // Unlock and display cursor
             DisplayEndOfDayUI();

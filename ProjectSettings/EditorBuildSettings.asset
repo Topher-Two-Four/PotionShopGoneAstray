@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CurrentBuild/MazeBuildEcho.unity
     guid: d98d607934a80d04e8564e247e94bac6
+  - enabled: 1
+    path: Assets/Scenes/CurrentBuild/MazeBuildFox.unity
+    guid: fc8194994e8e9764f890b63154d89c65
   m_configObjects: {}

@@ -428,7 +428,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         AudioManager.Instance.PlaySFX("TeleportToShop");
         Invoke("SetPlayerCapsuleInactive", 0.5f);
         ToggleCursorOn();
-        OrderSystem.Instance.CheckForCompleteOrders(); // Check for any complete orders to update order UI
+        //OrderSystem.Instance.CheckForCompleteOrders(); // Check for any complete orders to update order UI
         CallLoadPotionShop(); // Call load potion shop function, which is staggered to allow it to be invoked if neccessary
     }
 
@@ -441,7 +441,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         SetPlayerCapsuleActive();
         AudioManager.Instance.PlaySFX("TeleportToMaze");
-        int randomSceneIndex = Random.Range(3, 8); // Choose random maze scene to load
+        int randomSceneIndex = Random.Range(3, 9); // Choose random maze scene to load
         Invoke("CallMovePlayerToSpawn", 0.1f);
         SceneManager.LoadScene(randomSceneIndex);
     }

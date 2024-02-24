@@ -1,12 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
 
     public Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
 
+    [SerializeField] private Slider masterVolumeSlider;
+    [SerializeField] private Slider musicVolumeSlider;
+    [SerializeField] private Slider sfx1VolumeSlider;
+    [SerializeField] private Slider sfx2VolumeSlider;
+
+    [SerializeField] private AudioListener playerAudioListener;
     public AudioSource musicSource;
     public AudioSource sfxSource;
     public AudioSource sfx2Source;
@@ -27,7 +34,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip rotateInventoryItemSound;
     public AudioClip placeInventoryItemSound;
     public AudioClip trashInventorySound;
-     public AudioClip dropItemSound;
+    public AudioClip dropItemSound;
 
     public AudioClip openBookSound;
     public AudioClip closeBookSound;
@@ -78,6 +85,19 @@ public class AudioManager : MonoBehaviour
     public AudioClip teleportToShopSound;
 
     public static AudioManager Instance { get; private set; } // Singleton logic
+
+    private void Start()
+    {
+        if (!PlayerPrefs.HasKey("masterVolume"))
+        {
+            PlayerPrefs.SetFloat("masterVolume", 1);
+            LoadVolumePref();
+        }
+        else
+        {
+            LoadVolumePref();
+        }
+    }
 
     void Awake()
     {
@@ -166,4 +186,36 @@ public class AudioManager : MonoBehaviour
             sfxSource.PlayOneShot(clip);
         }
     }
+
+    public void ChangeMasterVolume()
+    {
+        AudioListener.volume = masterVolumeSlider.value;
+        SaveVolumePref();
+    }
+
+    public void ChangeMusicVolume()
+    {
+        musicSource.volume = musicVolumeSlider.value;
+    }
+
+    public void ChangeSFX1Volume()
+    {
+        sfxSource.volume = sfx1VolumeSlider.value;
+    }
+
+    public void ChangeSFX2Volume()
+    {
+        sfx2Source.volume = sfx2VolumeSlider.value;
+    }
+
+    private void LoadVolumePref()
+    {
+        masterVolumeSlider.value = PlayerPrefs.GetFloat("masterVolume");
+    }
+
+    private void SaveVolumePref()
+    {
+        PlayerPrefs.SetFloat("masterVolume", masterVolumeSlider.value);
+    }
+
 }

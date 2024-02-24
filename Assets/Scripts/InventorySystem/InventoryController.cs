@@ -191,12 +191,12 @@ public class InventoryController : MonoBehaviour
     {
         if (selectedItem == null)
         {
-            Debug.Log("No item selected");
+            //Debug.Log("No item selected");
             return false;
         }
         else
         {
-            Debug.Log("Item selected");
+            //Debug.Log("Item selected");
             return true;
         }
     }

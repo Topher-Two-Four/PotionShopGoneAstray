@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
     [SerializeField] private GameObject winLossCanvas;
     [Tooltip("The canvas that holds the pause menu screen UI elements.")]
     [SerializeField] private GameObject pauseMenuCanvas;
+    [Tooltip("The canvas that holds the pause menu game settings UI elements.")]
+    [SerializeField] private GameObject settingsCanvas;
     [Tooltip("The canvas that holds the quest screen UI elements.")]
     [SerializeField] private GameObject questCanvas;
 
@@ -309,6 +311,10 @@ public class GameManager : MonoBehaviour, IDataPersistence
             {
                 potionCraftingCanvas.SetActive(false);
             }
+            if (bookshelfCanvas != null)
+            {
+                bookshelfCanvas.SetActive(false);
+            }
             //orderCanvas.SetActive(false);
             ToggleCursorOn(); // Unlock and display cursor
             DisplayEndOfDayUI();
@@ -499,6 +505,27 @@ public class GameManager : MonoBehaviour, IDataPersistence
         orderCanvas.SetActive(false); // Hide order canvas
     }
 
+    public void TogglePauseMenuSettingsCanvas()
+    {
+        if (!settingsCanvas.activeSelf)
+        {
+            settingsCanvas.gameObject.SetActive(true);
+        }
+        else
+        {
+            {
+                settingsCanvas.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void ToggleOffPauseMenuSettingsCanvas()
+    {
+        { 
+            settingsCanvas.gameObject.SetActive(false);
+        }
+    }
+
     public GameObject GetDoorToMaze()
     {
         return doorToMaze;
@@ -511,8 +538,11 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     private void DisplayEndOfDayUI()
     {
-        endOfDayText.gameObject.SetActive(true);
-        endOfDayText.text = ("End of Day " + currentDay);
+        if (endOfDayText.gameObject != null)
+        {
+            endOfDayText.gameObject.SetActive(true);
+            endOfDayText.text = ("End of Day " + currentDay);
+        }
         dayEndPlayerCurrencyText.text = ("Player Currency: $" + playerCurrency);
         dayEndLandlordPaymentText.text = ("Landlord Payment: $" + landlordPayment);
         endOfDayCanvas.SetActive(true);

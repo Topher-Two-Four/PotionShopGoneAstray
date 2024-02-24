@@ -284,6 +284,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         GameManager.Instance.currentDay++;
         OrderSystem.Instance.GenerateOrderList();
         DataPersistenceManager.Instance.SaveGame();
+        Debug.Log("Game saved.");
         SwitchSceneToPotionShopWithNewDay();
     }
 
@@ -403,6 +404,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         StartNewDayTimer(); // Restart and resume timer at beginning of day
         DayUIUpdate(); // Update UI
         OrderSystem.Instance.GenerateOrderList(); // Generate new list of orders
+        OrderSystem.Instance.CheckForCompleteOrders(); // Check for any complete orders to update order UI
         SceneManager.LoadScene(2); // Load scene through scene manager
     }
 

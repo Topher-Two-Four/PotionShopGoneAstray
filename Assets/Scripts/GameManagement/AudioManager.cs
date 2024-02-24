@@ -12,11 +12,13 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private Slider musicVolumeSlider;
     [SerializeField] private Slider sfx1VolumeSlider;
     [SerializeField] private Slider sfx2VolumeSlider;
+    [SerializeField] private Slider sfx3VolumeSlider;
 
     [SerializeField] private AudioListener playerAudioListener;
     public AudioSource musicSource;
     public AudioSource sfxSource;
     public AudioSource sfx2Source;
+    public AudioSource sfx3Source;
 
     public AudioClip menuButtonHoverSound;
     public AudioClip menuButtonClickSound;
@@ -187,6 +189,14 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void PlaySFX3(string name)
+    {
+        if (audioClips.TryGetValue(name, out AudioClip clip))
+        {
+            sfxSource.PlayOneShot(clip);
+        }
+    }
+
     public void ChangeMasterVolume()
     {
         AudioListener.volume = masterVolumeSlider.value;
@@ -206,6 +216,11 @@ public class AudioManager : MonoBehaviour
     public void ChangeSFX2Volume()
     {
         sfx2Source.volume = sfx2VolumeSlider.value;
+    }
+
+    public void ChangeSFX3Volume()
+    {
+        sfx3Source.volume = sfx3VolumeSlider.value;
     }
 
     private void LoadVolumePref()

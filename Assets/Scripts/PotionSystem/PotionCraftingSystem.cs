@@ -192,6 +192,7 @@ public class PotionCraftingSystem : MonoBehaviour
         shouldBeStirred = potionRecipe.needStirring;
         desiredTemp = potionRecipe.desiredTemp;
         lidDesired = potionRecipe.needsLidOn;
+        bool _halfwayCompleteIndicated = false;
         //Debug.Log("Needs stirring:" + shouldBeStirred);
         ingredient1 = null;
         ingredient2 = null;
@@ -237,9 +238,10 @@ public class PotionCraftingSystem : MonoBehaviour
             CheckPotionQuality(potionRecipe.cookTime, timeAtDesiredTemp);
             UpdatePotionQualityIndicator();
 
-            if (timeCooked > 29.0f &&    timeCooked < 31.0f)
+            if ((timeCooked > 29.0f && timeCooked < 31.0f) && _halfwayCompleteIndicated)
             {
-                AudioManager.Instance.PlaySFX("CauldronBubble");
+                AudioManager.Instance.PlaySFX3("CauldronBubble");
+                _halfwayCompleteIndicated = true;
             }
 
             yield return null;
@@ -271,7 +273,7 @@ public class PotionCraftingSystem : MonoBehaviour
 
     private void ResetBrewingTimer()
     {
-        timeRemainingText.text = ("00");
+        timeRemainingText.text = ("--");
     }
 
     private void UpdatePotionQualityIndicator()

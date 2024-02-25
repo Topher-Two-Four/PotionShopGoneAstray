@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
     [SerializeField] private FirstPersonController controller; // First person controller game object
     [Tooltip("The landlord payment amount.")]
     [SerializeField] private int landlordPayment = 1400;
+    [Tooltip("The amount of time consumed every time the player teleports to the maze level.")]
+    [SerializeField] private float mazeTravelTimeDeduction = 30.0f;
 
     [Header("Time and Day Settings:")]
     [Tooltip("The total amount of time in a game day in seconds.")]
@@ -131,6 +133,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         {
             if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(0)) // Do not allow pause menu toggle when in main mainu
             TogglePauseMenuCanvas(); // Toggle pause menu
+            ToggleOffPauseMenuSettingsCanvas();
         }
     }
 
@@ -284,6 +287,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         GameManager.Instance.currentDay++;
         OrderSystem.Instance.GenerateOrderList();
         DataPersistenceManager.Instance.SaveGame();
+        Debug.Log("Game saved.");
         SwitchSceneToPotionShopWithNewDay();
     }
 
@@ -302,6 +306,16 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     private void EndDay()
     {
+        SetPlayerCapsuleInactive(); // Deactivate player capsule
+        ToggleCursorOn(); // Unlock and display cursor
+        AudioManager.Instance.PlaySFX("PauseGame");
+
+        var foundAIObjects = FindObjectsOfType<MazeAIController>();
+        foreach (MazeAIController mazeAI in foundAIObjects)
+        {
+            mazeAI.StopMovement(); // Pause AI movement when game is paused
+        }
+
         if (currentDay < 5)
         {
             this.endOfDayCurrency = this.playerCurrency;
@@ -403,6 +417,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         StartNewDayTimer(); // Restart and resume timer at beginning of day
         DayUIUpdate(); // Update UI
         OrderSystem.Instance.GenerateOrderList(); // Generate new list of orders
+        OrderSystem.Instance.CheckForCompleteOrders(); // Check for any complete orders to update order UI
         SceneManager.LoadScene(2); // Load scene through scene manager
     }
 
@@ -439,7 +454,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         SetPlayerCapsuleActive();
         AudioManager.Instance.PlaySFX("TeleportToMaze");
-        int randomSceneIndex = Random.Range(3, 8); // Choose random maze scene to load
+        int randomSceneIndex = Random.Range(3, 9); // Choose random maze scene to load
+        timeRemaining -= mazeTravelTimeDeduction;
         Invoke("CallMovePlayerToSpawn", 0.1f);
         SceneManager.LoadScene(randomSceneIndex);
     }
@@ -513,9 +529,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         }
         else
         {
-            {
-                settingsCanvas.gameObject.SetActive(false);
-            }
+            settingsCanvas.gameObject.SetActive(false);
         }
     }
 

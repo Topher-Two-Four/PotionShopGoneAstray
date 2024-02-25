@@ -8,6 +8,7 @@ TagManager:
   - PlayerSpawnPoint
   - ItemTarget
   - EnemySpawnPoint
+  - TeleportingEnemy
   layers:
   - Default
   - TransparentFX

@@ -149,16 +149,19 @@ namespace StarterAssets
 					if (!Physics.Raycast(transform.position, enemyDirection, enemyDistance, obstacleMask)) // Check for any obstacles in the way of raycast
 					{
 						Debug.DrawRay(this.transform.position, enemyDirection, Color.green, enemyDistance);
-						Teleportation.Instance.PlayerHasLooked();
+						if (enemyInRange[i].CompareTag("TeleportingEnemy"))
+						{
+							Teleportation.Instance.PlayerHasLooked();
+						}
 						isLooking = true;
-						Debug.Log(isLooking);
+						//Debug.Log(isLooking);
 						return;
 					}
 					else
 					{
 						//Teleportation.Instance.PlayerHasNotLooked();// Player not looking
 						isLooking = false;
-						Debug.Log(isLooking);
+						//Debug.Log(isLooking);
 					}
 				}
 			}

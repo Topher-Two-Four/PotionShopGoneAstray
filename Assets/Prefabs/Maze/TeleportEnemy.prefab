@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3763263676343624898}
   m_Layer: 8
   m_Name: TeleportEnemy
-  m_TagString: Untagged
+  m_TagString: TeleportingEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,8 +35,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 181986136288829003}
-  - {fileID: 3248283026958005942}
   - {fileID: 2007447888948980307}
+  - {fileID: 8188281750111853720}
+  - {fileID: 3248283026958005942}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -151.828, z: 0}
 --- !u!33 &8119892291799641206
@@ -249,8 +250,9 @@ MonoBehaviour:
   teleportLength: 7
   timeRemovedWhenCaught: 120
   jellyModel: {fileID: 1193510614406344937}
+  caughtItemRemoveAmount: 3
   audioSource: {fileID: 6950652183319526180}
-  triggeredMusic: {fileID: 8300000, guid: 6069c9764a6e20e41a4470bb6fa56150, type: 3}
+  triggeredMusic: {fileID: 8300000, guid: 99fe2f08d6dbf2c48b0b5da30b341790, type: 3}
   caughtSound: {fileID: 8300000, guid: 15233aab885ccd9458792332fa7dbe0b, type: 3}
 --- !u!1 &5026945704411923157
 GameObject:
@@ -497,4 +499,106 @@ Transform:
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: a17ab6e43f54d404d823b27dd77bb31d, type: 3}
   m_PrefabInstance: {fileID: 2040511360375459256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6539199358087177588
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 133424587619720603}
+    m_Modifications:
+    - target: {fileID: 3106773414518766060, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3106773414518766060, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3106773414518766060, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3106773414518766060, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3106773414518766060, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3106773414518766060, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3106773414518766060, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3106773414518766060, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3106773414518766060, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3106773414518766060, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3106773414518766060, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3106773414518766060, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3106773414518766060, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3106773414518766060, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3106773414518766060, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3106773414518766060, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3106773414518766060, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3106773414518766060, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3106773414518766060, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3106773414518766060, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4695911552597011086, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+      propertyPath: m_Name
+      value: JellyRuneCanvas
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+--- !u!224 &8188281750111853720 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3106773414518766060, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+  m_PrefabInstance: {fileID: 6539199358087177588}
   m_PrefabAsset: {fileID: 0}

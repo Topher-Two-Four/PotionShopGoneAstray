@@ -7,16 +7,23 @@ public class RoomManager : MonoBehaviour
 {
     [Header("List of Rooms:")]
     [Tooltip("The list of room game objects in the potion shop.")]
-    [SerializeField] private List<GameObject> roomList = new List<GameObject>(); // List for holding room game objects
+    [SerializeField] private GameObject cauldronRoom;
+    [SerializeField] private GameObject orderRoom;
+    [SerializeField] private GameObject mazeDoorRoom;
+    [SerializeField] private GameObject registerRoom;
 
     [Header("List of Buttons Corresponding to Rooms:")]
     [Tooltip("The list of navigational buttons which correspond to rooms in the potion shop.")]
-    [SerializeField] private List<Button> buttonList = new List<Button>(); // List for holding buttons, index corresponding to each room
+    [SerializeField] private Button leftNavigationButton;
+    [SerializeField] private Button rightNavigationButton;
 
     [HideInInspector] public GameObject currentRoom; // The current room that is active/open
-    [HideInInspector] public bool isCauldronRoom; 
+    [HideInInspector] public bool isCauldronRoom;
 
-    //private bool isAnyRoomOpen; // Keep track of whether a room canvas is open or not
+    [HideInInspector] public bool cauldronRoomOpen;
+    [HideInInspector] public bool orderRoomOpen;
+    [HideInInspector] public bool mazeDoorRoomOpen;
+    [HideInInspector] public bool registerRoomOpen;
 
     private void Awake()
     {
@@ -25,12 +32,28 @@ public class RoomManager : MonoBehaviour
         AudioManager.Instance.musicSource.pitch = 1.0f;
         AudioManager.Instance.PlayMusic("ShopMusic");
 
-        // Assign a listener to each button in the button list
-        foreach (Button button in buttonList)
+        cauldronRoomOpen = false;
+        orderRoomOpen = false;
+        mazeDoorRoomOpen = false;
+        registerRoomOpen = true;
+
+        currentRoom = registerRoom;
+
+        leftNavigationButton.onClick.AddListener(() => LeftArrowKeyPress());
+        rightNavigationButton.onClick.AddListener(() => RightArrowKeyPress());
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
         {
-            button.onClick.AddListener(() => ToggleRoom(button));
+            LeftArrowKeyPress();
         }
 
+        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+        {
+            RightArrowKeyPress();
+        }
     }
 
     private void OnDestroy()
@@ -41,57 +64,114 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    // Toggles on and off room game objects for navigation of 2D scene
-    private void ToggleRoom(Button button)
+    private void SwitchToCauldronRoom()
+    {
+        currentRoom.SetActive(false); // Set current room game object to inactive
+        currentRoom = cauldronRoom; // Switch current room to the new room
+        currentRoom.SetActive(true); // Set new current room game object to active
+
+        GameManager.Instance.ToggleOffDoorToMaze();
+        GameManager.Instance.ToggleOnPotionCraftingCanvas();
+        GameManager.Instance.ToggleOffOrderDisplay();
+        GameManager.Instance.ToggleOnBookshelfCanvas();
+
+        cauldronRoomOpen = true;
+        orderRoomOpen = false;
+        mazeDoorRoomOpen = false;
+        registerRoomOpen = false;
+    }
+
+    private void SwitchToOrderRoom()
+    {
+        currentRoom.SetActive(false); // Set current room game object to inactive
+        currentRoom = orderRoom; // Switch current room to the new room
+        currentRoom.SetActive(true); // Set new current room game object to active
+
+        GameManager.Instance.ToggleOffPotionCraftingCanvas();
+        GameManager.Instance.ToggleOffDoorToMaze();
+        GameManager.Instance.ToggleOnOrderDisplay();
+        GameManager.Instance.ToggleOffBookshelfCanvas();
+
+        cauldronRoomOpen = false;
+        orderRoomOpen = true;
+        mazeDoorRoomOpen = false;
+        registerRoomOpen = false;
+    }
+    private void SwitchToMazeDoorRoom()
+    {
+        currentRoom.SetActive(false); // Set current room game object to inactive
+        currentRoom = mazeDoorRoom; // Switch current room to the new room
+        currentRoom.SetActive(true); // Set new current room game object to active
+
+        GameManager.Instance.ToggleOffPotionCraftingCanvas();
+        GameManager.Instance.ToggleOnDoorToMaze();
+        GameManager.Instance.ToggleOffOrderDisplay();
+        GameManager.Instance.ToggleOffBookshelfCanvas();
+
+        cauldronRoomOpen = false;
+        orderRoomOpen = false;
+        mazeDoorRoomOpen = true;
+        registerRoomOpen = false;
+    }
+    private void SwitchToRegisterRoom()
+    {
+        currentRoom.SetActive(false); // Set current room game object to inactive
+        currentRoom = registerRoom; // Switch current room to the new room
+        currentRoom.SetActive(true); // Set new current room game object to active
+
+        GameManager.Instance.ToggleOffDoorToMaze();
+        GameManager.Instance.ToggleOffPotionCraftingCanvas();
+        GameManager.Instance.ToggleOffOrderDisplay();
+        GameManager.Instance.ToggleOffBookshelfCanvas();
+
+        cauldronRoomOpen = false;
+        orderRoomOpen = false;
+        mazeDoorRoomOpen = false;
+        registerRoomOpen = true;
+    }
+
+    private void LeftArrowKeyPress()
     {
         AudioManager.Instance.PlaySFX("NavigatePotionShop");
 
-        // Keep track of the index number for which button was pressed
-        int buttonIndex = buttonList.IndexOf(button);
-
-        // Check whether index is valid
-        if (buttonIndex >= 0 && buttonIndex < roomList.Count)
+        if (cauldronRoomOpen)
         {
-            // Set current room game object to inactive
-            currentRoom.SetActive(false);
-            // Switch current room to the new room
-            currentRoom = roomList[buttonIndex];
-            // Set new current room game object to active
-            currentRoom.SetActive(true);
-            // Keep track that a room game object is open and being displayed
-            //isAnyRoomOpen = true;
-
-            if (currentRoom == roomList[1] || currentRoom == roomList[4]) // Cauldron room
-            {
-                GameManager.Instance.ToggleOffDoorToMaze();
-                GameManager.Instance.ToggleOnPotionCraftingCanvas();
-                GameManager.Instance.ToggleOffOrderDisplay();
-                GameManager.Instance.ToggleOnBookshelfCanvas();
-            } 
-            else if (currentRoom == roomList[3] || currentRoom == roomList[6]) // Door to maze room
-            {
-                GameManager.Instance.ToggleOffPotionCraftingCanvas();
-                GameManager.Instance.ToggleOnDoorToMaze();
-                GameManager.Instance.ToggleOffOrderDisplay();
-                GameManager.Instance.ToggleOffBookshelfCanvas();
-            }
-            else if (currentRoom == roomList[2] || currentRoom == roomList[7]) // Order room
-            {
-                GameManager.Instance.ToggleOffPotionCraftingCanvas();
-                GameManager.Instance.ToggleOffDoorToMaze();
-                GameManager.Instance.ToggleOnOrderDisplay();
-                GameManager.Instance.ToggleOffBookshelfCanvas();
-            }
-            else // Front register room
-            {
-                GameManager.Instance.ToggleOffDoorToMaze();
-                GameManager.Instance.ToggleOffPotionCraftingCanvas();
-                GameManager.Instance.ToggleOffOrderDisplay();
-                GameManager.Instance.ToggleOffBookshelfCanvas();
-
-            }
+            SwitchToRegisterRoom();
+        }
+        else if (orderRoomOpen)
+        {
+            SwitchToCauldronRoom();
+        }
+        else if (mazeDoorRoomOpen)
+        {
+            SwitchToOrderRoom();
+        }
+        else // Register room open
+        {
+            SwitchToMazeDoorRoom();
         }
     }
 
+    private void RightArrowKeyPress()
+    {
+        AudioManager.Instance.PlaySFX("NavigatePotionShop");
+
+        if (cauldronRoomOpen)
+        {
+            SwitchToOrderRoom();
+        }
+        else if (orderRoomOpen)
+        {
+            SwitchToMazeDoorRoom();
+        }
+        else if (mazeDoorRoomOpen)
+        {
+            SwitchToRegisterRoom();
+        }
+        else // Register room open
+        {
+            SwitchToCauldronRoom();
+        }
+    }
 
 }

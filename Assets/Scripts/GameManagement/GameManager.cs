@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
     [SerializeField] private FirstPersonController controller; // First person controller game object
     [Tooltip("The landlord payment amount.")]
     [SerializeField] private int landlordPayment = 1400;
+    [Tooltip("The amount of time consumed every time the player teleports to the maze level.")]
+    [SerializeField] private float mazeTravelTimeDeduction = 30.0f;
 
     [Header("Time and Day Settings:")]
     [Tooltip("The total amount of time in a game day in seconds.")]
@@ -452,6 +454,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         SetPlayerCapsuleActive();
         AudioManager.Instance.PlaySFX("TeleportToMaze");
         int randomSceneIndex = Random.Range(3, 9); // Choose random maze scene to load
+        timeRemaining -= mazeTravelTimeDeduction;
         Invoke("CallMovePlayerToSpawn", 0.1f);
         SceneManager.LoadScene(randomSceneIndex);
     }

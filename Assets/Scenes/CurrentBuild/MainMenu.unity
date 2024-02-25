@@ -16274,7 +16274,7 @@ MonoBehaviour:
   ultraQualityColor: {r: 0.7490196, g: 0.19215684, b: 0.44863635, a: 0.54509807}
   highQualityColor: {r: 0, g: 0.005235672, b: 1, a: 0.54509807}
   mediumQualityColor: {r: 0.6132076, g: 0.4705513, b: 0, a: 0.54509807}
-  lowQualityColor: {r: 255, g: 103, b: 0, a: 120}
+  lowQualityColor: {r: 0.74901974, g: 0.30254522, b: 0, a: 0.54509807}
   failedColor: {r: 1, g: 0, b: 0, a: 0.54509807}
   temperatureDisplayImage: {fileID: 773830184}
   emptySlotImage: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}

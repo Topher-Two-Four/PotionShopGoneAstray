@@ -303,6 +303,16 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     private void EndDay()
     {
+        SetPlayerCapsuleInactive(); // Deactivate player capsule
+        ToggleCursorOn(); // Unlock and display cursor
+        AudioManager.Instance.PlaySFX("PauseGame");
+
+        var foundAIObjects = FindObjectsOfType<MazeAIController>();
+        foreach (MazeAIController mazeAI in foundAIObjects)
+        {
+            mazeAI.StopMovement(); // Pause AI movement when game is paused
+        }
+
         if (currentDay < 5)
         {
             this.endOfDayCurrency = this.playerCurrency;
@@ -428,7 +438,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         AudioManager.Instance.PlaySFX("TeleportToShop");
         Invoke("SetPlayerCapsuleInactive", 0.5f);
         ToggleCursorOn();
-        //OrderSystem.Instance.CheckForCompleteOrders(); // Check for any complete orders to update order UI
+        OrderSystem.Instance.CheckForCompleteOrders(); // Check for any complete orders to update order UI
         CallLoadPotionShop(); // Call load potion shop function, which is staggered to allow it to be invoked if neccessary
     }
 

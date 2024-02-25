@@ -220,7 +220,7 @@ public class MoralitySystem : MonoBehaviour
             RenderSettings.fogDensity = mazeFogModifer;
             ingredientSpawnModifier = 1.0f; //Normal amount of items spawn
             skullBearSpawnModifier = 1.0f;
-            enemySpawnAmount = 1;
+            enemySpawnAmount = Random.Range(1, 2);
             playerSpeedModifier = 1.0f; //Normal player speed
         }
         else if (moralityCounter >= -5 && moralityCounter < -1)
@@ -248,7 +248,7 @@ public class MoralitySystem : MonoBehaviour
             RenderSettings.fogDensity = mazeFogModifer;
             ingredientSpawnModifier = 0.7f; //Decrease amount of items that spawn
             skullBearSpawnModifier = 1.5f;
-            enemySpawnAmount = Random.Range(1, 2);
+            enemySpawnAmount = Random.Range(2, 3);
             playerSpeedModifier = 0.9f; //Decreased player speed
         }
         else
@@ -262,7 +262,7 @@ public class MoralitySystem : MonoBehaviour
             RenderSettings.fogDensity = mazeFogModifer;
             ingredientSpawnModifier = 0.5f; //Decrease amount of items that spawn
             skullBearSpawnModifier = 2.0f;
-            enemySpawnAmount = 2;
+            enemySpawnAmount = 3;
             playerSpeedModifier = 0.85f; //Decreased player speed
         }
     }

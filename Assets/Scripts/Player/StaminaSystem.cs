@@ -61,6 +61,7 @@ public class StaminaSystem : MonoBehaviour
                 {
                     playerController.SetSprintSpeed(normalRunSpeed * MoralitySystem.Instance.playerSpeedModifier);
                     hasRegeneratedStamina = true; // Set player has regenerated stamina to true
+                    staminaProgressUI.color = Color.white;
                     if (currentStamina >= maxStamina)
                     {
                         sliderCanvasGroup.alpha = 0;// Set alpha of canvas slider group to 0 so that UI will not be disabled
@@ -85,7 +86,7 @@ public class StaminaSystem : MonoBehaviour
             AudioManager.Instance.PlaySFX("PlayerOutOfStamina");
             hasRegeneratedStamina = false; // Set player has regenerated stamina to false
             playerController.SetSprintSpeed(slowedRunSpeed * MoralitySystem.Instance.playerSpeedModifier);
-            sliderCanvasGroup.alpha = 0.2f; // Set alpha of canvas slider group to 0 so that UI will not be disabled
+            staminaProgressUI.color = Color.gray;
         }
 
     }
@@ -104,7 +105,7 @@ public class StaminaSystem : MonoBehaviour
                 AudioManager.Instance.PlaySFX("PlayerOutOfStamina");
                 hasRegeneratedStamina = false; // Set player has regenerated stamina to false
                 playerController.SetSprintSpeed(slowedRunSpeed * MoralitySystem.Instance.playerSpeedModifier);
-                sliderCanvasGroup.alpha = 0.2f; // Set alpha of canvas slider group to 0 so that UI will not be disabled
+                staminaProgressUI.color = Color.gray;
             }
         }
     }

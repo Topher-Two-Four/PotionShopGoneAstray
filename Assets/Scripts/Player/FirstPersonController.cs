@@ -215,6 +215,11 @@ namespace StarterAssets
 			RotationSpeed = previousRotationSpeed;
         }
 
+		public void SpinAround(Vector3 angularVelocity)
+        {
+			gameObject.transform.Rotate(angularVelocity);
+		}
+
 		private void Update()
 		{
 			JumpAndGravity();

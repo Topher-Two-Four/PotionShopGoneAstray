@@ -629,4 +629,9 @@ public class GameManager : MonoBehaviour, IDataPersistence
         }
     }
 
+    public void RotatePlayer(Vector3 angularVelocity)
+    {
+        controller.SpinAround(angularVelocity);
+    }
+
 }

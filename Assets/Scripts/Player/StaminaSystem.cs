@@ -52,6 +52,7 @@ public class StaminaSystem : MonoBehaviour
     {
         if (!isCurrentlySprinting) // Check if player is currently sprinting
         {
+            //AudioManager.Instance.PlaySFX2("PlayerRun");
             if (currentStamina <= maxStamina - 0.01) // Check if stamina is not at maximum
             {
                 currentStamina += staminaRegenerationRate * Time.deltaTime; // Regenerate stamina

@@ -592,6 +592,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: JellyRuneCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8698356993753793533, guid: f9546d52304016c4d802c9ef1997bf3c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2bb51f0b8906196458bb4ae452a63182, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

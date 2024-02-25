@@ -404,6 +404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caughtTimeRemoveAmount: 120
+  caughtItemRemoveAmount: 3
 --- !u!1001 &5669769959572906283
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -631,6 +632,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1934357762281424026, guid: 39aaa3de1771091429d5b3faa70905f6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5c707e727ea090f4aa529f7b0a657db6, type: 3}
     - target: {fileID: 4037929286657510311, guid: 39aaa3de1771091429d5b3faa70905f6, type: 3}
       propertyPath: m_Name
       value: BirdRuneCanvas

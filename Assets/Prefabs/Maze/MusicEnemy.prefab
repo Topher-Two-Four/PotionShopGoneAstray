@@ -653,6 +653,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MusicManRuneCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8433192784665578899, guid: d96325c837e7f7c40a8e25bc9aa50a44, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0209b1ac75655534faedaab5fa67ea3f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

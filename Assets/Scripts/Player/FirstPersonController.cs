@@ -70,6 +70,7 @@ namespace StarterAssets
 		private float previousSprintSpeed;
 		private float previousRotationSpeed;
 		private bool isLooking = true;
+		private FootstepController footstepController;
 
 		// cinemachine
 		private float _cinemachineTargetPitch;
@@ -115,6 +116,8 @@ namespace StarterAssets
 			{
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
+
+			footstepController = GetComponentInChildren<FootstepController>();
 		}
 
 		private void Start()
@@ -283,7 +286,8 @@ namespace StarterAssets
 			if(!_input.sprint)
             {
 				_staminaSystem.isCurrentlySprinting = false;
-            }
+				footstepController.StartWalking();
+			}
 
 			if (_input.sprint && _controller.velocity.sqrMagnitude > 0)
 			{
@@ -291,18 +295,24 @@ namespace StarterAssets
                 {
 					_staminaSystem.isCurrentlySprinting = true;
 					_staminaSystem.Sprinting();
-                }
+					footstepController.StartSprinting();
+				}
 				else
                 {
 					_input.sprint = false;
-                }
+					footstepController.StartWalking();
+				}
 			}
 
 			// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
 			// note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
 			// if there is no input, set the target speed to 0
-			if (_input.move == Vector2.zero) targetSpeed = 0.0f;
+			if (_input.move == Vector2.zero)
+			{
+				targetSpeed = 0.0f;
+				footstepController.StopWalking();
+			}
 
 			// a reference to the players current horizontal velocity
 			float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;

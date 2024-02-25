@@ -11,6 +11,8 @@ public class MusicBox : MonoBehaviour
     [SerializeField] private float musicCatchDistance = 20.0f;
     [Tooltip("The amount of time to remove from the player's day when caught by the maze enemy.")]
     [SerializeField] private float timeRemovedWhenCaught = 120.0f;
+    [Tooltip("The amount of items to remove from the player's inventory when caught by the music enemy.")]
+    [SerializeField] private int caughtItemRemoveAmount = 3;
 
     [Header("Audio Settings:")]
     [Tooltip("The audio source attached to the maze enemy.")]
@@ -85,6 +87,11 @@ public class MusicBox : MonoBehaviour
 
     private void PlayerCaught()
     {
+        for (int i = 0; i < caughtItemRemoveAmount; i++)
+        {
+            InventoryController.Instance.RemoveRandomItemFromGrid();
+            //Debug.Log("Trying to remove random item from music box script...");
+        }
         GameManager.Instance.timeRemaining -= timeRemovedWhenCaught;
         GameManager.Instance.SwitchSceneToPotionLevel();
     }

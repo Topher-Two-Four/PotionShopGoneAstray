@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ItemGrid : MonoBehaviour
 {
@@ -59,6 +60,24 @@ public class ItemGrid : MonoBehaviour
                 if (inventoryItem != null && inventoryItem.GetInventoryItemData())
                 {
                     inventoryItem.Delete();
+                }
+            }
+        }
+    }
+    public void RemoveRandomItem(ItemGrid inventoryGrid)
+    {
+        for (int x = 0; x < gridSizeWidth; x++)
+        {
+            for (int y = 0; y < gridSizeHeight; y++)
+            {
+                x = Random.Range(0, gridSizeWidth);
+                y = Random.Range(0, gridSizeHeight);
+                InventoryItem inventoryItem = inventoryItemSlot[x, y];
+                //Debug.Log("Selecting " + inventoryItem + "using item grid script...");
+                if (inventoryItem != null && inventoryItem.GetInventoryItemData())
+                {
+                    inventoryItem.Delete();
+                    //Debug.Log("Removing " + inventoryItem + "using item grid script...");
                 }
             }
         }

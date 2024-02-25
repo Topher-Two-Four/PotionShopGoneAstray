@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caughtTimeRemoveAmount: 0
+  caughtItemRemoveAmount: 0
 --- !u!54 &2638901742658041616
 Rigidbody:
   m_ObjectHideFlags: 0

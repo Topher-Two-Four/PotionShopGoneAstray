@@ -358,6 +358,11 @@ public class InventoryController : MonoBehaviour
     {
         inventoryGrid?.ClearGrid(inventoryGrid); // If inventory grid exists then clear it
     }
+    public void RemoveRandomItemFromGrid()
+    {
+        inventoryGrid?.RemoveRandomItem(inventoryGrid); // If inventory grid exists then remove an item from it
+        //Debug.Log("Trying to remove random item from item grid script...");
+    }
 
     Vector2Int oldPosition;
     InventoryItem itemToHighlight;

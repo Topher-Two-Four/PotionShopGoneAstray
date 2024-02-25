@@ -11,6 +11,9 @@ public class Teleportation : MonoBehaviour
     [SerializeField] private float timeRemovedWhenCaught = 120.0f;
     [Tooltip("The maze enemy AI controller.")]
     [SerializeField] private GameObject jellyModel;
+    [Tooltip("The amount of items to remove from the player's inventory when caught by the teleporting enemy.")]
+    [SerializeField] private int caughtItemRemoveAmount = 3;
+
 
     [Header("Audio Settings:")]
     [Tooltip("The audio source attached to the maze enemy.")]
@@ -62,7 +65,7 @@ public class Teleportation : MonoBehaviour
             else
             {
                 PlayerCaught();
-                Debug.Log("Player caught.");
+                //Debug.Log("Player caught.");
             }
 
         }
@@ -89,7 +92,7 @@ public class Teleportation : MonoBehaviour
         GetComponentInParent<MazeAIController>().MoveToRandomPosition();
         PlayerHasNotLooked();
 
-        Debug.Log("Teleported out.");
+        //Debug.Log("Teleported out.");
     }
 
     public void MakeInvisible()
@@ -115,7 +118,11 @@ public class Teleportation : MonoBehaviour
 
     private void PlayerCaught()
     {
-        Debug.Log("Player caught.");
+        for (int i = 0; i < caughtItemRemoveAmount; i++)
+        {
+            InventoryController.Instance.RemoveRandomItemFromGrid();
+            //Debug.Log("Trying to remove random item from teleportation script...");
+        }
         GameManager.Instance.timeRemaining -= timeRemovedWhenCaught;
         GameManager.Instance.SwitchSceneToPotionLevel();
     }

@@ -250,8 +250,9 @@ MonoBehaviour:
   teleportLength: 7
   timeRemovedWhenCaught: 120
   jellyModel: {fileID: 1193510614406344937}
+  caughtItemRemoveAmount: 3
   audioSource: {fileID: 6950652183319526180}
-  triggeredMusic: {fileID: 8300000, guid: 6069c9764a6e20e41a4470bb6fa56150, type: 3}
+  triggeredMusic: {fileID: 8300000, guid: 99fe2f08d6dbf2c48b0b5da30b341790, type: 3}
   caughtSound: {fileID: 8300000, guid: 15233aab885ccd9458792332fa7dbe0b, type: 3}
 --- !u!1 &5026945704411923157
 GameObject:

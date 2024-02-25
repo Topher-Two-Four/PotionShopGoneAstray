@@ -133,6 +133,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         {
             if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(0)) // Do not allow pause menu toggle when in main mainu
             TogglePauseMenuCanvas(); // Toggle pause menu
+            ToggleOffPauseMenuSettingsCanvas();
         }
     }
 
@@ -528,9 +529,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         }
         else
         {
-            {
-                settingsCanvas.gameObject.SetActive(false);
-            }
+            settingsCanvas.gameObject.SetActive(false);
         }
     }
 

@@ -292,8 +292,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicLength: 10
-  musicCatchDistance: 10
+  musicCatchDistance: 15
   timeRemovedWhenCaught: 120
+  caughtItemRemoveAmount: 3
   audioSource: {fileID: 745292861983091844}
   triggeredMusic: {fileID: 8300000, guid: 6069c9764a6e20e41a4470bb6fa56150, type: 3}
   caughtSound: {fileID: 8300000, guid: 15233aab885ccd9458792332fa7dbe0b, type: 3}

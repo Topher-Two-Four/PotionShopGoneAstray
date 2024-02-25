@@ -65,7 +65,7 @@ Transform:
   m_GameObject: {fileID: 1523856400312017894}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.86602545, z: -0, w: 0.49999994}
-  m_LocalPosition: {x: 0, y: 1.375, z: 0}
+  m_LocalPosition: {x: 0.04, y: 1.375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -176,13 +176,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a84c835212d49cf46941e31e97c7081c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
   itemPrefab: {fileID: 3761654210620089128, guid: 6c69ccac8bd83f94eb1782d99ff66571, type: 3}
   potionPrefab: {fileID: 3761654210620089128, guid: 18758571485f014479423ac07bc72006, type: 3}
   canvasTransform: {fileID: 0}
   inventoryCanvas: {fileID: 0}
   inventoryGrid: {fileID: 0}
   trashButton: {fileID: 0}
+  items: []
 --- !u!114 &6725445383885262082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,7 +248,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6846241006579286110
 Transform:
   m_ObjectHideFlags: 0
@@ -258,7 +258,7 @@ Transform:
   m_GameObject: {fileID: 6073503498084768484}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.86602545, z: 0, w: 0.49999994}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.04, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -307,16 +307,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 6
   SprintSpeed: 10
-  RotationSpeed: 1.2
+  RotationSpeed: 0.5
   SpeedChangeRate: 10
   enemyMask:
     serializedVersion: 2
     m_Bits: 256
-  viewRadius: 90
-  viewAngle: 90
   obstacleMask:
     serializedVersion: 2
     m_Bits: 128
+  viewRadius: 40
+  viewAngle: 60
   JumpHeight: 1.2
   Gravity: -15
   JumpTimeout: 0.3
@@ -464,17 +464,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a838fa12ae57b1c4b873b84cee4d1014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentStamina: 100
+  playerController: {fileID: 0}
   maxStamina: 100
   jumpStaminaCost: 20
-  hasRegeneratedStamina: 1
-  isCurrentlySprinting: 0
   staminaDepletionRate: 25
   staminaRegenerationRate: 15
   slowedRunSpeed: 6
   normalRunSpeed: 10
   staminaProgressUI: {fileID: 0}
   sliderCanvasGroup: {fileID: 0}
+  currentStamina: 100
+  hasRegeneratedStamina: 1
+  isCurrentlySprinting: 0
 --- !u!136 &3878279027101484498
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -715,7 +716,7 @@ Transform:
   m_GameObject: {fileID: 8482563062153054515}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.375, z: 0}
+  m_LocalPosition: {x: 0.04, y: 1.375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

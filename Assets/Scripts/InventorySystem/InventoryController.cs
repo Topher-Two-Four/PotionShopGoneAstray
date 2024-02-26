@@ -372,6 +372,7 @@ public class InventoryController : MonoBehaviour
         inventoryGrid = savedPlayerInventory;
     }
 
+
     private void HandleHighlight()
     {
         Vector2Int positionOnGrid = GetTileGridPosition();

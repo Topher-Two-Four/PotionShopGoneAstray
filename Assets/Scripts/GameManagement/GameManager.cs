@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         data.landlordPayment = this.endOfDayLandlordPayment;
         data.currentDay = this.currentDay;
         data.playerMorality = this.endOfDayMorality;
-        //data.playerInventory = InventoryController.Instance.inventoryGrid;
+        //SerializationUtility.ToSerializable(ItemGrid grid);
     }
 
     public void LoadData(GameData data)

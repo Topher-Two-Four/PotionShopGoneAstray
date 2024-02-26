@@ -256,10 +256,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.34
-  m_Height: 2.0252533
+  m_Radius: 0.47
+  m_Height: 1.9311113
   m_Direction: 1
-  m_Center: {x: 0, y: -0.0026016235, z: 0}
+  m_Center: {x: 0, y: 0.044469833, z: 0}
 --- !u!54 &7529817703522702014
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -308,7 +308,7 @@ NavMeshAgent:
   m_Height: 1
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1
 --- !u!114 &5625502726092118386
 MonoBehaviour:
   m_ObjectHideFlags: 0

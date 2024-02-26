@@ -262,7 +262,7 @@ public class MazeAIController : MonoBehaviour
 
         if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance) // Keep movement under control when in proximity to player
         {
-            if (_waitTime <= 0 && !_playerCaught && Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 5f)
+            if (_waitTime <= 0 && !_playerCaught && Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 0f)
             {
                 //_isPatrolling = true; // Set AI status to patrolling
                 //_isDetectingPlayer = false; // Set player not detected
@@ -281,9 +281,9 @@ public class MazeAIController : MonoBehaviour
             }
             else
             {
-                if (Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 2f)
+                if (Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 0f)
                 {
-                    //Stop(); // Stop AI movement
+                    Stop(); // Stop AI movement
                     _detectionTime -= Time.deltaTime; // Decrement player detection wait timer
                 }
             }

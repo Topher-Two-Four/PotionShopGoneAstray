@@ -16,6 +16,6 @@ MonoBehaviour:
   isSellable: 0
   cantBeDiscarded: 0
   width: 1
-  height: 1
+  height: 2
   itemIcon: {fileID: 21300000, guid: 1a7388ccd78ac52439e7461a05c6e396, type: 3}
   itemObject: {fileID: 3728056772645781790, guid: 1fd41aad002c48246ba655dc8cdb5291, type: 3}

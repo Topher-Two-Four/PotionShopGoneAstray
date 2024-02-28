@@ -106,6 +106,7 @@ public class MazeSpawnManager : MonoBehaviour
                 enemiesToSpawn--;
             }
         }
+        GameManager.Instance.CallMovePlayerToSpawn();
         GameManager.Instance.ToggleOffLoadingScreenCanvas();
     }
 }

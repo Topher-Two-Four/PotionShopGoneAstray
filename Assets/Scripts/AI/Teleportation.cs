@@ -19,7 +19,7 @@ public class Teleportation : MonoBehaviour
     [Tooltip("The audio source attached to the maze enemy.")]
     [SerializeField] private AudioSource audioSource;
     [Tooltip("The audio clip that plays when the maze enemy is triggered.")]
-    [SerializeField] private AudioClip triggeredMusic;
+    [SerializeField] private AudioClip triggeredSound;
     [Tooltip("The audio clip that plays when the maze enemy catches the player.")]
     [SerializeField] private AudioClip caughtSound;
 
@@ -75,24 +75,24 @@ public class Teleportation : MonoBehaviour
     {
         if (!hasTeleportedIn)
         {
-            hasTeleportedIn = true;
-            teleportedInTime = 0;
-            MakeVisible();
-            Debug.Log("Teleported in.");
+                hasTeleportedIn = true;
+                teleportedInTime = 0;
+                audioSource.PlayOneShot(triggeredSound);
+                MakeVisible();
         }
     }
 
     public void TeleportOut()
     {
-        hasTeleportedIn = false;
-        teleportedInTime = 0f;
+            hasTeleportedIn = false;
+            teleportedInTime = 0f;
 
-        MakeInvisible();
+            audioSource.PlayOneShot(triggeredSound);
 
-        GetComponentInParent<MazeAIController>().MoveToRandomPosition();
-        PlayerHasNotLooked();
+            MakeInvisible();
 
-        //Debug.Log("Teleported out.");
+            GetComponentInParent<MazeAIController>().MoveToRandomPosition();
+            PlayerHasNotLooked();
     }
 
     public void MakeInvisible()

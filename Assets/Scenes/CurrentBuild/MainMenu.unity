@@ -7262,45 +7262,45 @@ MonoBehaviour:
   sfxSource: {fileID: 1377076976}
   sfx2Source: {fileID: 1377076976}
   sfx3Source: {fileID: 1076269149}
-  menuButtonHoverSound: {fileID: 8300000, guid: 0f205d58d80b738499501c4951cf24ca, type: 3}
-  menuButtonClickSound: {fileID: 8300000, guid: f12b15c443b9934419cdba6fe761b9ef, type: 3}
-  newDaySound: {fileID: 8300000, guid: 73264292b824c164896bb6ed58769dd1, type: 3}
-  endDaySound: {fileID: 8300000, guid: cbb2f7d8a937f7347a825c3d2f1547ad, type: 3}
-  pauseGameSound: {fileID: 8300000, guid: abe2401f9cc644148a7dec77fde6cbd9, type: 3}
-  unpauseGameSound: {fileID: 8300000, guid: abe2401f9cc644148a7dec77fde6cbd9, type: 3}
+  menuButtonHoverSound: {fileID: 8300000, guid: 4846f27d757fd6f44a1d7b17db250ca7, type: 3}
+  menuButtonClickSound: {fileID: 8300000, guid: 775bd5b703a9741418f4c2314ba632d2, type: 3}
+  newDaySound: {fileID: 8300000, guid: 98c2ce721f694da44a1ae32ffcbab134, type: 3}
+  endDaySound: {fileID: 8300000, guid: 91ca13e9ef9615549bbe80ff8e5bbbcb, type: 3}
+  pauseGameSound: {fileID: 8300000, guid: 4a639e87177d7914f9d343525f50e2fa, type: 3}
+  unpauseGameSound: {fileID: 8300000, guid: 11bdc16eeff52fb48a6ee1d82bc3b762, type: 3}
   winGameSound: {fileID: 8300000, guid: 5d53c99f72348a8428d38af657114528, type: 3}
   loseGameSound: {fileID: 8300000, guid: 0ec8125eaee844346b093bfebd3e014d, type: 3}
   navigatePotionShopSound: {fileID: 8300000, guid: f9164d8500f78f24988db3bf86c68850, type: 3}
-  openInventorySound: {fileID: 8300000, guid: 80fcd5520d183e3489e8c6ddab66515a, type: 3}
-  closeInventorySound: {fileID: 8300000, guid: 74e91f1f2f448174b868bc77785638a8, type: 3}
-  pickUpInventoryItemSound: {fileID: 8300000, guid: 29935e3c8a59d2749976a4d4ed6714b7, type: 3}
+  openInventorySound: {fileID: 8300000, guid: ef26ca49926c491499a30ed12db465c5, type: 3}
+  closeInventorySound: {fileID: 8300000, guid: 75b98ba7617083a4295baa7c7b0b5a92, type: 3}
+  pickUpInventoryItemSound: {fileID: 8300000, guid: 003a6ae5de859cf43872e331204b7f41, type: 3}
   rotateInventoryItemSound: {fileID: 8300000, guid: b69c7e6dd91579f4cbd7131ce3cf5209, type: 3}
-  placeInventoryItemSound: {fileID: 8300000, guid: fe9a05bf3e94cb34ea54c7dc8082272c, type: 3}
+  placeInventoryItemSound: {fileID: 8300000, guid: d6978d669879cd04e8f4e8dcfa74f8bc, type: 3}
   trashInventorySound: {fileID: 8300000, guid: 28a2bd829f961e346b00591236f61509, type: 3}
   dropItemSound: {fileID: 8300000, guid: 88e392feeccfaf841ae7406ebca39340, type: 3}
-  openBookSound: {fileID: 8300000, guid: 0d177254b04db674d9c4a245e20b064a, type: 3}
-  closeBookSound: {fileID: 8300000, guid: 7e1c70ca1f219f344918d949355ae615, type: 3}
+  openBookSound: {fileID: 8300000, guid: 88528c284a7a14b4583a1471f3c95f2a, type: 3}
+  closeBookSound: {fileID: 8300000, guid: 87878399e5e9765468acee80767b3ae6, type: 3}
   switchPageSound: {fileID: 8300000, guid: 1760ef1f8d2195a488a3ccd17a361885, type: 3}
   characterSpeechSound: {fileID: 8300000, guid: 81064515cbfa0c448868bf448647a1f2, type: 3}
   completeOrderSound: {fileID: 8300000, guid: 69fb830aea4954843917b511c55901be, type: 3}
   increaseMoralitySound: {fileID: 8300000, guid: 2c524846059fdbb46b6064c98c9e57a5, type: 3}
   decreaseMoralitySound: {fileID: 8300000, guid: 13bffdcace7e83945b623678e1297b15, type: 3}
-  cauldronBrewingSound: {fileID: 8300000, guid: 85c3b990c9506874d8c823823a725814, type: 3}
+  cauldronBrewingSound: {fileID: 8300000, guid: 7c563688af3284e42a7f0bacddf19007, type: 3}
   cauldronBubbleSound: {fileID: 8300000, guid: 442febbd71450e2428f2bc5692ed049a, type: 3}
   cauldronFireSound: {fileID: 8300000, guid: d4f8867498cb70546b973298d6ad5315, type: 3}
-  stirSound: {fileID: 8300000, guid: 1260969609c20a74d899a95573b73cd1, type: 3}
-  putLidOnSound: {fileID: 8300000, guid: b1651a34bb54ea141bf4aaa2e97eace4, type: 3}
-  takeLidOffSound: {fileID: 8300000, guid: b445be90445549d4b880226984ead26f, type: 3}
+  stirSound: {fileID: 8300000, guid: 3878798dfba5f6647b76f8c927bbe289, type: 3}
+  putLidOnSound: {fileID: 8300000, guid: 0f4d5bfa6522f9848abf6b989fd50f5c, type: 3}
+  takeLidOffSound: {fileID: 8300000, guid: 9e742d37add7edc4ea10b81c74f98c1e, type: 3}
   potionStartBrewingSound: {fileID: 8300000, guid: 3d8c9fedeb78c054ab3f7dc3d7a377e6, type: 3}
   potionFinishedBrewingSound: {fileID: 8300000, guid: 3101a72581aedfa4483bae24a0d7089d, type: 3}
-  retrievePotionSound: {fileID: 8300000, guid: f08076e741b853842bce66e201997211, type: 3}
-  addIngredientSound: {fileID: 8300000, guid: 62b6a24cca2ee234bbe7b81e4acde9e0, type: 3}
-  removeIngredientSound: {fileID: 8300000, guid: e4804defe44d22e48be061df11abee08, type: 3}
-  switchToFreezingTempSound: {fileID: 8300000, guid: 102e598d36fd23c41afba77117f3aa69, type: 3}
-  switchToColdTempSound: {fileID: 8300000, guid: 62acd04d1dde7a346b418fc611c84f63, type: 3}
+  retrievePotionSound: {fileID: 8300000, guid: 776fe2d2e04526945ac8cb2a5d80a481, type: 3}
+  addIngredientSound: {fileID: 8300000, guid: 5d408e549d0143341841ddde9082adfe, type: 3}
+  removeIngredientSound: {fileID: 8300000, guid: 3ef0d69a3d9bc7f47aaa7bebb9073513, type: 3}
+  switchToFreezingTempSound: {fileID: 8300000, guid: 4d176f64486fd0148a69ee4cf977daea, type: 3}
+  switchToColdTempSound: {fileID: 8300000, guid: b5e21478be8b370498c3c8ce411ad4ab, type: 3}
   switchToMediumTempSound: {fileID: 8300000, guid: e742306d03715d14c9b01b4a348c5b34, type: 3}
-  switchToHotTempSound: {fileID: 8300000, guid: d1f3d5442f272d74e927e250fe6d1bd9, type: 3}
-  switchToBoilingTempSound: {fileID: 8300000, guid: 409379c7880ccc541adc4f13745c77a3, type: 3}
+  switchToHotTempSound: {fileID: 8300000, guid: 17e7b104efe64494aa62aed9e3eaaca5, type: 3}
+  switchToBoilingTempSound: {fileID: 8300000, guid: 7bab25913a100cc4aa4a6b6c462fc48e, type: 3}
   menuMusic: {fileID: 8300000, guid: 3a0889cc0019127499874c7b5b88c7ec, type: 3}
   potionShopMusic: {fileID: 8300000, guid: 2e463fe82296a5442870ca800d689a4d, type: 3}
   mazeMusic: {fileID: 8300000, guid: 8e6ca72b438fefa4e89a8148af085210, type: 3}
@@ -7318,7 +7318,7 @@ MonoBehaviour:
   playerJumpSound: {fileID: 8300000, guid: f87b6a6d348ee544ca91a74b2ea7886a, type: 3}
   playerOutOfStaminaSound: {fileID: 8300000, guid: 0e0d57b244ffd3344a79585edb9364bb, type: 3}
   pickUpMazeItemSound: {fileID: 8300000, guid: 29935e3c8a59d2749976a4d4ed6714b7, type: 3}
-  teleportToMazeSound: {fileID: 8300000, guid: 99fe2f08d6dbf2c48b0b5da30b341790, type: 3}
+  teleportToMazeSound: {fileID: 8300000, guid: 0dc1b7515b92d2a42a6fcea954f3a1e3, type: 3}
   teleportToShopSound: {fileID: 8300000, guid: 99fe2f08d6dbf2c48b0b5da30b341790, type: 3}
 --- !u!1 &297818319
 GameObject:

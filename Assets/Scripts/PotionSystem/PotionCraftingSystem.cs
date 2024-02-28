@@ -575,7 +575,6 @@ public class PotionCraftingSystem : MonoBehaviour
     {
         if (currentTemp < 5) 
         {
-            AudioManager.Instance.PlaySFX("SwitchToBoilingTemp");
             currentTemp++;
             if (currentTemp == 5)
             {

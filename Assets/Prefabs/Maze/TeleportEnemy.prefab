@@ -252,8 +252,7 @@ MonoBehaviour:
   jellyModel: {fileID: 1193510614406344937}
   caughtItemRemoveAmount: 3
   audioSource: {fileID: 6950652183319526180}
-  triggeredSound: {fileID: 8300000, guid: 7c563688af3284e42a7f0bacddf19007, type: 3}
-  teleportSound: {fileID: 8300000, guid: 99fe2f08d6dbf2c48b0b5da30b341790, type: 3}
+  triggeredSound: {fileID: 8300000, guid: 99fe2f08d6dbf2c48b0b5da30b341790, type: 3}
   caughtSound: {fileID: 8300000, guid: 4599e29352a8844478d474e161fde3ad, type: 3}
 --- !u!1 &5026945704411923157
 GameObject:

@@ -11,18 +11,24 @@ public class LoadPotionShopOnCollision : MonoBehaviour
     [Tooltip("The amount of items to remove from player's inventory when collision with them occurs.")]
     [SerializeField] private int caughtItemRemoveAmount = 3;
 
+    private bool timeRemoved = false;
+
     // Switch to potion shop scene on collision with this game object
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (!timeRemoved)
         {
-            for (int i = 0; i < caughtItemRemoveAmount; i++)
+            if (collision.gameObject.tag == "Player")
             {
-                InventoryController.Instance.RemoveRandomItemFromGrid();
-                //Debug.Log("Trying to remove random item from collision script...");
+                for (int i = 0; i < caughtItemRemoveAmount; i++)
+                {
+                    InventoryController.Instance.RemoveRandomItemFromGrid();
+                    //Debug.Log("Trying to remove random item from collision script...");
+                }
+                timeRemoved = true;
+                GameManager.Instance.timeRemaining -= caughtTimeRemoveAmount; // Remove time from day if player is caught by enemy in maze
+                GameManager.Instance.SwitchSceneToPotionLevel(); // Switch scene to potion shop
             }
-            GameManager.Instance.timeRemaining -= caughtTimeRemoveAmount; // Remove time from day if player is caught by enemy in maze
-            GameManager.Instance.SwitchSceneToPotionLevel(); // Switch scene to potion shop
         }
     }
 

@@ -41,6 +41,7 @@ public class RoomManager : MonoBehaviour
 
         leftNavigationButton.onClick.AddListener(() => LeftArrowKeyPress());
         rightNavigationButton.onClick.AddListener(() => RightArrowKeyPress());
+        GameManager.Instance.ToggleOffLoadingScreenCanvas();
     }
 
     private void Update()

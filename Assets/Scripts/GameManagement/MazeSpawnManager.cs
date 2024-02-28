@@ -47,12 +47,9 @@ public class MazeSpawnManager : MonoBehaviour
         AudioManager.Instance.sfxSource.Stop();
         AudioManager.Instance.sfx2Source.Stop();
         AudioManager.Instance.PlayMusic("MazeMusic");
-
         MoralitySystem.Instance.ApplyMoralityEffect();
-
         GameManager.Instance.GetPlayerCapsule().transform.position = GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform.position;
         GameManager.Instance.ToggleCursorOff();
-
         ingredientsToSpawn = Mathf.FloorToInt(baseIngredientSpawnAmount * MoralitySystem.Instance.GetIngredientSpawnModifier());
         skullBearsToSpawn = Mathf.FloorToInt(baseSkullBearSpawnAmount * MoralitySystem.Instance.GetSkullBearSpawnModifier());
         enemiesToSpawn = MoralitySystem.Instance.GetEnemySpawnAmount();
@@ -109,5 +106,6 @@ public class MazeSpawnManager : MonoBehaviour
                 enemiesToSpawn--;
             }
         }
+        GameManager.Instance.ToggleOffLoadingScreenCanvas();
     }
 }

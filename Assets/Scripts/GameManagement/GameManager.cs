@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
     [SerializeField] private GameObject winLossCanvas;
     [Tooltip("The canvas that holds the pause menu screen UI elements.")]
     [SerializeField] private GameObject pauseMenuCanvas;
+    [Tooltip("The canvas that holds the loading screen UI elements.")]
+    [SerializeField] private GameObject loadingScreenCanvas;
     [Tooltip("The canvas that holds the pause menu game settings UI elements.")]
     [SerializeField] private GameObject settingsCanvas;
     [Tooltip("The canvas that holds the quest screen UI elements.")]
@@ -438,6 +440,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void SwitchSceneToPotionLevel() // Use scene manager to switch to Potion Level from Maze Level
     {
+        ToggleOnLoadingScreenCanvas();
         AudioManager.Instance.PlaySFX("TeleportToShop");
         Invoke("SetPlayerCapsuleInactive", 0.5f);
         ToggleCursorOn();
@@ -454,11 +457,14 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         SetPlayerCapsuleActive();
         AudioManager.Instance.PlaySFX("TeleportToMaze");
+        ToggleOnLoadingScreenCanvas();
         int randomSceneIndex = Random.Range(3, 9); // Choose random maze scene to load
         timeRemaining -= mazeTravelTimeDeduction;
-        Invoke("CallMovePlayerToSpawn", 0.1f);
-        SceneManager.LoadScene(randomSceneIndex);
+        Invoke("CallMovePlayerToSpawn", 0.1f); //////// This might be the timing issue for the spawn location...
+        StartCoroutine(LoadRandomScene(randomSceneIndex, 1.0f));
     }
+
+
 
     public void FreezeRotation()
     {
@@ -537,6 +543,19 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         { 
             settingsCanvas.gameObject.SetActive(false);
+        }
+    }
+    public void ToggleOnLoadingScreenCanvas()
+    {
+        {
+            loadingScreenCanvas.gameObject.SetActive(true);
+        }
+    }
+
+    public void ToggleOffLoadingScreenCanvas()
+    {
+        {
+            loadingScreenCanvas.gameObject.SetActive(false);
         }
     }
 
@@ -618,6 +637,12 @@ public class GameManager : MonoBehaviour, IDataPersistence
         }
     }
 
+    public void RotatePlayer(Vector3 angularVelocity)
+    {
+        controller.SpinAround(angularVelocity);
+    }
+
+
     private void CallMovePlayerToSpawn()
     {
         GameObject spawnPoint = GameObject.FindGameObjectWithTag("PlayerSpawnPoint");
@@ -629,9 +654,9 @@ public class GameManager : MonoBehaviour, IDataPersistence
         }
     }
 
-    public void RotatePlayer(Vector3 angularVelocity)
+    private IEnumerator LoadRandomScene(int randomSceneIndex, float delayTime)
     {
-        controller.SpinAround(angularVelocity);
+        yield return new WaitForSeconds(delayTime);
+        SceneManager.LoadScene(randomSceneIndex);
     }
-
 }

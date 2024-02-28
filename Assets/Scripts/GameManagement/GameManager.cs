@@ -480,7 +480,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void ToggleOnPotionCraftingCanvas()
     {
-            potionCraftingCanvas.SetActive(true); // Display potion crafting canvas
+        potionCraftingCanvas.SetActive(true); // Display potion crafting canvas
     }
 
     public void ToggleOffPotionCraftingCanvas()

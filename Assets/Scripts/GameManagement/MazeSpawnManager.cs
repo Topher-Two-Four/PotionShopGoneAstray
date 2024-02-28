@@ -108,5 +108,7 @@ public class MazeSpawnManager : MonoBehaviour
         }
         GameManager.Instance.CallMovePlayerToSpawn();
         GameManager.Instance.ToggleOffLoadingScreenCanvas();
+
+        TutorialManager.Instance.BeginMazeTutorial();
     }
 }

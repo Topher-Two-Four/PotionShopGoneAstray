@@ -42,6 +42,7 @@ public class RoomManager : MonoBehaviour
         leftNavigationButton.onClick.AddListener(() => LeftArrowKeyPress());
         rightNavigationButton.onClick.AddListener(() => RightArrowKeyPress());
         GameManager.Instance.ToggleOffLoadingScreenCanvas();
+        TutorialManager.Instance.ToggleOnLookingAroundShopTutorial();
     }
 
     private void Update()
@@ -76,6 +77,10 @@ public class RoomManager : MonoBehaviour
         GameManager.Instance.ToggleOffOrderDisplay();
         GameManager.Instance.ToggleOnBookshelfCanvas();
 
+        TutorialManager.Instance.ToggleOnBrewingStepsIntroTutorial();
+        TutorialManager.Instance.ToggleOnBrewingSteps1Tutorial();
+        TutorialManager.Instance.ToggleOnBrewingSteps2Tutorial();
+
         cauldronRoomOpen = true;
         orderRoomOpen = false;
         mazeDoorRoomOpen = false;
@@ -93,6 +98,9 @@ public class RoomManager : MonoBehaviour
         GameManager.Instance.ToggleOnOrderDisplay();
         GameManager.Instance.ToggleOffBookshelfCanvas();
 
+        TutorialManager.Instance.ToggleOnDeliveryTutorial();
+        TutorialManager.Instance.ToggleOnSellPotionsTutorial();
+
         cauldronRoomOpen = false;
         orderRoomOpen = true;
         mazeDoorRoomOpen = false;
@@ -108,6 +116,8 @@ public class RoomManager : MonoBehaviour
         GameManager.Instance.ToggleOnDoorToMaze();
         GameManager.Instance.ToggleOffOrderDisplay();
         GameManager.Instance.ToggleOffBookshelfCanvas();
+
+        TutorialManager.Instance.ToggleOnMazeAccessTutorial();
 
         cauldronRoomOpen = false;
         orderRoomOpen = false;

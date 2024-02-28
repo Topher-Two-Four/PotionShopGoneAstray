@@ -48,6 +48,7 @@ public class RecipeBookManager : MonoBehaviour
 
     private void ToggleBook()
     {
+        TutorialManager.Instance.ToggleOnCheckRecipeBookTutorial();
         if (apothecaryManualCanvas.gameObject.activeSelf)
         {
             AudioManager.Instance.PlaySFX("CloseBook");
@@ -75,6 +76,8 @@ public class RecipeBookManager : MonoBehaviour
             bookPageIndex++;
             bookPages[bookPageIndex].SetActive(true);
             UpdatePageTurnButtonVisibility();
+            TutorialManager.Instance.ToggleOnGoodAndBadPotions1Tutorial();
+            TutorialManager.Instance.ToggleOnGoodAndBadPotions2Tutorial();
         }
     }
 

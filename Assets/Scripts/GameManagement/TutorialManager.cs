@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TutorialManager : MonoBehaviour
 {
-    [Header("List of Rooms:")]
-    [Tooltip("The list of tutorials and tooltips in the game.")]
+    [Header("List of tutorial canvases:")]
+    [Tooltip("The list of tutorial and tooltip canvases in the game.")]
     [SerializeField] private GameObject brewingStepsIntroTutorial;
     [SerializeField] private GameObject brewingSteps1Tutorial;
     [SerializeField] private GameObject brewingSteps2Tutorial;
@@ -23,6 +23,29 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private GameObject pauseGameTutorial;
     [SerializeField] private GameObject sellPotionsTutorial;
 
+
+    private bool brewingStepsIntroTutorialPlayed = false;
+    private bool brewingSteps1TutorialPlayed = false;
+    private bool brewingSteps2TutorialPlayed = false;
+    private bool checkRecipeBookTutorialPlayed = false;
+    private bool deliveryTutorialPlayed = false;
+    private bool exploreTutorialPlayed = false;
+    private bool goodAndBadPotionTutorial1Played = false;
+    private bool goodAndBadPotionTutorial2Played = false;
+    private bool inventoryTutorialPlayed = false;
+    private bool jumpTutorialPlayed = false;
+    private bool lookingAroundShopTutorialPlayed = false;
+    private bool mazeAccessTutorialPlayed = false;
+    private bool monstersTutorialPlayed = false;
+    private bool movementTutorialPlayed = false;
+    private bool pauseGameTutorialPlayed = false;
+    private bool sellPotionsTutorialPlayed = false;
+    private bool mazeTutorialPlayed = false;
+
+    [Header("Tutorial Display Settings:")]
+    [Tooltip("The amount of time that elapses before the tutorial canvas is set inactive.")]
+    [SerializeField] private float timeoutTime = 5.0f;
+
     public static TutorialManager Instance { get; private set; } // Singleton logic
 
     private void Update()
@@ -32,7 +55,12 @@ public class TutorialManager : MonoBehaviour
 
     public void ToggleOnBrewingStepsIntroTutorial()
     {
-        brewingStepsIntroTutorial.SetActive(true);
+        if (!brewingStepsIntroTutorialPlayed)
+        {
+            brewingStepsIntroTutorial.SetActive(true);
+            Invoke("ToggleOffBrewingStepsIntroTutorial", timeoutTime);
+            brewingStepsIntroTutorialPlayed = true;
+        }
     }
 
     public void ToggleOffBrewingStepsIntroTutorial()
@@ -42,7 +70,12 @@ public class TutorialManager : MonoBehaviour
 
     public void ToggleOnBrewingSteps1Tutorial()
     {
-        brewingSteps1Tutorial.SetActive(true);
+        if (!brewingSteps1TutorialPlayed)
+        {
+            brewingSteps1Tutorial.SetActive(true);
+            Invoke("ToggleOffBrewingSteps1Tutorial", timeoutTime);
+            brewingSteps1TutorialPlayed = true;
+        }
     }
 
     public void ToggleOffBrewingSteps1Tutorial()
@@ -52,7 +85,12 @@ public class TutorialManager : MonoBehaviour
 
     public void ToggleOnBrewingSteps2Tutorial()
     {
-        brewingSteps2Tutorial.SetActive(true);
+        if (!brewingSteps2TutorialPlayed)
+        {
+            brewingSteps2Tutorial.SetActive(true);
+            Invoke("ToggleOffBrewingSteps2Tutorial", timeoutTime);
+            brewingSteps2TutorialPlayed = true;
+        }
     }
 
     public void ToggleOffBrewingSteps2Tutorial()
@@ -62,7 +100,12 @@ public class TutorialManager : MonoBehaviour
 
     public void ToggleOnCheckRecipeBookTutorial()
     {
-        checkRecipeBookTutorial.SetActive(true);
+        if (!checkRecipeBookTutorialPlayed)
+        {
+            checkRecipeBookTutorial.SetActive(true);
+            Invoke("ToggleOffCheckRecipeBookTutorial", timeoutTime);
+            checkRecipeBookTutorialPlayed = true;
+        }
     }
 
     public void ToggleOffCheckRecipeBookTutorial()
@@ -71,7 +114,12 @@ public class TutorialManager : MonoBehaviour
     }
     public void ToggleOnDeliveryTutorial()
     {
-        deliveryTutorial.SetActive(true);
+        if (!deliveryTutorialPlayed)
+        {
+            deliveryTutorial.SetActive(true);
+            Invoke("ToggleOffDeliveryTutorial", timeoutTime);
+            deliveryTutorialPlayed = true;
+        }
     }
 
     public void ToggleOffDeliveryTutorial()
@@ -81,7 +129,12 @@ public class TutorialManager : MonoBehaviour
 
     public void ToggleOnExploreTutorial()
     {
-        exploreTutorial.SetActive(true);
+        if (!exploreTutorialPlayed)
+        {
+            exploreTutorial.SetActive(true);
+            Invoke("ToggleOffExploreTutorial", timeoutTime);
+            exploreTutorialPlayed = true;
+        }
     }
 
     public void ToggleOffExploreTutorial()
@@ -90,7 +143,12 @@ public class TutorialManager : MonoBehaviour
     }
     public void ToggleOnGoodAndBadPotions1Tutorial()
     {
-        goodAndBadPotionTutorial1.SetActive(true);
+        if (!goodAndBadPotionTutorial1Played)
+        {
+            goodAndBadPotionTutorial1.SetActive(true);
+            Invoke("ToggleOffGoodAndBadPotions1Tutorial", timeoutTime);
+            goodAndBadPotionTutorial1Played = true;
+        }
     }
 
     public void ToggleOffGoodAndBadPotions1Tutorial()
@@ -100,7 +158,12 @@ public class TutorialManager : MonoBehaviour
 
     public void ToggleOnGoodAndBadPotions2Tutorial()
     {
-        goodAndBadPotionTutorial2.SetActive(true);
+        if (!goodAndBadPotionTutorial2Played)
+        {
+            goodAndBadPotionTutorial2.SetActive(true);
+            Invoke("ToggleOffGoodAndBadPotions2Tutorial", timeoutTime);
+            goodAndBadPotionTutorial2Played = true;
+        }
     }
 
     public void ToggleOffGoodAndBadPotions2Tutorial()
@@ -110,7 +173,12 @@ public class TutorialManager : MonoBehaviour
 
     public void ToggleOnInventoryTutorial()
     {
-        inventoryTutorial.SetActive(true);
+        if (!inventoryTutorialPlayed)
+        {
+            inventoryTutorial.SetActive(true);
+            Invoke("ToggleOffInventoryTutorial", timeoutTime);
+            inventoryTutorialPlayed = true;
+        }
     }
 
     public void ToggleOffInventoryTutorial()
@@ -119,7 +187,12 @@ public class TutorialManager : MonoBehaviour
     }
     public void ToggleOnJumpTutorial()
     {
-        jumpTutorial.SetActive(true);
+        if (!jumpTutorialPlayed)
+        {
+            jumpTutorial.SetActive(true);
+            Invoke("ToggleOffJumpTutorial", timeoutTime);
+            jumpTutorialPlayed = true;
+        }
     }
 
     public void ToggleOffJumpTutorial()
@@ -128,7 +201,12 @@ public class TutorialManager : MonoBehaviour
     }
     public void ToggleOnLookingAroundShopTutorial()
     {
-        lookingAroundShopTutorial.SetActive(true);
+        if (!lookingAroundShopTutorialPlayed)
+        {
+            lookingAroundShopTutorial.SetActive(true);
+            Invoke("ToggleOffLookingAroundShopTutorial", timeoutTime);
+            lookingAroundShopTutorialPlayed = true;
+        }
     }
 
     public void ToggleOffLookingAroundShopTutorial()
@@ -138,7 +216,12 @@ public class TutorialManager : MonoBehaviour
 
     public void ToggleOnMazeAccessTutorial()
     {
-        mazeAccessTutorial.SetActive(true);
+        if (!mazeAccessTutorialPlayed)
+        {
+            mazeAccessTutorial.SetActive(true);
+            Invoke("ToggleOffMazeAccessTutorial", timeoutTime);
+            mazeAccessTutorialPlayed = true;
+        }
     }
 
     public void ToggleOffMazeAccessTutorial()
@@ -148,7 +231,12 @@ public class TutorialManager : MonoBehaviour
 
     public void ToggleOnMonstersTutorial()
     {
-        monstersTutorial.SetActive(true);
+        if (!monstersTutorialPlayed)
+        {
+            monstersTutorial.SetActive(true);
+            Invoke("ToggleOffMonstersTutorial", timeoutTime);
+            monstersTutorialPlayed = true;
+        }
     }
 
     public void ToggleOffMonstersTutorial()
@@ -158,7 +246,12 @@ public class TutorialManager : MonoBehaviour
 
     public void ToggleOnMovementTutorial()
     {
-        movementTutorial.SetActive(true);
+        if (!movementTutorialPlayed)
+        {
+            movementTutorial.SetActive(true);
+            Invoke("ToggleOffMovementTutorial", timeoutTime);
+            movementTutorialPlayed = true;
+        }
     }
 
     public void ToggleOffMovementTutorial()
@@ -167,7 +260,12 @@ public class TutorialManager : MonoBehaviour
     }
     public void ToggleOnPauseGameTutorial()
     {
-        pauseGameTutorial.SetActive(true);
+        if (!pauseGameTutorialPlayed)
+        {
+            pauseGameTutorial.SetActive(true);
+            Invoke("ToggleOffPauseGameTutorial", timeoutTime);
+            pauseGameTutorialPlayed = true;
+        }
     }
 
     public void ToggleOffPauseGameTutorial()
@@ -177,11 +275,28 @@ public class TutorialManager : MonoBehaviour
 
     public void ToggleOnSellPotionsTutorial()
     {
-        sellPotionsTutorial.SetActive(true);
+        if (!sellPotionsTutorialPlayed)
+        {
+            sellPotionsTutorial.SetActive(true);
+            Invoke("ToggleOffSellPotionsTutorial", timeoutTime);
+            sellPotionsTutorialPlayed = true;
+        }
     }
 
     public void ToggleOffSellPotionsTutorial()
     {
         sellPotionsTutorial.SetActive(false);
+    }
+
+    public void BeginMazeTutorial()
+    {
+        if (!mazeTutorialPlayed)
+        {
+            Invoke("ToggleOnMovementTutorial", 0.5f);
+            Invoke("ToggleOnJumpTutorial", 0.5f);
+            Invoke("ToggleOnInventoryTutorial", 1.0f + timeoutTime);
+            Invoke("ToggleOnMonstersTutorial", 1.0f + timeoutTime + timeoutTime);
+            Invoke("ToggleOnPauseGameTutorial", 60.0f);
+        }
     }
 }

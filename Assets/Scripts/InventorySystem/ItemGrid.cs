@@ -9,7 +9,17 @@ public class ItemGrid : MonoBehaviour
     [HideInInspector] public const float tileSizeWidth = 32;
     [HideInInspector] public const float tileSizeHeight = 32;
 
-    InventoryItem[,] inventoryItemSlot;
+    public int GetGridSizeWidth()
+    {
+        return gridSizeWidth;
+    }
+
+    public int GetGridSizeHeight()
+    {
+        return gridSizeHeight;
+    }
+
+    public InventoryItem[,] inventoryItemSlot;
 
     RectTransform rectTransform;
 

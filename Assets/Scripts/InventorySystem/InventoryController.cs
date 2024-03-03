@@ -299,6 +299,20 @@ public class InventoryController : MonoBehaviour
         OrderSystem.Instance.CheckForCompleteOrders();
     }
 
+
+    public void RemovePotionFromInventory(PotionData potionData)
+    {
+        inventoryGrid.RemovePotionFromInventory(potionData);
+    }
+
+    public void RemoveItemFromInventory(ItemData itemData)
+    {
+        //Debug.Log("Removing " + itemData);
+        inventoryGrid.RemoveItemFromInventory(itemData);
+        //Debug.Log("Removed " + itemData);
+
+    }
+
     public void AddIngredientToPotionCraftingSpace(Vector2Int tileGridPosition)
     {
         InventoryItem selectedItem = selectedItemGrid.GetItem(tileGridPosition.x, tileGridPosition.y);
@@ -372,6 +386,10 @@ public class InventoryController : MonoBehaviour
         inventoryGrid = savedPlayerInventory;
     }
 
+    public ItemGrid GetInventoryGrid()
+    {
+        return inventoryGrid;
+    }
 
     private void HandleHighlight()
     {

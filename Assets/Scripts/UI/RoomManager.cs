@@ -43,6 +43,8 @@ public class RoomManager : MonoBehaviour
         rightNavigationButton.onClick.AddListener(() => RightArrowKeyPress());
         GameManager.Instance.ToggleOffLoadingScreenCanvas();
         TutorialManager.Instance.ToggleOnLookingAroundShopTutorial();
+
+        InventorySerializer.Instance.SerializeData(InventoryController.Instance.GetInventoryGrid());
     }
 
     private void Update()

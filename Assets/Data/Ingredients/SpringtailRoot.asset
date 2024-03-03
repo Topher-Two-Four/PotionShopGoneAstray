@@ -15,6 +15,7 @@ MonoBehaviour:
   isIngredient: 1
   isSellable: 0
   cantBeDiscarded: 0
+  ingredientID: 30
   width: 2
   height: 3
   itemIcon: {fileID: 21300000, guid: e9c87a255dd95c74c8723eb7900c470c, type: 3}

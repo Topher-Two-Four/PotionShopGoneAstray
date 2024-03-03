@@ -4,55 +4,87 @@ using UnityEngine;
 
 public class InventorySerializer : MonoBehaviour
 {
+    private string inventoryItemKey;
 
-    PotionData potionData;
+    public static InventorySerializer Instance { get; private set; } // Singleton logic
 
-    public void SerializeData(ItemGrid inventoryGrid)
+    private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
+    public string SerializeData(ItemGrid inventoryGrid)
+    {
+        inventoryItemKey = "";
+        HashSet<InventoryItem> processedItems = new HashSet<InventoryItem>();
+
+
         for (int x = 0; x < inventoryGrid.GetGridSizeWidth(); x++)
         {
             for (int y = 0; y < inventoryGrid.GetGridSizeHeight(); y++)
             {
-                InventoryItem inventoryItem = inventoryGrid.inventoryItemSlot[x, y];
-                //Debug.Log("Selecting " + inventoryItem + "using item grid script...");
-                if (inventoryItem != null && inventoryItem.GetInventoryItemData())
+                InventoryItem inventoryItem = inventoryGrid.GetItem(x, y);
+                if (inventoryItem != null && !processedItems.Contains(inventoryItem))
                 {
-                    // Serialize data
+                    processedItems.Add(inventoryItem);
+
+                    if (inventoryItem.GetInventoryItemData() != null)
+                    {
+                        int itemId = inventoryItem.GetInventoryItemData().ingredientID;
+                        int quantity = 1;
+
+                        inventoryItemKey += SerializeIngredientData(itemId, quantity);
+                    }
                 }
             }
-            
         }
 
-        if (potionData.isAntidote)
+        List<PotionData> potionsInInventory = inventoryGrid.FindPotionsInInventory();
+        
+        foreach (PotionData potion in potionsInInventory)
         {
-            // Add a 1
+            inventoryItemKey += SerializePotionData(potion);
+            Debug.Log(potion + " serialized.");
         }
-        else if (potionData.isBenefit)
-        {
-            // Add a 2
-        }
-        else if (potionData.isBenefit)
-        {
-            // Add a 3
-        }
-        else if (potionData.isBenefit)
-        {
-            // Add a 4
-        }
-        else if (potionData.isBenefit)
-        {
-            // Add a 5
-        }
-        else if (potionData.isBenefit)
-        {
-            // Add a 6
-        }
-        else if (potionData.isBenefit)
-        {
-            // Add a 7
-        } else
-        {
-            // Add an 8
-        }
+
+        Debug.Log("Serialized Inventory Key: " + inventoryItemKey);
+
+        return inventoryItemKey;
+    }
+
+    private string SerializeIngredientData(int itemId, int quantity)
+    {
+        Debug.Log("Item ID: " + itemId);
+        Debug.Log("Item quantity: " + quantity);
+
+        return itemId.ToString("D4");
+    }
+
+    private string SerializePotionData(PotionData potionData)
+    {
+        string potionKey = "";
+
+        potionKey += potionData.isAntidote ? "1" :
+                     potionData.isBenefit ? "2" :
+                     potionData.isDeath ? "3" :
+                     potionData.isCrippling ? "4" :
+                     potionData.isHatred ? "5" :
+                     potionData.isHealth ? "6" :
+                     potionData.isLove ? "7" :
+                     potionData.isLucky ? "8" :
+                     potionData.isPoison ? "9" :
+
+        potionKey += "0";
+        potionKey += potionData.quality.ToString("D1");
+        potionKey += potionData.numberOfIngredients.ToString("D2");
+
+        return potionKey;
     }
 }

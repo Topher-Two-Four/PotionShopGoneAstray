@@ -306,5 +306,20 @@ public class ItemGrid : MonoBehaviour
         }
     }
 
+    public void RemoveItemFromInventory(ItemData itemData)
+    {
+        for (int x = 0; x < gridSizeWidth; x++)
+        {
+            for (int y = 0; y < gridSizeHeight; y++)
+            {
+                InventoryItem item = inventoryItemSlot[x, y];
+                if (item != null && item.GetInventoryItemData() == itemData)
+                {
+                    RemoveItem(x, y);
+                    return;
+                }
+            }
+        }
+    }
 
 }

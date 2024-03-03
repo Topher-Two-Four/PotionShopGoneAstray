@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: ElixirOfFortunata_Recipe
   m_EditorClassIdentifier: 
   potion: {fileID: 11400000, guid: e96640cdfb7bbe948a86f3721e011177, type: 2}
-  ingredient1: {fileID: 11400000, guid: 57b141b33fde4ce48845950dc08834b7, type: 2}
-  ingredient2: {fileID: 0}
+  ingredient1: {fileID: 11400000, guid: 560e17a261f76c94f89bbede61f71151, type: 2}
+  ingredient2: {fileID: 11400000, guid: 57b141b33fde4ce48845950dc08834b7, type: 2}
   ingredient3: {fileID: 0}
   ingredient4: {fileID: 0}
-  cookTime: 60
   desiredTemp: 5
-  quality: 5
+  needStirring: 0
+  needsLidOn: 0
   ultraQualityTimeLimit: 0
   highQualityTimeLimit: 0
   mediumQualityTimeLimit: 0
   lowQualityTimeLimit: 0
+  quality: 5
+  cookTime: 60

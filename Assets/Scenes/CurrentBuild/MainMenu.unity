@@ -7287,7 +7287,7 @@ MonoBehaviour:
   decreaseMoralitySound: {fileID: 8300000, guid: 13bffdcace7e83945b623678e1297b15, type: 3}
   cauldronBrewingSound: {fileID: 8300000, guid: 7c563688af3284e42a7f0bacddf19007, type: 3}
   cauldronBubbleSound: {fileID: 8300000, guid: 442febbd71450e2428f2bc5692ed049a, type: 3}
-  cauldronFireSound: {fileID: 8300000, guid: d4f8867498cb70546b973298d6ad5315, type: 3}
+  cauldronFireSound: {fileID: 8300000, guid: 015216a6098744c49a88b18ff9f88e7e, type: 3}
   stirSound: {fileID: 8300000, guid: 3878798dfba5f6647b76f8c927bbe289, type: 3}
   putLidOnSound: {fileID: 8300000, guid: 0f4d5bfa6522f9848abf6b989fd50f5c, type: 3}
   takeLidOffSound: {fileID: 8300000, guid: 9e742d37add7edc4ea10b81c74f98c1e, type: 3}
@@ -52705,6 +52705,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1968482000}
   - component: {fileID: 1968482001}
+  - component: {fileID: 1968482002}
   m_Layer: 0
   m_Name: DataPersistenceManager
   m_TagString: Untagged
@@ -52740,6 +52741,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileName: savedata.json
+--- !u!114 &1968482002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968481999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 115f3b1593c3a16438a66faf0ad7161e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1968710222
 GameObject:
   m_ObjectHideFlags: 0

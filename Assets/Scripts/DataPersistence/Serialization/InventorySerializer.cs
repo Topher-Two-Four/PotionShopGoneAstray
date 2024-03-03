@@ -59,6 +59,33 @@ public class InventorySerializer : MonoBehaviour
         return inventoryItemKey;
     }
 
+    public void DeserializeData(string loadedInventoryKey)
+    {
+        int numberOfItems = loadedInventoryKey.Length / 4;
+
+        while (numberOfItems > 0)
+        {
+            if (loadedInventoryKey[0] == 0)
+            {
+                char ingredientIDPart1 = loadedInventoryKey[2];
+                char ingredientIDPart2 = loadedInventoryKey[3];
+
+                string ingredientID = (ingredientIDPart1 + ingredientIDPart2).ToString();
+
+                // Get ingredient by ID
+
+                // Add item to inventory
+            } else
+            {
+                char potionType = loadedInventoryKey[0];
+                char potionQuality = loadedInventoryKey[2];
+
+                // Create potion type of this type and add to inventory
+                //PotionCraftingSystem.Instance.AddPotionToInventory(potionData, potionQuality);
+            }
+        }
+    }
+
     private string SerializeIngredientData(int itemId, int quantity)
     {
         Debug.Log("Item ID: " + itemId);
@@ -69,7 +96,11 @@ public class InventorySerializer : MonoBehaviour
 
     private string SerializePotionData(PotionData potionData)
     {
-        string potionKey = "";
+        string potionKey = "1";
+        potionKey += potionData.ingredientID.ToString("D2");
+        potionKey += potionData.quality.ToString("D1");
+        
+        /* string potionKey = "";
 
         potionKey += potionData.isAntidote ? "1" :
                      potionData.isBenefit ? "2" :
@@ -84,6 +115,7 @@ public class InventorySerializer : MonoBehaviour
         potionKey += "0";
         potionKey += potionData.quality.ToString("D1");
         potionKey += potionData.numberOfIngredients.ToString("D2");
+        */
 
         return potionKey;
     }

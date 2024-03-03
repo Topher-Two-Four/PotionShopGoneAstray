@@ -13,7 +13,7 @@ public class ItemData : ScriptableObject
     public bool isSellable;
     [Tooltip("Whether or not the item is sellable.")]
     public bool cantBeDiscarded;
-    [Tooltip("Whether or not the item is sellable.")]
+    [Tooltip("Ingredient serialization ID.")]
     public int ingredientID;
 
     [Header("2D Item Width and Height:")]

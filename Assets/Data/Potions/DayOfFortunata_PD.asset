@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isIngredient: 0
   isSellable: 1
+  cantBeDiscarded: 0
+  ingredientID: 8
   width: 3
   height: 3
   itemIcon: {fileID: 21300000, guid: caab3bce15c2a844d82f4485f38bb0cc, type: 3}
@@ -27,7 +29,7 @@ MonoBehaviour:
   isPoison: 0
   isBenefit: 0
   isCrippling: 0
-  quality: 0
+  quality: 4
   baseValue: 10
   sellPrice: 0
   numberOfIngredients: 2

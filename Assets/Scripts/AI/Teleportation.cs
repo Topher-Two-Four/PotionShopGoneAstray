@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Teleportation : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class Teleportation : MonoBehaviour
     [SerializeField] private GameObject jellyModel;
     [Tooltip("The amount of items to remove from the player's inventory when caught by the teleporting enemy.")]
     [SerializeField] private int caughtItemRemoveAmount = 3;
-
+    [Tooltip("The tentacle warning  canvas for Jelly when it has teleported in.")]
+    [SerializeField] private GameObject jellyWarningCanvas;
 
     [Header("Audio Settings:")]
     [Tooltip("The audio source attached to the maze enemy.")]
@@ -61,7 +63,7 @@ public class Teleportation : MonoBehaviour
             {
                 teleportedInTime += Time.deltaTime;
                 //Debug.Log(teleportedInTime);
-            } 
+            }
             else
             {
                 PlayerCaught();
@@ -75,24 +77,27 @@ public class Teleportation : MonoBehaviour
     {
         if (!hasTeleportedIn)
         {
-                hasTeleportedIn = true;
-                teleportedInTime = 0;
-                audioSource.PlayOneShot(triggeredSound);
-                MakeVisible();
+            hasTeleportedIn = true;
+            teleportedInTime = 0;
+            audioSource.PlayOneShot(triggeredSound);
+            MakeVisible();
+            ToggleOnJellyWarningCanvas();
         }
     }
 
     public void TeleportOut()
     {
-            hasTeleportedIn = false;
-            teleportedInTime = 0f;
+        hasTeleportedIn = false;
+        teleportedInTime = 0f;
 
-            audioSource.PlayOneShot(triggeredSound);
+        audioSource.PlayOneShot(triggeredSound);
 
-            MakeInvisible();
-
-            GetComponentInParent<MazeAIController>().MoveToRandomPosition();
-            PlayerHasNotLooked();
+        MakeInvisible();
+        ToggleOffJellyWarningCanvas();
+        
+        GetComponentInParent<MazeAIController>().MoveToRandomPosition();
+        
+        PlayerHasNotLooked();
     }
 
     public void MakeInvisible()
@@ -126,4 +131,14 @@ public class Teleportation : MonoBehaviour
         GameManager.Instance.timeRemaining -= timeRemovedWhenCaught;
         GameManager.Instance.SwitchSceneToPotionLevel();
     }
+
+    private void ToggleOnJellyWarningCanvas()
+    {
+        jellyWarningCanvas.SetActive(true);
+    }
+    private void ToggleOffJellyWarningCanvas()
+    {
+        jellyWarningCanvas.SetActive(false);
+    }
+
 }

@@ -75,21 +75,23 @@ public class InventorySerializer : MonoBehaviour
                 // Get ingredient by ID
 
                 // Add item to inventory
-            } else
+            } 
+            else
             {
-                char potionType = loadedInventoryKey[0];
                 char potionQuality = loadedInventoryKey[2];
+                char potionIDPart1 = loadedInventoryKey[2];
+                char potionIDPart2 = loadedInventoryKey[3];
+
+                string potionID = (potionIDPart1 + potionIDPart2).ToString();
 
                 // Create potion type of this type and add to inventory
-                //PotionCraftingSystem.Instance.AddPotionToInventory(potionData, potionQuality);
+                // PotionCraftingSystem.Instance.AddPotionToInventory(potionData, potionQuality);
             }
         }
     }
 
     private string SerializeIngredientData(int itemId, int quantity)
     {
-        Debug.Log("Item ID: " + itemId);
-        Debug.Log("Item quantity: " + quantity);
 
         return itemId.ToString("D4");
     }
@@ -99,23 +101,6 @@ public class InventorySerializer : MonoBehaviour
         string potionKey = "1";
         potionKey += potionData.ingredientID.ToString("D2");
         potionKey += potionData.quality.ToString("D1");
-        
-        /* string potionKey = "";
-
-        potionKey += potionData.isAntidote ? "1" :
-                     potionData.isBenefit ? "2" :
-                     potionData.isDeath ? "3" :
-                     potionData.isCrippling ? "4" :
-                     potionData.isHatred ? "5" :
-                     potionData.isHealth ? "6" :
-                     potionData.isLove ? "7" :
-                     potionData.isLucky ? "8" :
-                     potionData.isPoison ? "9" :
-
-        potionKey += "0";
-        potionKey += potionData.quality.ToString("D1");
-        potionKey += potionData.numberOfIngredients.ToString("D2");
-        */
 
         return potionKey;
     }

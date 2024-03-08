@@ -20,71 +20,140 @@ public class AudioManager : MonoBehaviour
     public AudioSource sfx2Source;
     public AudioSource sfx3Source;
 
+    [Header("Menu Sounds:")]
     public AudioClip menuButtonHoverSound;
+    [Range(0.0f, 1.0f)] public float menuButtonHoverSoundVolume = 0.5f;
     public AudioClip menuButtonClickSound;
+    [Range(0.0f, 1.0f)] public float menuButtonClickSoundVolume = 0.5f;
+
+    [Header("General Sounds:")]
     public AudioClip newDaySound;
+    [Range(0.0f, 1.0f)] public float newDaySoundVolume = 0.5f;
     public AudioClip endDaySound;
+    [Range(0.0f, 1.0f)] public float endDaySoundVolume = 0.5f;
     public AudioClip pauseGameSound;
+    [Range(0.0f, 1.0f)] public float pauseGameSoundVolume = 0.5f;
     public AudioClip unpauseGameSound;
+    [Range(0.0f, 1.0f)] public float unpauseGameSoundVolume = 0.5f;
     public AudioClip winGameSound;
+    [Range(0.0f, 1.0f)] public float winGameSoundVolume = 0.5f;
     public AudioClip loseGameSound;
+    [Range(0.0f, 1.0f)] public float loseGameSoundVolume = 0.5f;
     public AudioClip navigatePotionShopSound;
+    [Range(0.0f, 1.0f)] public float navigatePotionShopSoundVolume = 0.5f;
 
+    [Header("Inventory Sounds:")]
     public AudioClip openInventorySound;
+    [Range(0.0f, 1.0f)] public float openInventorySoundVolume = 0.5f;
     public AudioClip closeInventorySound;
-    public AudioClip pickUpInventoryItemSound; 
+    [Range(0.0f, 1.0f)] public float closeInventorySoundVolume = 0.5f;
+    public AudioClip pickUpInventoryItemSound;
+    [Range(0.0f, 1.0f)] public float pickUpInventoryItemSoundVolume = 0.5f;
     public AudioClip rotateInventoryItemSound;
+    [Range(0.0f, 1.0f)] public float rotateInventoryItemSoundVolume = 0.5f;
     public AudioClip placeInventoryItemSound;
+    [Range(0.0f, 1.0f)] public float placeInventoryItemSoundVolume = 0.5f;
     public AudioClip trashInventorySound;
+    [Range(0.0f, 1.0f)] public float trashInventorySoundVolume = 0.5f;
     public AudioClip dropItemSound;
+    [Range(0.0f, 1.0f)] public float dropItemSoundVolume = 0.5f;
 
+    [Header("Book Sounds:")]
     public AudioClip openBookSound;
+    [Range(0.0f, 1.0f)] public float openBookSoundVolume = 0.5f;
     public AudioClip closeBookSound;
+    [Range(0.0f, 1.0f)] public float closeBookSoundVolume = 0.5f;
     public AudioClip switchPageSound;
+    [Range(0.0f, 1.0f)] public float switchPageSoundVolume = 0.5f;
 
+    [Header("Character Sounds:")]
     public AudioClip characterSpeechSound;
+    [Range(0.0f, 1.0f)] public float characterSpeechSoundVolume = 0.5f;
     public AudioClip completeOrderSound;
+    [Range(0.0f, 1.0f)] public float completeOrderSoundVolume = 0.5f;
     public AudioClip increaseMoralitySound;
+    [Range(0.0f, 1.0f)] public float increaseMoralitySoundVolume = 0.5f;
     public AudioClip decreaseMoralitySound;
+    [Range(0.0f, 1.0f)] public float decreaseMoralitySoundVolume = 0.5f;
 
+    [Header("Cauldron Sounds:")] 
     public AudioClip cauldronBrewingSound;
+    [Range(0.0f, 1.0f)] public float cauldronBrewingSoundVolume = 0.5f;
     public AudioClip cauldronBubbleSound;
+    [Range(0.0f, 1.0f)] public float cauldronBubbleSoundVolume = 0.5f;
     public AudioClip cauldronFireSound;
+    [Range(0.0f, 1.0f)] public float cauldronFireSoundVolume = 0.5f;
     public AudioClip stirSound;
+    [Range(0.0f, 1.0f)] public float stirSoundVolume = 0.5f;
     public AudioClip putLidOnSound;
+    [Range(0.0f, 1.0f)] public float putLidOnSoundVolume = 0.5f;
     public AudioClip takeLidOffSound;
+    [Range(0.0f, 1.0f)] public float takeLidOffSoundVolume = 0.5f;
     public AudioClip potionStartBrewingSound;
+    [Range(0.0f, 1.0f)] public float potionStartBrewingSoundVolume = 0.5f;
     public AudioClip potionFinishedBrewingSound;
+    [Range(0.0f, 1.0f)] public float potionFinishedBrewingSoundVolume = 0.5f;
     public AudioClip retrievePotionSound;
+    [Range(0.0f, 1.0f)] public float retrievePotionSoundVolume = 0.5f;
     public AudioClip addIngredientSound;
+    [Range(0.0f, 1.0f)] public float addIngredientSoundVolume = 0.5f;
     public AudioClip removeIngredientSound;
+    [Range(0.0f, 1.0f)] public float removeIngredientSoundVolume = 0.5f;
     public AudioClip switchToFreezingTempSound;
+    [Range(0.0f, 1.0f)] public float switchToFreezingTempSoundVolume = 0.5f;
     public AudioClip switchToColdTempSound;
+    [Range(0.0f, 1.0f)] public float switchToColdTempSoundVolume = 0.5f;
     public AudioClip switchToMediumTempSound;
+    [Range(0.0f, 1.0f)] public float switchToMediumTempSoundVolume = 0.5f;
     public AudioClip switchToHotTempSound;
+    [Range(0.0f, 1.0f)] public float switchToHotTempSoundVolume = 0.5f;
     public AudioClip switchToBoilingTempSound;
+    [Range(0.0f, 1.0f)] public float switchToBoilingTempSoundVolume = 0.5f;
 
+    [Header("Music:")]
     public AudioClip menuMusic;
+    [Range(0.0f, 1.0f)] public float menuMusicVolume = 0.5f;
     public AudioClip potionShopMusic;
+    [Range(0.0f, 1.0f)] public float potionShopMusicVolume = 0.5f;
     public AudioClip mazeMusic;
+    [Range(0.0f, 1.0f)] public float mazeMusicVolume = 0.5f;
     public AudioClip mazeMusicAllGood;
+    [Range(0.0f, 1.0f)] public float mazeMusicAllGoodVolume = 0.5f;
     public AudioClip mazeMusicVeryGood;
+    [Range(0.0f, 1.0f)] public float mazeMusicVeryGoodVolume = 0.5f;
     public AudioClip mazeMusicGood;
+    [Range(0.0f, 1.0f)] public float mazeMusicGoodVolume = 0.5f;
     public AudioClip mazeMusicNeutral;
+    [Range(0.0f, 1.0f)] public float mazeMusicNeutralVolume = 0.5f;
     public AudioClip mazeMusicBad;
+    [Range(0.0f, 1.0f)] public float mazeMusicBadVolume = 0.5f;
     public AudioClip mazeMusicVeryBad;
+    [Range(0.0f, 1.0f)] public float mazeMusicVeryBadVolume = 0.5f;
     public AudioClip mazeMusicAllBad;
+    [Range(0.0f, 1.0f)] public float mazeMusicAllBadVolume = 0.5f;
 
+
+    [Header("Ambient Sounds:")]
     public AudioClip potionShopAmbience1;
+    [Range(0.0f, 1.0f)] public float potionShopAmbience1Volume = 0.5f;
     public AudioClip potionShopAmbience2;
+    [Range(0.0f, 1.0f)] public float potionShopAmbience2Volume = 0.5f;
 
+    [Header("Player Sounds:")]
     public AudioClip playerWalkSound;
+    [Range(0.0f, 1.0f)] public float playerWalkSoundVolume = 0.5f;
     public AudioClip playerRunSound;
+    [Range(0.0f, 1.0f)] public float playerRunSoundVolume = 0.5f;
     public AudioClip playerJumpSound;
+    [Range(0.0f, 1.0f)] public float playerJumpSoundVolume = 0.5f;
     public AudioClip playerOutOfStaminaSound;
+    [Range(0.0f, 1.0f)] public float playerOutOfStaminaSoundVolume = 0.5f;
     public AudioClip pickUpMazeItemSound;
+    [Range(0.0f, 1.0f)] public float pickUpMazeItemSoundVolume = 0.5f;
     public AudioClip teleportToMazeSound;
+    [Range(0.0f, 1.0f)] public float teleportToMazeSoundVolume = 0.5f;
     public AudioClip teleportToShopSound;
+    [Range(0.0f, 1.0f)] public float teleportToShopSoundVolume = 0.5f;
 
     public static AudioManager Instance { get; private set; } // Singleton logic
 

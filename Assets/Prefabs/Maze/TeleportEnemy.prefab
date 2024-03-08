@@ -268,7 +268,6 @@ GameObject:
   - component: {fileID: 7170141835107084282}
   - component: {fileID: 6298653204672566114}
   - component: {fileID: 6012884922094455092}
-  - component: {fileID: 7838771924475843628}
   m_Layer: 5
   m_Name: LeftTentacle
   m_TagString: Untagged
@@ -354,20 +353,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7838771924475843628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4609086860542675072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67b705f6c959e7a42905baa8617317f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 6012884922094455092}
-  tentacleAnimation: {fileID: 0}
 --- !u!1 &4873661677922024508
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,7 +614,6 @@ GameObject:
   - component: {fileID: 2672398908085276889}
   - component: {fileID: 7921076696090067756}
   - component: {fileID: 1231339934797560326}
-  - component: {fileID: 694985270318023317}
   m_Layer: 5
   m_Name: RightTentacle
   m_TagString: Untagged
@@ -715,20 +699,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &694985270318023317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5324113105726616947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67b705f6c959e7a42905baa8617317f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 1231339934797560326}
-  tentacleAnimation: {fileID: 0}
 --- !u!1001 &2040511360375459256
 PrefabInstance:
   m_ObjectHideFlags: 0

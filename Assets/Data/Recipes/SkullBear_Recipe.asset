@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208b1537c6b018c438507b1122182a38, type: 3}
+  m_Name: SkullBear_Recipe
+  m_EditorClassIdentifier: 
+  potion: {fileID: 11400000, guid: 77130cf7bfa07d64394f753770cd9553, type: 2}
+  ingredient1: {fileID: 11400000, guid: cd4829c8e8f4a1242a184cc3b8150859, type: 2}
+  ingredient2: {fileID: 11400000, guid: cd4829c8e8f4a1242a184cc3b8150859, type: 2}
+  ingredient3: {fileID: 11400000, guid: cd4829c8e8f4a1242a184cc3b8150859, type: 2}
+  ingredient4: {fileID: 11400000, guid: cd4829c8e8f4a1242a184cc3b8150859, type: 2}
+  desiredTemp: 5
+  needStirring: 1
+  needsLidOn: 1
+  ultraQualityTimeLimit: 0
+  highQualityTimeLimit: 0
+  mediumQualityTimeLimit: 0
+  lowQualityTimeLimit: 0
+  quality: 5
+  cookTime: 60

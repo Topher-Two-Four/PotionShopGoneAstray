@@ -42,6 +42,7 @@ public class RoomManager : MonoBehaviour
         leftNavigationButton.onClick.AddListener(() => LeftArrowKeyPress());
         rightNavigationButton.onClick.AddListener(() => RightArrowKeyPress());
         GameManager.Instance.ToggleOffLoadingScreenCanvas();
+        GameManager.Instance.ToggleCursorOn();
         TutorialManager.Instance.ToggleOnLookingAroundShopTutorial();
 
         InventorySerializer.Instance.SerializeData(InventoryController.Instance.GetInventoryGrid());
@@ -74,6 +75,7 @@ public class RoomManager : MonoBehaviour
         currentRoom = cauldronRoom; // Switch current room to the new room
         currentRoom.SetActive(true); // Set new current room game object to active
 
+        GameManager.Instance.ToggleCursorOn();
         GameManager.Instance.ToggleOffDoorToMaze();
         GameManager.Instance.ToggleOnPotionCraftingCanvas();
         GameManager.Instance.ToggleOffOrderDisplay();
@@ -95,6 +97,7 @@ public class RoomManager : MonoBehaviour
         currentRoom = orderRoom; // Switch current room to the new room
         currentRoom.SetActive(true); // Set new current room game object to active
 
+        GameManager.Instance.ToggleCursorOn();
         GameManager.Instance.ToggleOffPotionCraftingCanvas();
         GameManager.Instance.ToggleOffDoorToMaze();
         GameManager.Instance.ToggleOnOrderDisplay();
@@ -110,6 +113,7 @@ public class RoomManager : MonoBehaviour
     }
     private void SwitchToMazeDoorRoom()
     {
+        GameManager.Instance.ToggleCursorOn();
         currentRoom.SetActive(false); // Set current room game object to inactive
         currentRoom = mazeDoorRoom; // Switch current room to the new room
         currentRoom.SetActive(true); // Set new current room game object to active
@@ -128,6 +132,7 @@ public class RoomManager : MonoBehaviour
     }
     private void SwitchToRegisterRoom()
     {
+        GameManager.Instance.ToggleCursorOn();
         currentRoom.SetActive(false); // Set current room game object to inactive
         currentRoom = registerRoom; // Switch current room to the new room
         currentRoom.SetActive(true); // Set new current room game object to active

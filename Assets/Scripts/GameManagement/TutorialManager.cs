@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -45,17 +47,46 @@ public class TutorialManager : MonoBehaviour
     [Header("Tutorial Display Settings:")]
     [Tooltip("The amount of time that elapses before the tutorial canvas is set inactive.")]
     [SerializeField] private float timeoutTime = 5.0f;
+    
+    [SerializeField] private bool tutorialsOn = true;
+    [SerializeField] private Button toggleTutorialsButton;
+    [SerializeField] private Image tutorialsToggledIndicator;
 
     public static TutorialManager Instance { get; private set; } // Singleton logic
+
+    private void Start()
+    {
+        try
+        {
+            toggleTutorialsButton.onClick.AddListener(() => ToggleTutorialVisibility());
+        } 
+        catch (Exception e)
+        {
+            Debug.LogWarning(e);
+        }
+    }
 
     private void Update()
     {
         if (Instance != null && Instance != this) { Destroy(this); } else { Instance = this; } // Singleton logic
     }
 
+    private void ToggleTutorialVisibility()
+    {
+        if (tutorialsOn)
+        {
+            tutorialsOn = false;
+            tutorialsToggledIndicator.gameObject.SetActive(false);
+        } else
+        {
+            tutorialsOn = true;
+            tutorialsToggledIndicator.gameObject.SetActive(true);
+        }
+    }
+
     public void ToggleOnBrewingStepsIntroTutorial()
     {
-        if (!brewingStepsIntroTutorialPlayed)
+        if (!brewingStepsIntroTutorialPlayed && tutorialsOn)
         {
             brewingStepsIntroTutorial.SetActive(true);
             Invoke("ToggleOffBrewingStepsIntroTutorial", timeoutTime);
@@ -70,7 +101,7 @@ public class TutorialManager : MonoBehaviour
 
     public void ToggleOnBrewingSteps1Tutorial()
     {
-        if (!brewingSteps1TutorialPlayed)
+        if (!brewingSteps1TutorialPlayed && tutorialsOn)
         {
             brewingSteps1Tutorial.SetActive(true);
             Invoke("ToggleOffBrewingSteps1Tutorial", timeoutTime);
@@ -85,7 +116,7 @@ public class TutorialManager : MonoBehaviour
 
     public void ToggleOnBrewingSteps2Tutorial()
     {
-        if (!brewingSteps2TutorialPlayed)
+        if (!brewingSteps2TutorialPlayed && tutorialsOn)
         {
             brewingSteps2Tutorial.SetActive(true);
             Invoke("ToggleOffBrewingSteps2Tutorial", timeoutTime);
@@ -100,7 +131,7 @@ public class TutorialManager : MonoBehaviour
 
     public void ToggleOnCheckRecipeBookTutorial()
     {
-        if (!checkRecipeBookTutorialPlayed)
+        if (!checkRecipeBookTutorialPlayed && tutorialsOn)
         {
             checkRecipeBookTutorial.SetActive(true);
             Invoke("ToggleOffCheckRecipeBookTutorial", timeoutTime);
@@ -114,7 +145,7 @@ public class TutorialManager : MonoBehaviour
     }
     public void ToggleOnDeliveryTutorial()
     {
-        if (!deliveryTutorialPlayed)
+        if (!deliveryTutorialPlayed && tutorialsOn)
         {
             deliveryTutorial.SetActive(true);
             Invoke("ToggleOffDeliveryTutorial", timeoutTime);
@@ -129,7 +160,7 @@ public class TutorialManager : MonoBehaviour
 
     public void ToggleOnExploreTutorial()
     {
-        if (!exploreTutorialPlayed)
+        if (!exploreTutorialPlayed && tutorialsOn)
         {
             exploreTutorial.SetActive(true);
             Invoke("ToggleOffExploreTutorial", timeoutTime);
@@ -143,7 +174,7 @@ public class TutorialManager : MonoBehaviour
     }
     public void ToggleOnGoodAndBadPotions1Tutorial()
     {
-        if (!goodAndBadPotionTutorial1Played)
+        if (!goodAndBadPotionTutorial1Played && tutorialsOn)
         {
             goodAndBadPotionTutorial1.SetActive(true);
             Invoke("ToggleOffGoodAndBadPotions1Tutorial", timeoutTime);
@@ -158,7 +189,7 @@ public class TutorialManager : MonoBehaviour
 
     public void ToggleOnGoodAndBadPotions2Tutorial()
     {
-        if (!goodAndBadPotionTutorial2Played)
+        if (!goodAndBadPotionTutorial2Played && tutorialsOn)
         {
             goodAndBadPotionTutorial2.SetActive(true);
             Invoke("ToggleOffGoodAndBadPotions2Tutorial", timeoutTime);
@@ -173,7 +204,7 @@ public class TutorialManager : MonoBehaviour
 
     public void ToggleOnInventoryTutorial()
     {
-        if (!inventoryTutorialPlayed)
+        if (!inventoryTutorialPlayed && tutorialsOn)
         {
             inventoryTutorial.SetActive(true);
             Invoke("ToggleOffInventoryTutorial", timeoutTime);
@@ -187,7 +218,7 @@ public class TutorialManager : MonoBehaviour
     }
     public void ToggleOnJumpTutorial()
     {
-        if (!jumpTutorialPlayed)
+        if (!jumpTutorialPlayed && tutorialsOn)
         {
             jumpTutorial.SetActive(true);
             Invoke("ToggleOffJumpTutorial", timeoutTime);
@@ -201,7 +232,7 @@ public class TutorialManager : MonoBehaviour
     }
     public void ToggleOnLookingAroundShopTutorial()
     {
-        if (!lookingAroundShopTutorialPlayed)
+        if (!lookingAroundShopTutorialPlayed && tutorialsOn)
         {
             lookingAroundShopTutorial.SetActive(true);
             Invoke("ToggleOffLookingAroundShopTutorial", timeoutTime);
@@ -216,7 +247,7 @@ public class TutorialManager : MonoBehaviour
 
     public void ToggleOnMazeAccessTutorial()
     {
-        if (!mazeAccessTutorialPlayed)
+        if (!mazeAccessTutorialPlayed && tutorialsOn)
         {
             mazeAccessTutorial.SetActive(true);
             Invoke("ToggleOffMazeAccessTutorial", timeoutTime);
@@ -231,7 +262,7 @@ public class TutorialManager : MonoBehaviour
 
     public void ToggleOnMonstersTutorial()
     {
-        if (!monstersTutorialPlayed)
+        if (!monstersTutorialPlayed && tutorialsOn)
         {
             monstersTutorial.SetActive(true);
             Invoke("ToggleOffMonstersTutorial", timeoutTime);
@@ -246,7 +277,7 @@ public class TutorialManager : MonoBehaviour
 
     public void ToggleOnMovementTutorial()
     {
-        if (!movementTutorialPlayed)
+        if (!movementTutorialPlayed && tutorialsOn)
         {
             movementTutorial.SetActive(true);
             Invoke("ToggleOffMovementTutorial", timeoutTime);
@@ -260,7 +291,7 @@ public class TutorialManager : MonoBehaviour
     }
     public void ToggleOnPauseGameTutorial()
     {
-        if (!pauseGameTutorialPlayed)
+        if (!pauseGameTutorialPlayed && tutorialsOn)
         {
             pauseGameTutorial.SetActive(true);
             Invoke("ToggleOffPauseGameTutorial", timeoutTime);
@@ -275,7 +306,7 @@ public class TutorialManager : MonoBehaviour
 
     public void ToggleOnSellPotionsTutorial()
     {
-        if (!sellPotionsTutorialPlayed)
+        if (!sellPotionsTutorialPlayed && tutorialsOn)
         {
             sellPotionsTutorial.SetActive(true);
             Invoke("ToggleOffSellPotionsTutorial", timeoutTime);
@@ -290,7 +321,7 @@ public class TutorialManager : MonoBehaviour
 
     public void BeginMazeTutorial()
     {
-        if (!mazeTutorialPlayed)
+        if (!mazeTutorialPlayed && tutorialsOn)
         {
             Invoke("ToggleOnMovementTutorial", 0.5f);
             Invoke("ToggleOnJumpTutorial", 0.5f);

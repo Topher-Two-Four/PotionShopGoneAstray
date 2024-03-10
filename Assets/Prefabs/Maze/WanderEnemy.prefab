@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 131211153909381853}
   m_Layer: 8
   m_Name: WanderEnemy
-  m_TagString: Untagged
+  m_TagString: MazeEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

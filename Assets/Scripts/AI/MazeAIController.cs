@@ -37,10 +37,11 @@ public class MazeAIController : MonoBehaviour
     [Tooltip("Whether this is a Jelly enemy.")]
     [SerializeField] private bool isJelly = false;
 
-    [HideInInspector] public bool _isPatrolling; // True if AI is patrolling
-    [HideInInspector] public bool _isChasing; // True if player is within range of visibility and being chased
-    [HideInInspector] public bool _isDetectingPlayer; // True if player is nearby and in the process of being detected
-    [HideInInspector] public bool _playerCaught; // True if player has been caught
+    public bool _isPatrolling; // True if AI is patrolling
+    public bool _isChasing; // True if player is within range of visibility and being chased
+    public bool _isDetectingPlayer; // True if player is nearby and in the process of being detected
+    public bool _playerCaught; // True if player has been caught
+    public bool _bellCooldownComplete;
 
     [HideInInspector] public float raycastMeshResolution = 1.0f; // Amount of rays that are cast per degree to increase mesh filter resolution
     [HideInInspector] public int raycastEdgeIterations = 4; // Number of times raycast will iterate to increase mesh filter performance
@@ -61,6 +62,7 @@ public class MazeAIController : MonoBehaviour
         _isChasing = false; // AI is not currently chasing player
         _isDetectingPlayer = false; // AI is not currently detecting player
         _playerCaught = false; // AI has not caught player
+        _bellCooldownComplete = true;
 
         navMeshAgent = GetComponent<NavMeshAgent>(); // Get the Nav Mesh Agent component of the AI game object
         navMeshAgent.isStopped = false; // Make it so that the AI is no longer stopped
@@ -86,6 +88,21 @@ public class MazeAIController : MonoBehaviour
                 if (GetComponentInChildren<Teleportation>() != null)
                 {
                     Teleportation.Instance.TeleportIn();
+                }
+
+                if (GetComponentInChildren<PenguinBell>() != null)
+                {
+                    //Debug.Log("Chasing and has PenguinBell");
+
+                    if (_bellCooldownComplete)
+                    {
+                        //Debug.Log(_bellCooldownComplete);
+
+                        PenguinBell.Instance.SoundAlarmBell();
+                        MoveEnemiesToAlarmSound();
+                        _bellCooldownComplete = false;
+                        Invoke("BellCooldown", PenguinBell.Instance.GetPenguinCoolDownTime());
+                    }
                 }
             }
 
@@ -344,4 +361,21 @@ public class MazeAIController : MonoBehaviour
         Debug.DrawLine(transform.position + rightBoundary * viewRadius, transform.position + leftBoundary * viewRadius, Color.green); // Draw a line between the two boundary end points to show view radius
     }
 
+    public void MoveEnemiesToAlarmSound()
+    {
+        Debug.Log("MoveEnemiesToAlarmSoundCalled");
+
+        GameObject[] mazeEnemies = GameObject.FindGameObjectsWithTag("MazeEnemy");
+        foreach (GameObject enemy in mazeEnemies)
+        {
+            Search(PenguinBell.Instance.gameObject.transform.position);
+            Debug.Log(enemy + " moving to " + PenguinBell.Instance.gameObject.transform.position);
+        }
+    }
+
+    private void BellCooldown()
+    {
+        _bellCooldownComplete = true;
+        Debug.Log("Bell cooldown complete.");
+    }
 }

@@ -14185,7 +14185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6073503498084768483, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
       propertyPath: viewAngle
-      value: 30
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 6073503498084768483, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
       propertyPath: viewRadius

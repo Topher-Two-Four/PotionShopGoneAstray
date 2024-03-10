@@ -243,11 +243,11 @@ public class AudioManager : MonoBehaviour
             if (audioSource == musicSource) 
             { 
                 audioSource.Stop();
-                Debug.Log("Music stopped.");
+                //Debug.Log("Music stopped.");
             }
-            Debug.Log("Playing " + name + " on " + audioSource);
+            //Debug.Log("Playing " + name + " on " + audioSource);
             audioSource.volume = volume;
-            Debug.Log("Volume: " + volume);
+            //Debug.Log("Volume: " + volume);
             audioSource.PlayOneShot(clip, volume);
         }
     }

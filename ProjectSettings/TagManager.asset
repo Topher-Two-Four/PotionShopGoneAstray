@@ -9,6 +9,7 @@ TagManager:
   - ItemTarget
   - EnemySpawnPoint
   - TeleportingEnemy
+  - MazeEnemy
   layers:
   - Default
   - TransparentFX

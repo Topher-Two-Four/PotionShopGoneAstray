@@ -161,8 +161,8 @@ public class PotionCraftingSystem : MonoBehaviour
 
         if (potionRecipe != null)
         {
-            AudioManager.Instance.PlaySFX("PotionStartBrewing");
-            AudioManager.Instance.PlaySFX2("CauldronFire");
+            AudioManager.Instance.PlayPotionStartBrewingSound();
+            AudioManager.Instance.PlayCauldronFireSound();
             isBrewing = true;
             BrewPotionWIthRecipe(potionRecipe);
             potionImage.sprite = potionRecipe.potion.itemIcon;
@@ -240,14 +240,14 @@ public class PotionCraftingSystem : MonoBehaviour
 
             if ((timeCooked > 29.0f && timeCooked < 31.0f) && _halfwayCompleteIndicated)
             {
-                AudioManager.Instance.PlaySFX3("CauldronBubble");
+                AudioManager.Instance.PlayCauldronBubbleSound();
                 _halfwayCompleteIndicated = true;
             }
 
             yield return null;
         }
         CheckPotionQuality(potionRecipe.cookTime, timeAtDesiredTemp);
-        AudioManager.Instance.PlaySFX("PotionFinishedBrewing");
+        AudioManager.Instance.PlayPotionFinishedBrewingSound();
         DisplayBrewingComplete();
     }
 
@@ -486,7 +486,7 @@ public class PotionCraftingSystem : MonoBehaviour
 
     public void AddItemToInventory(ItemData itemData)
     {
-        AudioManager.Instance.PlaySFX("RemoveIngredient");
+        AudioManager.Instance.PlayPickUpInventoryItemSound();
         if (itemData != null)
         {
             InventoryController.Instance.InsertItem(itemData);
@@ -573,30 +573,31 @@ public class PotionCraftingSystem : MonoBehaviour
 
     private void IncreaseTemperature()
     {
-        if (currentTemp < 5) 
+        if (currentTemp < 5)
         {
             currentTemp++;
             if (currentTemp == 5)
             {
-                AudioManager.Instance.PlaySFX("SwitchToBoilingTemp");
-            } 
+                AudioManager.Instance.PlaySwitchToBoilingTempSound();
+            }
             else if (currentTemp == 4)
             {
-                AudioManager.Instance.PlaySFX("SwitchToHotTemp");
-            } 
+                AudioManager.Instance.PlaySwitchToHotTempSound();
+            }
             else if (currentTemp == 3)
             {
-                AudioManager.Instance.PlaySFX("SwitchToMediumTemp");
-            } 
+                AudioManager.Instance.PlaySwitchToMediumTempSound();
+            }
             else if (currentTemp == 2)
             {
-                AudioManager.Instance.PlaySFX("SwitchToLowTemp");
+                AudioManager.Instance.PlaySwitchToColdTempSound();
+                UpdateTemperatureDisplay();
             }
-            UpdateTemperatureDisplay();
-        } else
-        {
-            currentTemp = 5;
-            UpdateTemperatureDisplay();
+            else
+            {
+                currentTemp = 5;
+                UpdateTemperatureDisplay();
+            }
         }
     }
 
@@ -607,19 +608,19 @@ public class PotionCraftingSystem : MonoBehaviour
             currentTemp--;
             if (currentTemp == 4)
             {
-                AudioManager.Instance.PlaySFX("SwitchToHotTemp");
+                    AudioManager.Instance.PlaySwitchToHotTempSound();
             }
             else if (currentTemp == 3)
             {
-                AudioManager.Instance.PlaySFX("SwitchToMediumTemp");
+                    AudioManager.Instance.PlaySwitchToMediumTempSound();
             }
             else if (currentTemp == 2)
             {
-                AudioManager.Instance.PlaySFX("SwitchToLowTemp");
+                    AudioManager.Instance.PlaySwitchToColdTempSound();
             } 
             else if (currentTemp == 1)
             {
-                AudioManager.Instance.PlaySFX("SwitchToFreezingTemp");
+                    AudioManager.Instance.PlaySwitchToFreezingTempSound();
             }
             UpdateTemperatureDisplay();
         }
@@ -665,14 +666,14 @@ public class PotionCraftingSystem : MonoBehaviour
     {
         if (!isLidOn)
         {
-            AudioManager.Instance.PlaySFX("PutLidOn");
+            AudioManager.Instance.PlayPutLidOnSound();
             putOnLidButton.gameObject.SetActive(false);
             removeLidButton.gameObject.SetActive(true);
             isLidOn = true;
         }
         else
         {
-            AudioManager.Instance.PlaySFX("TakeLidOff");
+            AudioManager.Instance.PlayTakeLidOffSound();
             removeLidButton.gameObject.SetActive(false);
             putOnLidButton.gameObject.SetActive(true);
             isLidOn = false;
@@ -681,7 +682,7 @@ public class PotionCraftingSystem : MonoBehaviour
 
     public void StirCauldron()
     {
-        AudioManager.Instance.PlaySFX("Stir");
+        AudioManager.Instance.PlayStirSound();
         if (timeCooked > (cookTime / 2))
         {
             isStirred = true;
@@ -696,7 +697,7 @@ public class PotionCraftingSystem : MonoBehaviour
         {
             if (isRetrievable)
             {
-                AudioManager.Instance.PlaySFX("RetrievePotion");
+                AudioManager.Instance.PlayRetrievePotionSound();
                 AddPotionToInventory(potionBeingBrewed, GetPotionQuality());
                 OrderSystem.Instance.CheckForCompleteOrders();
                 potionBeingBrewed = null;
@@ -711,7 +712,7 @@ public class PotionCraftingSystem : MonoBehaviour
     private void RetrieveItem(ItemData ingredient, int ingredientSlot)
     {
         AddItemToInventory(ingredient);
-        AudioManager.Instance.PlaySFX("RemoveIngredient");
+        AudioManager.Instance.PlayRemoveIngredientSound();
         if (ingredientSlot == 1)
         {
             ingredient1 = null;

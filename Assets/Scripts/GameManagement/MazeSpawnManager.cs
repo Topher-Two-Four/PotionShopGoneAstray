@@ -44,9 +44,9 @@ public class MazeSpawnManager : MonoBehaviour
 
     void Start()
     {
-        AudioManager.Instance.sfxSource.Stop();
+        AudioManager.Instance.sfx1Source.Stop();
         AudioManager.Instance.sfx2Source.Stop();
-        AudioManager.Instance.PlayMusic("MazeMusic");
+        AudioManager.Instance.PlayMazeMusic();
         MoralitySystem.Instance.ApplyMoralityEffect();
         GameManager.Instance.GetPlayerCapsule().transform.position = GameObject.FindGameObjectWithTag("PlayerSpawnPoint").transform.position;
         GameManager.Instance.ToggleCursorOff();

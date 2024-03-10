@@ -51,13 +51,13 @@ public class RecipeBookManager : MonoBehaviour
         TutorialManager.Instance.ToggleOnCheckRecipeBookTutorial();
         if (apothecaryManualCanvas.gameObject.activeSelf)
         {
-            AudioManager.Instance.PlaySFX("CloseBook");
+            AudioManager.Instance.PlayCloseBookSound();
             apothecaryManualCanvas.gameObject.SetActive(false);
             //inventoryGrid.SetActive(true);
 } 
         else
         {
-            AudioManager.Instance.PlaySFX("OpenBook");
+            AudioManager.Instance.PlayOpenBookSound();
             apothecaryManualCanvas.gameObject.SetActive(true);
         }
     }
@@ -71,7 +71,7 @@ public class RecipeBookManager : MonoBehaviour
     {
         if (bookPageIndex < bookPages.Length)
         {
-            AudioManager.Instance.PlaySFX("SwitchPage");
+            AudioManager.Instance.PlaySwitchPageSound();
             bookPages[bookPageIndex].SetActive(false);
             bookPageIndex++;
             bookPages[bookPageIndex].SetActive(true);
@@ -85,7 +85,7 @@ public class RecipeBookManager : MonoBehaviour
     {
         if (bookPageIndex > 0)
         {
-            AudioManager.Instance.PlaySFX("SwitchPage");
+            AudioManager.Instance.PlaySwitchPageSound();
             bookPages[bookPageIndex].SetActive(false);
             bookPageIndex--;
             bookPages[bookPageIndex].SetActive(true);

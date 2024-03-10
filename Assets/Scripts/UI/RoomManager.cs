@@ -27,10 +27,10 @@ public class RoomManager : MonoBehaviour
 
     private void Awake()
     {
-        AudioManager.Instance.sfxSource.Stop();
+        AudioManager.Instance.sfx1Source.Stop();
         AudioManager.Instance.sfx2Source.Stop();
         AudioManager.Instance.musicSource.pitch = 1.0f;
-        AudioManager.Instance.PlayMusic("ShopMusic");
+        AudioManager.Instance.PlayPotionShopMusic();
 
         cauldronRoomOpen = false;
         orderRoomOpen = false;
@@ -150,7 +150,7 @@ public class RoomManager : MonoBehaviour
 
     private void LeftArrowKeyPress()
     {
-        AudioManager.Instance.PlaySFX("NavigatePotionShop");
+        AudioManager.Instance.PlayNavigatePotionShopSound();
 
         if (cauldronRoomOpen)
         {
@@ -172,7 +172,7 @@ public class RoomManager : MonoBehaviour
 
     private void RightArrowKeyPress()
     {
-        AudioManager.Instance.PlaySFX("NavigatePotionShop");
+        AudioManager.Instance.PlayNavigatePotionShopSound();
 
         if (cauldronRoomOpen)
         {

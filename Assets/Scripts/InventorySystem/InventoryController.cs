@@ -206,7 +206,7 @@ public class InventoryController : MonoBehaviour
         //Debug.Log(itemData);
         if (itemData != null && isSpaceForItem && selectedItem == null)
         {
-            AudioManager.Instance.PlaySFX("PickUpMazeItem");
+            AudioManager.Instance.PlayPickUpMazeItemSound();
             InsertItem(itemData);
             itemData = null;
         }
@@ -217,7 +217,7 @@ public class InventoryController : MonoBehaviour
 
         if (inventoryCanvas.gameObject.activeSelf) // If inventory canvas is active then deactivate it
         {
-            AudioManager.Instance.PlaySFX("CloseInventory");
+            AudioManager.Instance.PlayCloseInventorySound();
 
             Cursor.visible = false; // Hide cursor
             Cursor.lockState = CursorLockMode.Locked; // Unlock and confine cursor to game screen
@@ -233,7 +233,7 @@ public class InventoryController : MonoBehaviour
         } 
         else // If inventory canvas is inactive then activate it
         {
-            AudioManager.Instance.PlaySFX("OpenInventory");
+            AudioManager.Instance.PlayOpenInventorySound();
 
             Cursor.lockState = CursorLockMode.Confined; // Lock cursor in one place
             Cursor.visible = true; // Hide cursor
@@ -244,7 +244,7 @@ public class InventoryController : MonoBehaviour
 
     public void ToggleInventoryCanvasOff()
     {
-        AudioManager.Instance.PlaySFX("CloseInventory");
+        AudioManager.Instance.PlayCloseInventorySound();
 
         if (inventoryCanvas.gameObject.activeSelf) // If inventory canvas is active then deactivate it
         {
@@ -288,7 +288,7 @@ public class InventoryController : MonoBehaviour
 
     public void SellPotion(Order order)
     {
-        AudioManager.Instance.PlaySFX("CompleteOrder");
+        AudioManager.Instance.PlayCompleteOrderSound();
         PotionData potionData = FindPotionOfType(order);
         potionData.sellPrice = (potionData.quality * potionData.baseValue) * potionData.numberOfIngredients;
         GameManager.Instance.AddCurrencyToPlayer(potionData.sellPrice);
@@ -323,7 +323,7 @@ public class InventoryController : MonoBehaviour
         if (selectedItem != null && selectedItem.GetInventoryItemData().isIngredient && isSpaceForItem)
         {
             selectedItemGrid.RemoveItem(tileGridPosition.x, tileGridPosition.y);
-            AudioManager.Instance.PlaySFX("AddIngredient");
+            AudioManager.Instance.PlayAddIngredientSound();
             PotionCraftingSystem.Instance.AddIngredientToSlot(selectedItem.GetInventoryItemData());
             Destroy(selectedItem.gameObject);
         }
@@ -344,7 +344,7 @@ public class InventoryController : MonoBehaviour
     {
         if (selectedItem != null && !selectedItem.GetInventoryItemData().cantBeDiscarded)
         {
-            AudioManager.Instance.PlaySFX("TrashInventory");
+            AudioManager.Instance.PlayTrashInventorySound();
             selectedItem.Delete();
         }
         else
@@ -359,7 +359,7 @@ public class InventoryController : MonoBehaviour
             selectedItem.GetType() != typeof(PotionData) &&
             !selectedItem.GetInventoryItemData().cantBeDiscarded)
         {
-            AudioManager.Instance.PlaySFX("DropItem");
+            AudioManager.Instance.PlayDropItemSound();
             selectedItem.Drop();
         }
         else
@@ -402,7 +402,6 @@ public class InventoryController : MonoBehaviour
 
             if (itemToHighlight != null)
             {
-                //AudioManager.Instance.PlaySFX("MenuButtonHover");
                 inventoryHighlight.Show(true);
                 inventoryHighlight.SetSize(itemToHighlight);
                 inventoryHighlight.SetPosition(selectedItemGrid, itemToHighlight);
@@ -427,7 +426,7 @@ public class InventoryController : MonoBehaviour
     private void RotateItem()
     {
         if (selectedItem == null) { return; }
-        AudioManager.Instance.PlaySFX("RotateInventoryItem");
+        AudioManager.Instance.PlayRotateInventoryItemSound();
         selectedItem.Rotate(); // Rotate selected item
     }
 
@@ -498,7 +497,7 @@ public class InventoryController : MonoBehaviour
         selectedItem = selectedItemGrid.PickUpItem(tileGridPosition.x, tileGridPosition.y);
         if (selectedItem != null)
         {
-            AudioManager.Instance.PlaySFX("PickUpInventoryItem");
+            AudioManager.Instance.PlayPickUpInventoryItemSound();
             rectTransform = selectedItem.GetComponent<RectTransform>();
         }
     }

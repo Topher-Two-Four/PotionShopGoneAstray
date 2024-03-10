@@ -52,7 +52,6 @@ public class StaminaSystem : MonoBehaviour
     {
         if (!isCurrentlySprinting) // Check if player is currently sprinting
         {
-            //AudioManager.Instance.PlaySFX2("PlayerRun");
             if (currentStamina <= maxStamina - 0.01) // Check if stamina is not at maximum
             {
                 currentStamina += staminaRegenerationRate * Time.deltaTime; // Regenerate stamina
@@ -76,7 +75,6 @@ public class StaminaSystem : MonoBehaviour
     {
         if (hasRegeneratedStamina) // Check if player has regenerated their stamina
         {
-            //AudioManager.Instance.PlaySFX2("PlayerRun");
             isCurrentlySprinting = true; // Set player has regenerated stamina to true
             currentStamina -= staminaDepletionRate * Time.deltaTime; // Deplete stamina
             UpdateStamina(1); // Update stamina UI
@@ -84,7 +82,7 @@ public class StaminaSystem : MonoBehaviour
 
         if (currentStamina <= 0) // Check if stamina is less than or equal to 0
         {
-            AudioManager.Instance.PlaySFX("PlayerOutOfStamina");
+            AudioManager.Instance.PlayPlayerOutOfStaminaSound();
             hasRegeneratedStamina = false; // Set player has regenerated stamina to false
             playerController.SetSprintSpeed(slowedRunSpeed * MoralitySystem.Instance.playerSpeedModifier);
             staminaProgressUI.color = Color.gray;
@@ -96,14 +94,14 @@ public class StaminaSystem : MonoBehaviour
     {
         if (currentStamina >= (maxStamina * jumpStaminaCost / maxStamina)) // Check if player has stamina to jump
         {
-            AudioManager.Instance.PlaySFX2("PlayerJump");
+            AudioManager.Instance.PlayPlayerJumpSound();
             currentStamina -= jumpStaminaCost; // Use stamina to jump
             playerController.PlayerJump(); // Allow player to jump if they have enough stamina
             UpdateStamina(1); // Update stamina UI
 
             if (currentStamina <= 0) // Check if stamina is less than or equal to 0
             {
-                AudioManager.Instance.PlaySFX("PlayerOutOfStamina");
+                AudioManager.Instance.PlayPlayerOutOfStaminaSound();
                 hasRegeneratedStamina = false; // Set player has regenerated stamina to false
                 playerController.SetSprintSpeed(slowedRunSpeed * MoralitySystem.Instance.playerSpeedModifier);
                 staminaProgressUI.color = Color.gray;

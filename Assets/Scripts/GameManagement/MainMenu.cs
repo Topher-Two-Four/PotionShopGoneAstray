@@ -14,7 +14,7 @@ public class MainMenu : MonoBehaviour
 
     public void Start()
     {
-        AudioManager.Instance.PlayMusic("MenuMusic");
+        AudioManager.Instance.PlayMenuMusic();
     }
 
     public void OnNewGamePressed()

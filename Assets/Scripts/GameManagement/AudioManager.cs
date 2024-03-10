@@ -13,12 +13,14 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private Slider sfx1VolumeSlider;
     [SerializeField] private Slider sfx2VolumeSlider;
     [SerializeField] private Slider sfx3VolumeSlider;
+    [SerializeField] private Slider sfx4VolumeSlider;
 
     [SerializeField] private AudioListener playerAudioListener;
     public AudioSource musicSource;
-    public AudioSource sfxSource;
+    public AudioSource sfx1Source;
     public AudioSource sfx2Source;
     public AudioSource sfx3Source;
+    public AudioSource sfx4Source;
 
     [Header("Menu Sounds:")]
     public AudioClip menuButtonHoverSound;
@@ -234,37 +236,312 @@ public class AudioManager : MonoBehaviour
         audioClips.Add("TeleportToShop", teleportToShopSound);
     }
 
-    public void PlayMusic(string name)
+    public void PlaySound(string name, float volume, AudioSource audioSource)
     {
         if (audioClips.TryGetValue(name, out AudioClip clip))
         {
-            musicSource.clip = clip;
-            musicSource.Play();
+            if (audioSource == musicSource) 
+            { 
+                audioSource.Stop();
+                Debug.Log("Music stopped.");
+            }
+            Debug.Log("Playing " + name + " on " + audioSource);
+            audioSource.volume = volume;
+            Debug.Log("Volume: " + volume);
+            audioSource.PlayOneShot(clip, volume);
         }
     }
 
-    public void PlaySFX(string name)
+    public void PlayMenuButtonHoverSound()
     {
-        if (audioClips.TryGetValue(name, out AudioClip clip))
-        {
-            sfxSource.PlayOneShot(clip);
-        }
-    }
-    public void PlaySFX2(string name)
-    {
-        if (audioClips.TryGetValue(name, out AudioClip clip))
-        {
-            sfxSource.PlayOneShot(clip);
-        }
+        PlaySound("MenuButtonHover", menuButtonHoverSoundVolume, sfx1Source);
     }
 
-    public void PlaySFX3(string name)
+    public void PlayMenuButtonClickSound()
     {
-        if (audioClips.TryGetValue(name, out AudioClip clip))
-        {
-            sfxSource.PlayOneShot(clip);
-        }
+        PlaySound("MenuButtonClick", menuButtonClickSoundVolume, sfx1Source);
     }
+
+    public void PlayNewDaySound()
+    {
+        PlaySound("NewDay", newDaySoundVolume, sfx1Source);
+    }
+
+    public void PlayEndDaySound()
+    {
+        PlaySound("EndDay", endDaySoundVolume, sfx1Source);
+    }
+
+    public void PlayPauseGameSound()
+    {
+        PlaySound("PauseGame", pauseGameSoundVolume, sfx1Source);
+    }
+
+    public void PlayUnpauseGameSound()
+    {
+        PlaySound("UnpauseGame", unpauseGameSoundVolume, sfx1Source);
+    }
+
+    public void PlayWinGameSound()
+    {
+        PlaySound("WinGame", winGameSoundVolume, sfx2Source);
+    }
+
+    public void PlayLoseGameSound()
+    {
+        PlaySound("LoseGame", loseGameSoundVolume, sfx2Source);
+    }
+
+    public void PlayNavigatePotionShopSound()
+    {
+        PlaySound("NavigatePotionShop", navigatePotionShopSoundVolume, sfx1Source);
+    }
+
+    public void PlayOpenInventorySound()
+    {
+        PlaySound("OpenInventory", openInventorySoundVolume, sfx1Source);
+    }
+
+    public void PlayCloseInventorySound()
+    {
+        PlaySound("CloseInventory", closeInventorySoundVolume, sfx1Source);
+    }
+
+    public void PlayPickUpInventoryItemSound()
+    {
+        PlaySound("PickUpInventoryItem", pickUpInventoryItemSoundVolume, sfx1Source);
+    }
+
+    public void PlayRotateInventoryItemSound()
+    {
+        PlaySound("RotateInventoryItem", rotateInventoryItemSoundVolume, sfx1Source);
+    }
+
+    public void PlayPlaceInventoryItemSound()
+    {
+        PlaySound("PlaceInventoryItem", placeInventoryItemSoundVolume, sfx1Source);
+    }
+
+    public void PlayTrashInventorySound()
+    {
+        PlaySound("TrashInventory", trashInventorySoundVolume, sfx1Source);
+    }
+
+    public void PlayDropItemSound()
+    {
+        PlaySound("DropItem", dropItemSoundVolume, sfx1Source);
+    }
+
+    public void PlayOpenBookSound()
+    {
+        PlaySound("OpenBook", openBookSoundVolume, sfx1Source);
+    }
+
+    public void PlayCloseBookSound()
+    {
+        PlaySound("CloseBook", closeBookSoundVolume, sfx1Source);
+    }
+
+    public void PlaySwitchPageSound()
+    {
+        PlaySound("SwitchPage", switchPageSoundVolume, sfx1Source);
+    }
+
+    public void PlayCharacterSpeechSound()
+    {
+        PlaySound("CharacterSpeech", characterSpeechSoundVolume, sfx4Source);
+    }
+
+    public void PlayCompleteOrderSound()
+    {
+        PlaySound("CompleteOrder", completeOrderSoundVolume, sfx1Source);
+    }
+
+    public void PlayIncreaseMoralitySound()
+    {
+        PlaySound("IncreaseMorality", increaseMoralitySoundVolume, sfx3Source);
+    }
+
+    public void PlayDecreaseMoralitySound()
+    {
+        PlaySound("DecreaseMorality", decreaseMoralitySoundVolume, sfx3Source);
+    }
+
+    public void PlayCauldronBrewingSound()
+    {
+        PlaySound("CauldronBrewing", cauldronBrewingSoundVolume, sfx3Source);
+    }
+
+    public void PlayCauldronBubbleSound()
+    {
+        PlaySound("CauldronBubble", cauldronBubbleSoundVolume, sfx1Source);
+    }
+
+    public void PlayCauldronFireSound()
+    {
+        PlaySound("CauldronFire", cauldronFireSoundVolume, sfx2Source);
+    }
+
+    public void PlayStirSound()
+    {
+        PlaySound("Stir", stirSoundVolume, sfx1Source);
+    }
+
+    public void PlayPutLidOnSound()
+    {
+        PlaySound("PutLidOn", putLidOnSoundVolume, sfx1Source);
+    }
+
+    public void PlayTakeLidOffSound()
+    {
+        PlaySound("TakeLidOff", takeLidOffSoundVolume, sfx1Source);
+    }
+
+    public void PlayPotionStartBrewingSound()
+    {
+        PlaySound("PotionStartBrewing", potionStartBrewingSoundVolume, sfx1Source);
+    }
+
+    public void PlayPotionFinishedBrewingSound()
+    {
+        PlaySound("PotionFinishedBrewing", potionFinishedBrewingSoundVolume, sfx1Source);
+    }
+
+    public void PlayRetrievePotionSound()
+    {
+        PlaySound("RetrievePotion", retrievePotionSoundVolume, sfx1Source);
+    }
+
+    public void PlayAddIngredientSound()
+    {
+        PlaySound("AddIngredient", addIngredientSoundVolume, sfx1Source);
+    }
+
+    public void PlayRemoveIngredientSound()
+    {
+        PlaySound("RemoveIngredient", removeIngredientSoundVolume, sfx1Source);
+    }
+
+    public void PlaySwitchToFreezingTempSound()
+    {
+        PlaySound("SwitchToFreezingTemp", switchToFreezingTempSoundVolume, sfx1Source);
+    }
+
+    public void PlaySwitchToColdTempSound()
+    {
+        PlaySound("SwitchToColdTemp", switchToColdTempSoundVolume, sfx1Source);
+    }
+
+    public void PlaySwitchToMediumTempSound()
+    {
+        PlaySound("SwitchToMediumTemp", switchToMediumTempSoundVolume, sfx1Source);
+    }
+
+    public void PlaySwitchToHotTempSound()
+    {
+        PlaySound("SwitchToHotTemp", switchToHotTempSoundVolume, sfx1Source);
+    }
+
+    public void PlaySwitchToBoilingTempSound()
+    {
+        PlaySound("SwitchToBoilingTemp", switchToBoilingTempSoundVolume, sfx1Source);
+    }
+
+    public void PlayMenuMusic()
+    {
+        PlaySound("MenuMusic", menuMusicVolume, musicSource);
+    }
+
+    public void PlayPotionShopMusic()
+    {
+        PlaySound("PotionShopMusic", potionShopMusicVolume, musicSource);
+    }
+
+    public void PlayMazeMusic()
+    {
+        PlaySound("MazeMusic", mazeMusicVolume, musicSource);
+    }
+
+    public void PlayMazeMusicAllGood()
+    {
+        PlaySound("MazeMusicAllGood", mazeMusicAllGoodVolume, musicSource);
+    }
+
+    public void PlayMazeMusicVeryGood()
+    {
+        PlaySound("MazeMusicVeryGood", mazeMusicVeryGoodVolume, musicSource);
+    }
+
+    public void PlayMazeMusicGood()
+    {
+        PlaySound("MazeMusicGood", mazeMusicGoodVolume, musicSource);
+    }
+
+    public void PlayMazeMusicNeutral()
+    {
+        PlaySound("MazeMusicNeutral", mazeMusicNeutralVolume, musicSource);
+    }
+
+    public void PlayMazeMusicBad()
+    {
+        PlaySound("MazeMusicBad", mazeMusicBadVolume, musicSource);
+    }
+
+    public void PlayMazeMusicVeryBad()
+    {
+        PlaySound("MazeMusicVeryBad", mazeMusicVeryBadVolume, musicSource);
+    }
+
+    public void PlayMazeMusicAllBad()
+    {
+        PlaySound("MazeMusicAllBad", mazeMusicAllBadVolume, musicSource);
+    }
+
+    public void PlayPotionShopAmbience1()
+    {
+        PlaySound("PotionShopAmbience1", potionShopAmbience1Volume, sfx4Source);
+    }
+
+    public void PlayPotionShopAmbience2()
+    {
+        PlaySound("PotionShopAmbience2", potionShopAmbience2Volume, sfx4Source);
+    }
+
+    public void PlayPlayerWalkSound()
+    {
+        PlaySound("PlayerWalk", playerWalkSoundVolume, sfx4Source);
+    }
+
+    public void PlayPlayerRunSound()
+    {
+        PlaySound("PlayerRun", playerRunSoundVolume, sfx4Source);
+    }
+
+    public void PlayPlayerJumpSound()
+    {
+        PlaySound("PlayerJump", playerJumpSoundVolume, sfx4Source);
+    }
+
+    public void PlayPlayerOutOfStaminaSound()
+    {
+        PlaySound("PlayerOutOfStamina", playerOutOfStaminaSoundVolume, sfx1Source);
+    }
+
+    public void PlayPickUpMazeItemSound()
+    {
+        PlaySound("PickUpMazeItem", pickUpMazeItemSoundVolume, sfx1Source);
+    }
+    public void PlayTeleportToMazeSound()
+    {
+        PlaySound("TeleportToMaze", teleportToMazeSoundVolume, sfx1Source);
+    }
+
+    public void PlayTeleportToShopSound()
+    {
+        PlaySound("TeleportToShop", teleportToShopSoundVolume, sfx1Source);
+    }
+
+
 
     public void ChangeMasterVolume()
     {
@@ -279,7 +556,7 @@ public class AudioManager : MonoBehaviour
 
     public void ChangeSFX1Volume()
     {
-        sfxSource.volume = sfx1VolumeSlider.value;
+        sfx1Source.volume = sfx1VolumeSlider.value;
     }
 
     public void ChangeSFX2Volume()
@@ -290,6 +567,10 @@ public class AudioManager : MonoBehaviour
     public void ChangeSFX3Volume()
     {
         sfx3Source.volume = sfx3VolumeSlider.value;
+    }
+    public void ChangeSFX4Volume()
+    {
+        sfx4Source.volume = sfx4VolumeSlider.value;
     }
 
     private void LoadVolumePref()

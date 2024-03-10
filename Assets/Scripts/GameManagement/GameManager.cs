@@ -194,7 +194,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         GameManager.Instance.isTimerRunning = true; // Run timer
         GameManager.Instance.timeRemaining = timeInDay; // Reset time of day
-        AudioManager.Instance.PlaySFX("NewDay");
+        AudioManager.Instance.PlayNewDaySound();
     }
 
     private void TimerUpdate() // Update timer and keep track of what time of day it is
@@ -252,7 +252,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         {
             isTimerRunning = true; // Resume timer
             pauseMenuCanvas.SetActive(false); // Deactivate pause menu canvas
-            AudioManager.Instance.PlaySFX("UnpauseGame");
+            AudioManager.Instance.PlayUnpauseGameSound();
             if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(0) ||
                 SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(1) ||
                 SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(2))
@@ -273,7 +273,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
             pauseMenuCanvas.SetActive(true); // Activate pause menu canvas
             SetPlayerCapsuleInactive(); // Deactivate player capsule
             ToggleCursorOn(); // Unlock and display cursor
-            AudioManager.Instance.PlaySFX("PauseGame");
+            AudioManager.Instance.PlayPauseGameSound();
 
             var foundAIObjects = FindObjectsOfType<MazeAIController>();
             foreach (MazeAIController mazeAI in foundAIObjects)
@@ -310,7 +310,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         SetPlayerCapsuleInactive(); // Deactivate player capsule
         ToggleCursorOn(); // Unlock and display cursor
-        AudioManager.Instance.PlaySFX("PauseGame");
+        AudioManager.Instance.PlayPauseGameSound();
 
         var foundAIObjects = FindObjectsOfType<MazeAIController>();
         foreach (MazeAIController mazeAI in foundAIObjects)
@@ -334,7 +334,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
             //orderCanvas.SetActive(false);
             ToggleCursorOn(); // Unlock and display cursor
             DisplayEndOfDayUI();
-            AudioManager.Instance.PlaySFX("EndDay");
+            AudioManager.Instance.PlayEndDaySound();
 
         }
         else
@@ -352,13 +352,13 @@ public class GameManager : MonoBehaviour, IDataPersistence
         if (playerCurrency >= landlordPayment)
         {
             winOrLossText.text = ("You've won!");
-            AudioManager.Instance.PlaySFX("WinGame");
+            AudioManager.Instance.PlayWinGameSound();
 
         }
         else
         {
             winOrLossText.text = ("You've lost!");
-            AudioManager.Instance.PlaySFX("LoseGame");
+            AudioManager.Instance.PlayLoseGameSound();
         }
         DataPersistenceManager.Instance.NewGame();
     }
@@ -441,7 +441,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public void SwitchSceneToPotionLevel() // Use scene manager to switch to Potion Level from Maze Level
     {
         ToggleOnLoadingScreenCanvas();
-        AudioManager.Instance.PlaySFX("TeleportToShop");
+        AudioManager.Instance.PlayTeleportToShopSound();
         Invoke("SetPlayerCapsuleInactive", 0.5f);
         ToggleCursorOn();
         OrderSystem.Instance.CheckForCompleteOrders(); // Check for any complete orders to update order UI
@@ -456,7 +456,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public void SwitchSceneToMazeLevel() // Use scene manager to switch to Maze Level
     {
         SetPlayerCapsuleActive();
-        AudioManager.Instance.PlaySFX("TeleportToMaze");
+        AudioManager.Instance.PlayTeleportToMazeSound();
         ToggleOnLoadingScreenCanvas();
         int randomSceneIndex = Random.Range(3, 9); // Choose random maze scene to load
         timeRemaining -= mazeTravelTimeDeduction;

@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CurrentBuild/MazeBuildFox.unity
     guid: fc8194994e8e9764f890b63154d89c65
+  - enabled: 1
+    path: Assets/Scenes/CurrentBuild/MazeBuildGolf.unity
+    guid: e4c3d0332d378fa4abf211453f893fcc
   m_configObjects: {}

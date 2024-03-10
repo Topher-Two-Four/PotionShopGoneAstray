@@ -579,14 +579,17 @@ public class PotionCraftingSystem : MonoBehaviour
             if (currentTemp == 5)
             {
                 AudioManager.Instance.PlaySwitchToBoilingTempSound();
+                UpdateTemperatureDisplay();
             }
             else if (currentTemp == 4)
             {
                 AudioManager.Instance.PlaySwitchToHotTempSound();
+                UpdateTemperatureDisplay();
             }
             else if (currentTemp == 3)
             {
                 AudioManager.Instance.PlaySwitchToMediumTempSound();
+                UpdateTemperatureDisplay();
             }
             else if (currentTemp == 2)
             {
@@ -608,19 +611,23 @@ public class PotionCraftingSystem : MonoBehaviour
             currentTemp--;
             if (currentTemp == 4)
             {
-                    AudioManager.Instance.PlaySwitchToHotTempSound();
+                AudioManager.Instance.PlaySwitchToHotTempSound();
+                UpdateTemperatureDisplay();
             }
             else if (currentTemp == 3)
             {
-                    AudioManager.Instance.PlaySwitchToMediumTempSound();
+                AudioManager.Instance.PlaySwitchToMediumTempSound();
+                UpdateTemperatureDisplay();
             }
             else if (currentTemp == 2)
             {
-                    AudioManager.Instance.PlaySwitchToColdTempSound();
+                AudioManager.Instance.PlaySwitchToColdTempSound();
+                UpdateTemperatureDisplay();
             } 
             else if (currentTemp == 1)
             {
-                    AudioManager.Instance.PlaySwitchToFreezingTempSound();
+                AudioManager.Instance.PlaySwitchToFreezingTempSound();
+                UpdateTemperatureDisplay();
             }
             UpdateTemperatureDisplay();
         }

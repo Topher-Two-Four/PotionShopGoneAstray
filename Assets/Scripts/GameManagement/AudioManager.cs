@@ -542,7 +542,6 @@ public class AudioManager : MonoBehaviour
     }
 
 
-
     public void ChangeMasterVolume()
     {
         AudioListener.volume = masterVolumeSlider.value;

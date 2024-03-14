@@ -28,12 +28,14 @@ public class Teleportation : MonoBehaviour
     private float teleportedInTime = 0f;
     private bool hasTeleportedIn = false;
     private bool playerHasLooked = false;
+    private bool playerCaught = false;
 
     public static Teleportation Instance { get; private set; } // Singleton logic
 
     private void Start()
     {
         TeleportOut();
+        playerCaught = false;
     }
 
     private void Awake()
@@ -62,12 +64,13 @@ public class Teleportation : MonoBehaviour
             else if (teleportedInTime < teleportLength)
             {
                 teleportedInTime += Time.deltaTime;
-                //Debug.Log(teleportedInTime);
             }
             else
             {
-                PlayerCaught();
-                //Debug.Log("Player caught.");
+                if (!playerCaught)
+                {
+                    PlayerCaught();
+                }
             }
 
         }

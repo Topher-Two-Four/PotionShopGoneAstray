@@ -83,6 +83,11 @@ public class TutorialManager : MonoBehaviour
             tutorialsToggledIndicator.gameObject.SetActive(true);
         }
     }
+    public void ToggleOnTutorials()
+    {
+            tutorialsOn = true;
+            tutorialsToggledIndicator.gameObject.SetActive(true);
+    }
 
     public void ToggleOnBrewingStepsIntroTutorial()
     {

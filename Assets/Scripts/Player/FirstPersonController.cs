@@ -223,6 +223,11 @@ namespace StarterAssets
 			gameObject.transform.Rotate(angularVelocity);
 		}
 
+		public void ChangeRotationSpeed(float playerRotateSpeed)
+        {
+			RotationSpeed = playerRotateSpeed;
+        }
+
 		private void Update()
 		{
 			JumpAndGravity();

@@ -658,4 +658,10 @@ public class GameManager : MonoBehaviour, IDataPersistence
         yield return new WaitForSeconds(delayTime);
         SceneManager.LoadScene(randomSceneIndex);
     }
+
+    public void ChangePlayerLookSpeed(float lookSpeed)
+    {
+        controller.ChangeRotationSpeed(lookSpeed);
+    }
+
 }

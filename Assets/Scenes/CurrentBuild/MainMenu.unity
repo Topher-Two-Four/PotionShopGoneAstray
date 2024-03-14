@@ -8931,6 +8931,8 @@ MonoBehaviour:
   increaseMoralitySoundVolume: 1
   decreaseMoralitySound: {fileID: 8300000, guid: 13bffdcace7e83945b623678e1297b15, type: 3}
   decreaseMoralitySoundVolume: 1
+  urnBreakSound: {fileID: 8300000, guid: 8ce23a59d8ca65d428bb5fc4f6667c22, type: 3}
+  urnBreakSoundVolume: 0.85
   cauldronBrewingSound: {fileID: 8300000, guid: 7c563688af3284e42a7f0bacddf19007, type: 3}
   cauldronBrewingSoundVolume: 1
   cauldronBubbleSound: {fileID: 8300000, guid: 442febbd71450e2428f2bc5692ed049a, type: 3}
@@ -35834,7 +35836,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &977770115
 RectTransform:
   m_ObjectHideFlags: 0

@@ -26,6 +26,13 @@ public class ItemObject : MonoBehaviour
             InventoryController.Instance.AddItemObjectToInventory(itemData);
             Destroy(gameObject);
         }
+
+        if (other.gameObject.tag == "UrnNPC")
+        {
+            ItemPot.Instance.AddItemToCount();
+            Destroy(gameObject);
+        }
+
     }
 
     private void RotateTowardsTarget()

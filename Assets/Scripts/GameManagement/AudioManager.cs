@@ -68,7 +68,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip switchPageSound;
     [Range(0.0f, 1.0f)] public float switchPageSoundVolume = 0.5f;
 
-    [Header("Character Sounds:")]
+    [Header("Various Sounds:")]
     public AudioClip characterSpeechSound;
     [Range(0.0f, 1.0f)] public float characterSpeechSoundVolume = 0.5f;
     public AudioClip completeOrderSound;
@@ -77,6 +77,8 @@ public class AudioManager : MonoBehaviour
     [Range(0.0f, 1.0f)] public float increaseMoralitySoundVolume = 0.5f;
     public AudioClip decreaseMoralitySound;
     [Range(0.0f, 1.0f)] public float decreaseMoralitySoundVolume = 0.5f;
+    public AudioClip urnBreakSound;
+    [Range(0.0f, 1.0f)] public float urnBreakSoundVolume = 0.5f;
 
     [Header("Cauldron Sounds:")] 
     public AudioClip cauldronBrewingSound;
@@ -199,6 +201,7 @@ public class AudioManager : MonoBehaviour
         audioClips.Add("CompleteOrder", completeOrderSound);
         audioClips.Add("IncreaseMorality", increaseMoralitySound);
         audioClips.Add("DecreaseMorality", decreaseMoralitySound);
+        audioClips.Add("UrnBreakSound", urnBreakSound);
         audioClips.Add("CauldronBrewing", cauldronBrewingSound);
         audioClips.Add("CauldronBubble", cauldronBubbleSound);
         audioClips.Add("CauldronFire", cauldronFireSound);
@@ -345,6 +348,11 @@ public class AudioManager : MonoBehaviour
     public void PlaySwitchPageSound()
     {
         PlaySound("SwitchPage", switchPageSoundVolume, sfx1Source);
+    }
+
+    public void PlayUrnBreakSound()
+    {
+        PlaySound("UrnBreakSound", urnBreakSoundVolume, sfx1Source);
     }
 
     public void PlayCharacterSpeechSound()

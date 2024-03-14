@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4065694008651991292}
   m_Layer: 0
   m_Name: Ginseng_IO
-  m_TagString: Untagged
+  m_TagString: ItemObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

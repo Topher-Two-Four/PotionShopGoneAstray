@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 8681066264600939552}
   m_Layer: 8
   m_Name: Audio Source
-  m_TagString: Untagged
+  m_TagString: UrnNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8008771088276894243
 Transform:
   m_ObjectHideFlags: 0
@@ -42,8 +42,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9845cf1b70eb5f74f9ed0d0c5ee96415, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 8ce23a59d8ca65d428bb5fc4f6667c22, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 0.82
   Loop: 0
@@ -55,7 +55,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 5
   Pan2D: 0
-  rolloffMode: 2
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -161,9 +161,10 @@ GameObject:
   - component: {fileID: 7044157271845881643}
   - component: {fileID: 6348490392139320521}
   - component: {fileID: 6062566889438340935}
+  - component: {fileID: 445862557848137151}
   m_Layer: 8
   m_Name: UrnNPC
-  m_TagString: Untagged
+  m_TagString: UrnNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -382,13 +383,30 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   animator: {fileID: 1287065593835987830}
+  isJelly: 0
   _isPatrolling: 0
   _isChasing: 0
   _isDetectingPlayer: 0
   _playerCaught: 0
+  _bellCooldownComplete: 0
   raycastMeshResolution: 1
   raycastEdgeIterations: 4
   raycastEdgeDistance: 0.5
+--- !u!114 &445862557848137151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4838142632647338643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff6cce61d6b9134eb08100cef0ce358, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitsToBreak: 0
+  itemDropOffset: {x: 0, y: 0.5, z: 0}
+  itemsCollectedDivider: 2
 --- !u!1001 &4662922157967810279
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -452,6 +470,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4a7a94269739cc141a686cb3d85cbff8, type: 3}
       propertyPath: m_Name
       value: ANIM_urn_idle
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4a7a94269739cc141a686cb3d85cbff8, type: 3}
+      propertyPath: m_TagString
+      value: UrnNPC
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 4a7a94269739cc141a686cb3d85cbff8, type: 3}
       propertyPath: m_Controller

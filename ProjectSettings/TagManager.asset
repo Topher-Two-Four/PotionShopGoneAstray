@@ -10,6 +10,8 @@ TagManager:
   - EnemySpawnPoint
   - TeleportingEnemy
   - MazeEnemy
+  - ItemObject
+  - UrnNPC
   layers:
   - Default
   - TransparentFX

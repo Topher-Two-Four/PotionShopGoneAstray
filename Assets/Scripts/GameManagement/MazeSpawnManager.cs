@@ -111,4 +111,17 @@ public class MazeSpawnManager : MonoBehaviour
 
         TutorialManager.Instance.BeginMazeTutorial();
     }
+
+    public static MazeSpawnManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this) { Destroy(gameObject); } else { Instance = this; } // Singleton logic
+    }
+
+    public ItemObject[] GetIngredientsArray()
+    {
+        return ingredientsArray;
+    }
+
 }

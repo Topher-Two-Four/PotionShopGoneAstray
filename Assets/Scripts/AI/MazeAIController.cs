@@ -372,6 +372,17 @@ public class MazeAIController : MonoBehaviour
             Debug.Log(enemy + " moving to " + PenguinBell.Instance.gameObject.transform.position);
         }
     }
+    public void MoveEnemiesToUrnBreakSound()
+    {
+        Debug.Log("MoveEnemiesToUrnBreakSoundCalled");
+
+        GameObject[] mazeEnemies = GameObject.FindGameObjectsWithTag("MazeEnemy");
+        foreach (GameObject enemy in mazeEnemies)
+        {
+            Search(ItemPot.Instance.gameObject.transform.position);
+            Debug.Log(enemy + " moving to " + ItemPot.Instance.gameObject.transform.position);
+        }
+    }
 
     private void BellCooldown()
     {

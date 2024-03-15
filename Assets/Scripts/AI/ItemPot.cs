@@ -38,6 +38,7 @@ public class ItemPot : MonoBehaviour
                 int randomIngredientIndex = Random.Range(0, ingredientList.Length - 1);
                 Instantiate(ingredientList[randomIngredientIndex], gameObject.transform.position - itemDropOffset, gameObject.transform.rotation);
             }
+            gameObject.GetComponent<MazeAIController>().MoveEnemiesToUrnBreakSound();
             AudioManager.Instance.PlayUrnBreakSound();
             Destroy(gameObject);
         }

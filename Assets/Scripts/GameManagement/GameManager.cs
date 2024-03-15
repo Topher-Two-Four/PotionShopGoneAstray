@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         playerCurrencyText.text = ("Player Currency: $" + playerCurrency);
         landlordPaymentText.text = ("Landlord Payment: $" + landlordPayment);
         currentDayText.text = ("Day " + currentDay);
-
+        CutsceneManager.Instance.PlayIntroCutscene();
     }
 
     private void Update()
@@ -351,12 +351,14 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
         if (playerCurrency >= landlordPayment)
         {
+            CutsceneManager.Instance.PlayWinGameCutscene();
             winOrLossText.text = ("You've won!");
             AudioManager.Instance.PlayWinGameSound();
 
         }
         else
         {
+            CutsceneManager.Instance.PlayLoseGameCutscene();
             winOrLossText.text = ("You've lost!");
             AudioManager.Instance.PlayLoseGameSound();
         }
@@ -414,6 +416,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public void SwitchSceneToPotionShopWithNewDay()
     {
         GameManager.Instance.endOfDayCanvas.SetActive(false);
+        CutsceneManager.Instance.PlayNewDayCutscene();
         SetPlayerCapsuleInactive();
         ToggleCursorOn(); // Unlock and display cursor
         StartNewDayTimer(); // Restart and resume timer at beginning of day
@@ -425,6 +428,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void SwitchSceneToPotionShopWithLoadGame()
     {
+        CutsceneManager.Instance.PlayNewDayCutscene();
         DataPersistenceManager.Instance.LoadGame();
         SetPlayerCapsuleInactive();
         ToggleCursorOn(); // Unlock and display cursor
@@ -440,7 +444,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void SwitchSceneToPotionLevel() // Use scene manager to switch to Potion Level from Maze Level
     {
-        ToggleOnLoadingScreenCanvas();
         AudioManager.Instance.PlayTeleportToShopSound();
         Invoke("SetPlayerCapsuleInactive", 0.5f);
         ToggleCursorOn();
@@ -457,7 +460,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         SetPlayerCapsuleActive();
         AudioManager.Instance.PlayTeleportToMazeSound();
-        ToggleOnLoadingScreenCanvas();
+        CutsceneManager.Instance.PlayLoadingCutscene();
         int randomSceneIndex = Random.Range(3, 11); // Choose random maze scene to load
         timeRemaining -= mazeTravelTimeDeduction;
         //Invoke("CallMovePlayerToSpawn", 0.8f); //////// This might be the timing issue for the spawn location...
@@ -555,7 +558,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public void ToggleOffLoadingScreenCanvas()
     {
         {
-            loadingScreenCanvas.gameObject.SetActive(false);
+            //loadingScreenCanvas.gameObject.SetActive(false);
         }
     }
 

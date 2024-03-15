@@ -12,6 +12,7 @@ TagManager:
   - MazeEnemy
   - ItemObject
   - UrnNPC
+  - FallBoundary
   layers:
   - Default
   - TransparentFX

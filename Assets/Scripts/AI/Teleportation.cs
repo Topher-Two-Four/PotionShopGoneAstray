@@ -129,7 +129,7 @@ public class Teleportation : MonoBehaviour
         for (int i = 0; i < caughtItemRemoveAmount; i++)
         {
             InventoryController.Instance.RemoveRandomItemFromGrid();
-            //Debug.Log("Trying to remove random item from teleportation script...");
+            CutsceneManager.Instance.PlayJellyCatchCutscene();
         }
         GameManager.Instance.timeRemaining -= timeRemovedWhenCaught;
         GameManager.Instance.SwitchSceneToPotionLevel();

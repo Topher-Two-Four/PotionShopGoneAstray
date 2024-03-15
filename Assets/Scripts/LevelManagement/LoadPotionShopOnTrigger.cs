@@ -14,6 +14,10 @@ public class LoadPotionShopOnTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            if (gameObject.tag == "FallBoundary")
+            {
+                CutsceneManager.Instance.PlayFallCutscene();
+            }
             GameManager.Instance.timeRemaining -= caughtTimeRemoveAmount; // Remove time from day if player is caught by enemy in maze
             GameManager.Instance.SwitchSceneToPotionLevel(); // Switch scene to potion shop
         }

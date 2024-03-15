@@ -29,13 +29,16 @@ public class LoadPotionShopOnCollision : MonoBehaviour
                 if (gameObject.tag == "MazeEnemy")
                 {
                     CutsceneManager.Instance.PlayBirdCatchCutscene();
-                } 
-
-                if (gameObject.tag == "FallBoundary")
+                }
+                else if (gameObject.tag == "FallBoundary")
                 {
                     CutsceneManager.Instance.PlayFallCutscene();
                 }
-
+                else
+                {
+                    CutsceneManager.Instance.PlayLoadingCutscene();
+                }
+ 
                 GameManager.Instance.timeRemaining -= caughtTimeRemoveAmount; // Remove time from day if player is caught by enemy in maze
                 GameManager.Instance.SwitchSceneToPotionLevel(); // Switch scene to potion shop
             }

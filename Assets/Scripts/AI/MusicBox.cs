@@ -89,8 +89,8 @@ public class MusicBox : MonoBehaviour
     {
         for (int i = 0; i < caughtItemRemoveAmount; i++)
         {
+            CutsceneManager.Instance.PlayMusicManCatchCutscene();
             InventoryController.Instance.RemoveRandomItemFromGrid();
-            //Debug.Log("Trying to remove random item from music box script...");
         }
         GameManager.Instance.timeRemaining -= timeRemovedWhenCaught;
         GameManager.Instance.SwitchSceneToPotionLevel();

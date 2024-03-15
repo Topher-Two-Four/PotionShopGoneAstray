@@ -26,6 +26,16 @@ public class LoadPotionShopOnCollision : MonoBehaviour
                     //Debug.Log("Trying to remove random item from collision script...");
                 }
                 timeRemoved = true;
+                if (gameObject.tag == "MazeEnemy")
+                {
+                    CutsceneManager.Instance.PlayBirdCatchCutscene();
+                } 
+
+                if (gameObject.tag == "FallBoundary")
+                {
+                    CutsceneManager.Instance.PlayFallCutscene();
+                }
+
                 GameManager.Instance.timeRemaining -= caughtTimeRemoveAmount; // Remove time from day if player is caught by enemy in maze
                 GameManager.Instance.SwitchSceneToPotionLevel(); // Switch scene to potion shop
             }

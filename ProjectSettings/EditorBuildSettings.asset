@@ -38,4 +38,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CurrentBuild/MazeBuildHotel.unity
     guid: 1424b8d1f7c196a47814797a71a91282
+  - enabled: 1
+    path: Assets/Scenes/CurrentBuild/MazeBuildIndia.unity
+    guid: 987f1f08b26681049ae19d66cbd8894e
   m_configObjects: {}

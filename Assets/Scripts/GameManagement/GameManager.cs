@@ -461,7 +461,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         SetPlayerCapsuleActive();
         AudioManager.Instance.PlayTeleportToMazeSound();
         CutsceneManager.Instance.PlayLoadingCutscene();
-        int randomSceneIndex = Random.Range(3, 11); // Choose random maze scene to load
+        int randomSceneIndex = Random.Range(3, 12); // Choose random maze scene to load
         timeRemaining -= mazeTravelTimeDeduction;
         //Invoke("CallMovePlayerToSpawn", 0.8f); //////// This might be the timing issue for the spawn location...
         StartCoroutine(LoadRandomScene(randomSceneIndex, 1.0f));

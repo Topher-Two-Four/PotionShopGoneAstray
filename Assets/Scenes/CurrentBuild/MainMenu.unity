@@ -9248,7 +9248,7 @@ MonoBehaviour:
   winGameSoundVolume: 1
   loseGameSound: {fileID: 8300000, guid: 0ec8125eaee844346b093bfebd3e014d, type: 3}
   loseGameSoundVolume: 1
-  navigatePotionShopSound: {fileID: 8300000, guid: f9164d8500f78f24988db3bf86c68850, type: 3}
+  navigatePotionShopSound: {fileID: 8300000, guid: 93ed2db1c49890c42b1ee68d1bf27d09, type: 3}
   navigatePotionShopSoundVolume: 1
   openInventorySound: {fileID: 8300000, guid: ef26ca49926c491499a30ed12db465c5, type: 3}
   openInventorySoundVolume: 1
@@ -9256,13 +9256,13 @@ MonoBehaviour:
   closeInventorySoundVolume: 1
   pickUpInventoryItemSound: {fileID: 8300000, guid: 003a6ae5de859cf43872e331204b7f41, type: 3}
   pickUpInventoryItemSoundVolume: 1
-  rotateInventoryItemSound: {fileID: 8300000, guid: b69c7e6dd91579f4cbd7131ce3cf5209, type: 3}
+  rotateInventoryItemSound: {fileID: 8300000, guid: 394f815a44ca79045946da76f255462c, type: 3}
   rotateInventoryItemSoundVolume: 1
   placeInventoryItemSound: {fileID: 8300000, guid: d6978d669879cd04e8f4e8dcfa74f8bc, type: 3}
   placeInventoryItemSoundVolume: 1
   trashInventorySound: {fileID: 8300000, guid: 28a2bd829f961e346b00591236f61509, type: 3}
   trashInventorySoundVolume: 1
-  dropItemSound: {fileID: 8300000, guid: 88e392feeccfaf841ae7406ebca39340, type: 3}
+  dropItemSound: {fileID: 8300000, guid: 65b116f232f6c8845895ca0e2bb84a5f, type: 3}
   dropItemSoundVolume: 1
   openBookSound: {fileID: 8300000, guid: 88528c284a7a14b4583a1471f3c95f2a, type: 3}
   openBookSoundVolume: 1
@@ -9313,9 +9313,9 @@ MonoBehaviour:
   switchToBoilingTempSound: {fileID: 8300000, guid: 7bab25913a100cc4aa4a6b6c462fc48e, type: 3}
   switchToBoilingTempSoundVolume: 1
   menuMusic: {fileID: 8300000, guid: 3a0889cc0019127499874c7b5b88c7ec, type: 3}
-  menuMusicVolume: 1
+  menuMusicVolume: 0.804
   potionShopMusic: {fileID: 8300000, guid: 2e463fe82296a5442870ca800d689a4d, type: 3}
-  potionShopMusicVolume: 1
+  potionShopMusicVolume: 0.803
   mazeMusic: {fileID: 8300000, guid: 8e6ca72b438fefa4e89a8148af085210, type: 3}
   mazeMusicVolume: 1
   mazeMusicAllGood: {fileID: 0}
@@ -9338,14 +9338,14 @@ MonoBehaviour:
   potionShopAmbience2Volume: 1
   playerWalkSound: {fileID: 8300000, guid: 9f5b4494a3c93384da98a7bdd976e3c1, type: 3}
   playerWalkSoundVolume: 1
-  playerRunSound: {fileID: 8300000, guid: a5c5b0728b315384780009475d84a367, type: 3}
+  playerRunSound: {fileID: 8300000, guid: f7c25d23ff15b7a47ac37e8e800ad28b, type: 3}
   playerRunSoundVolume: 1
-  playerJumpSound: {fileID: 8300000, guid: f87b6a6d348ee544ca91a74b2ea7886a, type: 3}
+  playerJumpSound: {fileID: 8300000, guid: a7cf0864be7378d4c8006fcfc86ee13e, type: 3}
   playerJumpSoundVolume: 1
-  playerOutOfStaminaSound: {fileID: 8300000, guid: 0e0d57b244ffd3344a79585edb9364bb, type: 3}
+  playerOutOfStaminaSound: {fileID: 8300000, guid: cb22d433589fe044a85f6f2384f2e7a7, type: 3}
   playerOutOfStaminaSoundVolume: 1
   pickUpMazeItemSound: {fileID: 8300000, guid: 29935e3c8a59d2749976a4d4ed6714b7, type: 3}
-  pickUpMazeItemSoundVolume: 1
+  pickUpMazeItemSoundVolume: 0.99880004
   teleportToMazeSound: {fileID: 8300000, guid: 0dc1b7515b92d2a42a6fcea954f3a1e3, type: 3}
   teleportToMazeSoundVolume: 1
   teleportToShopSound: {fileID: 8300000, guid: 99fe2f08d6dbf2c48b0b5da30b341790, type: 3}

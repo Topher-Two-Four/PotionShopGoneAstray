@@ -41,8 +41,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
     [SerializeField] private GameObject bookshelfCanvas;
     [Tooltip("The canvas that holds the order system UI elements.")]
     [SerializeField] private GameObject orderCanvas;
-    [Tooltip("The door from the potion shop to the maze.")]
-    [SerializeField] private GameObject doorToMaze;
     [Tooltip("The canvas that holds the end of day screen UI elements.")]
     [SerializeField] private GameObject endOfDayCanvas;
     [Tooltip("The canvas that holds the win/loss screen UI elements.")]
@@ -510,16 +508,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
         questCanvas.SetActive(false); // Hide bookshelf canvas
     }
 
-    public void ToggleOnDoorToMaze()
-    {
-        doorToMaze.SetActive(true); // Display door to maze from potion shop
-    }
-
-    public void ToggleOffDoorToMaze()
-    {
-        doorToMaze.SetActive(false); // Hide door to maze from potion shop
-    }
-
     public void ToggleOnOrderDisplay()
     {
         orderCanvas.SetActive(true); // Display order canvas
@@ -562,10 +550,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
         }
     }
 
-    public GameObject GetDoorToMaze()
-    {
-        return doorToMaze;
-    }
 
     public GameObject GetPauseMenuCanvas()
     {
@@ -665,6 +649,18 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public void ChangePlayerLookSpeed(float lookSpeed)
     {
         controller.ChangeRotationSpeed(lookSpeed);
+    }
+
+    public bool IsBedroomOpen()
+    {
+        if (RoomManager.Instance != null)
+        {
+            return RoomManager.Instance.IsBedRoomOpen();
+        } 
+        else
+        {
+            return false;
+        }
     }
 
 }

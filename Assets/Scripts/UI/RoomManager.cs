@@ -11,11 +11,14 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private GameObject orderRoom;
     [SerializeField] private GameObject mazeDoorRoom;
     [SerializeField] private GameObject registerRoom;
+    [SerializeField] private GameObject bedRoom;
 
     [Header("List of Buttons Corresponding to Rooms:")]
     [Tooltip("The list of navigational buttons which correspond to rooms in the potion shop.")]
     [SerializeField] private Button leftNavigationButton;
     [SerializeField] private Button rightNavigationButton;
+    [SerializeField] private Button enterBedroomButton;
+    [SerializeField] private Button leaveBedroomButton;
 
     [HideInInspector] public GameObject currentRoom; // The current room that is active/open
     [HideInInspector] public bool isCauldronRoom;
@@ -24,9 +27,14 @@ public class RoomManager : MonoBehaviour
     [HideInInspector] public bool orderRoomOpen;
     [HideInInspector] public bool mazeDoorRoomOpen;
     [HideInInspector] public bool registerRoomOpen;
+    [HideInInspector] public bool bedRoomOpen;
+
+    public static RoomManager Instance { get; private set; }
 
     private void Awake()
     {
+        if (Instance != null && Instance != this) { Destroy(gameObject); } else { Instance = this; } // Singleton logic
+
         AudioManager.Instance.sfx1Source.Stop();
         AudioManager.Instance.sfx2Source.Stop();
         AudioManager.Instance.musicSource.pitch = 1.0f;
@@ -36,8 +44,11 @@ public class RoomManager : MonoBehaviour
         orderRoomOpen = false;
         mazeDoorRoomOpen = false;
         registerRoomOpen = true;
+        bedRoomOpen = false;
 
         currentRoom = registerRoom;
+
+        InventoryController.Instance.ToggleOffBedroomStorageCanvas();
 
         leftNavigationButton.onClick.AddListener(() => LeftArrowKeyPress());
         rightNavigationButton.onClick.AddListener(() => RightArrowKeyPress());
@@ -52,34 +63,32 @@ public class RoomManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
         {
-            LeftArrowKeyPress();
+            if (!bedRoomOpen)
+            {
+                LeftArrowKeyPress();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
         {
-            RightArrowKeyPress();
+            if (!bedRoomOpen)
+            {
+                RightArrowKeyPress();
+            }
         }
     }
 
-    private void OnDestroy()
-    {
-        if (GameManager.Instance.GetDoorToMaze() != null)
-        {
-            GameManager.Instance.ToggleOffDoorToMaze();
-        }
-    }
-
-    private void SwitchToCauldronRoom()
+    public void SwitchToCauldronRoom()
     {
         currentRoom.SetActive(false); // Set current room game object to inactive
         currentRoom = cauldronRoom; // Switch current room to the new room
         currentRoom.SetActive(true); // Set new current room game object to active
 
         GameManager.Instance.ToggleCursorOn();
-        GameManager.Instance.ToggleOffDoorToMaze();
         GameManager.Instance.ToggleOnPotionCraftingCanvas();
         GameManager.Instance.ToggleOffOrderDisplay();
         GameManager.Instance.ToggleOnBookshelfCanvas();
+        InventoryController.Instance.ToggleOffBedroomStorageCanvas();
 
         TutorialManager.Instance.ToggleOnBrewingStepsIntroTutorial();
         TutorialManager.Instance.ToggleOnBrewingSteps1Tutorial();
@@ -89,9 +98,11 @@ public class RoomManager : MonoBehaviour
         orderRoomOpen = false;
         mazeDoorRoomOpen = false;
         registerRoomOpen = false;
+        bedRoomOpen = false;
+
     }
 
-    private void SwitchToOrderRoom()
+    public void SwitchToOrderRoom()
     {
         currentRoom.SetActive(false); // Set current room game object to inactive
         currentRoom = orderRoom; // Switch current room to the new room
@@ -99,9 +110,9 @@ public class RoomManager : MonoBehaviour
 
         GameManager.Instance.ToggleCursorOn();
         GameManager.Instance.ToggleOffPotionCraftingCanvas();
-        GameManager.Instance.ToggleOffDoorToMaze();
         GameManager.Instance.ToggleOnOrderDisplay();
         GameManager.Instance.ToggleOffBookshelfCanvas();
+        InventoryController.Instance.ToggleOffBedroomStorageCanvas();
 
         TutorialManager.Instance.ToggleOnDeliveryTutorial();
         TutorialManager.Instance.ToggleOnSellPotionsTutorial();
@@ -110,8 +121,10 @@ public class RoomManager : MonoBehaviour
         orderRoomOpen = true;
         mazeDoorRoomOpen = false;
         registerRoomOpen = false;
+        bedRoomOpen = false;
+
     }
-    private void SwitchToMazeDoorRoom()
+    public void SwitchToMazeDoorRoom()
     {
         GameManager.Instance.ToggleCursorOn();
         currentRoom.SetActive(false); // Set current room game object to inactive
@@ -119,9 +132,9 @@ public class RoomManager : MonoBehaviour
         currentRoom.SetActive(true); // Set new current room game object to active
 
         GameManager.Instance.ToggleOffPotionCraftingCanvas();
-        GameManager.Instance.ToggleOnDoorToMaze();
         GameManager.Instance.ToggleOffOrderDisplay();
         GameManager.Instance.ToggleOffBookshelfCanvas();
+        InventoryController.Instance.ToggleOffBedroomStorageCanvas();
 
         TutorialManager.Instance.ToggleOnMazeAccessTutorial();
 
@@ -129,23 +142,51 @@ public class RoomManager : MonoBehaviour
         orderRoomOpen = false;
         mazeDoorRoomOpen = true;
         registerRoomOpen = false;
+        bedRoomOpen = false;
+
     }
-    private void SwitchToRegisterRoom()
+    public void SwitchToRegisterRoom()
     {
         GameManager.Instance.ToggleCursorOn();
         currentRoom.SetActive(false); // Set current room game object to inactive
         currentRoom = registerRoom; // Switch current room to the new room
         currentRoom.SetActive(true); // Set new current room game object to active
 
-        GameManager.Instance.ToggleOffDoorToMaze();
         GameManager.Instance.ToggleOffPotionCraftingCanvas();
         GameManager.Instance.ToggleOffOrderDisplay();
         GameManager.Instance.ToggleOffBookshelfCanvas();
+        InventoryController.Instance.ToggleOffBedroomStorageCanvas();
 
         cauldronRoomOpen = false;
         orderRoomOpen = false;
         mazeDoorRoomOpen = false;
         registerRoomOpen = true;
+        bedRoomOpen = false;
+    }
+
+    public void SwitchToBedRoom()
+    {
+        currentRoom.SetActive(false); // Set current room game object to inactive
+        currentRoom = bedRoom; // Switch current room to the new room
+        currentRoom.SetActive(true); // Set new current room game object to active
+        GameManager.Instance.ToggleCursorOn();
+        GameManager.Instance.ToggleOffPotionCraftingCanvas();
+        GameManager.Instance.ToggleOffOrderDisplay();
+        GameManager.Instance.ToggleOffBookshelfCanvas();
+
+        InventoryController.Instance.ToggleInventoryCanvasOn();
+        InventoryController.Instance.ToggleOnBedroomStorageCanvas();
+
+        cauldronRoomOpen = false;
+        orderRoomOpen = false;
+        mazeDoorRoomOpen = false;
+        registerRoomOpen = false;
+        bedRoomOpen = true;
+    }
+
+    public void EnterMaze()
+    {
+        GameManager.Instance.SwitchSceneToMazeLevel();
     }
 
     private void LeftArrowKeyPress()
@@ -192,4 +233,8 @@ public class RoomManager : MonoBehaviour
         }
     }
 
+    public bool IsBedRoomOpen()
+    {
+        return bedRoomOpen;
+    }
 }

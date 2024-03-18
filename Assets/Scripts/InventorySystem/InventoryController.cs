@@ -19,6 +19,9 @@ public class InventoryController : MonoBehaviour
     [Tooltip("The inventory grid used by the player.")]
     [SerializeField] private ItemGrid inventoryGrid; // Inventory grid used by the player
 
+    [SerializeField] private GameObject satchelCanvas;
+    [SerializeField] private GameObject bedRoomStorageCanvas;
+
     [Header("Button Settings:")]
     [Tooltip("The button that trashes an item when pressed.")]
     [SerializeField] private Button trashButton;
@@ -46,6 +49,7 @@ public class InventoryController : MonoBehaviour
     private void Start()
     {
         isSpaceForItem = true; // Set initially true when beginning the game
+        ToggleOffBedroomStorageCanvas();
     }
 
     private void Awake()
@@ -59,7 +63,7 @@ public class InventoryController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab)) { ToggleInventoryCanvas(); } // When left mouse button is pressed run method
+        if (Input.GetKeyDown(KeyCode.Tab) && !GameManager.Instance.IsBedroomOpen()) { ToggleInventoryCanvas(); } // When left mouse button is pressed run method
 
         if (inventoryCanvas.activeSelf) // Only do the following code if the inventory canvas is open
         {
@@ -78,6 +82,7 @@ public class InventoryController : MonoBehaviour
             if (Input.GetMouseButtonDown(0)) { LeftMouseButtonPress(); } // When left mouse button is pressed run method
 
             if (Input.GetMouseButton(1)) { RightMouseButtonPress(); } // When right mouse button is pressed run method
+
         }
 
     }
@@ -240,6 +245,16 @@ public class InventoryController : MonoBehaviour
             GameManager.Instance.FreezeRotation();
             inventoryCanvas.gameObject.SetActive(true); // Activate canvas object
         }
+    }
+
+    public void ToggleInventoryCanvasOn()
+    {
+        // AudioManager.Instance.PlayOpenInventorySound();
+
+        Cursor.lockState = CursorLockMode.Confined; // Lock cursor in one place
+        Cursor.visible = true; // Hide cursor
+        //GameManager.Instance.FreezeRotation();
+        inventoryCanvas.gameObject.SetActive(true); // Activate canvas object
     }
 
     public void ToggleInventoryCanvasOff()
@@ -508,6 +523,22 @@ public class InventoryController : MonoBehaviour
         {
             rectTransform.position = Input.mousePosition;
         }
+    }
+
+
+    public void ToggleOnBedroomStorageCanvas()
+    {
+        bedRoomStorageCanvas.SetActive(true);
+    }
+
+    public void ToggleOffBedroomStorageCanvas()
+    {
+        bedRoomStorageCanvas.SetActive(false);
+    }
+
+    public bool CheckIfBedroomOpen()
+    {
+        return RoomManager.Instance.IsBedRoomOpen();
     }
 
 }

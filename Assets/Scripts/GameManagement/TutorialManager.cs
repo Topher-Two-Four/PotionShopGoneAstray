@@ -252,12 +252,13 @@ public class TutorialManager : MonoBehaviour
 
     public void ToggleOnMazeAccessTutorial()
     {
-        if (!mazeAccessTutorialPlayed && tutorialsOn)
+        /*if (!mazeAccessTutorialPlayed && tutorialsOn)
         {
-            mazeAccessTutorial.SetActive(true);
-            Invoke("ToggleOffMazeAccessTutorial", timeoutTime);
-            mazeAccessTutorialPlayed = true;
+            //mazeAccessTutorial.SetActive(true);
+            //Invoke("ToggleOffMazeAccessTutorial", timeoutTime);
+            //mazeAccessTutorialPlayed = true;
         }
+        */
     }
 
     public void ToggleOffMazeAccessTutorial()

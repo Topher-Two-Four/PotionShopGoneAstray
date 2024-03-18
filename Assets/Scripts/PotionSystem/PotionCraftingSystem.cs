@@ -702,7 +702,7 @@ public class PotionCraftingSystem : MonoBehaviour
     {
         if (!isBrewing)
         {
-            if (isRetrievable)
+            if (isRetrievable && InventoryController.Instance.CheckForItemSpace(potionBeingBrewed))
             {
                 AudioManager.Instance.PlayRetrievePotionSound();
                 AddPotionToInventory(potionBeingBrewed, GetPotionQuality());

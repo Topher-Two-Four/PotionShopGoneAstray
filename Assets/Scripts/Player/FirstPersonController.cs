@@ -157,14 +157,14 @@ namespace StarterAssets
 							Teleportation.Instance.PlayerHasLooked();
 						}
 						isLooking = true;
-						//Debug.Log(isLooking);
+						// Debug.Log(isLooking);
 						return;
 					}
 					else
 					{
 						//Teleportation.Instance.PlayerHasNotLooked();// Player not looking
 						isLooking = false;
-						//Debug.Log(isLooking);
+						// Debug.Log(isLooking);
 					}
 				}
 			}

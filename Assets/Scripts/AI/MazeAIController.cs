@@ -53,6 +53,7 @@ public class MazeAIController : MonoBehaviour
     private Vector3 _lastSeenLocation; // The location where the player was last seen
     private Vector3 _lastDetectedLocation = Vector3.zero; // The location where the player was last detected
     private int _currentPatrolPointIndex; // The patrol point that the AI is currently moving to
+    private float _bellCooldownTimer = 0f;
 
     private void Start()
     {
@@ -63,6 +64,7 @@ public class MazeAIController : MonoBehaviour
         _isDetectingPlayer = false; // AI is not currently detecting player
         _playerCaught = false; // AI has not caught player
         _bellCooldownComplete = true;
+        _bellCooldownTimer = 0f;
 
         navMeshAgent = GetComponent<NavMeshAgent>(); // Get the Nav Mesh Agent component of the AI game object
         navMeshAgent.isStopped = false; // Make it so that the AI is no longer stopped
@@ -101,7 +103,16 @@ public class MazeAIController : MonoBehaviour
                         PenguinBell.Instance.SoundAlarmBell();
                         MoveEnemiesToAlarmSound();
                         _bellCooldownComplete = false;
-                        Invoke("BellCooldown", PenguinBell.Instance.GetPenguinCoolDownTime());
+                        _bellCooldownTimer = 0.0f;
+                    }
+                }
+
+                if (!_bellCooldownComplete)
+                {
+                    _bellCooldownTimer += Time.deltaTime;
+                    if (_bellCooldownTimer >= PenguinBell.Instance.GetPenguinCoolDownTime())
+                    {
+                        _bellCooldownComplete = true;
                     }
                 }
             }
@@ -384,9 +395,4 @@ public class MazeAIController : MonoBehaviour
         }
     }
 
-    private void BellCooldown()
-    {
-        _bellCooldownComplete = true;
-        Debug.Log("Bell cooldown complete.");
-    }
 }

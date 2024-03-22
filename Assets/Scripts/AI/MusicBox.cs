@@ -90,6 +90,7 @@ public class MusicBox : MonoBehaviour
         for (int i = 0; i < caughtItemRemoveAmount; i++)
         {
             CutsceneManager.Instance.PlayMusicManCatchCutscene();
+            AudioManager.Instance.PlayMusicManCatchSound();
             InventoryController.Instance.RemoveRandomItemFromGrid();
         }
         GameManager.Instance.timeRemaining -= timeRemovedWhenCaught;

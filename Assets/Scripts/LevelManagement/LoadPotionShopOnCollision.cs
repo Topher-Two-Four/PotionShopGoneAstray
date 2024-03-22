@@ -28,6 +28,7 @@ public class LoadPotionShopOnCollision : MonoBehaviour
                 timeRemoved = true;
                 if (gameObject.tag == "MazeEnemy")
                 {
+                    AudioManager.Instance.PlayBirdCatchSound();
                     CutsceneManager.Instance.PlayBirdCatchCutscene();
                 }
                 else if (gameObject.tag == "FallBoundary")

@@ -159,6 +159,14 @@ public class AudioManager : MonoBehaviour
     public AudioClip teleportToShopSound;
     [Range(0.0f, 1.0f)] public float teleportToShopSoundVolume = 0.5f;
 
+    [Header("Monster Sounds")]
+    [SerializeField] public AudioClip birdCatchSound;
+    [Range(0.0f, 1.0f)] public float birdCatchSoundVolume = 0.5f;
+    [SerializeField] public AudioClip musicManCatchSound;
+    [Range(0.0f, 1.0f)] public float musicManCatchSoundVolume = 0.5f;
+    [SerializeField] public AudioClip jellyCatchSound;
+    [Range(0.0f, 1.0f)] public float jellyCatchSoundVolume = 0.5f;
+
     public static AudioManager Instance { get; private set; } // Singleton logic
 
     private void Start()
@@ -237,6 +245,9 @@ public class AudioManager : MonoBehaviour
         audioClips.Add("PickUpMazeItem", pickUpMazeItemSound);
         audioClips.Add("TeleportToMaze", teleportToMazeSound);
         audioClips.Add("TeleportToShop", teleportToShopSound);
+        audioClips.Add("BirdCatch", birdCatchSound);
+        audioClips.Add("MusicManCatch", musicManCatchSound);
+        audioClips.Add("JellyCatch", jellyCatchSound);
     }
 
     public void PlaySound(string name, float volume, AudioSource audioSource)
@@ -549,6 +560,23 @@ public class AudioManager : MonoBehaviour
         PlaySound("TeleportToShop", teleportToShopSoundVolume, sfx1Source);
     }
 
+    public void PlayBirdCatchSound()
+    {
+        PlaySound("BirdCatch", birdCatchSoundVolume, sfx1Source);
+        Debug.Log("Playing catch sound");
+    }
+
+    public void PlayMusicManCatchSound()
+    {
+        PlaySound("MusicManCatch", musicManCatchSoundVolume, sfx1Source);
+        Debug.Log("Playing catch sound");
+    }
+
+    public void PlayJellyCatchSound()
+    {
+        PlaySound("JellyCatch", jellyCatchSoundVolume, sfx1Source);
+        Debug.Log("Playing catch sound");
+    }
 
     public void ChangeMasterVolume()
     {

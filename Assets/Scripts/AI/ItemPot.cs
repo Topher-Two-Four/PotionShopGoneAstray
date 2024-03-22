@@ -47,7 +47,7 @@ public class ItemPot : MonoBehaviour
     public void AddItemToCount()
     {
         _itemsCollected++;
-        Debug.Log(_itemsCollected);
+        // Debug.Log(_itemsCollected);
     }
 
     public void SetItemsCollectedDivider(int divisor)

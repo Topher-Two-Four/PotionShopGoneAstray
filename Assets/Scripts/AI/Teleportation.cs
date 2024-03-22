@@ -130,6 +130,7 @@ public class Teleportation : MonoBehaviour
         {
             InventoryController.Instance.RemoveRandomItemFromGrid();
             CutsceneManager.Instance.PlayJellyCatchCutscene();
+            AudioManager.Instance.PlayJellyCatchSound();
         }
         GameManager.Instance.timeRemaining -= timeRemovedWhenCaught;
         GameManager.Instance.SwitchSceneToPotionLevel();

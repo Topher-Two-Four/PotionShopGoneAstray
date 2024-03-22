@@ -562,21 +562,22 @@ public class AudioManager : MonoBehaviour
 
     public void PlayBirdCatchSound()
     {
-        PlaySound("BirdCatch", birdCatchSoundVolume, sfx1Source);
+        PlaySound("BirdCatch", birdCatchSoundVolume, sfx4Source);
         Debug.Log("Playing catch sound");
     }
 
     public void PlayMusicManCatchSound()
     {
-        PlaySound("MusicManCatch", musicManCatchSoundVolume, sfx1Source);
+        PlaySound("MusicManCatch", musicManCatchSoundVolume, sfx4Source);
         Debug.Log("Playing catch sound");
     }
 
     public void PlayJellyCatchSound()
     {
-        PlaySound("JellyCatch", jellyCatchSoundVolume, sfx1Source);
+        PlaySound("JellyCatch", jellyCatchSoundVolume, sfx4Source);
         Debug.Log("Playing catch sound");
     }
+
 
     public void ChangeMasterVolume()
     {

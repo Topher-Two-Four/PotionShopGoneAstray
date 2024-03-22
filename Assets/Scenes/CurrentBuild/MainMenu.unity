@@ -9372,7 +9372,7 @@ MonoBehaviour:
   menuButtonClickSoundVolume: 1
   newDaySound: {fileID: 8300000, guid: 98c2ce721f694da44a1ae32ffcbab134, type: 3}
   newDaySoundVolume: 1
-  endDaySound: {fileID: 8300000, guid: 91ca13e9ef9615549bbe80ff8e5bbbcb, type: 3}
+  endDaySound: {fileID: 8300000, guid: f3c3b0ef92696d44882e26052c646272, type: 3}
   endDaySoundVolume: 1
   pauseGameSound: {fileID: 8300000, guid: 4a639e87177d7914f9d343525f50e2fa, type: 3}
   pauseGameSoundVolume: 1

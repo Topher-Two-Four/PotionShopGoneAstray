@@ -44,7 +44,8 @@ public class MazeSpawnManager : MonoBehaviour
 
     void Start()
     {
-        GameManager.Instance.CallMovePlayerToSpawn();
+        Invoke("MovePlayerToSpawn", 0.1f);
+        //GameManager.Instance.CallMovePlayerToSpawn();
         AudioManager.Instance.sfx1Source.Stop();
         AudioManager.Instance.sfx2Source.Stop();
         AudioManager.Instance.PlayMazeMusic();
@@ -122,6 +123,11 @@ public class MazeSpawnManager : MonoBehaviour
     public ItemObject[] GetIngredientsArray()
     {
         return ingredientsArray;
+    }
+
+    public void MovePlayerToSpawn()
+    {
+        GameManager.Instance.CallMovePlayerToSpawn();
     }
 
 }

@@ -636,7 +636,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         {
             playerCapsule.transform.position = spawnPoint.transform.position;
             playerCapsule.transform.rotation = spawnPoint.transform.rotation;
-            //Debug.Log("Player spawned in at " + spawnPoint.transform.position);
+            Debug.Log("Player spawned in at " + spawnPoint.transform.position);
         }
     }
 

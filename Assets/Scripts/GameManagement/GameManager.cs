@@ -631,7 +631,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void CallMovePlayerToSpawn()
     {
-        GameObject spawnPoint = GameObject.FindGameObjectWithTag("PlayerSpawnPoint");
+        GameObject spawnPoint = GameObject.FindSceneObjectsOfType("PlayerSpawnPoint");
         if (spawnPoint != null)
         {
             playerCapsule.transform.position = spawnPoint.transform.position;

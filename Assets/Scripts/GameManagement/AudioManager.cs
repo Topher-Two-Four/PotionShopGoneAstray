@@ -167,6 +167,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] public AudioClip jellyCatchSound;
     [Range(0.0f, 1.0f)] public float jellyCatchSoundVolume = 0.5f;
 
+    private bool _musicMuted = false;
+
+
     public static AudioManager Instance { get; private set; } // Singleton logic
 
     private void Start()
@@ -588,6 +591,19 @@ public class AudioManager : MonoBehaviour
     public void ChangeMusicVolume()
     {
         musicSource.volume = musicVolumeSlider.value;
+    }
+    public void ToggleMusic()
+    {
+        if (_musicMuted)
+        {
+            musicSource.volume = musicVolumeSlider.value;
+            _musicMuted = false;
+        } 
+        else
+        {
+            musicSource.volume = 0;
+            _musicMuted = true;
+        }
     }
 
     public void ChangeSFX1Volume()

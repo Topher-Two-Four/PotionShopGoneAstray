@@ -242,6 +242,7 @@ MonoBehaviour:
   _isChasing: 0
   _isDetectingPlayer: 0
   _playerCaught: 0
+  _bellCooldownComplete: 0
   raycastMeshResolution: 1
   raycastEdgeIterations: 4
   raycastEdgeDistance: 0.5
@@ -648,6 +649,22 @@ PrefabInstance:
     - target: {fileID: 1041574651203278559, guid: d96325c837e7f7c40a8e25bc9aa50a44, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240908232792322977, guid: d96325c837e7f7c40a8e25bc9aa50a44, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240908232792322977, guid: d96325c837e7f7c40a8e25bc9aa50a44, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240908232792322977, guid: d96325c837e7f7c40a8e25bc9aa50a44, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -860
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240908232792322977, guid: d96325c837e7f7c40a8e25bc9aa50a44, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -295
       objectReference: {fileID: 0}
     - target: {fileID: 6754747784632715627, guid: d96325c837e7f7c40a8e25bc9aa50a44, type: 3}
       propertyPath: m_Name

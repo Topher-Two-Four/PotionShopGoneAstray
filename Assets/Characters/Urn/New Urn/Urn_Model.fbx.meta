@@ -3,7 +3,32 @@ guid: bcac5a71db212fa43b71e0501358180f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LegMeat.001
+    second: {fileID: 2100000, guid: d75e8e32c84496c449320b95b7632616, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: 917b82a438520824dacbc9a814b2e671, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.004
+    second: {fileID: 2100000, guid: 4f9c9ee427efc3c429a4ae20fc46b980, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TEMP-EYE.001
+    second: {fileID: 2100000, guid: 4a8f3610fdddc3d419967b9786490a44, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TEMP-Mouth.001
+    second: {fileID: 2100000, guid: 6ac963e9eb4e9234182d634cda9c9a56, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -99,7 +124,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0

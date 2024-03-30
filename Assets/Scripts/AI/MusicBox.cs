@@ -25,6 +25,8 @@ public class MusicBox : MonoBehaviour
     private bool musicPlaying = false;
     private float currentMusicPlayTime = 0f;
 
+    private bool _hasRemovedItems = false;
+
     public static MusicBox Instance { get; private set; } // Singleton logic
 
     // Start is called before the first frame update
@@ -87,11 +89,13 @@ public class MusicBox : MonoBehaviour
 
     private void PlayerCaught()
     {
-        for (int i = 0; i < caughtItemRemoveAmount; i++)
+        if (!_hasRemovedItems)
         {
-            CutsceneManager.Instance.PlayMusicManCatchCutscene();
-            AudioManager.Instance.PlayMusicManCatchSound();
-            InventoryController.Instance.RemoveRandomItemFromGrid();
+            for (int i = 0; i < caughtItemRemoveAmount; i++)
+            {
+                InventoryController.Instance.RemoveRandomItemFromGrid();
+            }
+            _hasRemovedItems = true;
         }
         GameManager.Instance.timeRemaining -= timeRemovedWhenCaught;
         GameManager.Instance.SwitchSceneToPotionLevel();

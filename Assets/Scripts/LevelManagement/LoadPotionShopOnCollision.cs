@@ -11,21 +11,28 @@ public class LoadPotionShopOnCollision : MonoBehaviour
     [Tooltip("The amount of items to remove from player's inventory when collision with them occurs.")]
     [SerializeField] private int caughtItemRemoveAmount = 3;
 
-    private bool timeRemoved = false;
+    private bool _timeRemoved = false;
+    private bool _hasRemovedItems = false;
 
     // Switch to potion shop scene on collision with this game object
     private void OnCollisionEnter(Collision collision)
     {
-        if (!timeRemoved)
+        if (!_timeRemoved)
         {
             if (collision.gameObject.tag == "Player")
             {
-                for (int i = 0; i < caughtItemRemoveAmount; i++)
+                if (!_hasRemovedItems)
                 {
-                    InventoryController.Instance.RemoveRandomItemFromGrid();
-                    //Debug.Log("Trying to remove random item from collision script...");
+                    for (int i = 0; i < caughtItemRemoveAmount; i++)
+                    {
+                        InventoryController.Instance.RemoveRandomItemFromGrid();
+
+                    }
+                    _hasRemovedItems = true;
+                    Debug.Log(_hasRemovedItems);
                 }
-                timeRemoved = true;
+
+                _timeRemoved = true;
                 if (gameObject.tag == "MazeEnemy")
                 {
                     AudioManager.Instance.PlayBirdCatchSound();

@@ -74,23 +74,19 @@ public class ItemGrid : MonoBehaviour
             }
         }
     }
+
     public void RemoveRandomItem(ItemGrid inventoryGrid)
     {
-        for (int x = 0; x < gridSizeWidth; x++)
-        {
-            for (int y = 0; y < gridSizeHeight; y++)
-            {
-                x = Random.Range(0, gridSizeWidth);
-                y = Random.Range(0, gridSizeHeight);
-                InventoryItem inventoryItem = inventoryItemSlot[x, y];
-                //Debug.Log("Selecting " + inventoryItem + "using item grid script...");
-                if (inventoryItem != null && inventoryItem.GetInventoryItemData())
-                {
-                    inventoryItem.Delete();
-                    //Debug.Log("Removing " + inventoryItem + "using item grid script...");
-                }
-            }
-        }
+    int x = Random.Range(0, gridSizeWidth);
+    int y = Random.Range(0, gridSizeHeight);
+    InventoryItem inventoryItem = inventoryItemSlot[x, y];
+    Debug.Log("Selecting " + inventoryItem + "using item grid script...");
+
+    if (inventoryItem != null && inventoryItem.GetInventoryItemData())
+         {
+         inventoryItem.Delete();
+         Debug.Log("Removing " + inventoryItem + "using item grid script...");
+         }
     }
 
     private void CleanGridReference(InventoryItem item)

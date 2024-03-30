@@ -30,6 +30,8 @@ public class Teleportation : MonoBehaviour
     private bool playerHasLooked = false;
     private bool playerCaught = false;
 
+    private bool _hasRemovedItems = false;
+
     public static Teleportation Instance { get; private set; } // Singleton logic
 
     private void Start()
@@ -126,12 +128,17 @@ public class Teleportation : MonoBehaviour
 
     private void PlayerCaught()
     {
-        for (int i = 0; i < caughtItemRemoveAmount; i++)
+        if (!_hasRemovedItems)
         {
-            InventoryController.Instance.RemoveRandomItemFromGrid();
-            CutsceneManager.Instance.PlayJellyCatchCutscene();
-            AudioManager.Instance.PlayJellyCatchSound();
+            for (int i = 0; i < caughtItemRemoveAmount; i++)
+            {
+                InventoryController.Instance.RemoveRandomItemFromGrid();
+            }
+            _hasRemovedItems = true;
         }
+
+        CutsceneManager.Instance.PlayJellyCatchCutscene();
+        AudioManager.Instance.PlayJellyCatchSound();
         GameManager.Instance.timeRemaining -= timeRemovedWhenCaught;
         GameManager.Instance.SwitchSceneToPotionLevel();
     }

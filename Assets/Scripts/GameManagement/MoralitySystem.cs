@@ -15,6 +15,13 @@ public class MoralitySystem : MonoBehaviour
 
     [Header("Text Settings:")]
     [SerializeField] private TMP_Text[] mText;
+    [SerializeField] private Color allGoodTextColor = Color.blue;
+    [SerializeField] private Color veryGoodTextColor = Color.cyan;
+    [SerializeField] private Color goodTextColor = Color.green;
+    [SerializeField] private Color neutralTextColor = Color.white;
+    [SerializeField] private Color badTextColor = Color.yellow;
+    [SerializeField] private Color veryBadTextColor = Color.magenta;
+    [SerializeField] private Color allBadTextColor = Color.red;
 
     [HideInInspector] public float monsterSpeedModifier;
     [HideInInspector] public float playerSpeedModifier;
@@ -97,7 +104,7 @@ public class MoralitySystem : MonoBehaviour
             foreach (TMP_Text mText in mText)
             {
                 mText.text = "Alignment: All Good (" + moralityCounter + ")";
-                mText.color = new Color(0, 255, 0);
+                mText.color = allGoodTextColor;
             }
         }
         else if (moralityCounter >= 5 && moralityCounter < 10)
@@ -105,7 +112,7 @@ public class MoralitySystem : MonoBehaviour
             foreach (TMP_Text mText in mText)
             {
                 mText.text = "Alignment: Very Good (" + moralityCounter + ")";
-                mText.color = new Color(255, 130, 0);
+                mText.color = veryGoodTextColor;
             }
         }
         else if (moralityCounter >= 1 && moralityCounter < 5)
@@ -113,7 +120,7 @@ public class MoralitySystem : MonoBehaviour
             foreach (TMP_Text mText in mText)
             {
                 mText.text = "Alignment: Good (" + moralityCounter + ")";
-                mText.color = new Color(255, 255, 0);
+                mText.color = goodTextColor;
             }
         }
         else if (moralityCounter >= -1 && moralityCounter < 1)
@@ -121,7 +128,7 @@ public class MoralitySystem : MonoBehaviour
             foreach (TMP_Text mText in mText)
             {
                 mText.text = "Alignment: Neutral (" + moralityCounter + ")";
-                mText.color = Color.gray;
+                mText.color = neutralTextColor;
             }
         }
         else if (moralityCounter >= -5 && moralityCounter < -1)
@@ -129,7 +136,7 @@ public class MoralitySystem : MonoBehaviour
             foreach (TMP_Text mText in mText)
             {
                 mText.text = "Alignment: Bad (" + moralityCounter + ")";
-                mText.color = new Color(255, 203, 0);
+                mText.color = badTextColor;
             }
         }
         else if (moralityCounter > -10 && moralityCounter < -5)
@@ -137,7 +144,7 @@ public class MoralitySystem : MonoBehaviour
             foreach (TMP_Text mText in mText)
             {
                 mText.text = "Alignment: Very Bad (" + moralityCounter + ")";
-                mText.color = new Color(255, 110, 0);
+                mText.color = veryBadTextColor;
             }
 
         }
@@ -146,7 +153,7 @@ public class MoralitySystem : MonoBehaviour
             foreach (TMP_Text mText in mText)
             {
                 mText.text = "Alignment: All Bad (" + moralityCounter + ")";
-                mText.color = new Color(255, 0, 0);
+                mText.color = allBadTextColor;
             }
         }
     }

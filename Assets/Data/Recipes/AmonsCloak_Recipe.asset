@@ -12,15 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208b1537c6b018c438507b1122182a38, type: 3}
   m_Name: AmonsCloak_Recipe
   m_EditorClassIdentifier: 
-  potion: {fileID: 11400000, guid: 4372e7d3352c35043b2c0e883ea43210, type: 2}
+  potion: {fileID: 11400000, guid: 93cf9fc08d269364fa657a593d0cbd57, type: 2}
   ingredient1: {fileID: 11400000, guid: 8a86c6af669b84d43b1550e26b311338, type: 2}
   ingredient2: {fileID: 0}
   ingredient3: {fileID: 0}
   ingredient4: {fileID: 0}
-  cookTime: 60
   desiredTemp: 2
-  quality: 5
+  needStirring: 0
+  needsLidOn: 0
   ultraQualityTimeLimit: 0
   highQualityTimeLimit: 0
   mediumQualityTimeLimit: 0
   lowQualityTimeLimit: 0
+  quality: 5
+  cookTime: 60

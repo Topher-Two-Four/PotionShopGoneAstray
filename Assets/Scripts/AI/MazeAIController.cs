@@ -320,7 +320,7 @@ public class MazeAIController : MonoBehaviour
 
     private void ScanEnvironment()
     {
-        DrawDebugVisionArc(); // Use to show arc of AI vision
+        //DrawDebugVisionArc(); // Use to show arc of AI vision
 
         Collider[] playerInRange = Physics.OverlapSphere(transform.position, viewRadius, playerMask);  // Collider array of player colliders that are in range
 
@@ -374,24 +374,24 @@ public class MazeAIController : MonoBehaviour
 
     public void MoveEnemiesToAlarmSound()
     {
-        Debug.Log("MoveEnemiesToAlarmSoundCalled");
+        //Debug.Log("MoveEnemiesToAlarmSoundCalled");
 
         GameObject[] mazeEnemies = GameObject.FindGameObjectsWithTag("MazeEnemy");
         foreach (GameObject enemy in mazeEnemies)
         {
             Search(PenguinBell.Instance.gameObject.transform.position);
-            Debug.Log(enemy + " moving to " + PenguinBell.Instance.gameObject.transform.position);
+            //Debug.Log(enemy + " moving to " + PenguinBell.Instance.gameObject.transform.position);
         }
     }
     public void MoveEnemiesToUrnBreakSound()
     {
-        Debug.Log("MoveEnemiesToUrnBreakSoundCalled");
+        //Debug.Log("MoveEnemiesToUrnBreakSoundCalled");
 
         GameObject[] mazeEnemies = GameObject.FindGameObjectsWithTag("MazeEnemy");
         foreach (GameObject enemy in mazeEnemies)
         {
             Search(ItemPot.Instance.gameObject.transform.position);
-            Debug.Log(enemy + " moving to " + ItemPot.Instance.gameObject.transform.position);
+            //Debug.Log(enemy + " moving to " + ItemPot.Instance.gameObject.transform.position);
         }
     }
 

@@ -31,7 +31,7 @@ public class ItemPot : MonoBehaviour
             ItemObject[] ingredientList = MazeSpawnManager.Instance.GetIngredientsArray();
 
             int _itemsToSpawn = (_itemsCollected / itemsCollectedDivider);
-            Debug.Log("Items to spawn: " + _itemsToSpawn);
+            //Debug.Log("Items to spawn: " + _itemsToSpawn);
 
             for (int x = 0; x < _itemsToSpawn; x++)
             {

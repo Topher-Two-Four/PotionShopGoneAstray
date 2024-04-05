@@ -29,7 +29,7 @@ public class PenguinBell : MonoBehaviour
     public void SoundAlarmBell()
     {
         audioSource.PlayOneShot(penguinBellSound);
-        Debug.Log("Alarm sounded.");
+        //Debug.Log("Alarm sounded.");
     }
 
     public float GetPenguinCoolDownTime()

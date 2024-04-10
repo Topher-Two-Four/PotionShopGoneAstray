@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         playerCurrencyText.text = ("Player Currency: $" + playerCurrency);
         landlordPaymentText.text = ("Landlord Payment: $" + landlordPayment);
         currentDayText.text = ("Day " + currentDay);
-        CutsceneManager.Instance.PlayIntroCutscene();
+        //CutsceneManager.Instance.PlayIntroCutscene();
     }
 
     private void Update()

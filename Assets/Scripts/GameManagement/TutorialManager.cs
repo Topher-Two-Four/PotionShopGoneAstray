@@ -330,7 +330,7 @@ public class TutorialManager : MonoBehaviour
         if (!mazeTutorialPlayed && tutorialsOn)
         {
             Invoke("ToggleOnMovementTutorial", 0.5f);
-            Invoke("ToggleOnJumpTutorial", 0.5f);
+            //Invoke("ToggleOnJumpTutorial", 0.5f);
             Invoke("ToggleOnInventoryTutorial", 1.0f + timeoutTime);
             Invoke("ToggleOnMonstersTutorial", 1.0f + timeoutTime + timeoutTime);
             Invoke("ToggleOnPauseGameTutorial", 60.0f);

@@ -53574,7 +53574,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!1 &1454000666
 GameObject:
@@ -56107,9 +56107,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   introCutscene: {fileID: 919041380}
-  introCutsceneLength: 5
+  introCutsceneLength: 0.1
   newDayCutscene: {fileID: 201619606}
-  newDayCutsceneLength: 3
+  newDayCutsceneLength: 1
   winGameCutscene: {fileID: 51930254}
   winGameCutsceneLength: 5
   loseGameCutscene: {fileID: 823429419}
@@ -61932,7 +61932,7 @@ MonoBehaviour:
   movementTutorial: {fileID: 1275829265}
   pauseGameTutorial: {fileID: 332979531}
   sellPotionsTutorial: {fileID: 1512885536}
-  timeoutTime: 10
+  timeoutTime: 20
   tutorialsOn: 1
   toggleTutorialsButton: {fileID: 513926407}
   tutorialsToggledIndicator: {fileID: 149621143}

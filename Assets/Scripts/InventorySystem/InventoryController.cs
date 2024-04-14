@@ -20,7 +20,10 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private ItemGrid inventoryGrid; // Inventory grid used by the player
 
     [SerializeField] private GameObject satchelCanvas;
-    [SerializeField] private GameObject bedRoomStorageCanvas;
+    [SerializeField] private GameObject leftBedroomStorageCanvas;
+    [SerializeField] private GameObject rightBedroomStorageCanvas;
+    [SerializeField] private GameObject wallBedroomStorageCanvas;
+    [SerializeField] private GameObject dresserBedroomStorageCanvas;
 
     [Header("Button Settings:")]
     [Tooltip("The button that trashes an item when pressed.")]
@@ -528,12 +531,18 @@ public class InventoryController : MonoBehaviour
 
     public void ToggleOnBedroomStorageCanvas()
     {
-        bedRoomStorageCanvas.SetActive(true);
+        leftBedroomStorageCanvas.SetActive(true);
+        rightBedroomStorageCanvas.SetActive(true);
+        wallBedroomStorageCanvas.SetActive(true);
+        dresserBedroomStorageCanvas.SetActive(true);
     }
 
     public void ToggleOffBedroomStorageCanvas()
     {
-        bedRoomStorageCanvas.SetActive(false);
+        leftBedroomStorageCanvas.SetActive(false);
+        rightBedroomStorageCanvas.SetActive(false);
+        wallBedroomStorageCanvas.SetActive(false);
+        dresserBedroomStorageCanvas.SetActive(false);
     }
 
     public bool CheckIfBedroomOpen()

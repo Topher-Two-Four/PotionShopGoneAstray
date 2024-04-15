@@ -471,6 +471,10 @@ PrefabInstance:
       value: Bird_Model
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: d94d22d1914e47244bca4e331dad6a04, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: d94d22d1914e47244bca4e331dad6a04, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 033ac5010a3cd194787710478ed24a95, type: 2}

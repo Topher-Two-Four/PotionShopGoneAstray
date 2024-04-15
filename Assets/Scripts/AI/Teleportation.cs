@@ -128,6 +128,8 @@ public class Teleportation : MonoBehaviour
 
     private void PlayerCaught()
     {
+        CutsceneManager.Instance.PlayJellyCatchCutscene();
+
         if (!_hasRemovedItems)
         {
             for (int i = 0; i < caughtItemRemoveAmount; i++)
@@ -137,7 +139,6 @@ public class Teleportation : MonoBehaviour
             _hasRemovedItems = true;
         }
 
-        CutsceneManager.Instance.PlayJellyCatchCutscene();
         AudioManager.Instance.PlayJellyCatchSound();
         GameManager.Instance.timeRemaining -= timeRemovedWhenCaught;
         GameManager.Instance.SwitchSceneToPotionLevel();

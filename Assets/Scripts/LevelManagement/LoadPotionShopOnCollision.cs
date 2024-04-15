@@ -21,17 +21,6 @@ public class LoadPotionShopOnCollision : MonoBehaviour
         {
             if (collision.gameObject.tag == "Player")
             {
-                if (!_hasRemovedItems)
-                {
-                    for (int i = 0; i < caughtItemRemoveAmount; i++)
-                    {
-                        InventoryController.Instance.RemoveRandomItemFromGrid();
-
-                    }
-                    _hasRemovedItems = true;
-                    Debug.Log(_hasRemovedItems);
-                }
-
                 _timeRemoved = true;
                 if (gameObject.tag == "MazeEnemy")
                 {
@@ -46,7 +35,18 @@ public class LoadPotionShopOnCollision : MonoBehaviour
                 {
                     CutsceneManager.Instance.PlayLoadingCutscene();
                 }
- 
+
+                if (!_hasRemovedItems)
+                {
+                    for (int i = 0; i < caughtItemRemoveAmount; i++)
+                    {
+                        InventoryController.Instance.RemoveRandomItemFromGrid();
+
+                    }
+                    _hasRemovedItems = true;
+                    Debug.Log(_hasRemovedItems);
+                }
+
                 GameManager.Instance.timeRemaining -= caughtTimeRemoveAmount; // Remove time from day if player is caught by enemy in maze
                 GameManager.Instance.SwitchSceneToPotionLevel(); // Switch scene to potion shop
             }

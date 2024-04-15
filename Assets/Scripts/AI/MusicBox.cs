@@ -89,6 +89,8 @@ public class MusicBox : MonoBehaviour
 
     private void PlayerCaught()
     {
+        CutsceneManager.Instance.PlayMusicManCatchCutscene();
+
         if (!_hasRemovedItems)
         {
             for (int i = 0; i < caughtItemRemoveAmount; i++)

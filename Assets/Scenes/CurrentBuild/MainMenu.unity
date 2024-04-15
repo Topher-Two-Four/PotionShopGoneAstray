@@ -40993,7 +40993,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1094608475}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 04f67b069352d0f48b154c8af4278cd1, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 1512e6705cc46d240a02b46ccdbdb7c4, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -41005,7 +41005,7 @@ VideoPlayer:
   m_AspectRatio: 2
   m_DataSource: 0
   m_TimeUpdateMode: 2
-  m_PlaybackSpeed: 2
+  m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources: []
   m_DirectAudioVolumes: []
@@ -43971,7 +43971,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1202193998}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 04f67b069352d0f48b154c8af4278cd1, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 7e399823bbc6ed24bb2eaade5d5ceed0, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -43983,7 +43983,7 @@ VideoPlayer:
   m_AspectRatio: 2
   m_DataSource: 0
   m_TimeUpdateMode: 2
-  m_PlaybackSpeed: 2
+  m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources: []
   m_DirectAudioVolumes: []
@@ -52851,7 +52851,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1453070999
 RectTransform:
   m_ObjectHideFlags: 0
@@ -55490,11 +55490,11 @@ MonoBehaviour:
   loseGameCutscene: {fileID: 823429419}
   loseGameCutsceneLength: 5
   birdCatchCutscene: {fileID: 112978740}
-  birdCatchCutsceneLength: 1
+  birdCatchCutsceneLength: 2
   musicManCatchCutscene: {fileID: 21124838}
-  musicManCatchCutsceneLength: 1
+  musicManCatchCutsceneLength: 2
   jellyCatchCutscene: {fileID: 356455962}
-  jellyCatchCutsceneLength: 1
+  jellyCatchCutsceneLength: 2
   fallCutscene: {fileID: 712239981}
   fallCutsceneLength: 1
   loadingCutscene: {fileID: 1390448872}
@@ -62607,7 +62607,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1751856220}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 04f67b069352d0f48b154c8af4278cd1, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 4bd0da56b724cdc4187999093ce80328, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -62619,7 +62619,7 @@ VideoPlayer:
   m_AspectRatio: 2
   m_DataSource: 0
   m_TimeUpdateMode: 2
-  m_PlaybackSpeed: 2
+  m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources: []
   m_DirectAudioVolumes: []

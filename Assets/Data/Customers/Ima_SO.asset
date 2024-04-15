@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Ima_SO
   m_EditorClassIdentifier: 
   customerName: Ima
-  customerPortrait: {fileID: 21300000, guid: 8f098c260dcbba74dbb158bc8a07d493, type: 3}
+  customerPortrait: {fileID: 21300000, guid: 1143bc02cf516034fbedbcd7292d611c, type: 3}

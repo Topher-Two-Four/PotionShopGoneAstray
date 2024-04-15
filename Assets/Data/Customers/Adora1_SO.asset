@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 250d5f515a6f4fa4c9094fc5cc743468, type: 3}
-  m_Name: Adora_SO
+  m_Name: Adora1_SO
   m_EditorClassIdentifier: 
   customerName: Adora
-  customerPortrait: {fileID: 21300000, guid: f13d70d70702e7c46a57482eedf9adaf, type: 3}
+  customerPortrait: {fileID: 21300000, guid: 13efe316f40ef0447bd4a31a058c7b81, type: 3}

@@ -24400,6 +24400,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6366682580641172927, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
+      propertyPath: customerList.Array.size
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 6366682580641172927, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
       propertyPath: orderList.Array.data[0]
       value: 
       objectReference: {fileID: 1560526287}
@@ -24435,6 +24439,82 @@ PrefabInstance:
       propertyPath: orderList.Array.data[8]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6366682580641172927, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
+      propertyPath: customerList.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 88cc05410c4b5444380280b47540b0d8, type: 2}
+    - target: {fileID: 6366682580641172927, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
+      propertyPath: customerList.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2cbcbd7be3452e3429a4be3d31bad0cd, type: 2}
+    - target: {fileID: 6366682580641172927, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
+      propertyPath: customerList.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1fddef6a0dfe19241b87a7f33a4f23f7, type: 2}
+    - target: {fileID: 6366682580641172927, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
+      propertyPath: customerList.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 608a609dae5ab30419c3c9dfc1cd3522, type: 2}
+    - target: {fileID: 6366682580641172927, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
+      propertyPath: customerList.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: b7505a9b83a8a374398893d2119732e5, type: 2}
+    - target: {fileID: 6366682580641172927, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
+      propertyPath: customerList.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: f91d4d49f4cdfd2429c957af696823d0, type: 2}
+    - target: {fileID: 6366682580641172927, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
+      propertyPath: customerList.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: ab324fc7fd3473f48b19ac7c641058a7, type: 2}
+    - target: {fileID: 6366682580641172927, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
+      propertyPath: customerList.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: f4b02f3a97b133b438a3231ba24001bb, type: 2}
+    - target: {fileID: 6366682580641172927, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
+      propertyPath: customerList.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: e8da664de47c73444a87b29922b29ebb, type: 2}
+    - target: {fileID: 6366682580641172927, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
+      propertyPath: customerList.Array.data[9]
+      value: 
+      objectReference: {fileID: 11400000, guid: 15a8c4eab48ded24db0066bdc2b7d275, type: 2}
+    - target: {fileID: 6366682580641172927, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
+      propertyPath: customerList.Array.data[10]
+      value: 
+      objectReference: {fileID: 11400000, guid: d960aac32a1d17945bdf0a1ee555809d, type: 2}
+    - target: {fileID: 6366682580641172927, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
+      propertyPath: customerList.Array.data[11]
+      value: 
+      objectReference: {fileID: 11400000, guid: 153c49157ae87e14383be803555769cb, type: 2}
+    - target: {fileID: 6366682580641172927, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
+      propertyPath: customerList.Array.data[12]
+      value: 
+      objectReference: {fileID: 11400000, guid: 786a91bd1edfa2d4695ff677603e2a9a, type: 2}
+    - target: {fileID: 6366682580641172927, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
+      propertyPath: customerList.Array.data[13]
+      value: 
+      objectReference: {fileID: 11400000, guid: 51d2c4a966fdf884f9db3f5a4e93a58c, type: 2}
+    - target: {fileID: 6366682580641172927, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
+      propertyPath: customerList.Array.data[14]
+      value: 
+      objectReference: {fileID: 11400000, guid: de265f6e22e3a6d48b5fcdda029ceda6, type: 2}
+    - target: {fileID: 6366682580641172927, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
+      propertyPath: customerList.Array.data[15]
+      value: 
+      objectReference: {fileID: 11400000, guid: 89ab489e864d17a4590cf9906c2ce040, type: 2}
+    - target: {fileID: 6366682580641172927, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
+      propertyPath: customerList.Array.data[16]
+      value: 
+      objectReference: {fileID: 11400000, guid: cf2ea77ab5b8ca146bb3cf609c95c79d, type: 2}
+    - target: {fileID: 6366682580641172927, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
+      propertyPath: customerList.Array.data[17]
+      value: 
+      objectReference: {fileID: 11400000, guid: b14be026df71313429bf668fecb46b39, type: 2}
+    - target: {fileID: 6366682580641172927, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
+      propertyPath: customerList.Array.data[18]
+      value: 
+      objectReference: {fileID: 11400000, guid: 91f3b28c5d05ccf48b25f5f01dd3f658, type: 2}
     - target: {fileID: 7115564010251222282, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
       propertyPath: m_Name
       value: OrderManager

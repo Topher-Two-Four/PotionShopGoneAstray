@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: CorruptCop_SO
   m_EditorClassIdentifier: 
   customerName: Corrupt Cop
-  customerPortrait: {fileID: 21300000, guid: 3566b563e213e774b91c51f430e0d223, type: 3}
+  customerPortrait: {fileID: 21300000, guid: 878b80d7417188f4bb5b15b30b263030, type: 3}

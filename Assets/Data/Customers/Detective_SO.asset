@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Detective_SO
   m_EditorClassIdentifier: 
   customerName: Detective
-  customerPortrait: {fileID: 21300000, guid: 0fd37353a9e684c4c9d0d7d691493485, type: 3}
+  customerPortrait: {fileID: 21300000, guid: 51b8afbae049f2348a485105f1701895, type: 3}

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Deidamia_SO
   m_EditorClassIdentifier: 
   customerName: Deidamia
-  customerPortrait: {fileID: 21300000, guid: 00e62ba471762ca4ea00cd66e92b9eaa, type: 3}
+  customerPortrait: {fileID: 21300000, guid: bcb2e3c321404174b98cc6751a572587, type: 3}

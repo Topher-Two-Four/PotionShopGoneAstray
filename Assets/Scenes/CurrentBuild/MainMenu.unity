@@ -1930,8 +1930,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Medium
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d1440f35e0b50094e989e8b118c4d96e, type: 2}
+  m_sharedMaterial: {fileID: 243150503359950473, guid: d1440f35e0b50094e989e8b118c4d96e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13435,8 +13435,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Landlord Payment: $XXXX'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d1440f35e0b50094e989e8b118c4d96e, type: 2}
+  m_sharedMaterial: {fileID: 243150503359950473, guid: d1440f35e0b50094e989e8b118c4d96e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -17970,7 +17970,6 @@ GameObject:
   - component: {fileID: 474650753}
   - component: {fileID: 474650752}
   - component: {fileID: 474650751}
-  - component: {fileID: 474650750}
   m_Layer: 5
   m_Name: LeftOfDresserStorageArea
   m_TagString: Untagged
@@ -17997,20 +17996,6 @@ RectTransform:
   m_AnchoredPosition: {x: 558.25, y: 464.5}
   m_SizeDelta: {x: 32, y: 1}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &474650750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 474650748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e83be86f5671a48ba21e5d32365c25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridSizeWidth: 24
-  gridSizeHeight: 4
 --- !u!114 &474650751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21459,8 +21444,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: <Time of Day>
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d1440f35e0b50094e989e8b118c4d96e, type: 2}
+  m_sharedMaterial: {fileID: 243150503359950473, guid: d1440f35e0b50094e989e8b118c4d96e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -21484,7 +21469,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48.15
+  m_fontSize: 44.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -45916,8 +45901,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: --
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d1440f35e0b50094e989e8b118c4d96e, type: 2}
+  m_sharedMaterial: {fileID: 243150503359950473, guid: d1440f35e0b50094e989e8b118c4d96e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -48941,7 +48926,6 @@ GameObject:
   - component: {fileID: 1355543273}
   - component: {fileID: 1355543272}
   - component: {fileID: 1355543271}
-  - component: {fileID: 1355543270}
   m_Layer: 5
   m_Name: WallStorageArea
   m_TagString: Untagged
@@ -48968,20 +48952,6 @@ RectTransform:
   m_AnchoredPosition: {x: 602.5, y: 928}
   m_SizeDelta: {x: 32, y: 1}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &1355543270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355543268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e83be86f5671a48ba21e5d32365c25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridSizeWidth: 24
-  gridSizeHeight: 4
 --- !u!114 &1355543271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52881,7 +52851,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1453070999
 RectTransform:
   m_ObjectHideFlags: 0
@@ -53782,8 +53752,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Ye Olde Tutorial
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d1440f35e0b50094e989e8b118c4d96e, type: 2}
+  m_sharedMaterial: {fileID: 243150503359950473, guid: d1440f35e0b50094e989e8b118c4d96e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -57556,8 +57526,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 00:00
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d1440f35e0b50094e989e8b118c4d96e, type: 2}
+  m_sharedMaterial: {fileID: 243150503359950473, guid: d1440f35e0b50094e989e8b118c4d96e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -57581,7 +57551,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 46.9
+  m_fontSize: 43.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -63062,7 +63032,6 @@ GameObject:
   - component: {fileID: 1770569964}
   - component: {fileID: 1770569963}
   - component: {fileID: 1770569962}
-  - component: {fileID: 1770569961}
   m_Layer: 5
   m_Name: TopOfDresserStorageArea
   m_TagString: Untagged
@@ -63089,20 +63058,6 @@ RectTransform:
   m_AnchoredPosition: {x: 836.75, y: 779.75}
   m_SizeDelta: {x: 32, y: 1}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &1770569961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1770569959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e83be86f5671a48ba21e5d32365c25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridSizeWidth: 24
-  gridSizeHeight: 4
 --- !u!114 &1770569962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74801,8 +74756,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Alignment: All Good'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d1440f35e0b50094e989e8b118c4d96e, type: 2}
+  m_sharedMaterial: {fileID: 243150503359950473, guid: d1440f35e0b50094e989e8b118c4d96e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -74935,8 +74890,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Day #
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d1440f35e0b50094e989e8b118c4d96e, type: 2}
+  m_sharedMaterial: {fileID: 243150503359950473, guid: d1440f35e0b50094e989e8b118c4d96e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -74960,7 +74915,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48.15
+  m_fontSize: 44.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -75217,8 +75172,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Player Currency: $XXXX'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d1440f35e0b50094e989e8b118c4d96e, type: 2}
+  m_sharedMaterial: {fileID: 243150503359950473, guid: d1440f35e0b50094e989e8b118c4d96e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

@@ -44,7 +44,7 @@ public class MazeSpawnManager : MonoBehaviour
 
     void Start()
     {
-        Invoke("MovePlayerToSpawn", 0.1f);
+        MovePlayerToSpawn();
         //GameManager.Instance.CallMovePlayerToSpawn();
         AudioManager.Instance.sfx1Source.Stop();
         AudioManager.Instance.sfx2Source.Stop();

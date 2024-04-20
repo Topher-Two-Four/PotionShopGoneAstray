@@ -17345,7 +17345,8 @@ PrefabInstance:
       propertyPath: m_Lens.FieldOfView
       value: 68.6
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7899478307544988770, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -69336,6 +69337,7 @@ GameObject:
   - component: {fileID: 1968482000}
   - component: {fileID: 1968482001}
   - component: {fileID: 1968482002}
+  - component: {fileID: 1968482003}
   m_Layer: 0
   m_Name: DataPersistenceManager
   m_TagString: Untagged
@@ -69383,6 +69385,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115f3b1593c3a16438a66faf0ad7161e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1968482003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968481999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a84c835212d49cf46941e31e97c7081c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPrefab: {fileID: 3761654210620089128, guid: 6c69ccac8bd83f94eb1782d99ff66571, type: 3}
+  potionPrefab: {fileID: 3761654210620089128, guid: 18758571485f014479423ac07bc72006, type: 3}
+  canvasTransform: {fileID: 977770115}
+  inventoryCanvas: {fileID: 977770114}
+  inventoryGrid: {fileID: 832016047}
+  satchelCanvas: {fileID: 1626691042}
+  leftBedroomStorageCanvas: {fileID: 474650748}
+  rightBedroomStorageCanvas: {fileID: 711435469}
+  wallBedroomStorageCanvas: {fileID: 1355543268}
+  dresserBedroomStorageCanvas: {fileID: 1770569959}
+  trashButton: {fileID: 1807904949}
+  items: []
 --- !u!1 &1968555138 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4467092059410021527, guid: 8e3743bbf570f084784dda50b29375aa, type: 3}

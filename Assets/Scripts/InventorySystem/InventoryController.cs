@@ -34,7 +34,7 @@ public class InventoryController : MonoBehaviour
         set // Set as currently selected item grid
         {
             selectedItemGrid = value; // Store item grid as variable
-            inventoryHighlight.SetParent(value); // Add highlight to inventory item
+            //inventoryHighlight.SetParent(value); // Add highlight to inventory item
         }
     }
 
@@ -59,7 +59,7 @@ public class InventoryController : MonoBehaviour
     {
         if (Instance != null && Instance != this) { Destroy(this);} else { Instance = this;} // Singleton logic
 
-        inventoryHighlight = GetComponent<InventoryHighlight>(); // Get highlight component
+        //inventoryHighlight = GetComponent<InventoryHighlight>(); // Get highlight component
 
         trashButton.onClick.AddListener(() => DeleteItem());
     }
@@ -78,9 +78,9 @@ public class InventoryController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.G)) { DropItem(); } // Rotate selected inventory item
 
-            if (selectedItemGrid == null) { inventoryHighlight.Show(false); return; } // Don't show highlight if selected item grid doesn't exist and return from method
+            //if (selectedItemGrid == null) { inventoryHighlight.Show(false); return; } // Don't show highlight if selected item grid doesn't exist and return from method
 
-            HandleHighlight(); // Use script to handle highlight of inventory item
+            //HandleHighlight(); // Use script to handle highlight of inventory item
 
             if (Input.GetMouseButtonDown(0)) { LeftMouseButtonPress(); } // When left mouse button is pressed run method
 
@@ -411,9 +411,10 @@ public class InventoryController : MonoBehaviour
 
     private void HandleHighlight()
     {
-        Vector2Int positionOnGrid = GetTileGridPosition();
-        if (oldPosition == positionOnGrid) { return; }
-        oldPosition = positionOnGrid;
+        //Vector2Int positionOnGrid = GetTileGridPosition();
+        //if (oldPosition == positionOnGrid) { return; }
+        //oldPosition = positionOnGrid;
+        /*
         if (selectedItem == null)
         {
             itemToHighlight = selectedItemGrid.GetItem(positionOnGrid.x, positionOnGrid.y);
@@ -440,6 +441,7 @@ public class InventoryController : MonoBehaviour
             inventoryHighlight.SetSize(selectedItem);
             inventoryHighlight.SetPosition(selectedItemGrid, selectedItem, positionOnGrid.x, positionOnGrid.y);
         }
+        */
     }
     private void RotateItem()
     {

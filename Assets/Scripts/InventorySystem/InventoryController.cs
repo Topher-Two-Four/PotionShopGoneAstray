@@ -222,6 +222,7 @@ public class InventoryController : MonoBehaviour
 
     public void ToggleInventoryCanvas()
     {
+        if (GameManager.Instance.GetPauseMenuCanvas().activeSelf) { return; }
 
         if (inventoryCanvas.gameObject.activeSelf) // If inventory canvas is active then deactivate it
         {

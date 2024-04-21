@@ -7,8 +7,8 @@ using System.Collections;
 public class GameManager : MonoBehaviour, IDataPersistence
 {
     [Header("General Settings:")]
-    [Tooltip("The first person controller game object.")]
-    [SerializeField] private FirstPersonController controller; // First person controller game object
+    //[Tooltip("The first person controller game object.")]
+    private FirstPersonController controller; // First person controller game object
     [Tooltip("The landlord payment amount.")]
     [SerializeField] private int landlordPayment = 1400;
     [Tooltip("The amount of time consumed every time the player teleports to the maze level.")]
@@ -132,8 +132,10 @@ public class GameManager : MonoBehaviour, IDataPersistence
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(0)) // Do not allow pause menu toggle when in main mainu
+            {
             TogglePauseMenuCanvas(); // Toggle pause menu
             ToggleOffPauseMenuSettingsCanvas();
+            }
         }
     }
 
@@ -246,6 +248,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void TogglePauseMenuCanvas()
     {
+        Debug.Log("Pause menu toggled.");
         if (pauseMenuCanvas.gameObject.activeSelf) // If on, toggle off
         {
             isTimerRunning = true; // Resume timer
@@ -258,7 +261,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 SetPlayerCapsuleActive(); // Activate player capsule
                 ToggleCursorOff(); // Lock and hide cursor
             }
-            
             var foundAIObjects = FindObjectsOfType<MazeAIController>();
             foreach (MazeAIController mazeAI in foundAIObjects)
             {
@@ -415,7 +417,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         GameManager.Instance.endOfDayCanvas.SetActive(false);
         CutsceneManager.Instance.PlayNewDayCutscene();
-        SetPlayerCapsuleInactive();
         ToggleCursorOn(); // Unlock and display cursor
         StartNewDayTimer(); // Restart and resume timer at beginning of day
         DayUIUpdate(); // Update UI
@@ -428,7 +429,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         CutsceneManager.Instance.PlayNewDayCutscene();
         DataPersistenceManager.Instance.LoadGame();
-        SetPlayerCapsuleInactive();
         ToggleCursorOn(); // Unlock and display cursor
         StartNewDayTimer(); // Restart and resume timer at beginning of day
         GameManager.Instance.playerCurrency = this.playerCurrency; // Set player currency from loaded game
@@ -443,7 +443,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public void SwitchSceneToPotionLevel() // Use scene manager to switch to Potion Level from Maze Level
     {
         AudioManager.Instance.PlayTeleportToShopSound();
-        Invoke("SetPlayerCapsuleInactive", 0.5f);
         ToggleCursorOn();
         OrderSystem.Instance.CheckForCompleteOrders(); // Check for any complete orders to update order UI
         CallLoadPotionShop(); // Call load potion shop function, which is staggered to allow it to be invoked if neccessary
@@ -469,11 +468,13 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void FreezeRotation()
     {
+        controller = FindObjectOfType<FirstPersonController>();
         controller.FreezeRotation();
     }
 
     public void UnfreezeRotation()
     {
+        controller = FindObjectOfType<FirstPersonController>();
         controller.UnfreezeRotation();
     }
 
@@ -486,7 +487,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void ToggleOffPotionCraftingCanvas()
     {
-            potionCraftingCanvas.SetActive(false); // Hide potion crafting canvas
+        potionCraftingCanvas.SetActive(false); // Hide potion crafting canvas
     }
     public void ToggleOnBookshelfCanvas()
     {
@@ -597,6 +598,11 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public GameObject GetPlayerCapsule()
     {
+        controller = FindObjectOfType<FirstPersonController>();
+        if (controller != null)
+        {
+            playerCapsule = controller.GetComponentInChildren<CapsuleCollider>().gameObject; // Set player capsule active
+        }
         return playerCapsule;
     }
 
@@ -613,14 +619,30 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void SetPlayerCapsuleActive()
     {
-        //playerCapsule.SetActive(true); // Set player capsule active
+        Debug.Log("Trying to set player capsule active.");
+        if (controller == null)
+        {
+            controller = FindObjectOfType<FirstPersonController>();
+            controller.GetComponentInChildren<CapsuleCollider>().gameObject.SetActive(true); // Set player capsule inactive
+            Debug.Log("Set player capsule active.");
+        }
+        else
+        {
+            controller.GetComponentInChildren<CapsuleCollider>().gameObject.SetActive(true); // Set player capsule inactive
+            Debug.Log("Set player capsule active.");
+        }
     }
 
     public void SetPlayerCapsuleInactive()
     {
-        if (playerCapsule != null)
+        if (controller == null)
         {
-            //playerCapsule.SetActive(false); // Set player capsule inactive
+            controller = FindObjectOfType<FirstPersonController>();
+            controller.GetComponentInChildren<CapsuleCollider>().gameObject.SetActive(false); // Set player capsule inactive
+        }
+        else
+        {
+            controller.GetComponentInChildren<CapsuleCollider>().gameObject.SetActive(false); // Set player capsule inactive
         }
     }
 

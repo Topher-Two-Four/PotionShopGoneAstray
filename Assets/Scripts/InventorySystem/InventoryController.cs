@@ -229,13 +229,15 @@ public class InventoryController : MonoBehaviour
 
             Cursor.visible = false; // Hide cursor
             Cursor.lockState = CursorLockMode.Locked; // Unlock and confine cursor to game screen
-            GameManager.Instance.UnfreezeRotation();
             if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(2))
             {
                 Cursor.lockState = CursorLockMode.Confined; // Unlock cursor and confine to game screen
                 Cursor.visible = true; // Show cursor
             }
-
+            else
+            {
+                GameManager.Instance.UnfreezeRotation();
+            }
 
             inventoryCanvas.gameObject.SetActive(false); // Deactivate canvas object
         } 
@@ -245,7 +247,10 @@ public class InventoryController : MonoBehaviour
 
             Cursor.lockState = CursorLockMode.Confined; // Lock cursor in one place
             Cursor.visible = true; // Hide cursor
-            GameManager.Instance.FreezeRotation();
+            if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(2))
+            {
+                GameManager.Instance.FreezeRotation();
+            }
             inventoryCanvas.gameObject.SetActive(true); // Activate canvas object
         }
     }

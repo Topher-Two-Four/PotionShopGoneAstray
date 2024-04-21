@@ -254,8 +254,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
             isTimerRunning = true; // Resume timer
             pauseMenuCanvas.SetActive(false); // Deactivate pause menu canvas
             AudioManager.Instance.PlayUnpauseGameSound();
-            if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(0) ||
-                SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(1) ||
+            if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(0) &&
+                SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(1) &&
                 SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(2))
             {
                 SetPlayerCapsuleActive(); // Activate player capsule

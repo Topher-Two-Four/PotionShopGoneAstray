@@ -16,8 +16,8 @@ public class OrderSystem : MonoBehaviour
     [SerializeField] private Sprite antidoteIcon;
     [Tooltip("The sprite for the benefit potion icon.")]
     [SerializeField] private Sprite benefitIcon;
-    [Tooltip("The sprite for the crippling potion icon.")]
-    [SerializeField] private Sprite cripplingIcon;
+    [Tooltip("The sprite for the harmful potion icon.")]
+    [SerializeField] private Sprite harmfulIcon;
     [Tooltip("The sprite for the death potion icon.")]
     [SerializeField] private Sprite deathIcon;
     [Tooltip("The sprite for the hatred potion icon.")]
@@ -67,9 +67,9 @@ public class OrderSystem : MonoBehaviour
                     currentOrder.turnInPotionButtonImage.sprite = benefitIcon;
                     break;
                 case 6:
-                    currentOrder.isCrippling = true;
-                    potionTypeText = "Crippling";
-                    currentOrder.turnInPotionButtonImage.sprite = cripplingIcon;
+                    currentOrder.isHarmful = true;
+                    potionTypeText = "Harmful";
+                    currentOrder.turnInPotionButtonImage.sprite = harmfulIcon;
                     break;
                 case 5:
                     currentOrder.isDeath = true;
@@ -147,9 +147,9 @@ public class OrderSystem : MonoBehaviour
                     currentOrder.turnInPotionButtonImage.sprite = benefitIcon;
                     break;
                 case 6:
-                    currentOrder.isCrippling = true;
-                    potionTypeText = "Crippling";
-                    currentOrder.turnInPotionButtonImage.sprite = cripplingIcon;
+                    currentOrder.isHarmful = true;
+                    potionTypeText = "Harmful";
+                    currentOrder.turnInPotionButtonImage.sprite = harmfulIcon;
                     break;
                 case 5:
                     currentOrder.isDeath = true;

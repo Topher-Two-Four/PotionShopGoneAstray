@@ -295,7 +295,7 @@ public class InventoryController : MonoBehaviour
         {
             if ((potion.isAntidote && potionOrdered.isAntidote) ||
                 (potion.isBenefit && potionOrdered.isBenefit) ||
-                (potion.isCrippling && potionOrdered.isCrippling) ||
+                (potion.isHarmful&& potionOrdered.isHarmful) ||
                 (potion.isDeath && potionOrdered.isDeath) ||
                 (potion.isHatred && potionOrdered.isHatred ||
                 (potion.isHealth && potionOrdered.isHealth) ||

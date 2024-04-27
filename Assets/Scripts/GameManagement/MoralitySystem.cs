@@ -79,7 +79,7 @@ public class MoralitySystem : MonoBehaviour
             AudioManager.Instance.PlayDecreaseMoralitySound();
             moralityCounter--;
         }
-        else if (potionData.isCrippling)
+        else if (potionData.isHarmful)
         {
             AudioManager.Instance.PlayDecreaseMoralitySound();
             moralityCounter -= 2;

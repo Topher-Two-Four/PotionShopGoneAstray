@@ -22,13 +22,13 @@ MonoBehaviour:
   itemObject: {fileID: 0}
   isHealth: 0
   isLove: 0
-  isHatred: 1
+  isHatred: 0
   isAntidote: 0
   isDeath: 0
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 1
   quality: 0
   baseValue: 12
   sellPrice: 0

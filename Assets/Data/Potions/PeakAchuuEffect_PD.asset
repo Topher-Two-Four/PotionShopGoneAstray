@@ -28,7 +28,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 1
+  isHarmful: 1
   quality: 0
   baseValue: 14
   sellPrice: 0

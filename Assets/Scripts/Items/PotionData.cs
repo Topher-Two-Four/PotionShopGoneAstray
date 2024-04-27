@@ -23,8 +23,8 @@ public class PotionData : ItemData
     public bool isPoison;
     [Tooltip("Whether this is a benefit potion.")]
     public bool isBenefit;
-    [Tooltip("Whether this is a crippling potion.")]
-    public bool isCrippling;
+    [Tooltip("Whether this is a harmful potion.")]
+    public bool isHarmful;
 
     [HideInInspector] public int quality; // The quality of the item from 1-5
     [HideInInspector] public int baseValue; // The base currency value of this item

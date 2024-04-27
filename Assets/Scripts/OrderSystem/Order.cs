@@ -27,5 +27,5 @@ public class Order : MonoBehaviour
     [HideInInspector] public bool isLucky;
     [HideInInspector] public bool isPoison;
     [HideInInspector] public bool isBenefit;
-    [HideInInspector] public bool isCrippling;
+    [HideInInspector] public bool isHarmful;
 }

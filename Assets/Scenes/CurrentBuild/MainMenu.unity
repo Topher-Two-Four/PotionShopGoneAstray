@@ -8427,7 +8427,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &236392837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9423,7 +9423,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &253174095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10302,7 +10302,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &268450575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15586,7 +15586,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &372948577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15953,7 +15953,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &379759311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16658,7 +16658,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &383892024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17355,7 +17355,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &402224393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20293,7 +20293,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &477612973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27089,6 +27089,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6366682580641172927, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
+      propertyPath: harmfulIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 38199e37bcae61f49be3bfcbb00c7225, type: 3}
+    - target: {fileID: 6366682580641172927, guid: 4acc62a1188bda14d89b3a689beab8d8, type: 3}
       propertyPath: orderList.Array.size
       value: 6
       objectReference: {fileID: 0}
@@ -27660,7 +27664,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &658604487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33278,7 +33282,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &788805271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34364,7 +34368,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &805492556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35498,7 +35502,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &832273140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35717,7 +35721,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &832447372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38208,6 +38212,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1505543116830095007, guid: 8e3743bbf570f084784dda50b29375aa, type: 3}
+      propertyPath: m_text
+      value: Cullen would like to buy a Harmful potion.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1505543116830095007, guid: 8e3743bbf570f084784dda50b29375aa, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: d1440f35e0b50094e989e8b118c4d96e, type: 2}
@@ -40228,7 +40236,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &949896194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40522,7 +40530,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &950986779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47984,7 +47992,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &1171998140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55306,7 +55314,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &1368121964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56061,7 +56069,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &1380786906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56883,7 +56891,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &1400049540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57102,7 +57110,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &1400676876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60107,7 +60115,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &1521240064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60622,7 +60630,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &1525094345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65427,7 +65435,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &1688981223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67045,7 +67053,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &1715370077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71169,7 +71177,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &1834225901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71942,7 +71950,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &1851041582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78225,7 +78233,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &2027940199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78761,7 +78769,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &2040703959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80028,7 +80036,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &2077595193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80317,7 +80325,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &2081082627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81595,7 +81603,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &2124182133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82774,7 +82782,7 @@ MonoBehaviour:
   isLucky: 0
   isPoison: 0
   isBenefit: 0
-  isCrippling: 0
+  isHarmful: 0
 --- !u!114 &2137165962
 MonoBehaviour:
   m_ObjectHideFlags: 0

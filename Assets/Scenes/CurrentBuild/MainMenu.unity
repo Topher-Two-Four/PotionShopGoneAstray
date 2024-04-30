@@ -11941,7 +11941,7 @@ MonoBehaviour:
   teleportToShopSoundVolume: 1
   birdCatchSound: {fileID: 8300000, guid: f3c3b0ef92696d44882e26052c646272, type: 3}
   birdCatchSoundVolume: 1
-  musicManCatchSound: {fileID: 8300000, guid: 9ee6f5773ced33347aa0d355d0c70c29, type: 3}
+  musicManCatchSound: {fileID: 8300000, guid: 447ed06ea7db0384bb2ca2b27717ec1f, type: 3}
   musicManCatchSoundVolume: 1
   jellyCatchSound: {fileID: 8300000, guid: 440c0d384bb7f9645849942823cca4c1, type: 3}
   jellyCatchSoundVolume: 1

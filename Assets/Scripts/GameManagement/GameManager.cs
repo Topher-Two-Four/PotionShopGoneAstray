@@ -9,8 +9,10 @@ public class GameManager : MonoBehaviour, IDataPersistence
     [Header("General Settings:")]
     //[Tooltip("The first person controller game object.")]
     private FirstPersonController controller; // First person controller game object
-    [Tooltip("The landlord payment amount.")]
-    [SerializeField] private int landlordPayment = 1400;
+    [Tooltip("The minimum landlord payment amount.")]
+    [SerializeField] private int landlordPaymentMin = 3000;
+    [Tooltip("The maximum landlord payment amount.")]
+    [SerializeField] private int landlordPaymentMax = 5000;
     [Tooltip("The amount of time consumed every time the player teleports to the maze level.")]
     [SerializeField] private float mazeTravelTimeDeduction = 30.0f;
 
@@ -81,6 +83,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     [HideInInspector] public bool isEndOfDay; // Variable to keep track of whether the day is over
 
     private int playerCurrency = 0;
+    private int landlordPayment = 0;
     private int endOfDayCurrency;
     private int endOfDayLandlordPayment;
     private int endOfDayMorality;
@@ -399,7 +402,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         GameManager.Instance.currentDay = 1; // Reset to day 1
         StartNewDayTimer(); // Restart and resume timer at beginning of day
         GameManager.Instance.playerCurrency = 0;
-        GameManager.Instance.landlordPayment = 1400;
+        GameManager.Instance.landlordPayment = Random.Range(landlordPaymentMin, landlordPaymentMax);
         ResetDayTransitionStates();
         MoralitySystem.Instance.ResetMoralityCounter();
         InventoryController.Instance.ClearInventoryGrid();

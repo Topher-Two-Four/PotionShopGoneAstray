@@ -1829,7 +1829,7 @@ PrefabInstance:
       objectReference: {fileID: 275407602}
     - target: {fileID: 7191769637739229790, guid: 91d3cb84ad82a74468a13781462d10ca, type: 3}
       propertyPath: landlordPayment
-      value: 1400
+      value: 2400
       objectReference: {fileID: 0}
     - target: {fileID: 7191769637739229790, guid: 91d3cb84ad82a74468a13781462d10ca, type: 3}
       propertyPath: pauseMenuCanvas

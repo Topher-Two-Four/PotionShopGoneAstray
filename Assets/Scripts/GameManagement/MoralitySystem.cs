@@ -123,7 +123,7 @@ public class MoralitySystem : MonoBehaviour
                 mText.color = goodTextColor;
             }
         }
-        else if (moralityCounter >= -25 && moralityCounter < 25)
+        else if (moralityCounter >= -10 && moralityCounter < 25)
         {
             foreach (TMP_Text mText in mText)
             {
@@ -131,7 +131,7 @@ public class MoralitySystem : MonoBehaviour
                 mText.color = neutralTextColor;
             }
         }
-        else if (moralityCounter >= -50 && moralityCounter < -25)
+        else if (moralityCounter >= -30 && moralityCounter < -10)
         {
             foreach (TMP_Text mText in mText)
             {
@@ -139,7 +139,7 @@ public class MoralitySystem : MonoBehaviour
                 mText.color = badTextColor;
             }
         }
-        else if (moralityCounter >= -75 && moralityCounter < -50)
+        else if (moralityCounter >= -50 && moralityCounter < -30)
         {
             foreach (TMP_Text mText in mText)
             {
@@ -219,7 +219,7 @@ public class MoralitySystem : MonoBehaviour
             enemySpawnAmount = 3;
             playerSpeedModifier = 1.0f; //Normal player speed
         }
-        else if (moralityCounter >= -25 && moralityCounter < 25)
+        else if (moralityCounter >= -10 && moralityCounter < 25)
         {
             AudioManager.Instance.musicSource.pitch = 1.0f;
             // AudioManager.Instance.PlayMusic("NeutralMazeMusic");
@@ -234,7 +234,7 @@ public class MoralitySystem : MonoBehaviour
             enemySpawnAmount = 3;
             playerSpeedModifier = 1.0f; //Normal player speed
         }
-        else if (moralityCounter >= -50 && moralityCounter < -25)
+        else if (moralityCounter >= -30 && moralityCounter < -10)
         {
             AudioManager.Instance.musicSource.pitch = 0.7f;
             // AudioManager.Instance.PlayMusic("BadMazeMusic");
@@ -249,7 +249,7 @@ public class MoralitySystem : MonoBehaviour
             enemySpawnAmount = 3;
             playerSpeedModifier = 0.95f; //Decreased player speed
         }
-        else if (moralityCounter > -75 && moralityCounter < -50)
+        else if (moralityCounter > -50 && moralityCounter < -30)
         {
             AudioManager.Instance.musicSource.pitch = -1.1f;
             // AudioManager.Instance.PlayMusic("VeryBadMazeMusic");

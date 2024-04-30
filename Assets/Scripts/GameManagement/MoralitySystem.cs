@@ -99,7 +99,7 @@ public class MoralitySystem : MonoBehaviour
 
     public void UpdateMoralityUI()
     {
-        if (moralityCounter >= 10)
+        if (moralityCounter >= 75)
         {
             foreach (TMP_Text mText in mText)
             {
@@ -107,7 +107,7 @@ public class MoralitySystem : MonoBehaviour
                 mText.color = allGoodTextColor;
             }
         }
-        else if (moralityCounter >= 5 && moralityCounter < 10)
+        else if (moralityCounter >= 50 && moralityCounter < 75)
         {
             foreach (TMP_Text mText in mText)
             {
@@ -115,7 +115,7 @@ public class MoralitySystem : MonoBehaviour
                 mText.color = veryGoodTextColor;
             }
         }
-        else if (moralityCounter >= 1 && moralityCounter < 5)
+        else if (moralityCounter >= 25 && moralityCounter < 50)
         {
             foreach (TMP_Text mText in mText)
             {
@@ -123,7 +123,7 @@ public class MoralitySystem : MonoBehaviour
                 mText.color = goodTextColor;
             }
         }
-        else if (moralityCounter >= -1 && moralityCounter < 1)
+        else if (moralityCounter >= -25 && moralityCounter < 25)
         {
             foreach (TMP_Text mText in mText)
             {
@@ -131,7 +131,7 @@ public class MoralitySystem : MonoBehaviour
                 mText.color = neutralTextColor;
             }
         }
-        else if (moralityCounter >= -5 && moralityCounter < -1)
+        else if (moralityCounter >= -50 && moralityCounter < -25)
         {
             foreach (TMP_Text mText in mText)
             {
@@ -139,7 +139,7 @@ public class MoralitySystem : MonoBehaviour
                 mText.color = badTextColor;
             }
         }
-        else if (moralityCounter > -10 && moralityCounter < -5)
+        else if (moralityCounter >= -75 && moralityCounter < -50)
         {
             foreach (TMP_Text mText in mText)
             {
@@ -174,7 +174,7 @@ public class MoralitySystem : MonoBehaviour
 
     public void ApplyMoralityEffect()
     {
-        if (moralityCounter >= 10)
+        if (moralityCounter >= 75)
         {
             AudioManager.Instance.musicSource.pitch = 1.1f;
             // AudioManager.Instance.PlayMusic("AllGoodMazeMusic");
@@ -186,10 +186,10 @@ public class MoralitySystem : MonoBehaviour
             ingredientSpawnModifier = 1.5f; //Increase amount of items that spawn
             skullBearSpawnModifier = 0.5f;
             ItemPot.Instance.SetItemsCollectedDivider(1);
-            enemySpawnAmount = Random.Range(0, 2);
+            enemySpawnAmount = Random.Range(2, 4);
             playerSpeedModifier = 1.2f; //Increase player speed
         }
-        else if (moralityCounter >= 5 && moralityCounter < 10)
+        else if (moralityCounter >= 50 && moralityCounter < 75)
         {
             AudioManager.Instance.musicSource.pitch = 1.07f;
             // AudioManager.Instance.PlayMusic("VeryGoodMazeMusic");
@@ -201,10 +201,10 @@ public class MoralitySystem : MonoBehaviour
             ingredientSpawnModifier = 1.3f; //Increase amount of items that spawn
             skullBearSpawnModifier = 0.7f;
             ItemPot.Instance.SetItemsCollectedDivider(2);
-            enemySpawnAmount = 1;
+            enemySpawnAmount = Random.Range(2, 4);
             playerSpeedModifier = 1.1f; //Increase player speed
         }
-        else if (moralityCounter >= 1 && moralityCounter < 5)
+        else if (moralityCounter >= 25 && moralityCounter < 50)
         {
             AudioManager.Instance.musicSource.pitch = 1.03f;
             // AudioManager.Instance.PlayMusic("GoodMazeMusic");
@@ -216,10 +216,10 @@ public class MoralitySystem : MonoBehaviour
             ingredientSpawnModifier = 1.1f; //Increase amount of items that spawn
             skullBearSpawnModifier = 0.9f;
             ItemPot.Instance.SetItemsCollectedDivider(3);
-            enemySpawnAmount = 1;
+            enemySpawnAmount = 3;
             playerSpeedModifier = 1.0f; //Normal player speed
         }
-        else if (moralityCounter >= -1 && moralityCounter < 1)
+        else if (moralityCounter >= -25 && moralityCounter < 25)
         {
             AudioManager.Instance.musicSource.pitch = 1.0f;
             // AudioManager.Instance.PlayMusic("NeutralMazeMusic");
@@ -231,10 +231,10 @@ public class MoralitySystem : MonoBehaviour
             ingredientSpawnModifier = 1.0f; //Normal amount of items spawn
             skullBearSpawnModifier = 1.0f;
             ItemPot.Instance.SetItemsCollectedDivider(4);
-            enemySpawnAmount = Random.Range(1, 3);
+            enemySpawnAmount = 3;
             playerSpeedModifier = 1.0f; //Normal player speed
         }
-        else if (moralityCounter >= -5 && moralityCounter < -1)
+        else if (moralityCounter >= -50 && moralityCounter < -25)
         {
             AudioManager.Instance.musicSource.pitch = 0.7f;
             // AudioManager.Instance.PlayMusic("BadMazeMusic");
@@ -246,10 +246,10 @@ public class MoralitySystem : MonoBehaviour
             ingredientSpawnModifier = 0.9f; //Decrease amount of items that spawn
             skullBearSpawnModifier = 1.3f;
             ItemPot.Instance.SetItemsCollectedDivider(5);
-            enemySpawnAmount = Random.Range(1, 3);
+            enemySpawnAmount = 3;
             playerSpeedModifier = 0.95f; //Decreased player speed
         }
-        else if (moralityCounter > -10 && moralityCounter < -5)
+        else if (moralityCounter > -75 && moralityCounter < -50)
         {
             AudioManager.Instance.musicSource.pitch = -1.1f;
             // AudioManager.Instance.PlayMusic("VeryBadMazeMusic");
@@ -261,7 +261,7 @@ public class MoralitySystem : MonoBehaviour
             ingredientSpawnModifier = 0.7f; //Decrease amount of items that spawn
             skullBearSpawnModifier = 1.5f;
             ItemPot.Instance.SetItemsCollectedDivider(6);
-            enemySpawnAmount = Random.Range(2, 4);
+            enemySpawnAmount = 3;
             playerSpeedModifier = 0.9f; //Decreased player speed
         }
         else

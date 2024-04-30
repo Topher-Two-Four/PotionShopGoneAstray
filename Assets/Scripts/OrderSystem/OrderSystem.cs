@@ -49,53 +49,57 @@ public class OrderSystem : MonoBehaviour
             currentOrder.customerName = customerList[randomCustomerIndex].customerName;
             currentOrder.customerPortrait = customerList[randomCustomerIndex].customerPortrait;
 
-            int randomPotionTypeIndex = Random.Range(0, 8);
+            int randomPotionTypeIndex = Random.Range(0, 6);
 
             currentOrder.turnInPotionButton.onClick.AddListener(() => InventoryController.Instance.SellPotion(currentOrder));
             currentOrder.turnInPotionButton.interactable = false;
 
             switch (randomPotionTypeIndex) // Assign random potion type for request
             {
-                case 8:
+                case 6:
                     currentOrder.isAntidote = true;
                     potionTypeText = "Antidote";
                     currentOrder.turnInPotionButtonImage.sprite = antidoteIcon;
                     break;
-                case 7:
+                case 5:
                     currentOrder.isBenefit = true;
                     potionTypeText = "Benefit";
                     currentOrder.turnInPotionButtonImage.sprite = benefitIcon;
                     break;
-                case 6:
+                case 4:
                     currentOrder.isHarmful = true;
                     potionTypeText = "Harmful";
                     currentOrder.turnInPotionButtonImage.sprite = harmfulIcon;
                     break;
-                case 5:
+                case 3:
                     currentOrder.isDeath = true;
                     potionTypeText = "Death";
                     currentOrder.turnInPotionButtonImage.sprite = deathIcon;
                     break;
+/*
                 case 4:
                     currentOrder.isHatred = true;
                     potionTypeText = "Hatred";
                     currentOrder.turnInPotionButtonImage.sprite = hatredIcon;
                     break;
-                case 3:
+*/
+                case 2:
                     currentOrder.isHealth = true;
                     potionTypeText = "Health";
                     currentOrder.turnInPotionButtonImage.sprite = healthIcon;
                     break;
-                case 2:
+                case 1:
                     currentOrder.isLove = true;
                     potionTypeText = "Love";
                     currentOrder.turnInPotionButtonImage.sprite = loveIcon;
                     break;
+/*
                 case 1:
                     currentOrder.isLucky = true;
                     potionTypeText = "Luck";
                     currentOrder.turnInPotionButtonImage.sprite = luckyIcon;
                     break;
+*/
                 case 0:
                     currentOrder.isPoison = true;
                     potionTypeText = "Poison";
@@ -136,46 +140,48 @@ public class OrderSystem : MonoBehaviour
 
             switch (randomPotionTypeIndex) // Assign random potion type for request
             {
-                case 8:
+                case 6:
                     currentOrder.isAntidote = true;
                     potionTypeText = "Antidote";
                     currentOrder.turnInPotionButtonImage.sprite = antidoteIcon;
                     break;
-                case 7:
+                case 5:
                     currentOrder.isBenefit = true;
                     potionTypeText = "Benefit";
                     currentOrder.turnInPotionButtonImage.sprite = benefitIcon;
                     break;
-                case 6:
+                case 4:
                     currentOrder.isHarmful = true;
                     potionTypeText = "Harmful";
                     currentOrder.turnInPotionButtonImage.sprite = harmfulIcon;
                     break;
-                case 5:
+                case 3:
                     currentOrder.isDeath = true;
                     potionTypeText = "Death";
                     currentOrder.turnInPotionButtonImage.sprite = deathIcon;
                     break;
-                case 4:
+/*                case 4:
                     currentOrder.isHatred = true;
                     potionTypeText = "Hatred";
                     currentOrder.turnInPotionButtonImage.sprite = hatredIcon;
                     break;
-                case 3:
+*/
+                case 2:
                     currentOrder.isHealth = true;
                     potionTypeText = "Health";
                     currentOrder.turnInPotionButtonImage.sprite = healthIcon;
                     break;
-                case 2:
+                case 1:
                     currentOrder.isLove = true;
                     potionTypeText = "Love";
                     currentOrder.turnInPotionButtonImage.sprite = loveIcon;
                     break;
-                case 1:
+/*                case 1:
                     currentOrder.isLucky = true;
                     potionTypeText = "Luck";
                     currentOrder.turnInPotionButtonImage.sprite = luckyIcon;
                     break;
+*/
                 case 0:
                     currentOrder.isPoison = true;
                     potionTypeText = "Poison";

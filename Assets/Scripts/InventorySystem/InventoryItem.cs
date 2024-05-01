@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class InventoryItem : MonoBehaviour
 {
@@ -78,7 +79,8 @@ public class InventoryItem : MonoBehaviour
 
     public void Drop()
     {
-        if (GameManager.Instance.GetPlayerCapsule().activeSelf)
+        if (GameManager.Instance.GetPlayerCapsule().activeSelf 
+            && SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(2))
         {
             Vector3 spawnLocation = GameManager.Instance.GetDropSpawnLocation().transform.position;
             Instantiate(itemData.itemObject, spawnLocation, Quaternion.identity);

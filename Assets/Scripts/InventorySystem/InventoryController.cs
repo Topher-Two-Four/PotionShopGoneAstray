@@ -76,7 +76,7 @@ public class InventoryController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Delete)) { DeleteItem(); } // Rotate selected inventory item
 
-            if (Input.GetKeyDown(KeyCode.G)) { DropItem(); } // Rotate selected inventory item
+            if (Input.GetKeyDown(KeyCode.G)) { DropItem(); } // Drop selected inventory item
 
             //if (selectedItemGrid == null) { inventoryHighlight.Show(false); return; } // Don't show highlight if selected item grid doesn't exist and return from method
 
@@ -379,7 +379,7 @@ public class InventoryController : MonoBehaviour
 
     public void DropItem()
     {
-        if (selectedItem != null && 
+        if (selectedItem != null &&
             selectedItem.GetType() != typeof(PotionData) &&
             !selectedItem.GetInventoryItemData().cantBeDiscarded)
         {

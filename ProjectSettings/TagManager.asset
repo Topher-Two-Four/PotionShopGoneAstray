@@ -13,6 +13,7 @@ TagManager:
   - ItemObject
   - UrnNPC
   - FallBoundary
+  - DroppedItemSpawnPoint
   layers:
   - Default
   - TransparentFX

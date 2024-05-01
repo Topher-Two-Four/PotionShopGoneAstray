@@ -611,6 +611,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public GameObject GetDropSpawnLocation()
     {
+        dropSpawnLocation = GameObject.FindGameObjectWithTag("DroppedItemSpawnPoint");
         return dropSpawnLocation;
     }
 

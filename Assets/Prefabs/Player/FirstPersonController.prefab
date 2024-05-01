@@ -104,7 +104,7 @@ Camera:
     height: 1
   near clip plane: 0.2
   far clip plane: 500
-  field of view: 40
+  field of view: 68.6
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -181,6 +181,11 @@ MonoBehaviour:
   canvasTransform: {fileID: 0}
   inventoryCanvas: {fileID: 0}
   inventoryGrid: {fileID: 0}
+  satchelCanvas: {fileID: 0}
+  leftBedroomStorageCanvas: {fileID: 0}
+  rightBedroomStorageCanvas: {fileID: 0}
+  wallBedroomStorageCanvas: {fileID: 0}
+  dresserBedroomStorageCanvas: {fileID: 0}
   trashButton: {fileID: 0}
   items: []
 --- !u!114 &6725445383885262082
@@ -544,7 +549,7 @@ GameObject:
   - component: {fileID: 1636439168227901433}
   m_Layer: 6
   m_Name: DroppedItemSpawnPoint
-  m_TagString: Untagged
+  m_TagString: DroppedItemSpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

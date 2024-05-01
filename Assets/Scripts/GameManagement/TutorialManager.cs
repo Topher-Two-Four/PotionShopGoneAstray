@@ -51,6 +51,11 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private bool tutorialsOn = true;
     [SerializeField] private Button toggleTutorialsButton;
     [SerializeField] private Image tutorialsToggledIndicator;
+    [SerializeField] private bool tutorialOnScreen = false;
+    [SerializeField] private GameObject activeTutorialCat;
+    [SerializeField] private GameObject inactiveTutorialCat;
+    [SerializeField] private GameObject activeCapedTutorialCat;
+    [SerializeField] private GameObject inactiveCapedTutorialCat;
 
     public static TutorialManager Instance { get; private set; } // Singleton logic
 
@@ -66,7 +71,7 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(this); } else { Instance = this; } // Singleton logic
     }
@@ -88,6 +93,17 @@ public class TutorialManager : MonoBehaviour
             tutorialsOn = true;
             tutorialsToggledIndicator.gameObject.SetActive(true);
     }
+    public void SetTutorialCatActive()
+    {
+        activeTutorialCat.gameObject.SetActive(true);
+        inactiveTutorialCat.gameObject.SetActive(false);
+    }
+
+    public void SetTutorialCatInactive()
+    {
+        activeTutorialCat.gameObject.SetActive(false);
+        inactiveTutorialCat.gameObject.SetActive(true);
+    }
 
     public void ToggleOnBrewingStepsIntroTutorial()
     {
@@ -96,12 +112,14 @@ public class TutorialManager : MonoBehaviour
             brewingStepsIntroTutorial.SetActive(true);
             Invoke("ToggleOffBrewingStepsIntroTutorial", timeoutTime);
             brewingStepsIntroTutorialPlayed = true;
+            SetTutorialCatActive();
         }
     }
 
     public void ToggleOffBrewingStepsIntroTutorial()
     {
         brewingStepsIntroTutorial.SetActive(false);
+        SetTutorialCatInactive();
     }
 
     public void ToggleOnBrewingSteps1Tutorial()
@@ -111,12 +129,14 @@ public class TutorialManager : MonoBehaviour
             brewingSteps1Tutorial.SetActive(true);
             Invoke("ToggleOffBrewingSteps1Tutorial", timeoutTime);
             brewingSteps1TutorialPlayed = true;
+            SetTutorialCatActive();
         }
     }
 
     public void ToggleOffBrewingSteps1Tutorial()
     {
         brewingSteps1Tutorial.SetActive(false);
+        SetTutorialCatInactive();
     }
 
     public void ToggleOnBrewingSteps2Tutorial()
@@ -126,12 +146,14 @@ public class TutorialManager : MonoBehaviour
             brewingSteps2Tutorial.SetActive(true);
             Invoke("ToggleOffBrewingSteps2Tutorial", timeoutTime);
             brewingSteps2TutorialPlayed = true;
+            SetTutorialCatActive();
         }
     }
 
     public void ToggleOffBrewingSteps2Tutorial()
     {
         brewingSteps2Tutorial.SetActive(false);
+        SetTutorialCatInactive();
     }
 
     public void ToggleOnCheckRecipeBookTutorial()
@@ -141,12 +163,14 @@ public class TutorialManager : MonoBehaviour
             checkRecipeBookTutorial.SetActive(true);
             Invoke("ToggleOffCheckRecipeBookTutorial", timeoutTime);
             checkRecipeBookTutorialPlayed = true;
+            SetTutorialCatActive();
         }
     }
 
     public void ToggleOffCheckRecipeBookTutorial()
     {
         checkRecipeBookTutorial.SetActive(false);
+        SetTutorialCatInactive();
     }
     public void ToggleOnDeliveryTutorial()
     {
@@ -155,12 +179,14 @@ public class TutorialManager : MonoBehaviour
             deliveryTutorial.SetActive(true);
             Invoke("ToggleOffDeliveryTutorial", timeoutTime);
             deliveryTutorialPlayed = true;
+            SetTutorialCatActive();
         }
     }
 
     public void ToggleOffDeliveryTutorial()
     {
         deliveryTutorial.SetActive(false);
+        SetTutorialCatInactive();
     }
 
     public void ToggleOnExploreTutorial()
@@ -170,12 +196,14 @@ public class TutorialManager : MonoBehaviour
             exploreTutorial.SetActive(true);
             Invoke("ToggleOffExploreTutorial", timeoutTime);
             exploreTutorialPlayed = true;
+            SetTutorialCatActive();
         }
     }
 
     public void ToggleOffExploreTutorial()
     {
         exploreTutorial.SetActive(false);
+        SetTutorialCatInactive();
     }
     public void ToggleOnGoodAndBadPotions1Tutorial()
     {
@@ -184,12 +212,14 @@ public class TutorialManager : MonoBehaviour
             goodAndBadPotionTutorial1.SetActive(true);
             Invoke("ToggleOffGoodAndBadPotions1Tutorial", timeoutTime);
             goodAndBadPotionTutorial1Played = true;
+            SetTutorialCatActive();
         }
     }
 
     public void ToggleOffGoodAndBadPotions1Tutorial()
     {
         goodAndBadPotionTutorial1.SetActive(false);
+        SetTutorialCatInactive();
     }
 
     public void ToggleOnGoodAndBadPotions2Tutorial()
@@ -199,12 +229,14 @@ public class TutorialManager : MonoBehaviour
             goodAndBadPotionTutorial2.SetActive(true);
             Invoke("ToggleOffGoodAndBadPotions2Tutorial", timeoutTime);
             goodAndBadPotionTutorial2Played = true;
+            SetTutorialCatActive();
         }
     }
 
     public void ToggleOffGoodAndBadPotions2Tutorial()
     {
         goodAndBadPotionTutorial2.SetActive(false);
+        SetTutorialCatInactive();
     }
 
     public void ToggleOnInventoryTutorial()
@@ -214,12 +246,14 @@ public class TutorialManager : MonoBehaviour
             inventoryTutorial.SetActive(true);
             Invoke("ToggleOffInventoryTutorial", timeoutTime);
             inventoryTutorialPlayed = true;
+            SetTutorialCatActive();
         }
     }
 
     public void ToggleOffInventoryTutorial()
     {
         inventoryTutorial.SetActive(false);
+        SetTutorialCatInactive();
     }
     public void ToggleOnJumpTutorial()
     {
@@ -228,12 +262,14 @@ public class TutorialManager : MonoBehaviour
             jumpTutorial.SetActive(true);
             Invoke("ToggleOffJumpTutorial", timeoutTime);
             jumpTutorialPlayed = true;
+            SetTutorialCatActive();
         }
     }
 
     public void ToggleOffJumpTutorial()
     {
         jumpTutorial.SetActive(false);
+        SetTutorialCatInactive();
     }
     public void ToggleOnLookingAroundShopTutorial()
     {
@@ -242,12 +278,14 @@ public class TutorialManager : MonoBehaviour
             lookingAroundShopTutorial.SetActive(true);
             Invoke("ToggleOffLookingAroundShopTutorial", timeoutTime);
             lookingAroundShopTutorialPlayed = true;
+            SetTutorialCatActive();
         }
     }
 
     public void ToggleOffLookingAroundShopTutorial()
     {
         lookingAroundShopTutorial.SetActive(false);
+        SetTutorialCatInactive();
     }
 
     public void ToggleOnMazeAccessTutorial()
@@ -264,6 +302,7 @@ public class TutorialManager : MonoBehaviour
     public void ToggleOffMazeAccessTutorial()
     {
         mazeAccessTutorial.SetActive(false);
+        SetTutorialCatInactive();
     }
 
     public void ToggleOnMonstersTutorial()
@@ -273,12 +312,14 @@ public class TutorialManager : MonoBehaviour
             monstersTutorial.SetActive(true);
             Invoke("ToggleOffMonstersTutorial", timeoutTime);
             monstersTutorialPlayed = true;
+            SetTutorialCatActive();
         }
     }
 
     public void ToggleOffMonstersTutorial()
     {
         monstersTutorial.SetActive(false);
+        SetTutorialCatInactive();
     }
 
     public void ToggleOnMovementTutorial()
@@ -288,12 +329,14 @@ public class TutorialManager : MonoBehaviour
             movementTutorial.SetActive(true);
             Invoke("ToggleOffMovementTutorial", timeoutTime);
             movementTutorialPlayed = true;
+            SetTutorialCatActive();
         }
     }
 
     public void ToggleOffMovementTutorial()
     {
         movementTutorial.SetActive(false);
+        SetTutorialCatInactive();
     }
     public void ToggleOnPauseGameTutorial()
     {
@@ -302,12 +345,14 @@ public class TutorialManager : MonoBehaviour
             pauseGameTutorial.SetActive(true);
             Invoke("ToggleOffPauseGameTutorial", timeoutTime);
             pauseGameTutorialPlayed = true;
+            SetTutorialCatActive();
         }
     }
 
     public void ToggleOffPauseGameTutorial()
     {
         pauseGameTutorial.SetActive(false);
+        SetTutorialCatInactive();
     }
 
     public void ToggleOnSellPotionsTutorial()
@@ -317,12 +362,14 @@ public class TutorialManager : MonoBehaviour
             sellPotionsTutorial.SetActive(true);
             Invoke("ToggleOffSellPotionsTutorial", timeoutTime);
             sellPotionsTutorialPlayed = true;
+            SetTutorialCatActive();
         }
     }
 
     public void ToggleOffSellPotionsTutorial()
     {
         sellPotionsTutorial.SetActive(false);
+        SetTutorialCatInactive();
     }
 
     public void BeginMazeTutorial()

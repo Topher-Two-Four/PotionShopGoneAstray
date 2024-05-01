@@ -21,7 +21,7 @@ public class CloseTutorialOnClick : MonoBehaviour
     private void CloseTutorialWindow()
     {
         _tutorialWindow.SetActive(false);
-
+        TutorialManager.Instance.SetTutorialCatInactive();
         GameManager.Instance.ToggleCursorOn(); // Catch edge case where cursor gets disabled due to click occurring
     }
 

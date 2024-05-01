@@ -50,11 +50,34 @@ public class CutsceneManager : MonoBehaviour
     [SerializeField] private GameObject sellingInstructions;
     [Range(0.1f, 30f)] public float sellingInstructionsLength = 1.0f;
 
+    [SerializeField] private GameObject instructionsCanvas;
+
     public static CutsceneManager Instance { get; private set; }
 
     private void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); } else { Instance = this; }
+    }
+
+    public void OpenInstructionsCanvas()
+    {
+        instructionsCanvas.gameObject.SetActive(true);
+    }
+
+    public void CloseInstructionsCanvas()
+    {
+        StopAllInstructionVideos();
+        instructionsCanvas.gameObject.SetActive(false);
+    }
+
+    private void StopAllInstructionVideos()
+    {
+        StopAlignmentInstructions();
+        StopBookInstructions();
+        StopBrewingInstructions();
+        StopGatherMatsInstructions();
+        StopRecipeInstructions();
+        StopSellingInstructions();
     }
 
     public void PlayIntroCutscene()
@@ -158,6 +181,7 @@ public class CutsceneManager : MonoBehaviour
 
     public void PlayAlignmentInstructions()
     {
+        StopAllInstructionVideos();
         alignmentInstructions.SetActive(true);
         Invoke("StopAlignmentInstructions", alignmentInstructionsLength);
     }
@@ -169,6 +193,7 @@ public class CutsceneManager : MonoBehaviour
 
     public void PlayBookInstructions()
     {
+        StopAllInstructionVideos();
         bookInstructions.SetActive(true);
         Invoke("StopBookInstructions", bookInstructionsLength);
     }
@@ -180,6 +205,7 @@ public class CutsceneManager : MonoBehaviour
 
     public void PlayBrewingInstructions()
     {
+        StopAllInstructionVideos();
         brewingInstructions.SetActive(true);
         Invoke("StopBrewingInstructions", brewingInstructionsLength);
     }
@@ -191,6 +217,7 @@ public class CutsceneManager : MonoBehaviour
 
     public void PlayGatherMatsInstructions()
     {
+        StopAllInstructionVideos();
         gatherMatsInstructions.SetActive(true);
         Invoke("StopGatherMatsInstructions", gatherMatsInstructionsLength);
     }
@@ -202,6 +229,7 @@ public class CutsceneManager : MonoBehaviour
 
     public void PlayRecipeInstructions()
     {
+        StopAllInstructionVideos();
         recipeInstructions.SetActive(true);
         Invoke("StopRecipeInstructions", recipeInstructionsLength);
     }
@@ -213,6 +241,7 @@ public class CutsceneManager : MonoBehaviour
 
     public void PlaySellingInstructions()
     {
+        StopAllInstructionVideos();
         sellingInstructions.SetActive(true);
         Invoke("StopSellingInstructions", sellingInstructionsLength);
     }

@@ -32,6 +32,24 @@ public class CutsceneManager : MonoBehaviour
     [SerializeField] private GameObject loadingCutscene;
     [Range(0.1f, 10f)] public float loadingCutsceneLength = 1.0f;
 
+    [SerializeField] private GameObject alignmentInstructions;
+    [Range(0.1f, 30f)] public float alignmentInstructionsLength = 5.0f;
+
+    [SerializeField] private GameObject bookInstructions;
+    [Range(0.1f, 30f)] public float bookInstructionsLength = 1.0f;
+
+    [SerializeField] private GameObject brewingInstructions;
+    [Range(0.1f, 30f)] public float brewingInstructionsLength = 1.0f;
+
+    [SerializeField] private GameObject gatherMatsInstructions;
+    [Range(0.1f, 30f)] public float gatherMatsInstructionsLength = 1.0f;
+
+    [SerializeField] private GameObject recipeInstructions;
+    [Range(0.1f, 30f)] public float recipeInstructionsLength = 1.0f;
+
+    [SerializeField] private GameObject sellingInstructions;
+    [Range(0.1f, 30f)] public float sellingInstructionsLength = 1.0f;
+
     public static CutsceneManager Instance { get; private set; }
 
     private void Awake()
@@ -138,4 +156,70 @@ public class CutsceneManager : MonoBehaviour
         loadingCutscene.SetActive(false);
     }
 
+    public void PlayAlignmentInstructions()
+    {
+        alignmentInstructions.SetActive(true);
+        Invoke("StopAlignmentInstructions", alignmentInstructionsLength);
+    }
+
+    public void StopAlignmentInstructions()
+    {
+        alignmentInstructions.SetActive(false);
+    }
+
+    public void PlayBookInstructions()
+    {
+        bookInstructions.SetActive(true);
+        Invoke("StopBookInstructions", bookInstructionsLength);
+    }
+
+    public void StopBookInstructions()
+    {
+        bookInstructions.SetActive(false);
+    }
+
+    public void PlayBrewingInstructions()
+    {
+        brewingInstructions.SetActive(true);
+        Invoke("StopBrewingInstructions", brewingInstructionsLength);
+    }
+
+    public void StopBrewingInstructions()
+    {
+        brewingInstructions.SetActive(false);
+    }
+
+    public void PlayGatherMatsInstructions()
+    {
+        gatherMatsInstructions.SetActive(true);
+        Invoke("StopGatherMatsInstructions", gatherMatsInstructionsLength);
+    }
+
+    public void StopGatherMatsInstructions()
+    {
+        gatherMatsInstructions.SetActive(false);
+    }
+
+    public void PlayRecipeInstructions()
+    {
+        recipeInstructions.SetActive(true);
+        Invoke("StopRecipeInstructions", recipeInstructionsLength);
+    }
+
+    public void StopRecipeInstructions()
+    {
+        recipeInstructions.SetActive(false);
+    }
+
+    public void PlaySellingInstructions()
+    {
+        sellingInstructions.SetActive(true);
+        Invoke("StopSellingInstructions", sellingInstructionsLength);
+    }
+
+    public void StopSellingInstructions()
+    {
+        sellingInstructions.SetActive(false);
+    }
 }
+

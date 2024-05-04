@@ -485,7 +485,10 @@ public class InventoryController : MonoBehaviour
         }
         else
         {
-            AddIngredientToPotionCraftingSpace(tileGridPosition);
+            if (PotionCraftingSystem.Instance.CheckIfIngredientSlotAvailable())
+            {
+                AddIngredientToPotionCraftingSpace(tileGridPosition);
+            }
         }
     }
 

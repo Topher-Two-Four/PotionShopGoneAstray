@@ -251,7 +251,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void TogglePauseMenuCanvas()
     {
-        Debug.Log("Pause menu toggled.");
+        //Debug.Log("Pause menu toggled.");
         if (pauseMenuCanvas.gameObject.activeSelf) // If on, toggle off
         {
             isTimerRunning = true; // Resume timer

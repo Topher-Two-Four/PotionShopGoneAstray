@@ -447,6 +447,30 @@ public class PotionCraftingSystem : MonoBehaviour
         }
     }
 
+    public bool CheckIfIngredientSlotAvailable() // Add an ingredient from the inventory into the crafting slot
+    {
+            if (ingredient1 == null)
+            {
+                return true;
+            }
+            else if (ingredient2 == null)
+            {
+                return true;
+            }
+            else if (ingredient3 == null)
+            {
+                return true;
+            }
+            else if (ingredient4 == null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+    }
+
     public void AddIngredientToSlot(ItemData ingredient) // Add an ingredient from the inventory into the crafting slot
     {
         //Debug.Log("Adding " + ingredient);
@@ -480,7 +504,7 @@ public class PotionCraftingSystem : MonoBehaviour
         else
         {
             //Debug.Log("No available space.");
-            return; // Return if no space available amongst the three ingredient spaces
+            return; // Return if no space available amongst the four ingredient spaces
         }
     }
 

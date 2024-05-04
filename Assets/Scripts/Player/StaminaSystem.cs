@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using StarterAssets;
+using UnityEngine.SceneManagement;
 
 public class StaminaSystem : MonoBehaviour
 {
@@ -92,7 +93,7 @@ public class StaminaSystem : MonoBehaviour
 
    public void StaminaJump()
     {
-        if (currentStamina >= (maxStamina * jumpStaminaCost / maxStamina)) // Check if player has stamina to jump
+        if (currentStamina >= (maxStamina * jumpStaminaCost / maxStamina) && SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(2)) // Check if player has stamina to jump
         {
             AudioManager.Instance.PlayPlayerJumpSound();
             currentStamina -= jumpStaminaCost; // Use stamina to jump

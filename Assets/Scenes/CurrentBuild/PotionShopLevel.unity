@@ -806,6 +806,10 @@ PrefabInstance:
       propertyPath: m_Lens.FieldOfView
       value: 68.6
       objectReference: {fileID: 0}
+    - target: {fileID: 8658750562217861214, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7899478307544988770, guid: 252bf6042df4a6d4eaa661cadbb128dd, type: 3}
     m_RemovedGameObjects: []
@@ -1427,6 +1431,11 @@ MonoBehaviour:
   tutorialsOn: 1
   toggleTutorialsButton: {fileID: 0}
   tutorialsToggledIndicator: {fileID: 0}
+  tutorialOnScreen: 0
+  activeTutorialCat: {fileID: 0}
+  inactiveTutorialCat: {fileID: 0}
+  activeCapedTutorialCat: {fileID: 0}
+  inactiveCapedTutorialCat: {fileID: 0}
 --- !u!114 &510523260
 MonoBehaviour:
   m_ObjectHideFlags: 0

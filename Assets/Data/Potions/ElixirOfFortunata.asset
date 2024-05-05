@@ -25,10 +25,10 @@ MonoBehaviour:
   isHatred: 0
   isAntidote: 0
   isDeath: 0
-  isLucky: 1
+  isLucky: 0
   isPoison: 0
-  isBenefit: 0
-  isCrippling: 0
+  isBenefit: 1
+  isHarmful: 0
   quality: 2
   baseValue: 10
   sellPrice: 0

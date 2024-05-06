@@ -12373,15 +12373,15 @@ MonoBehaviour:
   menuButtonClickSoundVolume: 1
   newDaySound: {fileID: 8300000, guid: 98c2ce721f694da44a1ae32ffcbab134, type: 3}
   newDaySoundVolume: 1
-  endDaySound: {fileID: 8300000, guid: f3c3b0ef92696d44882e26052c646272, type: 3}
+  endDaySound: {fileID: 8300000, guid: 91ca13e9ef9615549bbe80ff8e5bbbcb, type: 3}
   endDaySoundVolume: 1
   pauseGameSound: {fileID: 8300000, guid: 4a639e87177d7914f9d343525f50e2fa, type: 3}
   pauseGameSoundVolume: 1
   unpauseGameSound: {fileID: 8300000, guid: 11bdc16eeff52fb48a6ee1d82bc3b762, type: 3}
   unpauseGameSoundVolume: 1
-  winGameSound: {fileID: 8300000, guid: 5d53c99f72348a8428d38af657114528, type: 3}
+  winGameSound: {fileID: 8300000, guid: 32b6a6f804d240a48812bd7102465c99, type: 3}
   winGameSoundVolume: 1
-  loseGameSound: {fileID: 8300000, guid: 0ec8125eaee844346b093bfebd3e014d, type: 3}
+  loseGameSound: {fileID: 8300000, guid: 8b865cd6613e66b4f98ab460072f361f, type: 3}
   loseGameSoundVolume: 1
   navigatePotionShopSound: {fileID: 8300000, guid: 93ed2db1c49890c42b1ee68d1bf27d09, type: 3}
   navigatePotionShopSoundVolume: 1
@@ -12421,7 +12421,7 @@ MonoBehaviour:
   cauldronBubbleSoundVolume: 1
   cauldronFireSound: {fileID: 8300000, guid: 015216a6098744c49a88b18ff9f88e7e, type: 3}
   cauldronFireSoundVolume: 1
-  stirSound: {fileID: 8300000, guid: 3878798dfba5f6647b76f8c927bbe289, type: 3}
+  stirSound: {fileID: 8300000, guid: d5e51dc6ec134cd4bbfbb9ef9b6930bf, type: 3}
   stirSoundVolume: 1
   putLidOnSound: {fileID: 8300000, guid: 0f4d5bfa6522f9848abf6b989fd50f5c, type: 3}
   putLidOnSoundVolume: 1
@@ -12447,26 +12447,26 @@ MonoBehaviour:
   switchToHotTempSoundVolume: 1
   switchToBoilingTempSound: {fileID: 8300000, guid: 7bab25913a100cc4aa4a6b6c462fc48e, type: 3}
   switchToBoilingTempSoundVolume: 1
-  menuMusic: {fileID: 8300000, guid: 3a0889cc0019127499874c7b5b88c7ec, type: 3}
-  menuMusicVolume: 0.804
-  potionShopMusic: {fileID: 8300000, guid: 2e463fe82296a5442870ca800d689a4d, type: 3}
-  potionShopMusicVolume: 0.803
-  mazeMusic: {fileID: 8300000, guid: 8e6ca72b438fefa4e89a8148af085210, type: 3}
+  menuMusic: {fileID: 8300000, guid: 2e463fe82296a5442870ca800d689a4d, type: 3}
+  menuMusicVolume: 0.782
+  potionShopMusic: {fileID: 8300000, guid: 091238d7573d8444f87c78f6689b0ea9, type: 3}
+  potionShopMusicVolume: 0.707
+  mazeMusic: {fileID: 8300000, guid: 894a470f385b9444eaa9187232abdfc1, type: 3}
   mazeMusicVolume: 1
-  mazeMusicAllGood: {fileID: 0}
+  mazeMusicAllGood: {fileID: 8300000, guid: 894a470f385b9444eaa9187232abdfc1, type: 3}
   mazeMusicAllGoodVolume: 1
-  mazeMusicVeryGood: {fileID: 0}
+  mazeMusicVeryGood: {fileID: 8300000, guid: 894a470f385b9444eaa9187232abdfc1, type: 3}
   mazeMusicVeryGoodVolume: 1
-  mazeMusicGood: {fileID: 0}
+  mazeMusicGood: {fileID: 8300000, guid: 894a470f385b9444eaa9187232abdfc1, type: 3}
   mazeMusicGoodVolume: 1
-  mazeMusicNeutral: {fileID: 0}
+  mazeMusicNeutral: {fileID: 8300000, guid: 894a470f385b9444eaa9187232abdfc1, type: 3}
   mazeMusicNeutralVolume: 1
   mazeMusicBad: {fileID: 0}
   mazeMusicBadVolume: 1
-  mazeMusicVeryBad: {fileID: 0}
+  mazeMusicVeryBad: {fileID: 8300000, guid: 139b68e134857334b9369a0444c97c47, type: 3}
   mazeMusicVeryBadVolume: 1
-  mazeMusicAllBad: {fileID: 0}
-  mazeMusicAllBadVolume: 1
+  mazeMusicAllBad: {fileID: 8300000, guid: 5f964be6b625f4a45a26abe9e97d33d0, type: 3}
+  mazeMusicAllBadVolume: 0.758
   potionShopAmbience1: {fileID: 8300000, guid: 2332429183ed69e4e9153e8ac88f9f19, type: 3}
   potionShopAmbience1Volume: 1
   potionShopAmbience2: {fileID: 8300000, guid: 4aca2890c9499bd4d90c815cc376605f, type: 3}
@@ -12486,11 +12486,11 @@ MonoBehaviour:
   teleportToShopSound: {fileID: 8300000, guid: 99fe2f08d6dbf2c48b0b5da30b341790, type: 3}
   teleportToShopSoundVolume: 1
   birdCatchSound: {fileID: 8300000, guid: f3c3b0ef92696d44882e26052c646272, type: 3}
-  birdCatchSoundVolume: 1
+  birdCatchSoundVolume: 0.927
   musicManCatchSound: {fileID: 8300000, guid: 447ed06ea7db0384bb2ca2b27717ec1f, type: 3}
-  musicManCatchSoundVolume: 1
+  musicManCatchSoundVolume: 0.948
   jellyCatchSound: {fileID: 8300000, guid: 440c0d384bb7f9645849942823cca4c1, type: 3}
-  jellyCatchSoundVolume: 1
+  jellyCatchSoundVolume: 0.934
 --- !u!1 &296567658
 GameObject:
   m_ObjectHideFlags: 0

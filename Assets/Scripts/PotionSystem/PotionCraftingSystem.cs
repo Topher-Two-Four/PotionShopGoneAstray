@@ -728,7 +728,7 @@ public class PotionCraftingSystem : MonoBehaviour
         {
             if (InventoryController.Instance.CheckForItemSelected())
             {
-                Debug.Log("Item selected.");
+                //Debug.Log("Item selected.");
                 return;
             }
             if (isRetrievable && InventoryController.Instance.CheckForItemSpace(potionBeingBrewed))

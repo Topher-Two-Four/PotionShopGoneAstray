@@ -250,9 +250,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teleportLength: 7
-  timeRemovedWhenCaught: 120
+  timeRemovedWhenCaught: 300
   jellyModel: {fileID: 6587553238792040847}
-  caughtItemRemoveAmount: 3
+  caughtItemRemoveAmount: 10
   jellyWarningCanvas: {fileID: 4873661677922024508}
   audioSource: {fileID: 6950652183319526180}
   triggeredSound: {fileID: 8300000, guid: 99fe2f08d6dbf2c48b0b5da30b341790, type: 3}

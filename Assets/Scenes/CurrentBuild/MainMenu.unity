@@ -1646,6 +1646,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1602711344}
     - target: {fileID: 7191769637739229790, guid: 91d3cb84ad82a74468a13781462d10ca, type: 3}
+      propertyPath: landlordPaymentMax
+      value: 12000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7191769637739229790, guid: 91d3cb84ad82a74468a13781462d10ca, type: 3}
+      propertyPath: landlordPaymentMin
+      value: 9000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7191769637739229790, guid: 91d3cb84ad82a74468a13781462d10ca, type: 3}
       propertyPath: playerCurrencyText
       value: 
       objectReference: {fileID: 2131980721}

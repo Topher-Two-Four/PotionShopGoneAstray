@@ -404,8 +404,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0babd36c7ebf7f1489dd94dde4fad222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  caughtTimeRemoveAmount: 120
-  caughtItemRemoveAmount: 3
+  caughtTimeRemoveAmount: 300
+  caughtItemRemoveAmount: 10
 --- !u!1001 &1401250002806503868
 PrefabInstance:
   m_ObjectHideFlags: 0

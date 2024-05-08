@@ -75,6 +75,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
     [SerializeField] private TMP_Text dayEndPlayerCurrencyText;
     [Tooltip("The text showing landlord payment amount for the end of day UI.")]
     [SerializeField] private TMP_Text dayEndLandlordPaymentText;
+    [Tooltip("The text color for the time of day.")]
+    [SerializeField] private Color dayTextColor;
 
     [HideInInspector] public float timeRemaining = 0; // Time remaining in day
     [HideInInspector] public bool isMorning; // Variable to keep track of whether it's morning
@@ -210,7 +212,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
             {
                 morningTransitionComplete = true; // Set transition status to complete
                 timeOfDayText.text = ("Morning"); // Display time of day text on screen
-                timeOfDayText.color = Color.white; // Set color of text to white
+                timeOfDayText.color = dayTextColor; // Set color of text to white
             }
         }
         else if (timeRemaining <= 600 && timeRemaining > 300)

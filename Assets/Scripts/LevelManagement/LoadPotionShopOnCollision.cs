@@ -44,7 +44,7 @@ public class LoadPotionShopOnCollision : MonoBehaviour
 
                     }
                     _hasRemovedItems = true;
-                    Debug.Log(_hasRemovedItems);
+                    //Debug.Log(_hasRemovedItems);
                 }
 
                 GameManager.Instance.timeRemaining -= caughtTimeRemoveAmount; // Remove time from day if player is caught by enemy in maze

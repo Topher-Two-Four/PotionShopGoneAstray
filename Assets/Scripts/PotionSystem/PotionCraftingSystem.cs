@@ -726,6 +726,11 @@ public class PotionCraftingSystem : MonoBehaviour
     {
         if (!isBrewing)
         {
+            if (InventoryController.Instance.CheckForItemSelected())
+            {
+                Debug.Log("Item selected.");
+                return;
+            }
             if (isRetrievable && InventoryController.Instance.CheckForItemSpace(potionBeingBrewed))
             {
                 AudioManager.Instance.PlayRetrievePotionSound();

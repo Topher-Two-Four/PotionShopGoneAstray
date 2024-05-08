@@ -474,16 +474,7 @@ public class InventoryController : MonoBehaviour
     {
         Vector2Int tileGridPosition = GetTileGridPosition();
 
-        if (selectedItem != null)
-        {
-            InventoryItem itemToRemove = selectedItemGrid.RemoveItem(tileGridPosition.x, tileGridPosition.y);
-
-            if (itemToRemove != null)
-            {
-                Destroy(itemToRemove.gameObject);
-            }
-        }
-        else
+        if (selectedItem == null)
         {
             if (PotionCraftingSystem.Instance.CheckIfIngredientSlotAvailable())
             {

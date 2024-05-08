@@ -747,23 +747,26 @@ public class PotionCraftingSystem : MonoBehaviour
 
     private void RetrieveItem(ItemData ingredient, int ingredientSlot)
     {
-        AddItemToInventory(ingredient);
-        AudioManager.Instance.PlayRemoveIngredientSound();
-        if (ingredientSlot == 1)
+        if (!InventoryController.Instance.CheckForItemSelected())
         {
-            ingredient1 = null;
-        }
-        else if (ingredientSlot == 2)
-        {
-            ingredient2 = null;
-        }
-        else if (ingredientSlot == 3)
-        {
-            ingredient3 = null;
-        } 
-        else
-        {
-            ingredient4 = null;
+            AddItemToInventory(ingredient);
+            AudioManager.Instance.PlayRemoveIngredientSound();
+            if (ingredientSlot == 1)
+            {
+                ingredient1 = null;
+            }
+            else if (ingredientSlot == 2)
+            {
+                ingredient2 = null;
+            }
+            else if (ingredientSlot == 3)
+            {
+                ingredient3 = null;
+            }
+            else
+            {
+                ingredient4 = null;
+            }
         }
     }
 }

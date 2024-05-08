@@ -338,7 +338,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
             ToggleCursorOn(); // Unlock and display cursor
             DisplayEndOfDayUI();
             AudioManager.Instance.PlayEndDaySound();
-
         }
         else
         {
@@ -623,17 +622,17 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void SetPlayerCapsuleActive()
     {
-        Debug.Log("Trying to set player capsule active.");
+        //Debug.Log("Trying to set player capsule active.");
         if (controller == null)
         {
             controller = FindObjectOfType<FirstPersonController>();
             controller.GetComponentInChildren<CapsuleCollider>().gameObject.SetActive(true); // Set player capsule inactive
-            Debug.Log("Set player capsule active.");
+            //Debug.Log("Set player capsule active.");
         }
         else
         {
             controller.GetComponentInChildren<CapsuleCollider>().gameObject.SetActive(true); // Set player capsule inactive
-            Debug.Log("Set player capsule active.");
+            //Debug.Log("Set player capsule active.");
         }
     }
 
@@ -662,7 +661,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         {
             playerCapsule.transform.position = spawnPoint.transform.position;
             playerCapsule.transform.rotation = spawnPoint.transform.rotation;
-            Debug.Log("Player spawned in at " + spawnPoint.transform.position);
+            //Debug.Log("Player spawned in at " + spawnPoint.transform.position);
         }
     }
 
